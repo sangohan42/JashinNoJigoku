@@ -36,8 +36,9 @@ public class CharacterControllerLogic : MonoBehaviour
 	
 	
 	// Private global only
-	private float leftX = 0f;
-	private float leftY = 0f;
+	private float joyX = 0f;
+	private float joyY = 0f;
+	public float turnSmoothing = 15f;	// A smoothing value for turning the player.
 	private AnimatorStateInfo stateInfo;
 	private AnimatorTransitionInfo transInfo;
 	private float speed = 0f;
@@ -120,6 +121,17 @@ public class CharacterControllerLogic : MonoBehaviour
 		rot2 = radarCameraRotation; 
 		radarCam.transform.eulerAngles = rot2;
 		radarCam.transform.position = transform.position+radarCameraPosition;
+
+		//If we still are in idle (not in pivot, not in locomotion, not in Sneak)
+		if(stateInfo.nameHash == hashIdsScript.m_IdleState)
+		{
+			// If there is some axis input...
+			if(joyX != 0f || joyY != 0f)
+			{
+				// ... set the players rotation and set the speed parameter to 5.5f.
+				Rotating(joyX, joyY);
+			}
+		}
 	}
 	
 	/// Update is called once per frame.
@@ -134,8 +146,8 @@ public class CharacterControllerLogic : MonoBehaviour
 		float charSpeed = 0f;
 
 		//Get Joystick Vector
-		float joyX = uiJoystickScript.position.x;
-		float joyY = uiJoystickScript.position.y;
+		joyX = uiJoystickScript.position.x;
+		joyY = uiJoystickScript.position.y;
 
 		Vector3 stickDirection = new Vector3 (joyX, 0, joyY);
 		Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
@@ -147,6 +159,7 @@ public class CharacterControllerLogic : MonoBehaviour
 		direction = angleRootToMove * directionSpeed / 180f;
 		
 		charAngle = angleRootToMove;
+
 
 		// Press B to sprint
 		if (Input.GetButton("Sprint"))
@@ -168,27 +181,44 @@ public class CharacterControllerLogic : MonoBehaviour
 			Animator.SetFloat(hashIdsScript.angle, charAngle);
 		}
 
-		if (speed < LocomotionThreshold && Mathf.Abs(leftX) < 0.05f)    // Dead zone
+		if (speed < LocomotionThreshold && Mathf.Abs(joyX) < 0.05f)    // Dead zone
 		{
 			animator.SetFloat(hashIdsScript.direction, 0f);
 			animator.SetFloat(hashIdsScript.angle, 0f);
 		}
 
 		animator.SetBool(hashIdsScript.sneakingBool, Input.GetButton("Sneak"));
+
+
+	}
+
+	void Rotating (float horizontal, float vertical)
+	{
+		// Create a new vector of the horizontal and vertical inputs.
+		Vector3 targetDirection = new Vector3(horizontal, 0f, vertical);
 		
+		// Create a rotation based on this new vector assuming that up is the global y axis.
+		Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+		
+		// Create a rotation that is an increment closer to the target rotation from the player's rotation.
+		Quaternion newRotation = Quaternion.Lerp(rigidbody.rotation, targetRotation, turnSmoothing * Time.deltaTime);
+		
+		// Change the players rotation to this new rotation.
+		rigidbody.MoveRotation(newRotation);
 	}
 	
 	/// Any code that moves the character needs to be checked against physics
 	void FixedUpdate()
 	{							
 		// Rotate character model if stick is tilted right or left, but only if character is moving in that direction
-		if (IsInLocomotion()&& ((direction >= 0 && leftX >= 0) || (direction < 0 && leftX < 0)))
+		if (IsInLocomotion()&& ((direction >= 0 && joyX >= 0) || (direction < 0 && joyX < 0)))
 		{
 //			Debug.Log ("HERE");
-			Vector3 rotationAmount = Vector3.Lerp(Vector3.zero, new Vector3(0f, rotationDegreePerSecond * (leftX < 0f ? -1f : 1f), 0f), Mathf.Abs(leftX));
+			Vector3 rotationAmount = Vector3.Lerp(Vector3.zero, new Vector3(0f, rotationDegreePerSecond * (joyX < 0f ? -1f : 1f), 0f), Mathf.Abs(joyX));
 			Quaternion deltaRotation = Quaternion.Euler(rotationAmount * Time.deltaTime);
         	this.transform.rotation = (this.transform.rotation * deltaRotation);
 		}		
+
 
 		AudioManagement ();
 	}

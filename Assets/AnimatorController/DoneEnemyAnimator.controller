@@ -558,7 +558,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: WeaponLower
-  m_Speed: 2
+  m_Speed: 3
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: 8cc1daac7509949e7836c91eb0a8afd5, type: 3}
@@ -603,7 +603,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: WeaponShoot
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: 880d91853c6894a4faf66ba6981d7dff, type: 3}

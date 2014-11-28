@@ -352,26 +352,6 @@ BlendTree:
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
   m_BlendType: 0
---- !u!206 &20616736
-BlendTree:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: IdlePivotR
-  m_Childs:
-  - m_Motion: {fileID: 7400006, guid: 4ee731d726c3dd34eb36806ea0d8fe98, type: 3}
-    m_Threshold: 0
-    m_Position: {x: 0, y: 0}
-    m_TimeScale: 1.70000005
-    m_CycleOffset: 0
-    m_IsAnim: 1
-    m_Mirror: 0
-  m_BlendParameter: Angle
-  m_BlendParameterY: Speed
-  m_MinThreshold: 0
-  m_MaxThreshold: 180
-  m_UseAutomaticThresholds: 1
-  m_BlendType: 0
 --- !u!206 &20620741
 BlendTree:
   m_ObjectHideFlags: 3
@@ -473,26 +453,6 @@ BlendTree:
   m_MinThreshold: -1
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
-  m_BlendType: 0
---- !u!206 &20647306
-BlendTree:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: IdlePivotL
-  m_Childs:
-  - m_Motion: {fileID: 7400014, guid: 4ee731d726c3dd34eb36806ea0d8fe98, type: 3}
-    m_Threshold: -180
-    m_Position: {x: 0, y: 0}
-    m_TimeScale: 2
-    m_CycleOffset: 0
-    m_IsAnim: 1
-    m_Mirror: 0
-  m_BlendParameter: Angle
-  m_BlendParameterY: Speed
-  m_MinThreshold: -180
-  m_MaxThreshold: 0
-  m_UseAutomaticThresholds: 0
   m_BlendType: 0
 --- !u!206 &20670636
 BlendTree:
@@ -858,7 +818,7 @@ Transition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
-    m_EventTreshold: .5
+    m_EventTreshold: .200000003
     m_ExitTime: .939024389
   m_Atomic: 1
   m_Solo: 0
@@ -884,78 +844,6 @@ Transition:
     m_ConditionEvent: Angle
     m_EventTreshold: -160
     m_ExitTime: .713467121
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
-  m_CanTransitionToSelf: 0
---- !u!1101 &110134255
-Transition:
-  serializedVersion: 2
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 110247306}
-  m_DstState: {fileID: 110270636}
-  m_TransitionDuration: .148221329
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Speed
-    m_EventTreshold: .300000012
-    m_ExitTime: .851778686
-  - m_ConditionMode: 5
-    m_ConditionEvent: Speed
-    m_EventTreshold: .5
-    m_ExitTime: .850000024
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
-  m_CanTransitionToSelf: 0
---- !u!1101 &110135080
-Transition:
-  serializedVersion: 2
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 110247306}
-  m_DstState: {fileID: 110280950}
-  m_TransitionDuration: .25
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: Speed
-    m_EventTreshold: .400000006
-    m_ExitTime: .75
-  - m_ConditionMode: 5
-    m_ConditionEvent: Speed
-    m_EventTreshold: 0
-    m_ExitTime: .75
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
-  m_CanTransitionToSelf: 0
---- !u!1101 &110136564
-Transition:
-  serializedVersion: 2
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 110280950}
-  m_DstState: {fileID: 110247306}
-  m_TransitionDuration: .0609756112
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Speed
-    m_EventTreshold: .100000001
-    m_ExitTime: .939024389
-  - m_ConditionMode: 4
-    m_ConditionEvent: Angle
-    m_EventTreshold: -160
-    m_ExitTime: .939024389
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -1004,30 +892,6 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1101 &110163377
-Transition:
-  serializedVersion: 2
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 110280950}
-  m_DstState: {fileID: 110216736}
-  m_TransitionDuration: .0609756112
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Speed
-    m_EventTreshold: .100000001
-    m_ExitTime: .939024389
-  - m_ConditionMode: 3
-    m_ConditionEvent: Angle
-    m_EventTreshold: 160
-    m_ExitTime: .939024389
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
-  m_CanTransitionToSelf: 0
 --- !u!1101 &110167659
 Transition:
   serializedVersion: 2
@@ -1044,30 +908,6 @@ Transition:
     m_ConditionEvent: Speed
     m_EventTreshold: .100000001
     m_ExitTime: .713467121
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
-  m_CanTransitionToSelf: 0
---- !u!1101 &110168419
-Transition:
-  serializedVersion: 2
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 110216736}
-  m_DstState: {fileID: 110280950}
-  m_TransitionDuration: .25
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 5
-    m_ConditionEvent: Sneak
-    m_EventTreshold: 0
-    m_ExitTime: .75
-  - m_ConditionMode: 4
-    m_ConditionEvent: Speed
-    m_EventTreshold: .400000006
-    m_ExitTime: .75
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -1092,30 +932,6 @@ Transition:
     m_ConditionEvent: Sneak
     m_EventTreshold: .100000001
     m_ExitTime: .939024389
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
-  m_CanTransitionToSelf: 0
---- !u!1101 &110179796
-Transition:
-  serializedVersion: 2
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 110216736}
-  m_DstState: {fileID: 110270636}
-  m_TransitionDuration: .148221329
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Speed
-    m_EventTreshold: .300000012
-    m_ExitTime: .851778686
-  - m_ConditionMode: 5
-    m_ConditionEvent: Speed
-    m_EventTreshold: .5
-    m_ExitTime: .850000024
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -1204,21 +1020,6 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
---- !u!1102 &110216736
-State:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: IdlePivotR
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Motions:
-  - {fileID: 20616736}
-  m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 228, y: 168, z: 0}
-  m_IKOnFeet: 1
-  m_Mirror: 0
-  m_Tag: 
 --- !u!1102 &110232796
 State:
   m_ObjectHideFlags: 3
@@ -1232,21 +1033,6 @@ State:
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: 216, y: -72, z: 0}
   m_IKOnFeet: 0
-  m_Mirror: 0
-  m_Tag: 
---- !u!1102 &110247306
-State:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: IdlePivotL
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Motions:
-  - {fileID: 20647306}
-  m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: -96, y: 168, z: 0}
-  m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
 --- !u!1102 &110270636
@@ -1320,8 +1106,6 @@ StateMachine:
   m_States:
   - {fileID: 110280950}
   - {fileID: 110270636}
-  - {fileID: 110247306}
-  - {fileID: 110216736}
   - {fileID: 110281670}
   - {fileID: 110232796}
   - {fileID: 110297475}
@@ -1332,8 +1116,6 @@ StateMachine:
       first: {fileID: 110280950}
       second:
       - {fileID: 110114863}
-      - {fileID: 110136564}
-      - {fileID: 110163377}
       - {fileID: 110171969}
     data:
       first: {fileID: 110270636}
@@ -1342,15 +1124,11 @@ StateMachine:
       - {fileID: 110121029}
       - {fileID: 110138184}
     data:
-      first: {fileID: 110247306}
-      second:
-      - {fileID: 110135080}
-      - {fileID: 110134255}
+      first: {fileID: 0}
+      second: []
     data:
-      first: {fileID: 110216736}
-      second:
-      - {fileID: 110168419}
-      - {fileID: 110179796}
+      first: {fileID: 0}
+      second: []
     data:
       first: {fileID: 110281670}
       second:
