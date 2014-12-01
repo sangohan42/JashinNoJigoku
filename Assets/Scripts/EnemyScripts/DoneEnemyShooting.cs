@@ -11,7 +11,7 @@ public class DoneEnemyShooting : MonoBehaviour
 	
 	
 	private Animator anim;								// Reference to the animator.
-	private DoneHashIDs hash;							// Reference to the HashIDs script.
+	private HashIds hash;							// Reference to the HashIDs script.
 	private LineRenderer laserShotLine;					// Reference to the laser shot line renderer.
 	private Light laserShotLight;						// Reference to the laser shot light.
 	private SphereCollider col;							// Reference to the sphere collider.
@@ -30,7 +30,7 @@ public class DoneEnemyShooting : MonoBehaviour
 		col = GetComponent<SphereCollider>();
 		player = GameObject.FindGameObjectWithTag(DoneTags.player).transform;
 		playerHealth = player.gameObject.GetComponent<DonePlayerHealth>();
-		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneHashIDs>();
+		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<HashIds>();
 		
 		// The line renderer and light are off to start.
 		laserShotLine.enabled = false;
@@ -79,6 +79,8 @@ public class DoneEnemyShooting : MonoBehaviour
 	
 	void Shoot ()
 	{
+
+		Debug.Log ("SHOOT");
 		// The enemy is shooting.
 		shooting = true;
 		

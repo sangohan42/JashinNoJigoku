@@ -10,7 +10,7 @@ public class DoneEnemyAnimation : MonoBehaviour
 	private DoneEnemySight enemySight;			// Reference to the EnemySight script.
 	private NavMeshAgent nav;					// Reference to the nav mesh agent.
 	private Animator anim;						// Reference to the Animator.
-	private DoneHashIDs hash;					// Reference to the HashIDs script.
+	private HashIds hash;					// Reference to the HashIDs script.
 	private DoneAnimatorSetup animSetup;		// An instance of the AnimatorSetup helper class.
 
 
@@ -21,7 +21,7 @@ public class DoneEnemyAnimation : MonoBehaviour
 		enemySight = GetComponent<DoneEnemySight>();
 		nav = GetComponent<NavMeshAgent>();
 		anim = GetComponent<Animator>();
-		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneHashIDs>();
+		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<HashIds>();
 		
 		// Making sure the rotation is controlled by Mecanim.
 		nav.updateRotation = false;
@@ -62,8 +62,10 @@ public class DoneEnemyAnimation : MonoBehaviour
 		float angle;
 		
 		// If the player is in sight...
-		if(enemySight.playerInSight)
+		if(enemySight.playerInSight && (enemySight.personalLastSighting - transform.position).magnitude < enemySight.shootingDistance)
 		{
+			Debug.Log ("ShootingD = " + enemySight.shootingDistance);
+			Debug.Log ("Distance = " + (enemySight.personalLastSighting - transform.position).magnitude);
 			// ... the enemy should stop...
 			speed = 0f;
 			
@@ -74,10 +76,14 @@ public class DoneEnemyAnimation : MonoBehaviour
 		{
 			// Otherwise the speed is a projection of desired velocity on to the forward vector...
 			speed = Vector3.Project(nav.desiredVelocity, transform.forward).magnitude;
+
+//			Debug.Log ("desired Velocity = " + nav.desiredVelocity);
 			
 			// ... and the angle is the angle between forward and the desired velocity.
 			angle = FindAngle(transform.forward, nav.desiredVelocity, transform.up);
-			
+
+//			Debug.Log ("Angle = " + angle);
+
 			// If the angle is within the deadZone...
 			if(Mathf.Abs(angle) < deadZone)
 			{
