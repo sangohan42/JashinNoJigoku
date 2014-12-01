@@ -462,7 +462,7 @@ BlendTree:
   m_Name: Locomotion
   m_Childs:
   - m_Motion: {fileID: 20612518}
-    m_Threshold: .5
+    m_Threshold: .300000012
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -484,7 +484,7 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: Speed
   m_BlendParameterY: Speed
-  m_MinThreshold: .5
+  m_MinThreshold: .300000012
   m_MaxThreshold: 2
   m_UseAutomaticThresholds: 0
   m_BlendType: 0
@@ -1113,6 +1113,9 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
+      first: {fileID: 0}
+      second: []
+    data:
       first: {fileID: 110280950}
       second:
       - {fileID: 110114863}
@@ -1123,12 +1126,6 @@ StateMachine:
       - {fileID: 110167659}
       - {fileID: 110121029}
       - {fileID: 110138184}
-    data:
-      first: {fileID: 0}
-      second: []
-    data:
-      first: {fileID: 0}
-      second: []
     data:
       first: {fileID: 110281670}
       second:

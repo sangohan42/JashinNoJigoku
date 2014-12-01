@@ -126,6 +126,7 @@ public class DoneEnemySight : MonoBehaviour
 					if(hit.collider.gameObject == player)
 					{
 						// ... the player is in sight.
+						personalLastSighting = player.transform.position;
 						playerInSight = true;
 						inPursuit = true;
 						inPatrol = false;

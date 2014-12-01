@@ -56,10 +56,10 @@ public class DoneEnemyAI : MonoBehaviour
 		// Stop the enemy where it is.
 		// Create a vector from the enemy to the last sighting of the player.
 		Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
-//		Debug.Log ("Distance = " + sightingDeltaPos.magnitude);
+		Debug.Log ("Distance = " + sightingDeltaPos.magnitude);
 		if(sightingDeltaPos.magnitude < enemySight.shootingDistance)
 		{
-//			Debug.Log ("STOP ANIM");
+			Debug.Log ("STOP ANIM");
 			nav.Stop();
 		}
 
