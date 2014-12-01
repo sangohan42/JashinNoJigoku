@@ -7732,7 +7732,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
+  mAtlas: {fileID: 11400000, guid: 47290be3fd028408294e71deb218b9eb, type: 2}
   mSpriteName: main_joystick
   mType: 0
   mFillDirection: 4
