@@ -2905,7 +2905,6 @@ GameObject:
   - 4: {fileID: 791473645}
   - 33: {fileID: 791473648}
   - 23: {fileID: 791473647}
-  - 95: {fileID: 791473646}
   m_Layer: 9
   m_Name: prop_sciFiGun_low
   m_TagString: Untagged
@@ -2926,22 +2925,6 @@ Transform:
   - {fileID: 71760959}
   m_Father: {fileID: 1348459264}
   m_RootOrder: 5
---- !u!95 &791473646
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 9500000, guid: a5471f2c435681a43af6b4d9faeca672,
-    type: 3}
-  m_PrefabInternal: {fileID: 1055991628}
-  m_GameObject: {fileID: 791473644}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a5471f2c435681a43af6b4d9faeca672, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!23 &791473647
 Renderer:
   m_ObjectHideFlags: 0
