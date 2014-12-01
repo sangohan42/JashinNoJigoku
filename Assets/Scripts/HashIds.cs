@@ -8,11 +8,8 @@ public class HashIds : MonoBehaviour {
 	public int m_IdleState = 0;
 	public int m_LocomotionIdState = 0;
 	public int m_dyingState = 0;
+	public int m_sneakingState = 0;
 
-//	public int m_LocomotionPivotLState = 0;
-//	public int m_LocomotionPivotRState = 0;	
-//	public int m_LocomotionPivotL_IdleTrans = 0;	
-//	public int m_LocomotionPivotR_IdleTrans = 0;
 	public int Empty_YoujinModeTrans;
 	public int WeaponRaise_WeaponLower;
 	public int Empty_WeaponRaiseTrans;
@@ -40,11 +37,7 @@ public class HashIds : MonoBehaviour {
 		m_IdleState = Animator.StringToHash("Base Layer.Idle");
 		m_LocomotionIdState = Animator.StringToHash("Base Layer.Locomotion");
 		m_dyingState = Animator.StringToHash("Base Layer.Dying");
-//
-//		m_LocomotionPivotLState = Animator.StringToHash("Base Layer.LocomotionPivotL");
-//		m_LocomotionPivotRState = Animator.StringToHash("Base Layer.LocomotionPivotR");
-//		m_LocomotionPivotL_IdleTrans = Animator.StringToHash("Base Layer.Locomotion -> Base Layer.LocomotionPivotL");
-//		m_LocomotionPivotR_IdleTrans = Animator.StringToHash("Base Layer.Locomotion -> Base Layer.LocomotionPivotR");
+		m_sneakingState = Animator.StringToHash("Base Layer.Sneak");
 		Empty_YoujinModeTrans = Animator.StringToHash("Youjin.Empty -> Youjin.WeaponRaise");
 		WeaponRaise_WeaponLower = Animator.StringToHash("Youjin.WeaponRaise -> Youjin.WeaponLower");
 		Empty_WeaponRaiseTrans = Animator.StringToHash("Shooting.Empty -> Shooting.WeaponRaise");

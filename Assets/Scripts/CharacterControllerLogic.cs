@@ -123,7 +123,7 @@ public class CharacterControllerLogic : MonoBehaviour
 		radarCam.transform.position = transform.position+radarCameraPosition;
 
 		//If we still are in idle (not in pivot, not in locomotion, not in Sneak)
-		if(stateInfo.nameHash == hashIdsScript.m_IdleState)
+		if(stateInfo.nameHash == hashIdsScript.m_IdleState || stateInfo.nameHash == hashIdsScript.m_sneakingState)
 		{
 			// If there is some axis input...
 			if(joyX != 0f || joyY != 0f)

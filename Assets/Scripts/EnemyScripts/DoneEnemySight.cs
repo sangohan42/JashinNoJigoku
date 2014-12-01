@@ -3,14 +3,11 @@ using System.Collections;
 
 public class DoneEnemySight : MonoBehaviour
 {
-	public float fieldOfViewAngle = 90f;				// Number of degrees, centred on forward, for the enemy see.
-	public float shootingDistance = 5;
-	public bool playerInSight;							// Whether or not the player is currently sighted.
-	public bool inPursuit;							// Whether or not the player is currently sighted.
-	public bool inPatrol;
+	public float fieldOfViewAngle = 110f;				// Number of degrees, centred on forward, for the enemy see.
+    public bool playerInSight;							// Whether or not the player is currently sighted.
 	public Vector3 personalLastSighting;				// Last place this enemy spotted the player.
-	public Vector3 previousSighting;					// Where the player was sighted last frame.
-
+	
+	
 	private NavMeshAgent nav;							// Reference to the NavMeshAgent component.
 	private SphereCollider col;							// Reference to the sphere collider trigger component.
 	private Animator anim;								// Reference to the Animator.
@@ -18,10 +15,9 @@ public class DoneEnemySight : MonoBehaviour
     private GameObject player;							// Reference to the player.
 	private Animator playerAnim;						// Reference to the player's animator component.
 	private DonePlayerHealth playerHealth;				// Reference to the player's health script.
-	private HashIds hash;							// Reference to the HashIDs.
-	private ParticleSystem interrogativePoint;
-	private GameObject interrogativePointObject;
-	public GameObject FOV;
+	private DoneHashIDs hash;							// Reference to the HashIDs.
+	private Vector3 previousSighting;					// Where the player was sighted last frame.
+	
 	
 	void Awake ()
 	{
@@ -33,70 +29,32 @@ public class DoneEnemySight : MonoBehaviour
 		player = GameObject.FindGameObjectWithTag(DoneTags.player);
 		playerAnim = player.GetComponent<Animator>();
 		playerHealth = player.GetComponent<DonePlayerHealth>();
-
-		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<HashIds>();
+		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneHashIDs>();
 		
 		// Set the personal sighting and the previous sighting to the reset position.
-		personalLastSighting = new Vector3 (1000, 1000, 1000);
-		previousSighting = new Vector3 (1000, 1000, 1000);
-		inPursuit = false;
-		inPatrol = true;
-		interrogativePointObject = GameObject.Find ("InterrogativePoint");
-		interrogativePoint = interrogativePointObject.GetComponent<ParticleSystem>();
-		interrogativePointObject.SetActive (false);
+		personalLastSighting = lastPlayerSighting.resetPosition;
+		previousSighting = lastPlayerSighting.resetPosition;
 	}
 	
 	
 	void Update ()
 	{
-	
+		// If the last global sighting of the player has changed...
+		if(lastPlayerSighting.position != previousSighting)
+			// ... then update the personal sighting to be the same as the global sighting.
+			personalLastSighting = lastPlayerSighting.position;
+		
+		// Set the previous sighting to the be the sighting from this frame.
+		previousSighting = lastPlayerSighting.position;
+		
 		// If the player is alive...
 		if(playerHealth.health > 0f)
-		{
 			// ... set the animator parameter to whether the player is in sight or not.
 			anim.SetBool(hash.playerInSightBool, playerInSight);
-			anim.SetBool (hash.inPursuitBool, inPursuit);
-			anim.SetBool (hash.inPatrolBool, inPatrol);
-
-			int youJinLayerTransition = anim.GetAnimatorTransitionInfo(3).nameHash;
-			int shootingLayerTransition = anim.GetAnimatorTransitionInfo(1).nameHash;
-
-			//Display or undisplay the interrogation point
-			if(youJinLayerTransition == hash.Empty_YoujinModeTrans && interrogativePointObject.activeSelf == false)
-			{
-				interrogativePointObject.SetActive(true);
-				interrogativePoint.Play();
-				anim.SetBool(hash.inYoujinBool, true);
-			}
-			else if((youJinLayerTransition == hash.WeaponRaise_WeaponLower || 
-			         shootingLayerTransition == hash.Empty_WeaponRaiseTrans ||
-			         shootingLayerTransition == hash.Empty_WeaponShootTrans) && 
-			        interrogativePointObject.activeSelf == true)
-			{
-				interrogativePoint.Stop();
-				interrogativePointObject.SetActive(false);
-				anim.SetBool(hash.inYoujinBool, false);
-
-			}
-		}
-
 		else
-		{
 			// ... set the animator parameter to false.
 			anim.SetBool(hash.playerInSightBool, false);
-			anim.SetBool (hash.inPursuitBool, false);
-			anim.SetBool (hash.inPatrolBool, true);
-		}
-
 	}
-
-	void LateUpdate()
-	{
-				Vector3 euler = FOV.transform.localEulerAngles;
-				euler.x = 0;
-				euler.z = 0;
-				FOV.transform.localEulerAngles = euler;
-		}
 	
 
 	void OnTriggerStay (Collider other)
@@ -106,9 +64,7 @@ public class DoneEnemySight : MonoBehaviour
         {
 			// By default the player is not in sight.
 			playerInSight = false;
-
-			anim.SetLayerWeight(3,1);
-
+			
 			// Create a vector from the enemy to the player and store the angle between it and forward.
             Vector3 direction = other.transform.position - transform.position;
 			float angle = Vector3.Angle(direction, transform.forward);
@@ -121,41 +77,29 @@ public class DoneEnemySight : MonoBehaviour
 				// ... and if a raycast towards the player hits something...
 				if(Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, col.radius))
 				{
-//					Debug.DrawLine(hit.point, hit.point + hit.normal, Color.green, 2, false);
 					// ... and if the raycast hits the player...
 					if(hit.collider.gameObject == player)
 					{
 						// ... the player is in sight.
-						personalLastSighting = player.transform.position;
 						playerInSight = true;
-						inPursuit = true;
-						inPatrol = false;
-						anim.SetLayerWeight(3,0);
-
-//						Debug.Log ("Player in sight");
-
+						
+						// Set the last global sighting is the players current position.
+						lastPlayerSighting.position = player.transform.position;
 					}
 				}
 			}
 			
 			// Store the name hashes of the current states.
 			int playerLayerZeroStateHash = playerAnim.GetCurrentAnimatorStateInfo(0).nameHash;
-
-			// If the player is walking, running
-			if(playerLayerZeroStateHash == hash.m_LocomotionIdState)
+			int playerLayerOneStateHash = playerAnim.GetCurrentAnimatorStateInfo(1).nameHash;
+			
+			// If the player is running or is attracting attention...
+			if(playerLayerZeroStateHash == hash.locomotionState || playerLayerOneStateHash == hash.shoutState)
 			{
-				// ... set the last personal sighting of the player to the player's current position.
-				personalLastSighting = player.transform.position;
-				inPatrol = false;
-//				Debug.Log ("Player in Sphere Collider");
-//				// ... and if the player is within hearing range...
-//				if(CalculatePathLength(player.transform.position) <= col.radius)
-//				{
-//					// ... set the last personal sighting of the player to the player's current position.
-//					personalLastSighting = player.transform.position;
-//					inPatrol = false;
-//					Debug.Log ("Player in Sphere Collider");
-//				}
+				// ... and if the player is within hearing range...
+				if(CalculatePathLength(player.transform.position) <= col.radius)
+					// ... set the last personal sighting of the player to the player's current position.
+					personalLastSighting = player.transform.position;
 			}
         }
     }

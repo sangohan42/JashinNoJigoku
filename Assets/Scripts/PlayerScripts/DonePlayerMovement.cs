@@ -9,14 +9,14 @@ public class DonePlayerMovement : MonoBehaviour
 	
 	
 	private Animator anim;				// Reference to the animator component.
-	private HashIds hash;			// Reference to the HashIDs.
+	private DoneHashIDs hash;			// Reference to the HashIDs.
 	
 	
 	void Awake ()
 	{
 		// Setting up the references.
 		anim = GetComponent<Animator>();
-		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<HashIds>();
+		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneHashIDs>();
 		
 		// Set the weight of the shouting layer to 1.
 		anim.SetLayerWeight(1, 1f);
@@ -35,7 +35,14 @@ public class DonePlayerMovement : MonoBehaviour
 	
 	
 	void Update ()
-	{	
+	{
+		// Cache the attention attracting input.
+		bool shout = Input.GetButtonDown("Attract");
+		
+		// Set the animator shouting parameter.
+		anim.SetBool(hash.shoutingBool, shout);
+		
+		AudioManagement(shout);
 	}
 	
 	
@@ -76,7 +83,7 @@ public class DonePlayerMovement : MonoBehaviour
 	void AudioManagement (bool shout)
 	{
 		// If the player is currently in the run state...
-		if(anim.GetCurrentAnimatorStateInfo(0).nameHash == hash.m_LocomotionIdState)
+		if(anim.GetCurrentAnimatorStateInfo(0).nameHash == hash.locomotionState)
 		{
 			// ... and if the footsteps are not playing...
 			if(!audio.isPlaying)
