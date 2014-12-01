@@ -9,8 +9,7 @@ public class DonePlayerHealth : MonoBehaviour
 	
 	
 	private Animator anim;								// Reference to the animator component.
-	private DonePlayerMovement playerMovement;			// Reference to the player movement script.
-	private DoneHashIDs hash;							// Reference to the HashIDs.
+	private HashIds hash;							// Reference to the HashIDs.
 	private DoneSceneFadeInOut sceneFadeInOut;			// Reference to the SceneFadeInOut script.
 	private DoneLastPlayerSighting lastPlayerSighting;	// Reference to the LastPlayerSighting script.
 	private float timer;								// A timer for counting to the reset of the level once the player is dead.
@@ -21,8 +20,7 @@ public class DonePlayerHealth : MonoBehaviour
 	{
 		// Setting up the references.
 		anim = GetComponent<Animator>();
-		playerMovement = GetComponent<DonePlayerMovement>();
-		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneHashIDs>();
+		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<HashIds>();
 		sceneFadeInOut = GameObject.FindGameObjectWithTag(DoneTags.fader).GetComponent<DoneSceneFadeInOut>();
 		lastPlayerSighting = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneLastPlayerSighting>();
 	}
@@ -63,13 +61,12 @@ public class DonePlayerHealth : MonoBehaviour
 	void PlayerDead ()
 	{
 		// If the player is in the dying state then reset the dead parameter.
-		if(anim.GetCurrentAnimatorStateInfo(0).nameHash == hash.dyingState)
+		if(anim.GetCurrentAnimatorStateInfo(0).nameHash == hash.m_dyingState)
 			anim.SetBool(hash.deadBool, false);
 		
 		// Disable the movement.
 		anim.SetFloat(hash.speedFloat, 0f);
-		playerMovement.enabled = false;
-		
+
 		// Reset the player sighting to turn off the alarms.
 		lastPlayerSighting.position = lastPlayerSighting.resetPosition;
 		
