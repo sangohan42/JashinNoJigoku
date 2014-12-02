@@ -42,6 +42,8 @@ public class CharacterControllerLogic : MonoBehaviour
 	private float direction = 0f;
 	private float charAngle = 0f;
 	private const float SPRINT_SPEED = 2.0f;	
+	private float COVER_SPEED = 1;
+
 	private const float SPRINT_FOV = 75.0f;
 	private const float NORMAL_FOV = 60.0f;
 	private float capsuleHeight;
@@ -55,6 +57,9 @@ public class CharacterControllerLogic : MonoBehaviour
 	private UIJoystick uiJoystickScript;
 
 	private CoverState currentCoverState;
+	private Vector3 vecToAlignTo;
+	private Vector3 positionToPlaceTo;
+	private CapsuleCollider caps;
 
 	#endregion
 		
@@ -88,6 +93,30 @@ public class CharacterControllerLogic : MonoBehaviour
 			this.currentCoverState = value;
 		}
 	}
+
+	public Vector3 VecToAlignTo
+	{
+		get
+		{
+			return this.vecToAlignTo;
+		}
+		set
+		{
+			this.vecToAlignTo = value;
+		}
+	}
+
+	public Vector3 PositionToPlaceTo
+	{
+		get
+		{
+			return this.positionToPlaceTo;
+		}
+		set
+		{
+			this.positionToPlaceTo = value;
+		}
+	}
 	
 	public float LocomotionThreshold { get { return 0.15f; } }
 	
@@ -118,6 +147,8 @@ public class CharacterControllerLogic : MonoBehaviour
 		uiJoystickScript = GameObject.Find ("JoyStick").GetComponent<UIJoystick> ();
 
 		currentCoverState = CoverState.nil;
+
+		caps = GetComponent<CapsuleCollider>();
 	}
 
 	void LateUpdate()
@@ -134,16 +165,25 @@ public class CharacterControllerLogic : MonoBehaviour
 		radarCam.transform.eulerAngles = rot2;
 		radarCam.transform.position = transform.position+radarCameraPosition;
 
-		//If we still are in idle (not in pivot, not in locomotion, not in Sneak)
-		if(stateInfo.nameHash == hashIdsScript.m_IdleState || stateInfo.nameHash == hashIdsScript.m_sneakingState)
+		if(currentCoverState == CoverState.nil)
 		{
-			// If there is some axis input...
-			if(joyX != 0f || joyY != 0f)
+			//If we still are in idle (not in pivot, not in locomotion, not in Sneak)
+			if(stateInfo.nameHash == hashIdsScript.m_IdleState || stateInfo.nameHash == hashIdsScript.m_sneakingState)
 			{
-				// ... set the players rotation and set the speed parameter to 5.5f.
-				Rotating(joyX, joyY);
+				// If there is some axis input...
+				if(joyX != 0f || joyY != 0f)
+				{
+					// ... set the players rotation and set the speed parameter to 5.5f.
+					Rotating(joyX, joyY);
+				}
 			}
 		}
+
+//		//We enter in the Cover Mode so we turn the character to align it with the object's normal
+//		if(transInfo.nameHash == hashIdsScript.Locomotion_CoverTrans)
+//		{
+//			transform.forward = vecToAlignTo;
+//		}
 	}
 	
 	/// Update is called once per frame.
@@ -161,46 +201,128 @@ public class CharacterControllerLogic : MonoBehaviour
 		joyX = uiJoystickScript.position.x;
 		joyY = uiJoystickScript.position.y;
 
-		Vector3 stickDirection = new Vector3 (joyX, 0, joyY);
-		Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
-		
-		float angleRootToMove = Vector3.Angle(transform.forward, stickDirection) * (axisSign.y < 0 ? -1f : 1f);
-		
-		charSpeed = stickDirection.magnitude;
-
-		direction = angleRootToMove * directionSpeed / 180f;
-		
-		charAngle = angleRootToMove;
-
-
-		// Press B to sprint
-		if (Input.GetButton("Sprint"))
+		//NOT in COVER
+		if(currentCoverState == CoverState.nil)
 		{
-			speed = Mathf.Lerp(speed, SPRINT_SPEED, Time.deltaTime);
-//			mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, SPRINT_FOV, fovDampTime * Time.deltaTime);
+
+			Vector3 stickDirection = new Vector3 (joyX, 0, joyY);
+			Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
+			
+			float angleRootToMove = Vector3.Angle(transform.forward, stickDirection) * (axisSign.y < 0 ? -1f : 1f);
+			
+			charSpeed = stickDirection.magnitude;
+
+			direction = angleRootToMove * directionSpeed / 180f;
+			
+			charAngle = angleRootToMove;
+
+
+			// Press B to sprint
+			if (Input.GetButton("Sprint"))
+			{
+				speed = Mathf.Lerp(speed, SPRINT_SPEED, Time.deltaTime);
+			}
+			else
+			{
+				speed = charSpeed;
+			}
+
+			animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
+			animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
+			
+			if (speed > LocomotionThreshold)	// Dead zone
+			{
+				Animator.SetFloat(hashIdsScript.angle, charAngle);
+			}
+
+			if (speed < LocomotionThreshold && Mathf.Abs(joyX) < 0.05f)    // Dead zone
+			{
+				animator.SetFloat(hashIdsScript.direction, 0f);
+				animator.SetFloat(hashIdsScript.angle, 0f);
+			}
+
+			animator.SetBool(hashIdsScript.sneakingBool, Input.GetButton("Sneak"));
 		}
+
+		//IN COVER
 		else
 		{
-			speed = charSpeed;
-//			mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, NORMAL_FOV, fovDampTime * Time.deltaTime);		
+			//We place the player close to the wall while we are in transition
+			if(transInfo.nameHash == hashIdsScript.Locomotion_CoverTrans)
+			{
+				animator.SetFloat(hashIdsScript.speedFloat, 0);
+				animator.SetFloat(hashIdsScript.direction, 0);
+
+				Quaternion q = Quaternion.FromToRotation(transform.forward, vecToAlignTo);
+				transform.rotation = Quaternion.Lerp(transform.rotation, q * transform.rotation, 12f * Time.deltaTime);
+				transform.position = Vector3.Lerp (transform.position, positionToPlaceTo, 12f*Time.deltaTime);
+			}
+
+			else
+			{
+				Vector3 stickDirection = new Vector3 (joyX, 0, joyY).normalized;
+				Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
+				
+				float angleRootToMove = Vector3.Angle(transform.forward, stickDirection) * (axisSign.y < 0 ? -1f : 1f);
+
+				direction = angleRootToMove * directionSpeed / 180f;
+				
+				charAngle = angleRootToMove;
+
+				switch(currentCoverState)
+				{
+					case CoverState.onDownFace:
+						if(joyY > -0.4f)
+						{
+							speed = Mathf.Abs (joyX);
+							direction = joyX;
+							charAngle = 0;
+						}
+						else 
+						{
+							currentCoverState = CoverState.nil;
+							animator.SetBool(hashIdsScript.coverBool, false);
+//							caps.radius = 0.4f;
+						}
+						break;
+
+					case CoverState.OnLeftFace:
+						if(joyX > -0.4f)
+						{
+							speed = Mathf.Abs (joyY);
+							direction = -1*joyY;
+							charAngle = 0;
+						}
+						else 
+						{
+							currentCoverState = CoverState.nil;
+							animator.SetBool(hashIdsScript.coverBool, false);
+//							caps.radius = 0.4f;
+						}
+						break;
+
+					case CoverState.OnRightFace:
+						if(joyX < 0.4f)
+						{
+							speed = Mathf.Abs (joyY);
+							direction = joyY;
+							charAngle = 0;
+						}
+						else 
+						{
+							currentCoverState = CoverState.nil;
+							animator.SetBool(hashIdsScript.coverBool, false);
+//							caps.radius = 0.4f;
+						}
+						break;
+
+					default:
+						break;
+				}
+				animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
+				animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
+			}
 		}
-
-		animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
-		animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
-		
-		if (speed > LocomotionThreshold)	// Dead zone
-		{
-			Animator.SetFloat(hashIdsScript.angle, charAngle);
-		}
-
-		if (speed < LocomotionThreshold && Mathf.Abs(joyX) < 0.05f)    // Dead zone
-		{
-			animator.SetFloat(hashIdsScript.direction, 0f);
-			animator.SetFloat(hashIdsScript.angle, 0f);
-		}
-
-		animator.SetBool(hashIdsScript.sneakingBool, Input.GetButton("Sneak"));
-
 
 	}
 
