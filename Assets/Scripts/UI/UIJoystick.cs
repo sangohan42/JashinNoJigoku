@@ -33,6 +33,7 @@ public class UIJoystick : MonoBehaviour
     void OnEnable()
     {
         widget = GetComponent<UIWidget>();
+//		joystickSprite.enabled = false;
 
         if (SystemInfo.deviceType == DeviceType.Handheld)
         {
@@ -45,6 +46,7 @@ public class UIJoystick : MonoBehaviour
     /// </summary>
     void Initialize()
     {
+//		joystickSprite.enabled = true;
         centerPosition = UICamera.mainCamera.WorldToScreenPoint(transform.position);
 
         radius = (widget.height) * 0.5f * Screen.height / widget.root.manualHeight;
@@ -64,7 +66,6 @@ public class UIJoystick : MonoBehaviour
             {
                 Initialize();
             }
-
             touchId = UICamera.currentTouchID;
             innerPosition = UICamera.currentTouch.pos;
 
@@ -78,8 +79,10 @@ public class UIJoystick : MonoBehaviour
             {
                 touchId = -10;
                 ClearPosition();
-
+				isInitialized = false;
                 isPressed = false;
+//				joystickSprite.enabled = false;
+
             }
         }
     }

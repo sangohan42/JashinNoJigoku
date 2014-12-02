@@ -64,8 +64,8 @@ public class DoneEnemyAnimation : MonoBehaviour
 		// If the player is in sight...
 		if(enemySight.playerInSight && (enemySight.personalLastSighting - transform.position).magnitude < enemySight.shootingDistance)
 		{
-			Debug.Log ("ShootingD = " + enemySight.shootingDistance);
-			Debug.Log ("Distance = " + (enemySight.personalLastSighting - transform.position).magnitude);
+//			Debug.Log ("ShootingD = " + enemySight.shootingDistance);
+//			Debug.Log ("Distance = " + (enemySight.personalLastSighting - transform.position).magnitude);
 			// ... the enemy should stop...
 			speed = 0f;
 			

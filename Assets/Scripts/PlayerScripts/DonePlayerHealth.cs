@@ -9,7 +9,6 @@ public class DonePlayerHealth : MonoBehaviour
 	
 	
 	private Animator anim;								// Reference to the animator component.
-	private DonePlayerMovement playerMovement;			// Reference to the player movement script.
 	private HashIds hash;							// Reference to the HashIDs.
 	private DoneSceneFadeInOut sceneFadeInOut;			// Reference to the SceneFadeInOut script.
 	private DoneLastPlayerSighting lastPlayerSighting;	// Reference to the LastPlayerSighting script.
@@ -21,7 +20,6 @@ public class DonePlayerHealth : MonoBehaviour
 	{
 		// Setting up the references.
 		anim = GetComponent<Animator>();
-		playerMovement = GetComponent<DonePlayerMovement>();
 		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<HashIds>();
 		sceneFadeInOut = GameObject.FindGameObjectWithTag(DoneTags.fader).GetComponent<DoneSceneFadeInOut>();
 		lastPlayerSighting = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneLastPlayerSighting>();
@@ -68,8 +66,7 @@ public class DonePlayerHealth : MonoBehaviour
 		
 		// Disable the movement.
 		anim.SetFloat(hash.speedFloat, 0f);
-		playerMovement.enabled = false;
-		
+
 		// Reset the player sighting to turn off the alarms.
 		lastPlayerSighting.position = lastPlayerSighting.resetPosition;
 		
