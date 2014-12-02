@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
+public enum CoverState {onDownFace, OnRightFace, OnLeftFace, nil};
+
 /// #DESCRIPTION OF CLASS#
 public class CharacterControllerLogic : MonoBehaviour 
 {
+	
 	#region Variables (private)
 	
 	// Inspector serialized
@@ -27,12 +30,6 @@ public class CharacterControllerLogic : MonoBehaviour
 	private float fovDampTime = 3f;
 	[SerializeField]
 	private HashIds hashIdsScript;
-//	[SerializeField]
-//	private float jumpMultiplier = 1f;
-//	[SerializeField]
-//	private CapsuleCollider capCollider;
-//	[SerializeField]
-//	private float jumpDist = 1f;
 	
 	
 	// Private global only
@@ -56,7 +53,8 @@ public class CharacterControllerLogic : MonoBehaviour
 	private Vector3 radarCameraPosition;
 
 	private UIJoystick uiJoystickScript;
-	
+
+	private CoverState currentCoverState;
 
 	#endregion
 		
@@ -76,6 +74,18 @@ public class CharacterControllerLogic : MonoBehaviour
 		get
 		{
 			return this.speed;
+		}
+	}
+
+	public CoverState CurrentCoverState
+	{
+		get
+		{
+			return this.currentCoverState;
+		}
+		set
+		{
+			this.currentCoverState = value;
 		}
 	}
 	
@@ -106,6 +116,8 @@ public class CharacterControllerLogic : MonoBehaviour
 		radarCameraPosition = radarCam.transform.position - transform.position;
 
 		uiJoystickScript = GameObject.Find ("JoyStick").GetComponent<UIJoystick> ();
+
+		currentCoverState = CoverState.nil;
 	}
 
 	void LateUpdate()

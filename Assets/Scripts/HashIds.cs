@@ -14,17 +14,19 @@ public class HashIds : MonoBehaviour {
 	public int WeaponRaise_WeaponLower;
 	public int Empty_WeaponRaiseTrans;
 	public int Empty_WeaponShootTrans;
+
 	public int deadBool;
 	public int sneakingBool;
 	public int playerInSightBool;
 	public int inPursuitBool;
 	public int inPatrolBool;
 	public int inYoujinBool;
+	public int openBool;
+	public int coverBool;
+
 	public int shotFloat;
 	public int aimWeightFloat;
 	public int angularSpeedFloat;
-	public int openBool;
-
 	public int speedFloat;
 	public int speedFloatEnemy;
 	public int direction;
@@ -49,14 +51,14 @@ public class HashIds : MonoBehaviour {
 		inPursuitBool = Animator.StringToHash("InPursuit");
 		inPatrolBool = Animator.StringToHash("InPatrol");
 		inYoujinBool = Animator.StringToHash("InYoujin");
+		openBool = Animator.StringToHash("Open");
+		coverBool = Animator.StringToHash("Cover");
+
 		shotFloat = Animator.StringToHash("Shot");
 		aimWeightFloat = Animator.StringToHash("AimWeight");
 		angularSpeedFloat = Animator.StringToHash("AngularSpeed");
-		openBool = Animator.StringToHash("Open");
-
 		speedFloat = Animator.StringToHash("Speed");
-		speedFloatEnemy = Animator.StringToHash("SpeedEnemy");
-	
+		speedFloatEnemy = Animator.StringToHash ("SpeedEnemy");
 		direction = Animator.StringToHash("Direction");
 		angle = Animator.StringToHash("Angle");
 

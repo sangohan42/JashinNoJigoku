@@ -3,8 +3,8 @@ using System.Collections;
 
 public class DoneEnemyShooting : MonoBehaviour
 {
-	public float maximumDamage = 120f;					// The maximum potential damage per shot.
-	public float minimumDamage = 45f;					// The minimum potential damage per shot.
+	public float maximumDamage = 50f;					// The maximum potential damage per shot.
+	public float minimumDamage = 25f;					// The minimum potential damage per shot.
 	public AudioClip shotClip;							// An audio clip to play when a shot happens.
 	public float flashIntensity = 3f;					// The intensity of the light when the shot happens.
 	public float fadeSpeed = 10f;						// How fast the light will fade after the shot.
@@ -80,7 +80,7 @@ public class DoneEnemyShooting : MonoBehaviour
 	void Shoot ()
 	{
 
-		Debug.Log ("SHOOT");
+//		Debug.Log ("SHOOT");
 		// The enemy is shooting.
 		shooting = true;
 		
@@ -105,7 +105,8 @@ public class DoneEnemyShooting : MonoBehaviour
 		
 		// Set the end position of the player's centre of mass.
 		laserShotLine.SetPosition(1, player.position + Vector3.up * 1.5f);
-		
+
+		laserShotLine.SetWidth (0.1f, 0.1f);
 		// Turn on the line renderer.
 		laserShotLine.enabled = true;
 		
