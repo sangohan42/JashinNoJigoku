@@ -63,6 +63,9 @@ public class CharacterControllerLogic : MonoBehaviour
 	private CapsuleCollider caps;
 
 	private Transform CameraInCoverPos;
+	private Vector3 coverPos;
+	private Vector3 coverRot;
+
 	
 	private Vector3 savedCamPosition;
 	private Quaternion savedCamRotation;
@@ -185,6 +188,9 @@ public class CharacterControllerLogic : MonoBehaviour
 		caps = GetComponent<CapsuleCollider>();
 
 		CameraInCoverPos = GameObject.Find ("CameraInCoverPos").transform;
+		coverPos = CameraInCoverPos.position - transform.position;
+		coverRot = new Vector3(CameraInCoverPos.localEulerAngles.x, CameraInCoverPos.localEulerAngles.y, 0);
+
 		inCoverMode = false;
 		inPositioningCoverModeCam = false;
 	}
@@ -238,8 +244,11 @@ public class CharacterControllerLogic : MonoBehaviour
 
 		else if (inCoverMode)
 		{
-			gamecam.transform.localPosition = CameraInCoverPos.localPosition;
-			gamecam.transform.localRotation = CameraInCoverPos.localRotation;
+//			gamecam.transform.localPosition = CameraInCoverPos.localPosition;
+//			gamecam.transform.localRotation = CameraInCoverPos.localRotation;
+
+			gamecam.transform.localPosition = coverPos;
+			gamecam.transform.localEulerAngles = coverRot;
 		}
 			
 //		//Reset camera position and rotation in Cover mode while we are  NOT in transition to Cover mode
@@ -368,12 +377,12 @@ public class CharacterControllerLogic : MonoBehaviour
 						break;
 
 					case CoverState.OnLeftFace:
-						if(joyX > -0.4f)
+						if(joyY > -0.4f)
 						{
-							speed = Mathf.Abs (joyY);
-							direction = -1*joyY;
+							speed = Mathf.Abs (joyX);
+							direction = joyX;
 							charAngle = 0;
-							transform.position += new Vector3(0, 0,Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+							transform.position += new Vector3(0, 0,-1*Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 						}
 						else 
 						{
@@ -384,10 +393,10 @@ public class CharacterControllerLogic : MonoBehaviour
 						break;
 
 					case CoverState.OnRightFace:
-						if(joyX < 0.4f)
+						if(joyY > -0.4f)
 						{
-							speed = Mathf.Abs (joyY);
-							direction = joyY;
+							speed = Mathf.Abs (joyX);
+							direction = joyX;
 							charAngle = 0;
 							transform.position += new Vector3(0, 0,Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 						}
