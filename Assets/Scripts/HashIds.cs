@@ -15,6 +15,7 @@ public class HashIds : MonoBehaviour {
 	public int Empty_WeaponRaiseTrans;
 	public int Empty_WeaponShootTrans;
 	public int Locomotion_CoverTrans;
+	public int Cover_LocomotionTrans;
 
 	public int deadBool;
 	public int sneakingBool;
@@ -46,6 +47,7 @@ public class HashIds : MonoBehaviour {
 		Empty_WeaponRaiseTrans = Animator.StringToHash("Shooting.Empty -> Shooting.WeaponRaise");
 		Empty_WeaponShootTrans = Animator.StringToHash("Shooting.Empty -> Shooting.WeaponShoot");
 		Locomotion_CoverTrans =Animator.StringToHash("Base Layer.Locomotion -> Base Layer.Cover");
+		Cover_LocomotionTrans =Animator.StringToHash("Base Layer.Cover -> Base Layer.Locomotion");
 
 		deadBool = Animator.StringToHash("Dead");
 		sneakingBool = Animator.StringToHash("Sneak");

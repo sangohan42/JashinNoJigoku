@@ -147,15 +147,8 @@ public class DoneEnemySight : MonoBehaviour
 				// ... set the last personal sighting of the player to the player's current position.
 				personalLastSighting = player.transform.position;
 				inPatrol = false;
-//				Debug.Log ("Player in Sphere Collider");
-//				// ... and if the player is within hearing range...
-//				if(CalculatePathLength(player.transform.position) <= col.radius)
-//				{
-//					// ... set the last personal sighting of the player to the player's current position.
-//					personalLastSighting = player.transform.position;
-//					inPatrol = false;
+
 //					Debug.Log ("Player in Sphere Collider");
-//				}
 			}
         }
     }

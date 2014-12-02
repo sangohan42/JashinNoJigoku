@@ -42,13 +42,14 @@ public class CharacterControllerLogic : MonoBehaviour
 	private float direction = 0f;
 	private float charAngle = 0f;
 	private const float SPRINT_SPEED = 2.0f;	
-	private float COVER_SPEED = 1;
+	private float COVER_SPEED = 0.9f;
 
 	private const float SPRINT_FOV = 75.0f;
 	private const float NORMAL_FOV = 60.0f;
 	private float capsuleHeight;
 
 	private Vector3 cameraRotation;
+	private Quaternion cameraRotationQuaternion;
 	private Vector3 cameraPosition;
 
 	private Vector3 radarCameraRotation;
@@ -61,6 +62,14 @@ public class CharacterControllerLogic : MonoBehaviour
 	private Vector3 positionToPlaceTo;
 	private CapsuleCollider caps;
 
+	private Transform CameraInCoverPos;
+	
+	private Vector3 savedCamPosition;
+	private Quaternion savedCamRotation;
+
+	private bool inCoverMode;
+	private bool inPositioningCoverModeCam;
+	
 	#endregion
 		
 	
@@ -117,6 +126,30 @@ public class CharacterControllerLogic : MonoBehaviour
 			this.positionToPlaceTo = value;
 		}
 	}
+
+	public Vector3 SavedCamPosition
+	{
+		get
+		{
+			return this.savedCamPosition;
+		}
+		set
+		{
+			this.savedCamPosition = value;
+		}
+	}
+
+	public Quaternion SavedCamRotation
+	{
+		get
+		{
+			return this.savedCamRotation;
+		}
+		set
+		{
+			this.savedCamRotation = value;
+		}
+	}
 	
 	public float LocomotionThreshold { get { return 0.15f; } }
 	
@@ -140,6 +173,7 @@ public class CharacterControllerLogic : MonoBehaviour
 		}		
 
 		cameraRotation = gamecam.transform.eulerAngles;
+		cameraRotationQuaternion = gamecam.transform.localRotation;
 		cameraPosition = gamecam.transform.position - transform.position;
 		radarCameraRotation = radarCam.transform.eulerAngles;
 		radarCameraPosition = radarCam.transform.position - transform.position;
@@ -149,15 +183,14 @@ public class CharacterControllerLogic : MonoBehaviour
 		currentCoverState = CoverState.nil;
 
 		caps = GetComponent<CapsuleCollider>();
+
+		CameraInCoverPos = GameObject.Find ("CameraInCoverPos").transform;
+		inCoverMode = false;
+		inPositioningCoverModeCam = false;
 	}
 
 	void LateUpdate()
 	{
-		//Reset Camera Rotation and position
-		Vector3 rot = gamecam.transform.eulerAngles;
-		rot = cameraRotation; 
-		gamecam.transform.eulerAngles = rot;
-		gamecam.transform.position = transform.position+cameraPosition;
 
 		//Reset Radar Camera Rotation and position
 		Vector3 rot2 = radarCam.transform.eulerAngles;
@@ -165,8 +198,25 @@ public class CharacterControllerLogic : MonoBehaviour
 		radarCam.transform.eulerAngles = rot2;
 		radarCam.transform.position = transform.position+radarCameraPosition;
 
+		//Reset Camera position and rotation if we are not in cover and if we are not in transition from cover
 		if(currentCoverState == CoverState.nil)
 		{
+			if(transInfo.nameHash != hashIdsScript.Cover_LocomotionTrans)
+			{
+				Vector3 rot = gamecam.transform.eulerAngles;
+				rot = cameraRotation; 
+				gamecam.transform.eulerAngles = rot;
+				gamecam.transform.position = transform.position+cameraPosition;
+			}
+
+//			else
+//			{
+//				Debug.Log("ENTER HERE");
+//
+//				gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, cameraPosition, 10f*Time.deltaTime);
+//				gamecam.transform.localRotation = Quaternion.Lerp(gamecam.transform.localRotation, cameraRotationQuaternion, 10f*Time.deltaTime);
+//			}
+
 			//If we still are in idle (not in pivot, not in locomotion, not in Sneak)
 			if(stateInfo.nameHash == hashIdsScript.m_IdleState || stateInfo.nameHash == hashIdsScript.m_sneakingState)
 			{
@@ -179,11 +229,28 @@ public class CharacterControllerLogic : MonoBehaviour
 			}
 		}
 
-//		//We enter in the Cover Mode so we turn the character to align it with the object's normal
-//		if(transInfo.nameHash == hashIdsScript.Locomotion_CoverTrans)
+		//We are positiong the character close to the wall so we save the camera position until it's correctly set
+		else if(inPositioningCoverModeCam == false && inCoverMode == false)
+		{
+			gamecam.transform.position = savedCamPosition;
+			gamecam.transform.rotation = savedCamRotation;
+		}
+
+		else if (inCoverMode)
+		{
+			gamecam.transform.localPosition = CameraInCoverPos.localPosition;
+			gamecam.transform.localRotation = CameraInCoverPos.localRotation;
+		}
+			
+//		//Reset camera position and rotation in Cover mode while we are  NOT in transition to Cover mode
+//		else if(transInfo.nameHash != hashIdsScript.Locomotion_CoverTrans)
 //		{
-//			transform.forward = vecToAlignTo;
+//			Quaternion rot = gamecam.transform.localRotation;
+//			rot = CameraInCoverPos.localRotation; 
+//			gamecam.transform.localRotation = rot;
+//			gamecam.transform.position = transform.position+CameraInCoverPos.localPosition;
 //		}
+
 	}
 	
 	/// Update is called once per frame.
@@ -204,6 +271,7 @@ public class CharacterControllerLogic : MonoBehaviour
 		//NOT in COVER
 		if(currentCoverState == CoverState.nil)
 		{
+			inCoverMode = false;
 
 			Vector3 stickDirection = new Vector3 (joyX, 0, joyY);
 			Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
@@ -247,19 +315,31 @@ public class CharacterControllerLogic : MonoBehaviour
 		//IN COVER
 		else
 		{
+			Quaternion q = Quaternion.FromToRotation(transform.forward, vecToAlignTo);
+			Quaternion newRotation = q * transform.rotation;
+
 			//We place the player close to the wall while we are in transition
-			if(transInfo.nameHash == hashIdsScript.Locomotion_CoverTrans)
+			if(transform.rotation !=newRotation)
 			{
 				animator.SetFloat(hashIdsScript.speedFloat, 0);
 				animator.SetFloat(hashIdsScript.direction, 0);
 
-				Quaternion q = Quaternion.FromToRotation(transform.forward, vecToAlignTo);
 				transform.rotation = Quaternion.Lerp(transform.rotation, q * transform.rotation, 12f * Time.deltaTime);
 				transform.position = Vector3.Lerp (transform.position, positionToPlaceTo, 12f*Time.deltaTime);
+			}
+			//We place the camera to the right position
+			else if(gamecam.transform.localPosition != CameraInCoverPos.localPosition)
+			{
+				inPositioningCoverModeCam = true;
+				gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, CameraInCoverPos.localPosition, 5*Time.deltaTime);
+				gamecam.transform.localRotation = Quaternion.Lerp(gamecam.transform.localRotation, CameraInCoverPos.localRotation, 5*Time.deltaTime);
 			}
 
 			else
 			{
+				inCoverMode = true;
+				inPositioningCoverModeCam = false;
+
 				Vector3 stickDirection = new Vector3 (joyX, 0, joyY).normalized;
 				Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
 				
@@ -277,6 +357,7 @@ public class CharacterControllerLogic : MonoBehaviour
 							speed = Mathf.Abs (joyX);
 							direction = joyX;
 							charAngle = 0;
+							transform.position += new Vector3(Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED,0, 0) ;
 						}
 						else 
 						{
@@ -292,6 +373,7 @@ public class CharacterControllerLogic : MonoBehaviour
 							speed = Mathf.Abs (joyY);
 							direction = -1*joyY;
 							charAngle = 0;
+							transform.position += new Vector3(0, 0,Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 						}
 						else 
 						{
@@ -307,6 +389,7 @@ public class CharacterControllerLogic : MonoBehaviour
 							speed = Mathf.Abs (joyY);
 							direction = joyY;
 							charAngle = 0;
+							transform.position += new Vector3(0, 0,Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 						}
 						else 
 						{

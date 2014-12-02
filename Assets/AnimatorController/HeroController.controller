@@ -1078,6 +1078,10 @@ Transition:
     m_ConditionEvent: Speed
     m_EventTreshold: .100000001
     m_ExitTime: .713467121
+  - m_ConditionMode: 2
+    m_ConditionEvent: Cover
+    m_EventTreshold: .100000001
+    m_ExitTime: .713467121
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -1192,7 +1196,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Cover
-  m_Speed: 1
+  m_Speed: 1.20000005
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 20621838}
