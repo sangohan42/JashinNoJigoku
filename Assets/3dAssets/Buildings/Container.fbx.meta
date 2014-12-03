@@ -145,6 +145,7 @@ ModelImporter:
     4300050: Container26
     4300052: Container_1:Container1
     4300054: Container
+    4300056: Container_:Container
     9500000: //RootNode
   materials:
     importMaterials: 0
