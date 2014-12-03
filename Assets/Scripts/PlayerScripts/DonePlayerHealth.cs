@@ -49,10 +49,16 @@ public class DonePlayerHealth : MonoBehaviour
 	{
 		// The player is now dead.
 		playerDead = true;
-		
+
 		// Set the animator's dead parameter to true also.
 		anim.SetBool(hash.deadBool, playerDead);
-		
+
+//		//Transition from animated to ragdolled
+//		anim.enabled = false; //disable animation
+//		rigidbody.isKinematic = false; //allow the ragdoll RigidBodies to react to the environment
+//		rigidbody.constraints = RigidbodyConstraints.None;
+//		rigidbody.AddForce(-2f*transform.forward,ForceMode.VelocityChange);
+
 		// Play the dying sound effect at the player's location.
 		AudioSource.PlayClipAtPoint(deathClip, transform.position);
 	}

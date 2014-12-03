@@ -25,7 +25,8 @@ public class HashIds : MonoBehaviour {
 	public int inYoujinBool;
 	public int openBool;
 	public int coverBool;
-
+	public int lookingAroundBool;
+	
 	public int shotFloat;
 	public int aimWeightFloat;
 	public int angularSpeedFloat;
@@ -57,6 +58,7 @@ public class HashIds : MonoBehaviour {
 		inYoujinBool = Animator.StringToHash("InYoujin");
 		openBool = Animator.StringToHash("Open");
 		coverBool = Animator.StringToHash("Cover");
+		lookingAroundBool = Animator.StringToHash("LookAround"); 
 
 		shotFloat = Animator.StringToHash("Shot");
 		aimWeightFloat = Animator.StringToHash("AimWeight");
