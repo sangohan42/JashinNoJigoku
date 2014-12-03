@@ -1273,7 +1273,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Cover
-  m_Speed: 1.20000005
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 20621838}

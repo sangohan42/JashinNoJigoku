@@ -443,8 +443,8 @@ public class CharacterControllerLogic : MonoBehaviour
 					break;
 				}				
 				//transform.position = positionToPlaceTo;
-				gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, camSwitchDamp*Time.deltaTime);
-				gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, camSwitchDamp*Time.deltaTime);
+				gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, 12*Time.deltaTime);
+				gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, 12*Time.deltaTime);
 
 //				if(!hasBeenInLookingAround)
 //				{
@@ -518,7 +518,7 @@ public class CharacterControllerLogic : MonoBehaviour
 								if(inLookAroundMode)
 								{
 									inCoverMode = false;
-									camSwitchDamp = 6f;
+									camSwitchDamp = 7f;
 								}
 								animator.SetBool(hashIdsScript.lookingAroundBool, false);
 								inLookAroundMode = false;
@@ -575,7 +575,7 @@ public class CharacterControllerLogic : MonoBehaviour
 								if(inLookAroundMode)
 								{
 									inCoverMode = false;
-									camSwitchDamp = 6f;
+									camSwitchDamp = 7f;
 								}
 								animator.SetBool(hashIdsScript.lookingAroundBool, false);
 								inLookAroundMode = false;
@@ -633,7 +633,7 @@ public class CharacterControllerLogic : MonoBehaviour
 								if(inLookAroundMode)
 								{
 									inCoverMode = false;
-									camSwitchDamp = 6f;
+									camSwitchDamp = 7f;
 								}
 								animator.SetBool(hashIdsScript.lookingAroundBool, false);
 								inLookAroundMode = false;
