@@ -923,26 +923,6 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1101 &110114863
-Transition:
-  serializedVersion: 2
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 110280950}
-  m_DstState: {fileID: 110270636}
-  m_TransitionDuration: .0609756112
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Speed
-    m_EventTreshold: .5
-    m_ExitTime: .939024389
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
-  m_CanTransitionToSelf: 0
 --- !u!1101 &110115987
 Transition:
   serializedVersion: 2
@@ -1119,7 +1099,7 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1101 &110167659
+--- !u!1101 &110167088
 Transition:
   serializedVersion: 2
   m_ObjectHideFlags: 3
@@ -1128,17 +1108,17 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110270636}
   m_DstState: {fileID: 110280950}
-  m_TransitionDuration: .286532909
+  m_TransitionDuration: .32923615
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
     m_EventTreshold: .100000001
-    m_ExitTime: .713467121
+    m_ExitTime: .67076385
   - m_ConditionMode: 2
     m_ConditionEvent: Cover
     m_EventTreshold: .100000001
-    m_ExitTime: .713467121
+    m_ExitTime: .67076385
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -1199,26 +1179,6 @@ Transition:
     m_ConditionEvent: LookAround
     m_EventTreshold: 0
     m_ExitTime: .75
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
-  m_CanTransitionToSelf: 0
---- !u!1101 &110179867
-Transition:
-  serializedVersion: 2
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 110270636}
-  m_DstState: {fileID: 110297475}
-  m_TransitionDuration: .32923615
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: Speed
-    m_EventTreshold: .5
-    m_ExitTime: .67076385
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -1454,16 +1414,14 @@ StateMachine:
     data:
       first: {fileID: 110280950}
       second:
-      - {fileID: 110114863}
       - {fileID: 110171969}
     data:
       first: {fileID: 110270636}
       second:
-      - {fileID: 110167659}
       - {fileID: 110121029}
       - {fileID: 110138184}
       - {fileID: 110123846}
-      - {fileID: 110179867}
+      - {fileID: 110167088}
     data:
       first: {fileID: 110281670}
       second:
