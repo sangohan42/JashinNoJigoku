@@ -384,7 +384,7 @@ public class CharacterControllerLogic : MonoBehaviour
 			charAngle = angleRootToMove;
 
 
-			Debug.Log ("Speed = " + speed);
+//			Debug.Log ("Speed = " + speed);
 			// Press B to sprint
 			if (charSpeed>=1f)
 			{
