@@ -22,6 +22,7 @@ public class DoneEnemySight : MonoBehaviour
 	private ParticleSystem interrogativePoint;
 	private GameObject interrogativePointObject;
 	public GameObject FOV;
+	private bool resetFOVColor;
 	
 	void Awake ()
 	{
@@ -44,6 +45,8 @@ public class DoneEnemySight : MonoBehaviour
 		interrogativePointObject = GameObject.Find ("InterrogativePoint");
 		interrogativePoint = interrogativePointObject.GetComponent<ParticleSystem>();
 		interrogativePointObject.SetActive (false);
+
+		resetFOVColor = true;
 	}
 	
 	
@@ -68,6 +71,7 @@ public class DoneEnemySight : MonoBehaviour
 				interrogativePoint.Play();
 				anim.SetBool(hash.inYoujinBool, true);
 			}
+
 			else if((youJinLayerTransition == hash.WeaponRaise_WeaponLower || 
 			         shootingLayerTransition == hash.Empty_WeaponRaiseTrans ||
 			         shootingLayerTransition == hash.Empty_WeaponShootTrans) && 
@@ -76,10 +80,24 @@ public class DoneEnemySight : MonoBehaviour
 				interrogativePoint.Stop();
 				interrogativePointObject.SetActive(false);
 				anim.SetBool(hash.inYoujinBool, false);
-
 			}
+
+			if((shootingLayerTransition == hash.Empty_WeaponRaiseTrans ||
+			   shootingLayerTransition == hash.Empty_WeaponShootTrans) && resetFOVColor)
+			{
+				FOV.renderer.material.SetColor("_TintColor", new Color(0.5f, 0, 0, 0.5f));
+				resetFOVColor = false;
+			}
+
+			else if(anim.GetBool(hash.inPatrolBool) == true && !resetFOVColor)
+			{
+				FOV.renderer.material.SetColor("_TintColor", new Color(0.5f, 0.5f, 0.5f, 0.5f));
+				resetFOVColor = true;
+			}
+
 		}
 
+		//Player is Dead
 		else
 		{
 			// ... set the animator parameter to false.
@@ -92,11 +110,11 @@ public class DoneEnemySight : MonoBehaviour
 
 	void LateUpdate()
 	{
-				Vector3 euler = FOV.transform.localEulerAngles;
-				euler.x = 0;
-				euler.z = 0;
-				FOV.transform.localEulerAngles = euler;
-		}
+		Vector3 euler = FOV.transform.localEulerAngles;
+		euler.x = 0;
+		euler.z = 0;
+		FOV.transform.localEulerAngles = euler;
+	}
 	
 
 	void OnTriggerStay (Collider other)
