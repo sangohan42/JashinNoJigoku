@@ -6,30 +6,30 @@ public class testCollisionWall : MonoBehaviour {
 	private HashIds hash;
 	private Animator playerAnimator;
 	private GameObject player;
+	private CharacterControllerLogic characterControllerLogicScript;
 	private GameObject gameCam;
-	private CapsuleCollider caps;
 
 	void Awake()
 	{
 		hash = GameObject.FindGameObjectWithTag (DoneTags.gameController).GetComponent<HashIds> ();
 		player = GameObject.FindGameObjectWithTag (DoneTags.player);
 		playerAnimator = player.GetComponent<Animator> ();
-		caps = player.GetComponent<CapsuleCollider>();
 		gameCam = GameObject.FindGameObjectWithTag (DoneTags.camera);
+		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
 
 	}
 	
 	void OnCollisionEnter(Collision collision) {
 
 		//If the player collide and was in Locomotion
-		if(collision.gameObject.CompareTag(DoneTags.player) && playerAnimator.GetCurrentAnimatorStateInfo(0).nameHash == hash.m_LocomotionIdState)
+		if(collision.gameObject.CompareTag(DoneTags.player) && playerAnimator.GetCurrentAnimatorStateInfo(0).nameHash == hash.m_LocomotionIdState &&
+		   !characterControllerLogicScript.IsPursued)
 		{
 			ContactPoint contact = collision.contacts[0];
 			if (collision.relativeVelocity.magnitude > 1)
 			{
 //				Debug.Log ("scalar product = " + Vector3.Dot(collision.gameObject.transform.forward,contact.normal));
 //				Debug.Log ("wall normal = " + contact.normal);
-				CharacterControllerLogic characterControllerLogicScript = collision.gameObject.GetComponent<CharacterControllerLogic>();
 
 //				//angle 150 with wall's normal vector
 //				if(Vector3.Dot(collision.gameObject.transform.forward,contact.normal) < -0.7f)

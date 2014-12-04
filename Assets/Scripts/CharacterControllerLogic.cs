@@ -92,6 +92,7 @@ public class CharacterControllerLogic : MonoBehaviour
 
 	private bool hasBeenInLookingAround;
 
+	private bool isPursued;
 	
 	#endregion
 		
@@ -220,6 +221,18 @@ public class CharacterControllerLogic : MonoBehaviour
 			this.boundingBoxMaxZ = value;
 		}
 	}
+
+	public bool IsPursued
+	{
+		get
+		{
+			return this.isPursued;
+		}
+		set
+		{
+			this.isPursued = value;
+		}
+	}
 	
 	public float LocomotionThreshold { get { return 0.15f; } }
 	
@@ -272,6 +285,7 @@ public class CharacterControllerLogic : MonoBehaviour
 		hasBeenInLookingAround = false;
 
 		camSwitchDamp = 12f;
+		isPursued = false;
 	}
 
 	void LateUpdate()
@@ -370,15 +384,14 @@ public class CharacterControllerLogic : MonoBehaviour
 			charAngle = angleRootToMove;
 
 
+			Debug.Log ("Speed = " + speed);
 			// Press B to sprint
-			if (Input.GetButton("Sprint"))
+			if (charSpeed>=1f)
 			{
 				speed = Mathf.Lerp(speed, SPRINT_SPEED, Time.deltaTime);
 			}
-			else
-			{
-				speed = charSpeed;
-			}
+			else speed = charSpeed;
+
 
 			animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
 			animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);

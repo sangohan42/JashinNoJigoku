@@ -39,14 +39,13 @@
             // in order not to occlude other objects
  
          Blend SrcAlpha OneMinusSrcAlpha // use alpha blending
- 
+
          CGPROGRAM 
  
          #pragma vertex vert 
          #pragma fragment frag
          
          uniform sampler2D _MainTex;
-
 		 // vertex input: position, UV
         struct appdata {
             float4 vertex : POSITION;

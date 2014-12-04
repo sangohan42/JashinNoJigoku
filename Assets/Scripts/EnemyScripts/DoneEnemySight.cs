@@ -24,6 +24,9 @@ public class DoneEnemySight : MonoBehaviour
 	public GameObject FOV;
 	private bool resetFOVColor;
 	
+	public Texture FOV1;
+	public Texture FOV2;
+
 	void Awake ()
 	{
 		// Setting up the references.
@@ -85,13 +88,13 @@ public class DoneEnemySight : MonoBehaviour
 			if((shootingLayerTransition == hash.Empty_WeaponRaiseTrans ||
 			   shootingLayerTransition == hash.Empty_WeaponShootTrans) && resetFOVColor)
 			{
-				FOV.renderer.material.SetColor("_TintColor", new Color(0.5f, 0, 0, 0.5f));
+				FOV.renderer.material.SetTexture("_MainTex", FOV2);
 				resetFOVColor = false;
 			}
 
 			else if(anim.GetBool(hash.inPatrolBool) == true && !resetFOVColor)
 			{
-				FOV.renderer.material.SetColor("_TintColor", new Color(0.5f, 0.5f, 0.5f, 0.5f));
+				FOV.renderer.material.SetTexture("_MainTex",FOV1);
 				resetFOVColor = true;
 			}
 
