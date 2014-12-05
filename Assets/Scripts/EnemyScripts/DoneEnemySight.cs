@@ -45,7 +45,7 @@ public class DoneEnemySight : MonoBehaviour
 		previousSighting = new Vector3 (1000, 1000, 1000);
 		inPursuit = false;
 		inPatrol = true;
-		interrogativePointObject = GameObject.Find ("InterrogativePoint");
+		interrogativePointObject = transform.Find ("InterrogativePoint").gameObject;
 		interrogativePoint = interrogativePointObject.GetComponent<ParticleSystem>();
 		interrogativePointObject.SetActive (false);
 
