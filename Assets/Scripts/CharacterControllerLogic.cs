@@ -167,6 +167,31 @@ public class CharacterControllerLogic : MonoBehaviour
 		}
 	}
 
+	public Vector3 CameraPosition
+	{
+		get
+		{
+			return this.cameraPosition;
+		}
+		set
+		{
+			this.cameraPosition = value;
+		}
+	}
+
+	public Vector3 CameraRotation
+	{
+		get
+		{
+			return this.cameraRotation;
+		}
+		set
+		{
+			this.cameraRotation = value;
+		}
+	}
+
+
 	public Vector3 SavedCamPosition
 	{
 		get
@@ -608,6 +633,8 @@ public class CharacterControllerLogic : MonoBehaviour
 						{
 							currentCoverState = CoverState.nil;
 							animator.SetBool(hashIdsScript.coverBool, false);
+							animator.SetBool(hashIdsScript.crouchCoverBool, false);
+
 							coverPos = coverPosCopy;
 							coverRot = coverRotCopy;
 						 	currentModifToCoverPos = 0;
@@ -668,6 +695,8 @@ public class CharacterControllerLogic : MonoBehaviour
 						{
 							currentCoverState = CoverState.nil;
 							animator.SetBool(hashIdsScript.coverBool, false);
+							animator.SetBool(hashIdsScript.crouchCoverBool, false);
+
 							coverPos = coverPosCopy;
 							coverRot = coverRotCopy;
 							currentModifToCoverPos = 0;
@@ -728,6 +757,8 @@ public class CharacterControllerLogic : MonoBehaviour
 						{
 							currentCoverState = CoverState.nil;
 							animator.SetBool(hashIdsScript.coverBool, false);
+							animator.SetBool(hashIdsScript.crouchCoverBool, false);
+
 							coverPos = coverPosCopy;
 							coverRot = coverRotCopy;
 							currentModifToCoverPos = 0;

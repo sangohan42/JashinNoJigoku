@@ -73,12 +73,19 @@ public class testCollisionWall : MonoBehaviour {
 						Debug.Log ("DOWN FACE");
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
-						if(isAWall)playerAnimator.SetBool(hash.coverBool, true);
-						else playerAnimator.SetBool(hash.crouchCoverBool, true);
-//						characterControllerLogicScript.VecToAlignTo = -1*contact.normal;
+						if(isAWall)
+						{
+							playerAnimator.SetBool(hash.coverBool, true);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, player.transform.position.y, contact.point.z -0.23f);
+						}
+						else 
+						{
+							playerAnimator.SetBool(hash.crouchCoverBool, true);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, player.transform.position.y, contact.point.z -0.37f);
+						}
+						//characterControllerLogicScript.VecToAlignTo = -1*contact.normal;
 						characterControllerLogicScript.BoundingBoxMinX = collider.bounds.min.x + 0.15f;
 						characterControllerLogicScript.BoundingBoxMaxX = collider.bounds.max.x - 0.15f;
-						characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, player.transform.position.y, contact.point.z -0.23f);
 						characterControllerLogicScript.CurrentCoverState = CoverState.onDownFace;
 
 					}
@@ -96,13 +103,20 @@ public class testCollisionWall : MonoBehaviour {
 						Debug.Log ("LEFT FACE");
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
-						if(isAWall)playerAnimator.SetBool(hash.coverBool, true);
-						else playerAnimator.SetBool(hash.crouchCoverBool, true);
+						if(isAWall)
+						{
+							playerAnimator.SetBool(hash.coverBool, true);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x - 0.23f, player.transform.position.y, contact.point.z);
+						}
+						else 
+						{
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x - 0.37f, player.transform.position.y, contact.point.z);
+							playerAnimator.SetBool(hash.crouchCoverBool, true);
+						}
 
 						//characterControllerLogicScript.VecToAlignTo = -1*contact.normal;
 						characterControllerLogicScript.BoundingBoxMinZ = collider.bounds.min.z + 0.15f;
 						characterControllerLogicScript.BoundingBoxMaxZ = collider.bounds.max.z - 0.15f;
-						characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x - 0.23f, player.transform.position.y, contact.point.z);
 						characterControllerLogicScript.CurrentCoverState = CoverState.OnLeftFace;
 
 					}
@@ -113,13 +127,20 @@ public class testCollisionWall : MonoBehaviour {
 						Debug.Log ("RIGHT FACE");
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
-						if(isAWall)playerAnimator.SetBool(hash.coverBool, true);
-						else playerAnimator.SetBool(hash.crouchCoverBool, true);
+						if(isAWall)
+						{
+							playerAnimator.SetBool(hash.coverBool, true);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x + 0.23f, player.transform.position.y, contact.point.z);
+						}
+						else 
+						{
+							playerAnimator.SetBool(hash.crouchCoverBool, true);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x + 0.37f, player.transform.position.y, contact.point.z);
+						}
 
 						//characterControllerLogicScript.VecToAlignTo = -1*contact.normal;
 						characterControllerLogicScript.BoundingBoxMinZ = collider.bounds.min.z + 0.15f;
 						characterControllerLogicScript.BoundingBoxMaxZ = collider.bounds.max.z - 0.15f;
-						characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x + 0.23f, player.transform.position.y, contact.point.z);
 						characterControllerLogicScript.CurrentCoverState = CoverState.OnRightFace;
 
 					}
