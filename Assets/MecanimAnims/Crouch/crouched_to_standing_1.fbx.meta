@@ -1,24 +1,24 @@
 fileFormatVersion: 2
-guid: fefe62512828545519610f60243d4c8c
+guid: ac47bc53db949470387ce9eda84740d1
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Adam_belt_geo
-    100004: Adam_Body_GeoGroup
-    100006: Adam_Eyes_Geo
-    100008: Adam_Gun_Geo
-    100010: Adam_Hands_Geo
-    100012: Adam_Head_Geo
-    100014: Adam_Head_GeoGroup
-    100016: Adam_jacket_Geo
-    100018: Adam_Lashes_Geo
-    100020: Adam_Pants_Geo
-    100022: Adam_shoes_geo
-    100024: Adam_Teeth_Lower
-    100026: Adam_Teeth_Upper
-    100028: Adam_Tongue_Geo
-    100030: adamsApple
+    100000: Adam_belt_geo
+    100002: Adam_Body_GeoGroup
+    100004: Adam_Eyes_Geo
+    100006: Adam_Gun_Geo
+    100008: Adam_Hands_Geo
+    100010: Adam_Head_Geo
+    100012: Adam_Head_GeoGroup
+    100014: Adam_jacket_Geo
+    100016: Adam_Lashes_Geo
+    100018: Adam_Pants_Geo
+    100020: Adam_shoes_geo
+    100022: Adam_Teeth_Lower
+    100024: Adam_Teeth_Upper
+    100026: Adam_Tongue_Geo
+    100028: adamsApple
+    100030: //RootNode
     100032: Head
     100034: Head_End
     100036: heel_L
@@ -88,22 +88,22 @@ ModelImporter:
     100164: spineaux
     100166: toe_L
     100168: toe_R
-    400000: //RootNode
-    400002: Adam_belt_geo
-    400004: Adam_Body_GeoGroup
-    400006: Adam_Eyes_Geo
-    400008: Adam_Gun_Geo
-    400010: Adam_Hands_Geo
-    400012: Adam_Head_Geo
-    400014: Adam_Head_GeoGroup
-    400016: Adam_jacket_Geo
-    400018: Adam_Lashes_Geo
-    400020: Adam_Pants_Geo
-    400022: Adam_shoes_geo
-    400024: Adam_Teeth_Lower
-    400026: Adam_Teeth_Upper
-    400028: Adam_Tongue_Geo
-    400030: adamsApple
+    400000: Adam_belt_geo
+    400002: Adam_Body_GeoGroup
+    400004: Adam_Eyes_Geo
+    400006: Adam_Gun_Geo
+    400008: Adam_Hands_Geo
+    400010: Adam_Head_Geo
+    400012: Adam_Head_GeoGroup
+    400014: Adam_jacket_Geo
+    400016: Adam_Lashes_Geo
+    400018: Adam_Pants_Geo
+    400020: Adam_shoes_geo
+    400022: Adam_Teeth_Lower
+    400024: Adam_Teeth_Upper
+    400026: Adam_Tongue_Geo
+    400028: adamsApple
+    400030: //RootNode
     400032: Head
     400034: Head_End
     400036: heel_L

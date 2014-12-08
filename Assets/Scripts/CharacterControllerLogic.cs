@@ -48,8 +48,11 @@ public class CharacterControllerLogic : MonoBehaviour
 	private const float NORMAL_FOV = 60.0f;
 	private float capsuleHeight;
 
-	private Vector3 cameraRotation;
-	private Vector3 cameraPosition;
+	private Vector3 cameraRotation;	// The camera rotation in normal mode
+	private Vector3 cameraPosition; // The camera position in normal mode
+	public float smooth = 1.5f;		// The relative speed at which the camera will catch up.
+	private float relCameraPosMag;		// The distance of the camera from the player.
+	private Vector3 newPos;				// The position the camera is trying to reach.
 
 	private Vector3 radarCameraRotation;
 	private Vector3 radarCameraPosition;
@@ -64,6 +67,8 @@ public class CharacterControllerLogic : MonoBehaviour
 	private Transform CameraInCoverPos;
 	private Vector3 coverPos;
 	private Vector3 coverRot;
+	private Vector3 coverPosCopy;
+	private Vector3 coverRotCopy;
 
 	private Transform CameraInLookingAroundPosRight;
 	private Vector3 lookAroundPosRight;
@@ -82,6 +87,8 @@ public class CharacterControllerLogic : MonoBehaviour
 	private bool inCoverMode;
 	private bool inPositioningCoverModeCam;
 	private bool playerPlaced;
+	private bool inModifyCoverPos;
+	private float currentModifToCoverPos;
 
 	private float boundingBoxMinX;
 	private float boundingBoxMaxX;
@@ -91,8 +98,17 @@ public class CharacterControllerLogic : MonoBehaviour
 	private float camSwitchDamp;
 
 	private bool hasBeenInLookingAround;
-
+	private bool hasBeenInCover;
+	
 	private bool isPursued;
+
+	private Vector3 camPositionWhenCloseToBorder;
+	private Vector3 camRotationWhenCloseToBorder;
+	private bool isPlayerCloseToBorder;
+
+	public float levelMaxX = 15;
+	public float levelMinX = -40;
+	
 	
 	#endregion
 		
@@ -257,6 +273,8 @@ public class CharacterControllerLogic : MonoBehaviour
 
 		cameraRotation = gamecam.transform.eulerAngles;
 		cameraPosition = gamecam.transform.position - transform.position;
+		relCameraPosMag = cameraPosition.magnitude - 0.5f;
+
 		radarCameraRotation = radarCam.transform.eulerAngles;
 		radarCameraPosition = radarCam.transform.position - transform.position;
 
@@ -268,7 +286,9 @@ public class CharacterControllerLogic : MonoBehaviour
 
 		CameraInCoverPos = GameObject.Find ("CameraInCoverPos").transform;
 		coverPos = CameraInCoverPos.localPosition;
-		coverRot = CameraInCoverPos.localEulerAngles;		
+		coverRot = CameraInCoverPos.localEulerAngles;
+		coverPosCopy = coverPos;
+		coverRotCopy = coverRot;
 
 		CameraInLookingAroundPosRight = GameObject.Find ("CameraInLookAroundRight").transform;
 		lookAroundPosRight = CameraInLookingAroundPosRight.localPosition;
@@ -283,9 +303,17 @@ public class CharacterControllerLogic : MonoBehaviour
 		playerPlaced = false;
 		inLookAroundMode = false;
 		hasBeenInLookingAround = false;
+		hasBeenInCover = false;
+		inModifyCoverPos = false;
+		currentModifToCoverPos = 0;
 
 		camSwitchDamp = 12f;
 		isPursued = false;
+
+		camRotationWhenCloseToBorder = new Vector3 (32, 0, 0);
+
+		isPlayerCloseToBorder = false;
+
 	}
 
 	void LateUpdate()
@@ -297,24 +325,62 @@ public class CharacterControllerLogic : MonoBehaviour
 		radarCam.transform.eulerAngles = rot2;
 		radarCam.transform.position = transform.position+radarCameraPosition;
 
-		//Reset Camera position and rotation if we are not in cover and if we are not in transition from cover
+		//Reset Camera position and rotation if we are not in cover 
 		if(currentCoverState == CoverState.nil)
 		{
-			if(transInfo.nameHash != hashIdsScript.Cover_LocomotionTrans)
+			if(hasBeenInCover)gamecam.transform.parent = null;
+
+			// The position to reach
+			Vector3 standardPos = transform.position + cameraPosition;
+
+				//We are not close to the border of the level
+			if(transform.position.x < levelMaxX && transform.position.x > levelMinX)
 			{
+				if(isPlayerCloseToBorder)
+				{
+					isPlayerCloseToBorder = false;
+				}
+
+				//Reset rotation
 				Vector3 rot = gamecam.transform.eulerAngles;
 				rot = cameraRotation; 
-				gamecam.transform.eulerAngles = rot;
-				gamecam.transform.position = transform.position+cameraPosition;
+				if(!hasBeenInCover)
+				{
+					// Lerp the camera's position between it's current position and it's new position.
+					gamecam.transform.position = Vector3.Lerp(gamecam.transform.position, standardPos, smooth * Time.deltaTime);
+					gamecam.transform.eulerAngles = Vector3.Lerp(gamecam.transform.eulerAngles,rot, smooth * Time.deltaTime);
+				}
+				else 
+				{
+					gamecam.transform.position = standardPos;
+					gamecam.transform.eulerAngles = rot;
+				}
+
+
 			}
 
-//			else
-//			{
-//				Debug.Log("ENTER HERE");
-//
-//				gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, cameraPosition, 10f*Time.deltaTime);
-//				gamecam.transform.localRotation = Quaternion.Lerp(gamecam.transform.localRotation, cameraRotationQuaternion, 10f*Time.deltaTime);
-//			}
+			//We are close to the border of the level
+			else
+			{
+
+				if(!isPlayerCloseToBorder)
+				{
+					isPlayerCloseToBorder = true;
+//					camPositionWhenCloseToBorder = gamecam.transform.position;
+				}
+
+				gamecam.transform.position = Vector3.Lerp(gamecam.transform.position, standardPos, smooth * Time.deltaTime);
+
+				Vector3 pos = gamecam.transform.position;
+
+				pos.x = (transform.position.x > levelMaxX) ? levelMaxX : levelMinX;
+				gamecam.transform.position = Vector3.Lerp(gamecam.transform.position, pos, smooth * Time.deltaTime);
+
+				gamecam.transform.eulerAngles = Vector3.Lerp(gamecam.transform.eulerAngles,camRotationWhenCloseToBorder, smooth * Time.deltaTime);
+
+			}
+
+			hasBeenInCover = false;
 
 			//If we still are in idle (not in pivot, not in locomotion, not in Sneak)
 			if(stateInfo.nameHash == hashIdsScript.m_IdleState || stateInfo.nameHash == hashIdsScript.m_sneakingState)
@@ -333,6 +399,7 @@ public class CharacterControllerLogic : MonoBehaviour
 		{
 			gamecam.transform.position = savedCamPosition;
 			gamecam.transform.rotation = savedCamRotation;
+			gamecam.transform.parent = transform;
 		}
 
 		else if (inCoverMode && !inLookAroundMode)
@@ -416,6 +483,8 @@ public class CharacterControllerLogic : MonoBehaviour
 			//We place the player close to the wall while we are in transition
 			if(!playerPlaced)
 			{
+				hasBeenInCover = true;
+
 				animator.SetFloat(hashIdsScript.speedFloat, 0);
 				animator.SetFloat(hashIdsScript.direction, 0);
 
@@ -459,11 +528,6 @@ public class CharacterControllerLogic : MonoBehaviour
 				gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, 12*Time.deltaTime);
 				gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, 12*Time.deltaTime);
 
-//				if(!hasBeenInLookingAround)
-//				{
-//					Debug.Log ("MODIF EULER");
-//					gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, camSwitchDamp*Time.deltaTime);
-//				}
 			}
 
 			else
@@ -541,7 +605,9 @@ public class CharacterControllerLogic : MonoBehaviour
 						{
 							currentCoverState = CoverState.nil;
 							animator.SetBool(hashIdsScript.coverBool, false);
-//							caps.radius = 0.4f;
+							coverPos = coverPosCopy;
+							coverRot = coverRotCopy;
+						 	currentModifToCoverPos = 0;
 						}
 						break;
 
@@ -599,7 +665,9 @@ public class CharacterControllerLogic : MonoBehaviour
 						{
 							currentCoverState = CoverState.nil;
 							animator.SetBool(hashIdsScript.coverBool, false);
-//							caps.radius = 0.4f;
+							coverPos = coverPosCopy;
+							coverRot = coverRotCopy;
+							currentModifToCoverPos = 0;
 						}
 						break;
 
@@ -657,7 +725,9 @@ public class CharacterControllerLogic : MonoBehaviour
 						{
 							currentCoverState = CoverState.nil;
 							animator.SetBool(hashIdsScript.coverBool, false);
-//							caps.radius = 0.4f;
+							coverPos = coverPosCopy;
+							coverRot = coverRotCopy;
+							currentModifToCoverPos = 0;
 						}
 						break;
 
@@ -717,17 +787,54 @@ public class CharacterControllerLogic : MonoBehaviour
 			audio.Stop();
 		
 	}
+
+	public bool IsInLocomotion()
+	{
+		return stateInfo.nameHash == hashIdsScript.m_LocomotionIdState;
+	}
+
+	// Subscribe to events
+	void OnEnable(){
+		
+		EasyTouch.On_TouchStart += HandleOn_TouchStart;
+		EasyTouch.On_TouchDown += HandleOn_TouchDown;
+		EasyTouch.On_TouchUp += HandleOn_TouchUp;
+		
+	}
+	
+	void HandleOn_TouchStart (Gesture gesture)
+	{
+		if (inCoverMode && !inLookAroundMode)
+		{
+			inModifyCoverPos = true;
+		}
+	}
+	
+	void HandleOn_TouchDown (Gesture gesture)
+	{
+		if(inModifyCoverPos)
+		{
+			float nextVal = currentModifToCoverPos + gesture.deltaPosition.x;
+//			Debug.Log ("currentModifToCoverPos = " + currentModifToCoverPos);
+			if(Mathf.Abs(nextVal) <90)
+			{
+				currentModifToCoverPos = nextVal; 
+				coverPos = Quaternion.AngleAxis(gesture.deltaPosition.x, Vector3.up) * coverPos;
+				coverRot.y += gesture.deltaPosition.x;
+			}
+		}
+	}
+	
+	void HandleOn_TouchUp (Gesture gesture)
+	{
+		if (inModifyCoverPos)
+		{
+			inModifyCoverPos = false;
+
+		}
+
+	}
 	
 	#endregion
 	
-	
-	#region Methods
-
-
-    public bool IsInLocomotion()
-    {
-		return stateInfo.nameHash == hashIdsScript.m_LocomotionIdState;
-    }
-
-	#endregion Methods
 }
