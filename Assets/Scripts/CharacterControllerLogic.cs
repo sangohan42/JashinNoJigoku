@@ -399,7 +399,6 @@ public class CharacterControllerLogic : MonoBehaviour
 		{
 			gamecam.transform.position = savedCamPosition;
 			gamecam.transform.rotation = savedCamRotation;
-			gamecam.transform.parent = transform;
 		}
 
 		else if (inCoverMode && !inLookAroundMode)
@@ -484,6 +483,7 @@ public class CharacterControllerLogic : MonoBehaviour
 			if(!playerPlaced)
 			{
 				hasBeenInCover = true;
+				gamecam.transform.parent = transform;
 
 				animator.SetFloat(hashIdsScript.speedFloat, 0);
 				animator.SetFloat(hashIdsScript.direction, 0);
@@ -525,8 +525,11 @@ public class CharacterControllerLogic : MonoBehaviour
 					break;
 				}				
 				//transform.position = positionToPlaceTo;
-				gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, 12*Time.deltaTime);
-				gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, 12*Time.deltaTime);
+				Debug.Log ("coverPos = " + coverPos);
+				Debug.Log ("coverRot = " + coverRot);
+
+				gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, 15*Time.deltaTime);
+				gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, 15*Time.deltaTime);
 
 			}
 
@@ -812,7 +815,7 @@ public class CharacterControllerLogic : MonoBehaviour
 	
 	void HandleOn_TouchDown (Gesture gesture)
 	{
-		if(inModifyCoverPos)
+		if(inModifyCoverPos && currentCoverState != CoverState.nil)
 		{
 			float nextVal = currentModifToCoverPos + gesture.deltaPosition.x;
 //			Debug.Log ("currentModifToCoverPos = " + currentModifToCoverPos);

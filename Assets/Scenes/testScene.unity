@@ -803,7 +803,7 @@ MonoBehaviour:
   fovDampTime: 3
   hashIdsScript: {fileID: 0}
   turnSmoothing: 15
-  smooth: 1.5
+  smooth: 4
   levelMaxX: 15
   levelMinX: -40
 --- !u!136 &79445559
