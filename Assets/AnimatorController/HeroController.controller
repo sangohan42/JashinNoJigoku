@@ -56,6 +56,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: CrouchCover
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 3
     m_Name: Base Layer
@@ -376,6 +382,33 @@ BlendTree:
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
   m_BlendType: 0
+--- !u!206 &20612622
+BlendTree:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: CrouchlookAround
+  m_Childs:
+  - m_Motion: {fileID: 7400010, guid: c63c4eb854e8640dc94904f9584aed55, type: 3}
+    m_Threshold: -1
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400008, guid: c63c4eb854e8640dc94904f9584aed55, type: 3}
+    m_Threshold: 1
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  m_BlendParameter: Direction
+  m_BlendParameterY: Speed
+  m_MinThreshold: -1
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 1
+  m_BlendType: 0
 --- !u!206 &20620741
 BlendTree:
   m_ObjectHideFlags: 3
@@ -508,6 +541,40 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: Direction
   m_BlendParameterY: Blend
+  m_MinThreshold: -1
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 1
+  m_BlendType: 0
+--- !u!206 &20664309
+BlendTree:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: CrouchCover
+  m_Childs:
+  - m_Motion: {fileID: 7400000, guid: 4652fe0b2e28d44ddbfe4ffd7e74b628, type: 3}
+    m_Threshold: -1
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400000, guid: 7773da5fe35734deaa9db5dd489b1de8, type: 3}
+    m_Threshold: 0
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  - m_Motion: {fileID: 7400002, guid: 4652fe0b2e28d44ddbfe4ffd7e74b628, type: 3}
+    m_Threshold: 1
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
+  m_BlendParameter: Direction
+  m_BlendParameterY: Speed
   m_MinThreshold: -1
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -929,6 +996,26 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
+--- !u!1101 &110112598
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110270636}
+  m_DstState: {fileID: 110264309}
+  m_TransitionDuration: .32923615
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: CrouchCover
+    m_EventTreshold: 0
+    m_ExitTime: .67076385
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
 --- !u!1101 &110115987
 Transition:
   serializedVersion: 2
@@ -945,6 +1032,26 @@ Transition:
     m_ConditionEvent: Dead
     m_EventTreshold: 0
     m_ExitTime: .899999976
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
+--- !u!1101 &110119492
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110212622}
+  m_DstState: {fileID: 110264309}
+  m_TransitionDuration: .25
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: LookAround
+    m_EventTreshold: 0
+    m_ExitTime: .75
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -1081,6 +1188,30 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
+--- !u!1101 &110150042
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110264309}
+  m_DstState: {fileID: 110270636}
+  m_TransitionDuration: .25
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: CrouchCover
+    m_EventTreshold: 0
+    m_ExitTime: .75
+  - m_ConditionMode: 3
+    m_ConditionEvent: Speed
+    m_EventTreshold: .400000006
+    m_ExitTime: .75
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
 --- !u!1101 &110154548
 Transition:
   serializedVersion: 2
@@ -1145,6 +1276,26 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
+--- !u!1101 &110167008
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110264309}
+  m_DstState: {fileID: 110212622}
+  m_TransitionDuration: .159574464
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: LookAround
+    m_EventTreshold: 0
+    m_ExitTime: .840425551
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
 --- !u!1101 &110167088
 Transition:
   serializedVersion: 2
@@ -1163,6 +1314,10 @@ Transition:
     m_ExitTime: .67076385
   - m_ConditionMode: 2
     m_ConditionEvent: Cover
+    m_EventTreshold: .100000001
+    m_ExitTime: .67076385
+  - m_ConditionMode: 2
+    m_ConditionEvent: CrouchCover
     m_EventTreshold: .100000001
     m_ExitTime: .67076385
   m_Atomic: 1
@@ -1313,6 +1468,21 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110212622
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: CrouchLookAround
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 20612622}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 120, y: 276, z: 0}
+  m_IKOnFeet: 1
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110221838
 State:
   m_ObjectHideFlags: 3
@@ -1370,6 +1540,21 @@ State:
   - {fileID: 7400000, guid: b49e7b3d75b0a4e10b733873826b4f81, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: -234, y: 4, z: 0}
+  m_IKOnFeet: 1
+  m_Mirror: 0
+  m_Tag: 
+--- !u!1102 &110264309
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: CrouchCover
+  m_Speed: 1.5
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 20664309}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: -192, y: 228, z: 0}
   m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
@@ -1466,6 +1651,8 @@ StateMachine:
   - {fileID: 110221838}
   - {fileID: 110275347}
   - {fileID: 110244785}
+  - {fileID: 110264309}
+  - {fileID: 110212622}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
@@ -1485,6 +1672,7 @@ StateMachine:
       - {fileID: 110123846}
       - {fileID: 110167088}
       - {fileID: 110161055}
+      - {fileID: 110112598}
     data:
       first: {fileID: 110281670}
       second:
@@ -1512,6 +1700,18 @@ StateMachine:
       second:
       - {fileID: 110173582}
       - {fileID: 110128338}
+    data:
+      first: {fileID: 110244785}
+      second: []
+    data:
+      first: {fileID: 110264309}
+      second:
+      - {fileID: 110150042}
+      - {fileID: 110167008}
+    data:
+      first: {fileID: 110212622}
+      second:
+      - {fileID: 110119492}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: -216, y: 84, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

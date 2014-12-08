@@ -525,9 +525,9 @@ public class CharacterControllerLogic : MonoBehaviour
 					break;
 				}				
 				//transform.position = positionToPlaceTo;
-				Debug.Log ("coverPos = " + coverPos);
-				Debug.Log ("coverRot = " + coverRot);
-
+//				Debug.Log ("coverPos = " + coverPos);
+//				Debug.Log ("coverRot = " + coverRot);
+				transform.position = positionToPlaceTo;
 				gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, 15*Time.deltaTime);
 				gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, 15*Time.deltaTime);
 
@@ -537,7 +537,7 @@ public class CharacterControllerLogic : MonoBehaviour
 			{
 				inCoverMode = true;
 				inPositioningCoverModeCam = false;
-
+				transform.position = positionToPlaceTo;
 				if(inLookAroundMode)
 				{
 					gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, currentLookAroundPos, 6f*Time.deltaTime);
@@ -737,6 +737,8 @@ public class CharacterControllerLogic : MonoBehaviour
 					default:
 						break;
 				}
+				positionToPlaceTo = transform.position;
+
 				animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
 				animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
 			}

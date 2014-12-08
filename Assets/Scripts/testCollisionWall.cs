@@ -9,6 +9,8 @@ public class testCollisionWall : MonoBehaviour {
 	private CharacterControllerLogic characterControllerLogicScript;
 	private GameObject gameCam;
 
+	public bool isAWall = true;
+
 	void Awake()
 	{
 		hash = GameObject.FindGameObjectWithTag (DoneTags.gameController).GetComponent<HashIds> ();
@@ -71,7 +73,8 @@ public class testCollisionWall : MonoBehaviour {
 						Debug.Log ("DOWN FACE");
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
-						playerAnimator.SetBool(hash.coverBool, true);
+						if(isAWall)playerAnimator.SetBool(hash.coverBool, true);
+						else playerAnimator.SetBool(hash.crouchCoverBool, true);
 //						characterControllerLogicScript.VecToAlignTo = -1*contact.normal;
 						characterControllerLogicScript.BoundingBoxMinX = collider.bounds.min.x + 0.15f;
 						characterControllerLogicScript.BoundingBoxMaxX = collider.bounds.max.x - 0.15f;
@@ -93,8 +96,10 @@ public class testCollisionWall : MonoBehaviour {
 						Debug.Log ("LEFT FACE");
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
-						playerAnimator.SetBool(hash.coverBool, true);
-//						characterControllerLogicScript.VecToAlignTo = -1*contact.normal;
+						if(isAWall)playerAnimator.SetBool(hash.coverBool, true);
+						else playerAnimator.SetBool(hash.crouchCoverBool, true);
+
+						//characterControllerLogicScript.VecToAlignTo = -1*contact.normal;
 						characterControllerLogicScript.BoundingBoxMinZ = collider.bounds.min.z + 0.15f;
 						characterControllerLogicScript.BoundingBoxMaxZ = collider.bounds.max.z - 0.15f;
 						characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x - 0.23f, player.transform.position.y, contact.point.z);
@@ -108,8 +113,10 @@ public class testCollisionWall : MonoBehaviour {
 						Debug.Log ("RIGHT FACE");
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
-						playerAnimator.SetBool(hash.coverBool, true);
-//						characterControllerLogicScript.VecToAlignTo = -1*contact.normal;
+						if(isAWall)playerAnimator.SetBool(hash.coverBool, true);
+						else playerAnimator.SetBool(hash.crouchCoverBool, true);
+
+						//characterControllerLogicScript.VecToAlignTo = -1*contact.normal;
 						characterControllerLogicScript.BoundingBoxMinZ = collider.bounds.min.z + 0.15f;
 						characterControllerLogicScript.BoundingBoxMaxZ = collider.bounds.max.z - 0.15f;
 						characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x + 0.23f, player.transform.position.y, contact.point.z);
