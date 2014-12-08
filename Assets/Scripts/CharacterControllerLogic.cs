@@ -101,6 +101,8 @@ public class CharacterControllerLogic : MonoBehaviour
 	private bool hasBeenInCover;
 	
 	private bool isPursued;
+	private bool isInPanoramicView;
+	public float maxAngleInPanoramicView = 120;
 
 	private Vector3 camPositionWhenCloseToBorder;
 	private Vector3 camRotationWhenCloseToBorder;
@@ -334,6 +336,7 @@ public class CharacterControllerLogic : MonoBehaviour
 
 		camSwitchDamp = 12f;
 		isPursued = false;
+		isInPanoramicView = false;
 
 		camRotationWhenCloseToBorder = new Vector3 (32, 0, 0);
 
@@ -350,86 +353,93 @@ public class CharacterControllerLogic : MonoBehaviour
 		radarCam.transform.eulerAngles = rot2;
 		radarCam.transform.position = transform.position+radarCameraPosition;
 
-		//Reset Camera position and rotation if we are not in cover 
-		if(currentCoverState == CoverState.nil)
+		if(!isInPanoramicView)
 		{
-			if(hasBeenInCover)gamecam.transform.parent = null;
-
-			// The position to reach
-			Vector3 standardPos = transform.position + cameraPosition;
-
-				//We are not close to the border of the level
-			if(transform.position.x < levelMaxX && transform.position.x > levelMinX)
+			//Reset Camera position and rotation if we are not in cover 
+			if(currentCoverState == CoverState.nil)
 			{
-				if(isPlayerCloseToBorder)
+				if(hasBeenInCover)gamecam.transform.parent = null;
+
+				// The position to reach
+				Vector3 standardPos = transform.position + cameraPosition;
+
+					//We are not close to the border of the level
+				if(transform.position.x < levelMaxX && transform.position.x > levelMinX)
 				{
-					isPlayerCloseToBorder = false;
+					if(isPlayerCloseToBorder)
+					{
+						isPlayerCloseToBorder = false;
+					}
+
+					//Reset rotation
+					Vector3 rot = gamecam.transform.eulerAngles;
+					rot = cameraRotation; 
+					if(!hasBeenInCover)
+					{
+						// Lerp the camera's position between it's current position and it's new position.
+						gamecam.transform.position = Vector3.Lerp(gamecam.transform.position, standardPos, smooth * Time.deltaTime);
+						gamecam.transform.eulerAngles = Vector3.Lerp(gamecam.transform.eulerAngles,rot, smooth * Time.deltaTime);
+					}
+					else 
+					{
+						gamecam.transform.position = standardPos;
+						gamecam.transform.eulerAngles = rot;
+					}
+
 				}
 
-				//Reset rotation
-				Vector3 rot = gamecam.transform.eulerAngles;
-				rot = cameraRotation; 
-				if(!hasBeenInCover)
+				//We are close to the border of the level
+				else
 				{
-					// Lerp the camera's position between it's current position and it's new position.
+
+					if(!isPlayerCloseToBorder)
+					{
+						isPlayerCloseToBorder = true;
+	//					camPositionWhenCloseToBorder = gamecam.transform.position;
+					}
+
 					gamecam.transform.position = Vector3.Lerp(gamecam.transform.position, standardPos, smooth * Time.deltaTime);
-					gamecam.transform.eulerAngles = Vector3.Lerp(gamecam.transform.eulerAngles,rot, smooth * Time.deltaTime);
+
+					Vector3 pos = gamecam.transform.position;
+
+					pos.x = (transform.position.x > levelMaxX) ? levelMaxX : levelMinX;
+					gamecam.transform.position = Vector3.Lerp(gamecam.transform.position, pos, smooth * Time.deltaTime);
+
+					gamecam.transform.eulerAngles = Vector3.Lerp(gamecam.transform.eulerAngles,camRotationWhenCloseToBorder, smooth * Time.deltaTime);
+
 				}
-				else 
+
+				hasBeenInCover = false;
+
+				//If we still are in idle (not in pivot, not in locomotion, not in Sneak)
+				if(stateInfo.nameHash == hashIdsScript.m_IdleState || stateInfo.nameHash == hashIdsScript.m_sneakingState)
 				{
-					gamecam.transform.position = standardPos;
-					gamecam.transform.eulerAngles = rot;
+					// If there is some axis input...
+					if(joyX != 0f || joyY != 0f)
+					{
+						// ... set the players rotation and set the speed parameter to 5.5f.
+						Rotating(joyX, joyY);
+					}
 				}
-
-
 			}
 
-			//We are close to the border of the level
-			else
+			//We are positiong the character close to the wall so we save the camera position until it's correctly set
+			else if(inPositioningCoverModeCam == false && inCoverMode == false && !hasBeenInLookingAround)
 			{
-
-				if(!isPlayerCloseToBorder)
-				{
-					isPlayerCloseToBorder = true;
-//					camPositionWhenCloseToBorder = gamecam.transform.position;
-				}
-
-				gamecam.transform.position = Vector3.Lerp(gamecam.transform.position, standardPos, smooth * Time.deltaTime);
-
-				Vector3 pos = gamecam.transform.position;
-
-				pos.x = (transform.position.x > levelMaxX) ? levelMaxX : levelMinX;
-				gamecam.transform.position = Vector3.Lerp(gamecam.transform.position, pos, smooth * Time.deltaTime);
-
-				gamecam.transform.eulerAngles = Vector3.Lerp(gamecam.transform.eulerAngles,camRotationWhenCloseToBorder, smooth * Time.deltaTime);
-
+				gamecam.transform.position = savedCamPosition;
+				gamecam.transform.rotation = savedCamRotation;
 			}
 
-			hasBeenInCover = false;
-
-			//If we still are in idle (not in pivot, not in locomotion, not in Sneak)
-			if(stateInfo.nameHash == hashIdsScript.m_IdleState || stateInfo.nameHash == hashIdsScript.m_sneakingState)
+			else if (inCoverMode && !inLookAroundMode)
 			{
-				// If there is some axis input...
-				if(joyX != 0f || joyY != 0f)
-				{
-					// ... set the players rotation and set the speed parameter to 5.5f.
-					Rotating(joyX, joyY);
-				}
+				gamecam.transform.localPosition = coverPos;
+				gamecam.transform.localEulerAngles = coverRot;
 			}
 		}
 
-		//We are positiong the character close to the wall so we save the camera position until it's correctly set
-		else if(inPositioningCoverModeCam == false && inCoverMode == false && !hasBeenInLookingAround)
+		//In PANORAMIC VIEW
+		else
 		{
-			gamecam.transform.position = savedCamPosition;
-			gamecam.transform.rotation = savedCamRotation;
-		}
-
-		else if (inCoverMode && !inLookAroundMode)
-		{
-			gamecam.transform.localPosition = coverPos;
-			gamecam.transform.localEulerAngles = coverRot;
 		}
 
 //		else if(inLookAroundMode)
@@ -455,324 +465,332 @@ public class CharacterControllerLogic : MonoBehaviour
 		joyX = uiJoystickScript.position.x;
 		joyY = uiJoystickScript.position.y;
 
-		//NOT in COVER
-		if(currentCoverState == CoverState.nil)
+		if(!isInPanoramicView)
 		{
-			inCoverMode = false;
-			playerPlaced = false;
-			hasBeenInLookingAround = false;
-			camSwitchDamp = 12f;
 
-			Vector3 stickDirection = new Vector3 (joyX, 0, joyY);
-			Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
-			
-			float angleRootToMove = Vector3.Angle(transform.forward, stickDirection) * (axisSign.y < 0 ? -1f : 1f);
-			
-			charSpeed = stickDirection.magnitude;
-
-			direction = angleRootToMove * directionSpeed / 180f;
-			
-			charAngle = angleRootToMove;
-
-
-//			Debug.Log ("Speed = " + speed);
-			// Press B to sprint
-			if (charSpeed>=1f)
+			//NOT in COVER
+			if(currentCoverState == CoverState.nil)
 			{
-				speed = Mathf.Lerp(speed, SPRINT_SPEED, Time.deltaTime);
-			}
-			else speed = charSpeed;
+				inCoverMode = false;
+				playerPlaced = false;
+				hasBeenInLookingAround = false;
+				camSwitchDamp = 12f;
 
-
-			animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
-			animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
-			
-			if (speed > LocomotionThreshold)	// Dead zone
-			{
-				Animator.SetFloat(hashIdsScript.angle, charAngle);
-			}
-
-			if (speed < LocomotionThreshold && Mathf.Abs(joyX) < 0.05f)    // Dead zone
-			{
-				animator.SetFloat(hashIdsScript.direction, 0f);
-				animator.SetFloat(hashIdsScript.angle, 0f);
-			}
-
-			animator.SetBool(hashIdsScript.sneakingBool, Input.GetButton("Sneak"));
-		}
-
-		//IN COVER
-		else
-		{
-			//We place the player close to the wall while we are in transition
-			if(!playerPlaced)
-			{
-				hasBeenInCover = true;
-				gamecam.transform.parent = transform;
-
-				animator.SetFloat(hashIdsScript.speedFloat, 0);
-				animator.SetFloat(hashIdsScript.direction, 0);
-
-				switch(currentCoverState)
-				{
-				case CoverState.onDownFace:
-					transform.eulerAngles = new Vector3(0,180,0);
-					break;
-				case CoverState.OnLeftFace:
-					transform.eulerAngles = new Vector3(0,-90,0);
-					break;
-				case CoverState.OnRightFace:
-					transform.eulerAngles = new Vector3(0,90,0);
-					break;
-				}
-//				transform.forward = vecToAlignTo;
-				transform.position = positionToPlaceTo;
-				playerPlaced = true;
-
-			}
-			//We place the camera to the right position
-			else if(gamecam.transform.localPosition != coverPos && !inLookAroundMode)
-			{
-				animator.SetFloat(hashIdsScript.speedFloat, 0);
-				animator.SetFloat(hashIdsScript.direction, 0);
-
-				inPositioningCoverModeCam = true;
-				switch(currentCoverState)
-				{
-				case CoverState.onDownFace:
-					transform.eulerAngles = new Vector3(0,180,0);
-					break;
-				case CoverState.OnLeftFace:
-					transform.eulerAngles = new Vector3(0,-90,0);
-					break;
-				case CoverState.OnRightFace:
-					transform.eulerAngles = new Vector3(0,90,0);
-					break;
-				}				
-				//transform.position = positionToPlaceTo;
-//				Debug.Log ("coverPos = " + coverPos);
-//				Debug.Log ("coverRot = " + coverRot);
-				transform.position = positionToPlaceTo;
-				gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, 15*Time.deltaTime);
-				gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, 15*Time.deltaTime);
-
-			}
-
-			else
-			{
-				inCoverMode = true;
-				inPositioningCoverModeCam = false;
-				transform.position = positionToPlaceTo;
-				if(inLookAroundMode)
-				{
-					gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, currentLookAroundPos, 6f*Time.deltaTime);
-					gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, currentLookAroundRot, 6f*Time.deltaTime);
-				}
-
-				Vector3 stickDirection = new Vector3 (joyX, 0, joyY).normalized;
+				Vector3 stickDirection = new Vector3 (joyX, 0, joyY);
 				Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
 				
 				float angleRootToMove = Vector3.Angle(transform.forward, stickDirection) * (axisSign.y < 0 ? -1f : 1f);
+				
+				charSpeed = stickDirection.magnitude;
 
 				direction = angleRootToMove * directionSpeed / 180f;
 				
 				charAngle = angleRootToMove;
 
-				switch(currentCoverState)
+
+	//			Debug.Log ("Speed = " + speed);
+				// Press B to sprint
+				if (charSpeed>=1f)
 				{
-					case CoverState.onDownFace:
-						if(joyY > -0.4f)
-						{
-							speed = Mathf.Abs (joyX);
-							direction = joyX;
-							charAngle = 0;
-							transform.position += new Vector3(Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED,0, 0) ;
-							transform.eulerAngles = new Vector3(0,180,0);
-							if(transform.position.x < boundingBoxMinX)
-							{
-								Vector3 temp = transform.position;
-								temp.x = boundingBoxMinX;
-								transform.position = temp;
-
-								if(direction <0)
-								{
-									currentLookAroundPos = lookAroundPosLeft;
-									currentLookAroundRot = lookAroundRotLeft;
-									inLookAroundMode = true;
-									animator.SetBool(hashIdsScript.lookingAroundBool, true);
-									hasBeenInLookingAround = true;
-								}
-							}
-							else if(transform.position.x > boundingBoxMaxX)
-							{
-								Vector3 temp = transform.position;
-								temp.x = boundingBoxMaxX;
-								transform.position = temp;
-
-								if(direction >0)
-								{
-									currentLookAroundPos = lookAroundPosRight;
-									currentLookAroundRot = lookAroundRotRight;
-									inLookAroundMode = true;
-									animator.SetBool(hashIdsScript.lookingAroundBool, true);
-									hasBeenInLookingAround = true;
-								}
-							}
-							else 
-							{
-								if(inLookAroundMode)
-								{
-									inCoverMode = false;
-									camSwitchDamp = 7f;
-								}
-								animator.SetBool(hashIdsScript.lookingAroundBool, false);
-								inLookAroundMode = false;
-							}
-						}
-						else 
-						{
-							currentCoverState = CoverState.nil;
-							animator.SetBool(hashIdsScript.coverBool, false);
-							animator.SetBool(hashIdsScript.crouchCoverBool, false);
-
-							coverPos = coverPosCopy;
-							coverRot = coverRotCopy;
-						 	currentModifToCoverPos = 0;
-						}
-						break;
-
-					case CoverState.OnLeftFace:
-						if(joyY > -0.4f)
-						{
-							speed = Mathf.Abs (joyX);
-							direction = joyX;
-							charAngle = 0;
-							transform.position += new Vector3(0, 0,-1*Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
-							transform.eulerAngles = new Vector3(0,-90,0);
-							if(transform.position.z < boundingBoxMinZ)
-							{
-								Vector3 temp = transform.position;
-								temp.z = boundingBoxMinZ;
-								transform.position = temp;
-
-								if(direction >0)
-								{
-									currentLookAroundPos = lookAroundPosRight;
-									currentLookAroundRot = lookAroundRotRight;
-									inLookAroundMode = true;
-									hasBeenInLookingAround = true;
-									animator.SetBool(hashIdsScript.lookingAroundBool, true);
-								}
-							}
-							else if(transform.position.z > boundingBoxMaxZ)
-							{
-								Vector3 temp = transform.position;
-								temp.z = boundingBoxMaxZ;
-								transform.position = temp;
-
-								if(direction <0)
-								{
-									currentLookAroundPos = lookAroundPosLeft;
-									currentLookAroundRot = lookAroundRotLeft;
-									inLookAroundMode = true;
-									hasBeenInLookingAround = true;
-									animator.SetBool(hashIdsScript.lookingAroundBool, true);
-								}
-							}
-							else 
-							{
-								if(inLookAroundMode)
-								{
-									inCoverMode = false;
-									camSwitchDamp = 7f;
-								}
-								animator.SetBool(hashIdsScript.lookingAroundBool, false);
-								inLookAroundMode = false;
-							}
-
-						}
-						else 
-						{
-							currentCoverState = CoverState.nil;
-							animator.SetBool(hashIdsScript.coverBool, false);
-							animator.SetBool(hashIdsScript.crouchCoverBool, false);
-
-							coverPos = coverPosCopy;
-							coverRot = coverRotCopy;
-							currentModifToCoverPos = 0;
-						}
-						break;
-
-					case CoverState.OnRightFace:
-						if(joyY > -0.4f)
-						{
-							speed = Mathf.Abs (joyX);
-							direction = joyX;
-							charAngle = 0;
-							transform.position += new Vector3(0, 0,Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
-							transform.eulerAngles = new Vector3(0,90,0);
-							if(transform.position.z < boundingBoxMinZ)
-							{
-								Vector3 temp = transform.position;
-								temp.z = boundingBoxMinZ;
-								transform.position = temp;
-
-								if(direction <0)
-								{
-									currentLookAroundPos = lookAroundPosLeft;
-									currentLookAroundRot = lookAroundRotLeft;
-									inLookAroundMode = true;
-									hasBeenInLookingAround = true;
-									animator.SetBool(hashIdsScript.lookingAroundBool, true);
-								}
-							}
-							else if(transform.position.z > boundingBoxMaxZ)
-							{
-								Vector3 temp = transform.position;
-								temp.z = boundingBoxMaxZ;
-								transform.position = temp;
-
-								if(direction >0)
-								{
-									currentLookAroundPos = lookAroundPosRight;
-									currentLookAroundRot = lookAroundRotRight;
-									inLookAroundMode = true;
-									hasBeenInLookingAround = true;
-									animator.SetBool(hashIdsScript.lookingAroundBool, true);
-								}
-							}
-							else 
-							{
-								if(inLookAroundMode)
-								{
-									inCoverMode = false;
-									camSwitchDamp = 7f;
-								}
-								animator.SetBool(hashIdsScript.lookingAroundBool, false);
-								inLookAroundMode = false;
-								
-							}
-						}
-						else 
-						{
-							currentCoverState = CoverState.nil;
-							animator.SetBool(hashIdsScript.coverBool, false);
-							animator.SetBool(hashIdsScript.crouchCoverBool, false);
-
-							coverPos = coverPosCopy;
-							coverRot = coverRotCopy;
-							currentModifToCoverPos = 0;
-						}
-						break;
-
-					default:
-						break;
+					speed = Mathf.Lerp(speed, SPRINT_SPEED, Time.deltaTime);
 				}
-				positionToPlaceTo = transform.position;
+				else speed = charSpeed;
+
 
 				animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
 				animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
+				
+				if (speed > LocomotionThreshold)	// Dead zone
+				{
+					Animator.SetFloat(hashIdsScript.angle, charAngle);
+				}
+
+				if (speed < LocomotionThreshold && Mathf.Abs(joyX) < 0.05f)    // Dead zone
+				{
+					animator.SetFloat(hashIdsScript.direction, 0f);
+					animator.SetFloat(hashIdsScript.angle, 0f);
+				}
+
+				animator.SetBool(hashIdsScript.sneakingBool, Input.GetButton("Sneak"));
 			}
+
+			//IN COVER
+			else
+			{
+				//We place the player close to the wall while we are in transition
+				if(!playerPlaced)
+				{
+					hasBeenInCover = true;
+					gamecam.transform.parent = transform;
+
+					animator.SetFloat(hashIdsScript.speedFloat, 0);
+					animator.SetFloat(hashIdsScript.direction, 0);
+
+					switch(currentCoverState)
+					{
+					case CoverState.onDownFace:
+						transform.eulerAngles = new Vector3(0,180,0);
+						break;
+					case CoverState.OnLeftFace:
+						transform.eulerAngles = new Vector3(0,-90,0);
+						break;
+					case CoverState.OnRightFace:
+						transform.eulerAngles = new Vector3(0,90,0);
+						break;
+					}
+	//				transform.forward = vecToAlignTo;
+					transform.position = positionToPlaceTo;
+					playerPlaced = true;
+
+				}
+				//We place the camera to the right position
+				else if(gamecam.transform.localPosition != coverPos && !inLookAroundMode)
+				{
+					animator.SetFloat(hashIdsScript.speedFloat, 0);
+					animator.SetFloat(hashIdsScript.direction, 0);
+
+					inPositioningCoverModeCam = true;
+					switch(currentCoverState)
+					{
+					case CoverState.onDownFace:
+						transform.eulerAngles = new Vector3(0,180,0);
+						break;
+					case CoverState.OnLeftFace:
+						transform.eulerAngles = new Vector3(0,-90,0);
+						break;
+					case CoverState.OnRightFace:
+						transform.eulerAngles = new Vector3(0,90,0);
+						break;
+					}				
+					//transform.position = positionToPlaceTo;
+	//				Debug.Log ("coverPos = " + coverPos);
+	//				Debug.Log ("coverRot = " + coverRot);
+					transform.position = positionToPlaceTo;
+					gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, 15*Time.deltaTime);
+					gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, 15*Time.deltaTime);
+
+				}
+
+				else
+				{
+					inCoverMode = true;
+					inPositioningCoverModeCam = false;
+					transform.position = positionToPlaceTo;
+					if(inLookAroundMode)
+					{
+						gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, currentLookAroundPos, 6f*Time.deltaTime);
+						gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, currentLookAroundRot, 6f*Time.deltaTime);
+					}
+
+					Vector3 stickDirection = new Vector3 (joyX, 0, joyY).normalized;
+					Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
+					
+					float angleRootToMove = Vector3.Angle(transform.forward, stickDirection) * (axisSign.y < 0 ? -1f : 1f);
+
+					direction = angleRootToMove * directionSpeed / 180f;
+					
+					charAngle = angleRootToMove;
+
+					switch(currentCoverState)
+					{
+						case CoverState.onDownFace:
+							if(joyY > -0.4f)
+							{
+								speed = Mathf.Abs (joyX);
+								direction = joyX;
+								charAngle = 0;
+								transform.position += new Vector3(Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED,0, 0) ;
+								transform.eulerAngles = new Vector3(0,180,0);
+								if(transform.position.x < boundingBoxMinX)
+								{
+									Vector3 temp = transform.position;
+									temp.x = boundingBoxMinX;
+									transform.position = temp;
+
+									if(direction <0)
+									{
+										currentLookAroundPos = lookAroundPosLeft;
+										currentLookAroundRot = lookAroundRotLeft;
+										inLookAroundMode = true;
+										animator.SetBool(hashIdsScript.lookingAroundBool, true);
+										hasBeenInLookingAround = true;
+									}
+								}
+								else if(transform.position.x > boundingBoxMaxX)
+								{
+									Vector3 temp = transform.position;
+									temp.x = boundingBoxMaxX;
+									transform.position = temp;
+
+									if(direction >0)
+									{
+										currentLookAroundPos = lookAroundPosRight;
+										currentLookAroundRot = lookAroundRotRight;
+										inLookAroundMode = true;
+										animator.SetBool(hashIdsScript.lookingAroundBool, true);
+										hasBeenInLookingAround = true;
+									}
+								}
+								else 
+								{
+									if(inLookAroundMode)
+									{
+										inCoverMode = false;
+										camSwitchDamp = 7f;
+									}
+									animator.SetBool(hashIdsScript.lookingAroundBool, false);
+									inLookAroundMode = false;
+								}
+							}
+							else 
+							{
+								currentCoverState = CoverState.nil;
+								animator.SetBool(hashIdsScript.coverBool, false);
+								animator.SetBool(hashIdsScript.crouchCoverBool, false);
+
+								coverPos = coverPosCopy;
+								coverRot = coverRotCopy;
+							 	currentModifToCoverPos = 0;
+							}
+							break;
+
+						case CoverState.OnLeftFace:
+							if(joyY > -0.4f)
+							{
+								speed = Mathf.Abs (joyX);
+								direction = joyX;
+								charAngle = 0;
+								transform.position += new Vector3(0, 0,-1*Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+								transform.eulerAngles = new Vector3(0,-90,0);
+								if(transform.position.z < boundingBoxMinZ)
+								{
+									Vector3 temp = transform.position;
+									temp.z = boundingBoxMinZ;
+									transform.position = temp;
+
+									if(direction >0)
+									{
+										currentLookAroundPos = lookAroundPosRight;
+										currentLookAroundRot = lookAroundRotRight;
+										inLookAroundMode = true;
+										hasBeenInLookingAround = true;
+										animator.SetBool(hashIdsScript.lookingAroundBool, true);
+									}
+								}
+								else if(transform.position.z > boundingBoxMaxZ)
+								{
+									Vector3 temp = transform.position;
+									temp.z = boundingBoxMaxZ;
+									transform.position = temp;
+
+									if(direction <0)
+									{
+										currentLookAroundPos = lookAroundPosLeft;
+										currentLookAroundRot = lookAroundRotLeft;
+										inLookAroundMode = true;
+										hasBeenInLookingAround = true;
+										animator.SetBool(hashIdsScript.lookingAroundBool, true);
+									}
+								}
+								else 
+								{
+									if(inLookAroundMode)
+									{
+										inCoverMode = false;
+										camSwitchDamp = 7f;
+									}
+									animator.SetBool(hashIdsScript.lookingAroundBool, false);
+									inLookAroundMode = false;
+								}
+
+							}
+							else 
+							{
+								currentCoverState = CoverState.nil;
+								animator.SetBool(hashIdsScript.coverBool, false);
+								animator.SetBool(hashIdsScript.crouchCoverBool, false);
+
+								coverPos = coverPosCopy;
+								coverRot = coverRotCopy;
+								currentModifToCoverPos = 0;
+							}
+							break;
+
+						case CoverState.OnRightFace:
+							if(joyY > -0.4f)
+							{
+								speed = Mathf.Abs (joyX);
+								direction = joyX;
+								charAngle = 0;
+								transform.position += new Vector3(0, 0,Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+								transform.eulerAngles = new Vector3(0,90,0);
+								if(transform.position.z < boundingBoxMinZ)
+								{
+									Vector3 temp = transform.position;
+									temp.z = boundingBoxMinZ;
+									transform.position = temp;
+
+									if(direction <0)
+									{
+										currentLookAroundPos = lookAroundPosLeft;
+										currentLookAroundRot = lookAroundRotLeft;
+										inLookAroundMode = true;
+										hasBeenInLookingAround = true;
+										animator.SetBool(hashIdsScript.lookingAroundBool, true);
+									}
+								}
+								else if(transform.position.z > boundingBoxMaxZ)
+								{
+									Vector3 temp = transform.position;
+									temp.z = boundingBoxMaxZ;
+									transform.position = temp;
+
+									if(direction >0)
+									{
+										currentLookAroundPos = lookAroundPosRight;
+										currentLookAroundRot = lookAroundRotRight;
+										inLookAroundMode = true;
+										hasBeenInLookingAround = true;
+										animator.SetBool(hashIdsScript.lookingAroundBool, true);
+									}
+								}
+								else 
+								{
+									if(inLookAroundMode)
+									{
+										inCoverMode = false;
+										camSwitchDamp = 7f;
+									}
+									animator.SetBool(hashIdsScript.lookingAroundBool, false);
+									inLookAroundMode = false;
+									
+								}
+							}
+							else 
+							{
+								currentCoverState = CoverState.nil;
+								animator.SetBool(hashIdsScript.coverBool, false);
+								animator.SetBool(hashIdsScript.crouchCoverBool, false);
+
+								coverPos = coverPosCopy;
+								coverRot = coverRotCopy;
+								currentModifToCoverPos = 0;
+							}
+							break;
+
+						default:
+							break;
+					}
+					positionToPlaceTo = transform.position;
+
+					animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
+					animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
+				}
+			}
+		}
+
+		else
+		{
 		}
 
 	}
