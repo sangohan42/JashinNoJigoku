@@ -3347,7 +3347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0f6812024024b50b4abe7c083e44ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousTransform: {fileID: 669985345}
   newTransform: {fileID: 495800918}
 --- !u!1 &495800917
 GameObject:
@@ -3568,7 +3567,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 046de2a77b02f4d8e8c7ff5ba5721a79, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -11789,8 +11788,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1319198032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.43556738, y: .547800183, z: 7.59414721}
-  m_LocalScale: {x: 1.11414218, y: 1.11414242, z: 1.11414242}
+  m_LocalPosition: {x: 1.43556738, y: .547800183, z: 2.63531113}
+  m_LocalScale: {x: 1.15459895, y: 1.11414242, z: 1.24652481}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 23
@@ -17745,7 +17744,7 @@ MonoBehaviour:
   touchDragThreshold: 40
   touchClickThreshold: 40
   rangeDistance: -1
-  scrollAxisName: Mouse ScrollWheel
+  scrollAxisName: 
   verticalAxisName: Vertical
   horizontalAxisName: Horizontal
   submitKey0: 13
@@ -18199,7 +18198,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2106022210}
   m_LocalRotation: {x: .622514665, y: 0, z: 0, w: .782608092}
-  m_LocalPosition: {x: .0485110879, y: 1.70771837, z: .263239384}
+  m_LocalPosition: {x: .0500000007, y: 1.70000005, z: .25999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8762737}
