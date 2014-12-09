@@ -18,7 +18,7 @@ public class DoneEnemyAI : MonoBehaviour
 	private float chaseTimer;								// A timer for the chaseWaitTime.
 	private float patrolTimer;								// A timer for the patrolWaitTime.
 	private int wayPointIndex;								// A counter for the way point array.
-
+	private CharacterControllerLogic characterControllerLogicScript;
 
 	void Awake ()
 	{
@@ -26,6 +26,7 @@ public class DoneEnemyAI : MonoBehaviour
 		enemySight = GetComponent<DoneEnemySight>();
 		nav = GetComponent<NavMeshAgent>();
 		player = GameObject.FindGameObjectWithTag(DoneTags.player).transform;
+		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
 		playerHealth = player.GetComponent<DonePlayerHealth>();
 		lastPlayerSighting = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneLastPlayerSighting>();
 
@@ -53,6 +54,7 @@ public class DoneEnemyAI : MonoBehaviour
 	
 	void Shooting ()
 	{
+		characterControllerLogicScript.IsPursued = true;
 		// Stop the enemy where it is.
 		// Create a vector from the enemy to the last sighting of the player.
 		Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
@@ -80,6 +82,8 @@ public class DoneEnemyAI : MonoBehaviour
 		//If the player was previously sighted
 		if(enemySight.inPursuit)
 		{
+			characterControllerLogicScript.IsPursued = true;
+
 			// Create a vector from the enemy to the last sighting of the player.
 			Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
 
@@ -118,6 +122,8 @@ public class DoneEnemyAI : MonoBehaviour
 		//We are in Youjin Mode
 		else
 		{
+			characterControllerLogicScript.IsPursued = false;
+
 			// Create a vector from the enemy to the last sighting of the player.
 			Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
 			
@@ -154,6 +160,8 @@ public class DoneEnemyAI : MonoBehaviour
 	
 	void Patrolling ()
 	{
+		characterControllerLogicScript.IsPursued = false;
+
 		// Set an appropriate speed for the NavMeshAgent.
 		nav.speed = patrolSpeed;
 		

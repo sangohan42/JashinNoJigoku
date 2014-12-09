@@ -162,17 +162,17 @@ ModelImporter:
     - serializedVersion: 16
       name: stand_up_from_back_3
       takeName: mixamo.com
-      firstFrame: 0
-      lastFrame: 156
+      firstFrame: 17
+      lastFrame: 114
       wrapMode: 0
-      orientationOffsetY: -7.4000001
+      orientationOffsetY: -8.34000015
       level: 0
       cycleOffset: 0
       loop: 0
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 0
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1

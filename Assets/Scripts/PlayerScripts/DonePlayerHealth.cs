@@ -14,8 +14,11 @@ public class DonePlayerHealth : MonoBehaviour
 	private DoneLastPlayerSighting lastPlayerSighting;	// Reference to the LastPlayerSighting script.
 	private float timer;								// A timer for counting to the reset of the level once the player is dead.
 	private bool playerDead;							// A bool to show if the player is dead or not.
-	
-	
+	private UILabel healthPointLabel;
+	private float maxHealthPoint;
+	private string maxHealthPointString;
+	private Transform lifeBar;
+
 	void Awake ()
 	{
 		// Setting up the references.
@@ -23,11 +26,21 @@ public class DonePlayerHealth : MonoBehaviour
 		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<HashIds>();
 		sceneFadeInOut = GameObject.FindGameObjectWithTag(DoneTags.fader).GetComponent<DoneSceneFadeInOut>();
 		lastPlayerSighting = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneLastPlayerSighting>();
+		healthPointLabel = GameObject.Find ("LifeNum").GetComponent<UILabel> ();
+		lifeBar = GameObject.Find ("LifeBar").transform;
+		maxHealthPointString = "/" + health;
+		maxHealthPoint = health;
 	}
 	
 	
     void Update ()
 	{
+		if(health <0)health = 0;
+		healthPointLabel.text = Mathf.CeilToInt(health) + maxHealthPointString;
+		Vector3 localScaleLifeBar = lifeBar.localScale;
+		localScaleLifeBar.x = health / maxHealthPoint;
+		lifeBar.localScale = localScaleLifeBar;
+
 		// If health is less than or equal to 0...
 		if(health <= 0f)
 		{
