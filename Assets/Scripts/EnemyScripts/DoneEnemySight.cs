@@ -14,7 +14,6 @@ public class DoneEnemySight : MonoBehaviour
 	private NavMeshAgent nav;							// Reference to the NavMeshAgent component.
 	private SphereCollider col;							// Reference to the sphere collider trigger component.
 	private Animator anim;								// Reference to the Animator.
-	private DoneLastPlayerSighting lastPlayerSighting;	// Reference to last global sighting of the player.
     private GameObject player;							// Reference to the player.
 	private Animator playerAnim;						// Reference to the player's animator component.
 	private DonePlayerHealth playerHealth;				// Reference to the player's health script.
@@ -23,7 +22,8 @@ public class DoneEnemySight : MonoBehaviour
 	private GameObject interrogativePointObject;
 	public GameObject FOV;
 	private bool resetFOVColor;
-	
+	private CharacterControllerLogic characterControllerLogicScript;
+
 	public Texture FOV1;
 	public Texture FOV2;
 
@@ -33,13 +33,13 @@ public class DoneEnemySight : MonoBehaviour
 		nav = GetComponent<NavMeshAgent>();
 		col = GetComponent<SphereCollider>();
 		anim = GetComponent<Animator>();
-		lastPlayerSighting = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneLastPlayerSighting>();
 		player = GameObject.FindGameObjectWithTag(DoneTags.player);
 		playerAnim = player.GetComponent<Animator>();
 		playerHealth = player.GetComponent<DonePlayerHealth>();
 
 		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<HashIds>();
-		
+		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
+
 		// Set the personal sighting and the previous sighting to the reset position.
 		personalLastSighting = new Vector3 (1000, 1000, 1000);
 		previousSighting = new Vector3 (1000, 1000, 1000);
@@ -90,12 +90,15 @@ public class DoneEnemySight : MonoBehaviour
 			{
 				FOV.renderer.material.SetTexture("_MainTex", FOV2);
 				resetFOVColor = false;
+				characterControllerLogicScript.IsPursued = true;
+
 			}
 
 			else if(anim.GetBool(hash.inPatrolBool) == true && !resetFOVColor)
 			{
 				FOV.renderer.material.SetTexture("_MainTex",FOV1);
 				resetFOVColor = true;
+				characterControllerLogicScript.IsPursued = false;
 			}
 
 		}
