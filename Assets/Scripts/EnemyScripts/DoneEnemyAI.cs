@@ -54,7 +54,6 @@ public class DoneEnemyAI : MonoBehaviour
 	
 	void Shooting ()
 	{
-		characterControllerLogicScript.IsPursued = true;
 		// Stop the enemy where it is.
 		// Create a vector from the enemy to the last sighting of the player.
 		Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
@@ -82,7 +81,6 @@ public class DoneEnemyAI : MonoBehaviour
 		//If the player was previously sighted
 		if(enemySight.inPursuit)
 		{
-			characterControllerLogicScript.IsPursued = true;
 
 			// Create a vector from the enemy to the last sighting of the player.
 			Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
@@ -122,7 +120,6 @@ public class DoneEnemyAI : MonoBehaviour
 		//We are in Youjin Mode
 		else
 		{
-			characterControllerLogicScript.IsPursued = false;
 
 			// Create a vector from the enemy to the last sighting of the player.
 			Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
@@ -160,7 +157,6 @@ public class DoneEnemyAI : MonoBehaviour
 	
 	void Patrolling ()
 	{
-		characterControllerLogicScript.IsPursued = false;
 
 		// Set an appropriate speed for the NavMeshAgent.
 		nav.speed = patrolSpeed;

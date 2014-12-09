@@ -22,7 +22,8 @@ public class DoneEnemySight : MonoBehaviour
 	private GameObject interrogativePointObject;
 	public GameObject FOV;
 	private bool resetFOVColor;
-	
+	private CharacterControllerLogic characterControllerLogicScript;
+
 	public Texture FOV1;
 	public Texture FOV2;
 
@@ -37,7 +38,8 @@ public class DoneEnemySight : MonoBehaviour
 		playerHealth = player.GetComponent<DonePlayerHealth>();
 
 		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<HashIds>();
-		
+		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
+
 		// Set the personal sighting and the previous sighting to the reset position.
 		personalLastSighting = new Vector3 (1000, 1000, 1000);
 		previousSighting = new Vector3 (1000, 1000, 1000);
@@ -88,12 +90,15 @@ public class DoneEnemySight : MonoBehaviour
 			{
 				FOV.renderer.material.SetTexture("_MainTex", FOV2);
 				resetFOVColor = false;
+				characterControllerLogicScript.IsPursued = true;
+
 			}
 
 			else if(anim.GetBool(hash.inPatrolBool) == true && !resetFOVColor)
 			{
 				FOV.renderer.material.SetTexture("_MainTex",FOV1);
 				resetFOVColor = true;
+				characterControllerLogicScript.IsPursued = false;
 			}
 
 		}

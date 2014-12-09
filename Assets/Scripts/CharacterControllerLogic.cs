@@ -867,7 +867,6 @@ public class CharacterControllerLogic : MonoBehaviour
 	void RotateInPanoramic(float horizontal, float vertical)
 	{
 		float nextValX = currentModifToPanoramicRotVertical + vertical;
-		Debug.Log ("nextValX = " + nextValX);
 
 		//VERTICAL MOVEMENT
 		if(Mathf.Abs(nextValX) <60)
@@ -883,15 +882,6 @@ public class CharacterControllerLogic : MonoBehaviour
 		//HORIZONTAL MOVEMENT
 		transform.rotation = Quaternion.AngleAxis(1.5f*horizontal, Vector3.up) * transform.rotation;
 
-//		Vector3 copy = gamecam.transform.localEulerAngles;
-//		copy.z = 0;
-//		gamecam.transform.localEulerAngles = copy;
-
-//		// Create a rotation based on this new vector assuming that up is the global y axis.
-//		Quaternion targetRotation = Quaternion.AngleAxis(horizontal, Vector3.up);
-//
-//		// Change the players rotation to this new rotation.
-//		rigidbody.MoveRotation(rigidbody.rotation * targetRotation);
 	}
 
 	void Rotating (float horizontal, float vertical)
@@ -952,7 +942,30 @@ public class CharacterControllerLogic : MonoBehaviour
 		EasyTouch.On_TouchStart += HandleOn_TouchStart;
 		EasyTouch.On_TouchDown += HandleOn_TouchDown;
 		EasyTouch.On_TouchUp += HandleOn_TouchUp;
+		EasyTouch.On_DoubleTap += HandleOn_DoubleTap;
 		
+	}
+
+	void HandleOn_DoubleTap (Gesture gesture)
+	{
+		if(joyX == 0 && joyY == 0 && !inCoverMode)
+		{
+			if(!isInPanoramicView)
+			{
+				isInPanoramicView = true;
+				gamecam.transform.parent = transform;
+				gamecam.transform.localPosition = camPanoramicPosition;
+				gamecam.transform.localEulerAngles = camPanoramicRotation;
+			}
+			else 
+			{
+				isInPanoramicView = false;
+				gamecam.transform.parent = null;
+				currentModifToPanoramicRotVertical = 0;
+				gamecam.transform.position = transform.position + cameraPosition;
+				gamecam.transform.eulerAngles = cameraRotation;
+			}
+		}
 	}
 	
 	void HandleOn_TouchStart (Gesture gesture)
