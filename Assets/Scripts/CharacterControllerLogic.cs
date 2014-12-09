@@ -112,8 +112,8 @@ public class CharacterControllerLogic : MonoBehaviour
 	private Vector3 camRotationWhenCloseToBorder;
 	private bool isPlayerCloseToBorder;
 
-	public float levelMaxX = 15;
-	public float levelMinX = -40;
+	public float levelMaxX = 20;
+	public float levelMinX = 4;
 
 	private int buildingMask;
 	private int NPCMask;
