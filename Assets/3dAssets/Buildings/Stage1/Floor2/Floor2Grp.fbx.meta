@@ -119,6 +119,28 @@ ModelImporter:
     100226: WallRoom3_7
     100228: WallRoom3Grp
     100230: WallRoom3Half1
+    100232: DoorToilet1
+    100234: DoorToilet1 1
+    100236: DoorToilet1 2
+    100238: DoorToilet1 3
+    100240: DoorToiletGrp1
+    100242: DoorToiletGrp2
+    100244: DoorToiletGrp3
+    100246: DoorToiletGrp4
+    100248: Lock
+    100250: Lock 1
+    100252: Lock 2
+    100254: Lock 3
+    100256: ToiletPaperGrp
+    100258: ToiletVer1
+    100260: ToiletVer2
+    100262: ToiletVer3
+    100264: ToiletVer4
+    100266: WallToiletRoom_10
+    100268: WallToiletRoom_11
+    100270: WallToiletRoom_7
+    100272: WallToiletRoom_8
+    100274: WallToiletRoom_9
     400000: cs_office:BSP_Object_model_106
     400002: cs_office:BSP_Object_model_112
     400004: cs_office:BSP_Object_model_119
@@ -235,6 +257,28 @@ ModelImporter:
     400226: WallRoom3_7
     400228: WallRoom3Grp
     400230: WallRoom3Half1
+    400232: DoorToilet1
+    400234: DoorToilet1 1
+    400236: DoorToilet1 2
+    400238: DoorToilet1 3
+    400240: DoorToiletGrp1
+    400242: DoorToiletGrp2
+    400244: DoorToiletGrp3
+    400246: DoorToiletGrp4
+    400248: Lock
+    400250: Lock 1
+    400252: Lock 2
+    400254: Lock 3
+    400256: ToiletPaperGrp
+    400258: ToiletVer1
+    400260: ToiletVer2
+    400262: ToiletVer3
+    400264: ToiletVer4
+    400266: WallToiletRoom_10
+    400268: WallToiletRoom_11
+    400270: WallToiletRoom_7
+    400272: WallToiletRoom_8
+    400274: WallToiletRoom_9
     2300000: cs_office:BSP_Object_model_106
     2300002: cs_office:BSP_Object_model_112
     2300004: cs_office:BSP_Object_model_119
@@ -331,6 +375,23 @@ ModelImporter:
     2300186: WallRoom3_6
     2300188: WallRoom3_7
     2300190: WallRoom3Half1
+    2300192: DoorToilet1
+    2300194: DoorToilet1 1
+    2300196: DoorToilet1 2
+    2300198: DoorToilet1 3
+    2300200: Lock
+    2300202: Lock 1
+    2300204: Lock 2
+    2300206: Lock 3
+    2300208: ToiletVer1
+    2300210: ToiletVer2
+    2300212: ToiletVer3
+    2300214: ToiletVer4
+    2300216: WallToiletRoom_10
+    2300218: WallToiletRoom_11
+    2300220: WallToiletRoom_7
+    2300222: WallToiletRoom_8
+    2300224: WallToiletRoom_9
     3300000: cs_office:BSP_Object_model_106
     3300002: cs_office:BSP_Object_model_112
     3300004: cs_office:BSP_Object_model_119
@@ -427,6 +488,23 @@ ModelImporter:
     3300186: WallRoom3_6
     3300188: WallRoom3_7
     3300190: WallRoom3Half1
+    3300192: DoorToilet1
+    3300194: DoorToilet1 1
+    3300196: DoorToilet1 2
+    3300198: DoorToilet1 3
+    3300200: Lock
+    3300202: Lock 1
+    3300204: Lock 2
+    3300206: Lock 3
+    3300208: ToiletVer1
+    3300210: ToiletVer2
+    3300212: ToiletVer3
+    3300214: ToiletVer4
+    3300216: WallToiletRoom_10
+    3300218: WallToiletRoom_11
+    3300220: WallToiletRoom_7
+    3300222: WallToiletRoom_8
+    3300224: WallToiletRoom_9
     4300000: cs_office:BSP_Object_model_145
     4300002: cs_office:BSP_Object_model_144
     4300004: cs_office:BSP_Object_model_106
@@ -523,6 +601,23 @@ ModelImporter:
     4300186: sen
     4300188: jaguchi
     4300190: Sink
+    4300192: ToiletVer1
+    4300194: ToiletVer2
+    4300196: ToiletVer3
+    4300198: ToiletVer4
+    4300200: WallToiletRoom_7
+    4300202: WallToiletRoom_8
+    4300204: WallToiletRoom_9
+    4300206: WallToiletRoom_10
+    4300208: WallToiletRoom_11
+    4300210: DoorToilet1
+    4300212: Lock
+    4300214: DoorToilet1
+    4300216: Lock
+    4300218: DoorToilet1
+    4300220: Lock
+    4300222: DoorToilet1
+    4300224: Lock
     9500000: //RootNode
   materials:
     importMaterials: 1
