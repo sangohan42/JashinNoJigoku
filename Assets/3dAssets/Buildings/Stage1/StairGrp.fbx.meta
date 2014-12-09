@@ -58,6 +58,152 @@ ModelImporter:
     100104: StairGrp:Stair8
     100106: StairGrp:Stair9
     100108: StairGrp:StairsGrp
+    100110: polySurface1
+    100112: polySurface2
+    100114: StairGrp1:GroundFloor2
+    100116: StairGrp1:hashira
+    100118: StairGrp1:hashira1
+    100120: StairGrp1:hashira2
+    100122: StairGrp1:hashira3
+    100124: StairGrp1:hashira4
+    100126: StairGrp1:pCube11
+    100128: StairGrp1:pCube12
+    100130: StairGrp1:pCube20
+    100132: StairGrp1:pCube21
+    100134: StairGrp1:pCube22
+    100136: StairGrp1:pCube23
+    100138: StairGrp1:pCube24
+    100140: StairGrp1:pCube25
+    100142: StairGrp1:pCube30
+    100144: StairGrp1:pCube31
+    100146: StairGrp1:StairsGrp
+    100148: StairLanding_1
+    100150: StairNum__1
+    100152: StairNum__10
+    100154: StairNum__11
+    100156: StairNum__12
+    100158: StairNum__13
+    100160: StairNum__14
+    100162: StairNum__15
+    100164: StairNum__16
+    100166: StairNum__17
+    100168: StairNum__18
+    100170: StairNum__19
+    100172: StairNum__2
+    100174: StairNum__20
+    100176: StairNum__21
+    100178: StairNum__22
+    100180: StairNum__23
+    100182: StairNum__24
+    100184: StairNum__25
+    100186: StairNum__26
+    100188: StairNum__27
+    100190: StairNum__28
+    100192: StairNum__29
+    100194: StairNum__3
+    100196: StairNum__30
+    100198: StairNum__31
+    100200: StairNum__32
+    100202: StairNum__33
+    100204: StairNum__34
+    100206: StairNum__35
+    100208: StairNum__36
+    100210: StairNum__37
+    100212: StairNum__38
+    100214: StairNum__4
+    100216: StairNum__5
+    100218: StairNum__6
+    100220: StairNum__7
+    100222: StairNum__8
+    100224: StairNum__9
+    100226: StairSide_2
+    100228: Stair:polySurface1
+    100230: Stair:polySurface2
+    100232: Stair:StairGrp1:GroundFloor2
+    100234: Stair:StairGrp1:hashira1
+    100236: Stair:StairGrp1:hashira1 1
+    100238: Stair:StairGrp1:hashira10
+    100240: Stair:StairGrp1:hashira10 1
+    100242: Stair:StairGrp1:hashira11
+    100244: Stair:StairGrp1:hashira11 1
+    100246: Stair:StairGrp1:hashira13
+    100248: Stair:StairGrp1:hashira13 1
+    100250: Stair:StairGrp1:hashira14
+    100252: Stair:StairGrp1:hashira14 1
+    100254: Stair:StairGrp1:hashira15
+    100256: Stair:StairGrp1:hashira15 1
+    100258: Stair:StairGrp1:hashira16
+    100260: Stair:StairGrp1:hashira16 1
+    100262: Stair:StairGrp1:hashira17
+    100264: Stair:StairGrp1:hashira17 1
+    100266: Stair:StairGrp1:hashira18
+    100268: Stair:StairGrp1:hashira18 1
+    100270: Stair:StairGrp1:hashira19
+    100272: Stair:StairGrp1:hashira19 1
+    100274: Stair:StairGrp1:hashira20
+    100276: Stair:StairGrp1:hashira22
+    100278: Stair:StairGrp1:hashira5
+    100280: Stair:StairGrp1:hashira5 1
+    100282: Stair:StairGrp1:hashira6
+    100284: Stair:StairGrp1:hashira6 1
+    100286: Stair:StairGrp1:hashira7
+    100288: Stair:StairGrp1:hashira7 1
+    100290: Stair:StairGrp1:hashira8
+    100292: Stair:StairGrp1:hashira8 1
+    100294: Stair:StairGrp1:hashira9
+    100296: Stair:StairGrp1:hashira9 1
+    100298: Stair:StairGrp1:pCube11
+    100300: Stair:StairGrp1:pCube12
+    100302: Stair:StairGrp1:pCube20
+    100304: Stair:StairGrp1:pCube21
+    100306: Stair:StairGrp1:pCube22
+    100308: Stair:StairGrp1:pCube23
+    100310: Stair:StairGrp1:pCube24
+    100312: Stair:StairGrp1:pCube26
+    100314: Stair:StairGrp1:pCube27
+    100316: Stair:StairGrp1:StairsGrp
+    100318: Stair:StairGrp1:Tesuri
+    100320: Stair:StairGrp1:Tesuri2
+    100322: Stair:StairLanding_1
+    100324: Stair:StairNum__1
+    100326: Stair:StairNum__10
+    100328: Stair:StairNum__11
+    100330: Stair:StairNum__12
+    100332: Stair:StairNum__13
+    100334: Stair:StairNum__14
+    100336: Stair:StairNum__15
+    100338: Stair:StairNum__16
+    100340: Stair:StairNum__17
+    100342: Stair:StairNum__18
+    100344: Stair:StairNum__19
+    100346: Stair:StairNum__2
+    100348: Stair:StairNum__20
+    100350: Stair:StairNum__21
+    100352: Stair:StairNum__22
+    100354: Stair:StairNum__23
+    100356: Stair:StairNum__24
+    100358: Stair:StairNum__25
+    100360: Stair:StairNum__26
+    100362: Stair:StairNum__27
+    100364: Stair:StairNum__28
+    100366: Stair:StairNum__29
+    100368: Stair:StairNum__3
+    100370: Stair:StairNum__30
+    100372: Stair:StairNum__31
+    100374: Stair:StairNum__32
+    100376: Stair:StairNum__33
+    100378: Stair:StairNum__34
+    100380: Stair:StairNum__35
+    100382: Stair:StairNum__36
+    100384: Stair:StairNum__37
+    100386: Stair:StairNum__38
+    100388: Stair:StairNum__4
+    100390: Stair:StairNum__5
+    100392: Stair:StairNum__6
+    100394: Stair:StairNum__7
+    100396: Stair:StairNum__8
+    100398: Stair:StairNum__9
+    100400: Stair:StairSide_2
     400000: //RootNode
     400002: StairGrp:GroundFloor2
     400004: StairGrp:pCube10
@@ -113,6 +259,152 @@ ModelImporter:
     400104: StairGrp:Stair8
     400106: StairGrp:Stair9
     400108: StairGrp:StairsGrp
+    400110: polySurface1
+    400112: polySurface2
+    400114: StairGrp1:GroundFloor2
+    400116: StairGrp1:hashira
+    400118: StairGrp1:hashira1
+    400120: StairGrp1:hashira2
+    400122: StairGrp1:hashira3
+    400124: StairGrp1:hashira4
+    400126: StairGrp1:pCube11
+    400128: StairGrp1:pCube12
+    400130: StairGrp1:pCube20
+    400132: StairGrp1:pCube21
+    400134: StairGrp1:pCube22
+    400136: StairGrp1:pCube23
+    400138: StairGrp1:pCube24
+    400140: StairGrp1:pCube25
+    400142: StairGrp1:pCube30
+    400144: StairGrp1:pCube31
+    400146: StairGrp1:StairsGrp
+    400148: StairLanding_1
+    400150: StairNum__1
+    400152: StairNum__10
+    400154: StairNum__11
+    400156: StairNum__12
+    400158: StairNum__13
+    400160: StairNum__14
+    400162: StairNum__15
+    400164: StairNum__16
+    400166: StairNum__17
+    400168: StairNum__18
+    400170: StairNum__19
+    400172: StairNum__2
+    400174: StairNum__20
+    400176: StairNum__21
+    400178: StairNum__22
+    400180: StairNum__23
+    400182: StairNum__24
+    400184: StairNum__25
+    400186: StairNum__26
+    400188: StairNum__27
+    400190: StairNum__28
+    400192: StairNum__29
+    400194: StairNum__3
+    400196: StairNum__30
+    400198: StairNum__31
+    400200: StairNum__32
+    400202: StairNum__33
+    400204: StairNum__34
+    400206: StairNum__35
+    400208: StairNum__36
+    400210: StairNum__37
+    400212: StairNum__38
+    400214: StairNum__4
+    400216: StairNum__5
+    400218: StairNum__6
+    400220: StairNum__7
+    400222: StairNum__8
+    400224: StairNum__9
+    400226: StairSide_2
+    400228: Stair:polySurface1
+    400230: Stair:polySurface2
+    400232: Stair:StairGrp1:GroundFloor2
+    400234: Stair:StairGrp1:hashira1
+    400236: Stair:StairGrp1:hashira1 1
+    400238: Stair:StairGrp1:hashira10
+    400240: Stair:StairGrp1:hashira10 1
+    400242: Stair:StairGrp1:hashira11
+    400244: Stair:StairGrp1:hashira11 1
+    400246: Stair:StairGrp1:hashira13
+    400248: Stair:StairGrp1:hashira13 1
+    400250: Stair:StairGrp1:hashira14
+    400252: Stair:StairGrp1:hashira14 1
+    400254: Stair:StairGrp1:hashira15
+    400256: Stair:StairGrp1:hashira15 1
+    400258: Stair:StairGrp1:hashira16
+    400260: Stair:StairGrp1:hashira16 1
+    400262: Stair:StairGrp1:hashira17
+    400264: Stair:StairGrp1:hashira17 1
+    400266: Stair:StairGrp1:hashira18
+    400268: Stair:StairGrp1:hashira18 1
+    400270: Stair:StairGrp1:hashira19
+    400272: Stair:StairGrp1:hashira19 1
+    400274: Stair:StairGrp1:hashira20
+    400276: Stair:StairGrp1:hashira22
+    400278: Stair:StairGrp1:hashira5
+    400280: Stair:StairGrp1:hashira5 1
+    400282: Stair:StairGrp1:hashira6
+    400284: Stair:StairGrp1:hashira6 1
+    400286: Stair:StairGrp1:hashira7
+    400288: Stair:StairGrp1:hashira7 1
+    400290: Stair:StairGrp1:hashira8
+    400292: Stair:StairGrp1:hashira8 1
+    400294: Stair:StairGrp1:hashira9
+    400296: Stair:StairGrp1:hashira9 1
+    400298: Stair:StairGrp1:pCube11
+    400300: Stair:StairGrp1:pCube12
+    400302: Stair:StairGrp1:pCube20
+    400304: Stair:StairGrp1:pCube21
+    400306: Stair:StairGrp1:pCube22
+    400308: Stair:StairGrp1:pCube23
+    400310: Stair:StairGrp1:pCube24
+    400312: Stair:StairGrp1:pCube26
+    400314: Stair:StairGrp1:pCube27
+    400316: Stair:StairGrp1:StairsGrp
+    400318: Stair:StairGrp1:Tesuri
+    400320: Stair:StairGrp1:Tesuri2
+    400322: Stair:StairLanding_1
+    400324: Stair:StairNum__1
+    400326: Stair:StairNum__10
+    400328: Stair:StairNum__11
+    400330: Stair:StairNum__12
+    400332: Stair:StairNum__13
+    400334: Stair:StairNum__14
+    400336: Stair:StairNum__15
+    400338: Stair:StairNum__16
+    400340: Stair:StairNum__17
+    400342: Stair:StairNum__18
+    400344: Stair:StairNum__19
+    400346: Stair:StairNum__2
+    400348: Stair:StairNum__20
+    400350: Stair:StairNum__21
+    400352: Stair:StairNum__22
+    400354: Stair:StairNum__23
+    400356: Stair:StairNum__24
+    400358: Stair:StairNum__25
+    400360: Stair:StairNum__26
+    400362: Stair:StairNum__27
+    400364: Stair:StairNum__28
+    400366: Stair:StairNum__29
+    400368: Stair:StairNum__3
+    400370: Stair:StairNum__30
+    400372: Stair:StairNum__31
+    400374: Stair:StairNum__32
+    400376: Stair:StairNum__33
+    400378: Stair:StairNum__34
+    400380: Stair:StairNum__35
+    400382: Stair:StairNum__36
+    400384: Stair:StairNum__37
+    400386: Stair:StairNum__38
+    400388: Stair:StairNum__4
+    400390: Stair:StairNum__5
+    400392: Stair:StairNum__6
+    400394: Stair:StairNum__7
+    400396: Stair:StairNum__8
+    400398: Stair:StairNum__9
+    400400: Stair:StairSide_2
     2300000: StairGrp:GroundFloor2
     2300002: StairGrp:pCube10
     2300004: StairGrp:pCube11
@@ -166,6 +458,146 @@ ModelImporter:
     2300100: StairGrp:Stair7
     2300102: StairGrp:Stair8
     2300104: StairGrp:Stair9
+    2300106: polySurface1
+    2300108: polySurface2
+    2300110: StairGrp1:GroundFloor2
+    2300112: StairGrp1:hashira
+    2300114: StairGrp1:hashira1
+    2300116: StairGrp1:hashira2
+    2300118: StairGrp1:hashira3
+    2300120: StairGrp1:hashira4
+    2300122: StairGrp1:pCube11
+    2300124: StairGrp1:pCube12
+    2300126: StairGrp1:pCube20
+    2300128: StairGrp1:pCube21
+    2300130: StairGrp1:pCube22
+    2300132: StairGrp1:pCube23
+    2300134: StairGrp1:pCube24
+    2300136: StairGrp1:pCube25
+    2300138: StairGrp1:pCube30
+    2300140: StairGrp1:pCube31
+    2300142: StairLanding_1
+    2300144: StairNum__1
+    2300146: StairNum__10
+    2300148: StairNum__11
+    2300150: StairNum__12
+    2300152: StairNum__13
+    2300154: StairNum__14
+    2300156: StairNum__15
+    2300158: StairNum__16
+    2300160: StairNum__17
+    2300162: StairNum__18
+    2300164: StairNum__19
+    2300166: StairNum__2
+    2300168: StairNum__20
+    2300170: StairNum__21
+    2300172: StairNum__22
+    2300174: StairNum__23
+    2300176: StairNum__24
+    2300178: StairNum__25
+    2300180: StairNum__26
+    2300182: StairNum__27
+    2300184: StairNum__28
+    2300186: StairNum__29
+    2300188: StairNum__3
+    2300190: StairNum__30
+    2300192: StairNum__31
+    2300194: StairNum__32
+    2300196: StairNum__33
+    2300198: StairNum__34
+    2300200: StairNum__35
+    2300202: StairNum__36
+    2300204: StairNum__37
+    2300206: StairNum__38
+    2300208: StairNum__4
+    2300210: StairNum__5
+    2300212: StairNum__6
+    2300214: StairNum__7
+    2300216: StairNum__8
+    2300218: StairNum__9
+    2300220: Stair:polySurface1
+    2300222: Stair:polySurface2
+    2300224: Stair:StairGrp1:GroundFloor2
+    2300226: Stair:StairGrp1:hashira1
+    2300228: Stair:StairGrp1:hashira1 1
+    2300230: Stair:StairGrp1:hashira10
+    2300232: Stair:StairGrp1:hashira10 1
+    2300234: Stair:StairGrp1:hashira11
+    2300236: Stair:StairGrp1:hashira11 1
+    2300238: Stair:StairGrp1:hashira13
+    2300240: Stair:StairGrp1:hashira13 1
+    2300242: Stair:StairGrp1:hashira14
+    2300244: Stair:StairGrp1:hashira14 1
+    2300246: Stair:StairGrp1:hashira15
+    2300248: Stair:StairGrp1:hashira15 1
+    2300250: Stair:StairGrp1:hashira16
+    2300252: Stair:StairGrp1:hashira16 1
+    2300254: Stair:StairGrp1:hashira17
+    2300256: Stair:StairGrp1:hashira17 1
+    2300258: Stair:StairGrp1:hashira18
+    2300260: Stair:StairGrp1:hashira18 1
+    2300262: Stair:StairGrp1:hashira19
+    2300264: Stair:StairGrp1:hashira19 1
+    2300266: Stair:StairGrp1:hashira20
+    2300268: Stair:StairGrp1:hashira22
+    2300270: Stair:StairGrp1:hashira5
+    2300272: Stair:StairGrp1:hashira5 1
+    2300274: Stair:StairGrp1:hashira6
+    2300276: Stair:StairGrp1:hashira6 1
+    2300278: Stair:StairGrp1:hashira7
+    2300280: Stair:StairGrp1:hashira7 1
+    2300282: Stair:StairGrp1:hashira8
+    2300284: Stair:StairGrp1:hashira8 1
+    2300286: Stair:StairGrp1:hashira9
+    2300288: Stair:StairGrp1:hashira9 1
+    2300290: Stair:StairGrp1:pCube11
+    2300292: Stair:StairGrp1:pCube12
+    2300294: Stair:StairGrp1:pCube20
+    2300296: Stair:StairGrp1:pCube21
+    2300298: Stair:StairGrp1:pCube22
+    2300300: Stair:StairGrp1:pCube23
+    2300302: Stair:StairGrp1:pCube24
+    2300304: Stair:StairGrp1:pCube26
+    2300306: Stair:StairGrp1:pCube27
+    2300308: Stair:StairLanding_1
+    2300310: Stair:StairNum__1
+    2300312: Stair:StairNum__10
+    2300314: Stair:StairNum__11
+    2300316: Stair:StairNum__12
+    2300318: Stair:StairNum__13
+    2300320: Stair:StairNum__14
+    2300322: Stair:StairNum__15
+    2300324: Stair:StairNum__16
+    2300326: Stair:StairNum__17
+    2300328: Stair:StairNum__18
+    2300330: Stair:StairNum__19
+    2300332: Stair:StairNum__2
+    2300334: Stair:StairNum__20
+    2300336: Stair:StairNum__21
+    2300338: Stair:StairNum__22
+    2300340: Stair:StairNum__23
+    2300342: Stair:StairNum__24
+    2300344: Stair:StairNum__25
+    2300346: Stair:StairNum__26
+    2300348: Stair:StairNum__27
+    2300350: Stair:StairNum__28
+    2300352: Stair:StairNum__29
+    2300354: Stair:StairNum__3
+    2300356: Stair:StairNum__30
+    2300358: Stair:StairNum__31
+    2300360: Stair:StairNum__32
+    2300362: Stair:StairNum__33
+    2300364: Stair:StairNum__34
+    2300366: Stair:StairNum__35
+    2300368: Stair:StairNum__36
+    2300370: Stair:StairNum__37
+    2300372: Stair:StairNum__38
+    2300374: Stair:StairNum__4
+    2300376: Stair:StairNum__5
+    2300378: Stair:StairNum__6
+    2300380: Stair:StairNum__7
+    2300382: Stair:StairNum__8
+    2300384: Stair:StairNum__9
     3300000: StairGrp:GroundFloor2
     3300002: StairGrp:pCube10
     3300004: StairGrp:pCube11
@@ -219,6 +651,146 @@ ModelImporter:
     3300100: StairGrp:Stair7
     3300102: StairGrp:Stair8
     3300104: StairGrp:Stair9
+    3300106: polySurface1
+    3300108: polySurface2
+    3300110: StairGrp1:GroundFloor2
+    3300112: StairGrp1:hashira
+    3300114: StairGrp1:hashira1
+    3300116: StairGrp1:hashira2
+    3300118: StairGrp1:hashira3
+    3300120: StairGrp1:hashira4
+    3300122: StairGrp1:pCube11
+    3300124: StairGrp1:pCube12
+    3300126: StairGrp1:pCube20
+    3300128: StairGrp1:pCube21
+    3300130: StairGrp1:pCube22
+    3300132: StairGrp1:pCube23
+    3300134: StairGrp1:pCube24
+    3300136: StairGrp1:pCube25
+    3300138: StairGrp1:pCube30
+    3300140: StairGrp1:pCube31
+    3300142: StairLanding_1
+    3300144: StairNum__1
+    3300146: StairNum__10
+    3300148: StairNum__11
+    3300150: StairNum__12
+    3300152: StairNum__13
+    3300154: StairNum__14
+    3300156: StairNum__15
+    3300158: StairNum__16
+    3300160: StairNum__17
+    3300162: StairNum__18
+    3300164: StairNum__19
+    3300166: StairNum__2
+    3300168: StairNum__20
+    3300170: StairNum__21
+    3300172: StairNum__22
+    3300174: StairNum__23
+    3300176: StairNum__24
+    3300178: StairNum__25
+    3300180: StairNum__26
+    3300182: StairNum__27
+    3300184: StairNum__28
+    3300186: StairNum__29
+    3300188: StairNum__3
+    3300190: StairNum__30
+    3300192: StairNum__31
+    3300194: StairNum__32
+    3300196: StairNum__33
+    3300198: StairNum__34
+    3300200: StairNum__35
+    3300202: StairNum__36
+    3300204: StairNum__37
+    3300206: StairNum__38
+    3300208: StairNum__4
+    3300210: StairNum__5
+    3300212: StairNum__6
+    3300214: StairNum__7
+    3300216: StairNum__8
+    3300218: StairNum__9
+    3300220: Stair:polySurface1
+    3300222: Stair:polySurface2
+    3300224: Stair:StairGrp1:GroundFloor2
+    3300226: Stair:StairGrp1:hashira1
+    3300228: Stair:StairGrp1:hashira1 1
+    3300230: Stair:StairGrp1:hashira10
+    3300232: Stair:StairGrp1:hashira10 1
+    3300234: Stair:StairGrp1:hashira11
+    3300236: Stair:StairGrp1:hashira11 1
+    3300238: Stair:StairGrp1:hashira13
+    3300240: Stair:StairGrp1:hashira13 1
+    3300242: Stair:StairGrp1:hashira14
+    3300244: Stair:StairGrp1:hashira14 1
+    3300246: Stair:StairGrp1:hashira15
+    3300248: Stair:StairGrp1:hashira15 1
+    3300250: Stair:StairGrp1:hashira16
+    3300252: Stair:StairGrp1:hashira16 1
+    3300254: Stair:StairGrp1:hashira17
+    3300256: Stair:StairGrp1:hashira17 1
+    3300258: Stair:StairGrp1:hashira18
+    3300260: Stair:StairGrp1:hashira18 1
+    3300262: Stair:StairGrp1:hashira19
+    3300264: Stair:StairGrp1:hashira19 1
+    3300266: Stair:StairGrp1:hashira20
+    3300268: Stair:StairGrp1:hashira22
+    3300270: Stair:StairGrp1:hashira5
+    3300272: Stair:StairGrp1:hashira5 1
+    3300274: Stair:StairGrp1:hashira6
+    3300276: Stair:StairGrp1:hashira6 1
+    3300278: Stair:StairGrp1:hashira7
+    3300280: Stair:StairGrp1:hashira7 1
+    3300282: Stair:StairGrp1:hashira8
+    3300284: Stair:StairGrp1:hashira8 1
+    3300286: Stair:StairGrp1:hashira9
+    3300288: Stair:StairGrp1:hashira9 1
+    3300290: Stair:StairGrp1:pCube11
+    3300292: Stair:StairGrp1:pCube12
+    3300294: Stair:StairGrp1:pCube20
+    3300296: Stair:StairGrp1:pCube21
+    3300298: Stair:StairGrp1:pCube22
+    3300300: Stair:StairGrp1:pCube23
+    3300302: Stair:StairGrp1:pCube24
+    3300304: Stair:StairGrp1:pCube26
+    3300306: Stair:StairGrp1:pCube27
+    3300308: Stair:StairLanding_1
+    3300310: Stair:StairNum__1
+    3300312: Stair:StairNum__10
+    3300314: Stair:StairNum__11
+    3300316: Stair:StairNum__12
+    3300318: Stair:StairNum__13
+    3300320: Stair:StairNum__14
+    3300322: Stair:StairNum__15
+    3300324: Stair:StairNum__16
+    3300326: Stair:StairNum__17
+    3300328: Stair:StairNum__18
+    3300330: Stair:StairNum__19
+    3300332: Stair:StairNum__2
+    3300334: Stair:StairNum__20
+    3300336: Stair:StairNum__21
+    3300338: Stair:StairNum__22
+    3300340: Stair:StairNum__23
+    3300342: Stair:StairNum__24
+    3300344: Stair:StairNum__25
+    3300346: Stair:StairNum__26
+    3300348: Stair:StairNum__27
+    3300350: Stair:StairNum__28
+    3300352: Stair:StairNum__29
+    3300354: Stair:StairNum__3
+    3300356: Stair:StairNum__30
+    3300358: Stair:StairNum__31
+    3300360: Stair:StairNum__32
+    3300362: Stair:StairNum__33
+    3300364: Stair:StairNum__34
+    3300366: Stair:StairNum__35
+    3300368: Stair:StairNum__36
+    3300370: Stair:StairNum__37
+    3300372: Stair:StairNum__38
+    3300374: Stair:StairNum__4
+    3300376: Stair:StairNum__5
+    3300378: Stair:StairNum__6
+    3300380: Stair:StairNum__7
+    3300382: Stair:StairNum__8
+    3300384: Stair:StairNum__9
     4300000: StairGrp:pCube17
     4300002: StairGrp:pCube18
     4300004: StairGrp:pCube19
@@ -272,6 +844,146 @@ ModelImporter:
     4300100: StairGrp:Stair36
     4300102: StairGrp:Stair37
     4300104: StairGrp:GroundFloor2
+    4300106: StairGrp1:pCube20
+    4300108: StairGrp1:pCube21
+    4300110: StairGrp1:pCube22
+    4300112: StairGrp1:pCube23
+    4300114: StairGrp1:pCube12
+    4300116: StairGrp1:pCube11
+    4300118: StairGrp1:hashira
+    4300120: StairNum__1
+    4300122: StairNum__2
+    4300124: StairNum__3
+    4300126: StairNum__4
+    4300128: StairNum__5
+    4300130: StairNum__6
+    4300132: StairNum__7
+    4300134: StairNum__8
+    4300136: StairNum__9
+    4300138: StairNum__10
+    4300140: StairNum__11
+    4300142: StairNum__12
+    4300144: StairNum__13
+    4300146: StairNum__14
+    4300148: StairNum__15
+    4300150: StairNum__16
+    4300152: StairNum__17
+    4300154: StairNum__18
+    4300156: StairNum__19
+    4300158: StairLanding_1
+    4300160: StairNum__20
+    4300162: StairNum__21
+    4300164: StairNum__22
+    4300166: StairNum__23
+    4300168: StairNum__24
+    4300170: StairNum__25
+    4300172: StairNum__26
+    4300174: StairNum__27
+    4300176: StairNum__28
+    4300178: StairNum__29
+    4300180: StairNum__30
+    4300182: StairNum__31
+    4300184: StairNum__32
+    4300186: StairNum__33
+    4300188: StairNum__34
+    4300190: StairNum__35
+    4300192: StairNum__36
+    4300194: StairNum__37
+    4300196: StairNum__38
+    4300198: StairGrp1:GroundFloor2
+    4300200: StairGrp1:pCube24
+    4300202: StairGrp1:pCube25
+    4300204: polySurface1
+    4300206: polySurface2
+    4300208: StairGrp1:pCube30
+    4300210: StairGrp1:pCube31
+    4300212: StairGrp1:hashira1
+    4300214: StairGrp1:hashira2
+    4300216: StairGrp1:hashira3
+    4300218: StairGrp1:hashira4
+    4300220: Stair:StairGrp1:pCube20
+    4300222: Stair:StairGrp1:pCube21
+    4300224: Stair:StairGrp1:pCube22
+    4300226: Stair:StairGrp1:pCube23
+    4300228: Stair:StairGrp1:pCube12
+    4300230: Stair:StairGrp1:pCube11
+    4300232: Stair:StairNum__1
+    4300234: Stair:StairNum__2
+    4300236: Stair:StairNum__3
+    4300238: Stair:StairNum__4
+    4300240: Stair:StairNum__5
+    4300242: Stair:StairNum__6
+    4300244: Stair:StairNum__7
+    4300246: Stair:StairNum__8
+    4300248: Stair:StairNum__9
+    4300250: Stair:StairNum__10
+    4300252: Stair:StairNum__11
+    4300254: Stair:StairNum__12
+    4300256: Stair:StairNum__13
+    4300258: Stair:StairNum__14
+    4300260: Stair:StairNum__15
+    4300262: Stair:StairNum__16
+    4300264: Stair:StairNum__17
+    4300266: Stair:StairNum__18
+    4300268: Stair:StairNum__19
+    4300270: Stair:StairLanding_1
+    4300272: Stair:StairNum__20
+    4300274: Stair:StairNum__21
+    4300276: Stair:StairNum__22
+    4300278: Stair:StairNum__23
+    4300280: Stair:StairNum__24
+    4300282: Stair:StairNum__25
+    4300284: Stair:StairNum__26
+    4300286: Stair:StairNum__27
+    4300288: Stair:StairNum__28
+    4300290: Stair:StairNum__29
+    4300292: Stair:StairNum__30
+    4300294: Stair:StairNum__31
+    4300296: Stair:StairNum__32
+    4300298: Stair:StairNum__33
+    4300300: Stair:StairNum__34
+    4300302: Stair:StairNum__35
+    4300304: Stair:StairNum__36
+    4300306: Stair:StairNum__37
+    4300308: Stair:StairNum__38
+    4300310: Stair:StairGrp1:GroundFloor2
+    4300312: Stair:StairGrp1:pCube24
+    4300314: Stair:polySurface1
+    4300316: Stair:polySurface2
+    4300318: Stair:StairGrp1:pCube26
+    4300320: Stair:StairGrp1:pCube27
+    4300322: Stair:StairGrp1:hashira6
+    4300324: Stair:StairGrp1:hashira7
+    4300326: Stair:StairGrp1:hashira8
+    4300328: Stair:StairGrp1:hashira9
+    4300330: Stair:StairGrp1:hashira10
+    4300332: Stair:StairGrp1:hashira11
+    4300334: Stair:StairGrp1:hashira13
+    4300336: Stair:StairGrp1:hashira14
+    4300338: Stair:StairGrp1:hashira15
+    4300340: Stair:StairGrp1:hashira16
+    4300342: Stair:StairGrp1:hashira17
+    4300344: Stair:StairGrp1:hashira1
+    4300346: Stair:StairGrp1:hashira5
+    4300348: Stair:StairGrp1:hashira18
+    4300350: Stair:StairGrp1:hashira19
+    4300352: Stair:StairGrp1:hashira20
+    4300354: Stair:StairGrp1:hashira22
+    4300356: Stair:StairGrp1:hashira6
+    4300358: Stair:StairGrp1:hashira7
+    4300360: Stair:StairGrp1:hashira8
+    4300362: Stair:StairGrp1:hashira9
+    4300364: Stair:StairGrp1:hashira10
+    4300366: Stair:StairGrp1:hashira11
+    4300368: Stair:StairGrp1:hashira13
+    4300370: Stair:StairGrp1:hashira14
+    4300372: Stair:StairGrp1:hashira15
+    4300374: Stair:StairGrp1:hashira16
+    4300376: Stair:StairGrp1:hashira17
+    4300378: Stair:StairGrp1:hashira1
+    4300380: Stair:StairGrp1:hashira5
+    4300382: Stair:StairGrp1:hashira18
+    4300384: Stair:StairGrp1:hashira19
     9500000: //RootNode
   materials:
     importMaterials: 1

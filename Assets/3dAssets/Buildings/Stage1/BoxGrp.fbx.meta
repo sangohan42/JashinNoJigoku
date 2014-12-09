@@ -17,6 +17,9 @@ ModelImporter:
     100022: Box7
     100024: Box8
     100026: Box9
+    100028: Box12
+    100030: Box13
+    100032: Box14
     400000: Box1
     400002: Box2
     400004: Box3
@@ -31,6 +34,9 @@ ModelImporter:
     400022: Box7
     400024: Box8
     400026: Box9
+    400028: Box12
+    400030: Box13
+    400032: Box14
     2300000: Box1
     2300002: Box2
     2300004: Box3
@@ -43,6 +49,9 @@ ModelImporter:
     2300018: Box7
     2300020: Box8
     2300022: Box9
+    2300024: Box12
+    2300026: Box13
+    2300028: Box14
     3300000: Box1
     3300002: Box2
     3300004: Box3
@@ -55,6 +64,9 @@ ModelImporter:
     3300018: Box7
     3300020: Box8
     3300022: Box9
+    3300024: Box12
+    3300026: Box13
+    3300028: Box14
     4300000: Box1
     4300002: Box2
     4300004: Box3
@@ -67,6 +79,9 @@ ModelImporter:
     4300018: Box9
     4300020: Box10
     4300022: Box11
+    4300024: Box12
+    4300026: Box13
+    4300028: Box14
     9500000: //RootNode
   materials:
     importMaterials: 1
