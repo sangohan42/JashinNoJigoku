@@ -51,8 +51,6 @@ public class CharacterControllerLogic : MonoBehaviour
 	private Vector3 cameraRotation;	// The camera rotation in normal mode
 	private Vector3 cameraPosition; // The camera position in normal mode
 	public float smooth = 1.5f;		// The relative speed at which the camera will catch up.
-	private float relCameraPosMag;		// The distance of the camera from the player.
-	private Vector3 newPos;				// The position the camera is trying to reach.
 
 	private Vector3 radarCameraRotation;
 	private Vector3 radarCameraPosition;
@@ -108,7 +106,8 @@ public class CharacterControllerLogic : MonoBehaviour
 	public float maxAngleInPanoramicView = 120;
 	private Vector3 camPanoramicPosition;
 	private Vector3 camPanoramicRotation;
-
+	private float currentModifToPanoramicRotVertical;
+	
 	private Vector3 camPositionWhenCloseToBorder;
 	private Vector3 camRotationWhenCloseToBorder;
 	private bool isPlayerCloseToBorder;
@@ -308,7 +307,6 @@ public class CharacterControllerLogic : MonoBehaviour
 
 		cameraRotation = gamecam.transform.eulerAngles;
 		cameraPosition = gamecam.transform.position - transform.position;
-		relCameraPosMag = cameraPosition.magnitude - 0.5f;
 
 		radarCameraRotation = radarCam.transform.eulerAngles;
 		radarCameraPosition = radarCam.transform.position - transform.position;
@@ -334,6 +332,7 @@ public class CharacterControllerLogic : MonoBehaviour
 		lookAroundPosLeft = CameraInLookingAroundPosLeft.localPosition;
 		lookAroundRotLeft = CameraInLookingAroundPosLeft.localEulerAngles;
 		lookAroundPosLeftCopy = lookAroundPosLeft;
+		currentModifToPanoramicRotVertical = 0;
 
 		inCoverMode = false;
 		inPositioningCoverModeCam = false;
@@ -492,16 +491,6 @@ public class CharacterControllerLogic : MonoBehaviour
 			}
 		}
 
-		//In PANORAMIC VIEW
-		else
-		{
-//			gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, camPanoramicPosition, smooth*Time.deltaTime);
-//			gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, camPanoramicRotation, smooth*Time.deltaTime);
-			gamecam.transform.localPosition = camPanoramicPosition;
-			gamecam.transform.localEulerAngles = camPanoramicRotation;
-
-		}
-
 //		else if(inLookAroundMode)
 //		{
 //			gamecam.transform.localPosition = lookAroundPos;
@@ -524,18 +513,22 @@ public class CharacterControllerLogic : MonoBehaviour
 		//Get Joystick Vector
 		joyX = uiJoystickScript.position.x;
 		joyY = uiJoystickScript.position.y;
+
 		if (Input.GetButtonDown("PanoramicView") && joyX == 0 && joyY == 0)
 		{
-			Debug.Log ("TOUCH");
+//			Debug.Log ("TOUCH");
 			if(!isInPanoramicView)
 			{
 				isInPanoramicView = true;
 				gamecam.transform.parent = transform;
+				gamecam.transform.localPosition = camPanoramicPosition;
+				gamecam.transform.localEulerAngles = camPanoramicRotation;
 			}
 			else 
 			{
 				isInPanoramicView = false;
 				gamecam.transform.parent = null;
+				currentModifToPanoramicRotVertical = 0;
 			}
 
 		}
@@ -863,10 +856,42 @@ public class CharacterControllerLogic : MonoBehaviour
 			}
 		}
 
+		//In Panoramic view
 		else
 		{
+			RotateInPanoramic(joyX, joyY);
 		}
 
+	}
+
+	void RotateInPanoramic(float horizontal, float vertical)
+	{
+		float nextValX = currentModifToPanoramicRotVertical + vertical;
+		Debug.Log ("nextValX = " + nextValX);
+
+		//VERTICAL MOVEMENT
+		if(Mathf.Abs(nextValX) <60)
+		{
+			currentModifToPanoramicRotVertical = nextValX; 
+			Vector3 copy = gamecam.transform.localEulerAngles;
+			copy.x -= vertical;
+			gamecam.transform.localEulerAngles = copy;
+
+//			gamecam.transform.localRotation = Quaternion.AngleAxis(vertical, -1*this.transform.right) * gamecam.transform.localRotation;
+		}
+
+		//HORIZONTAL MOVEMENT
+		transform.rotation = Quaternion.AngleAxis(1.5f*horizontal, Vector3.up) * transform.rotation;
+
+//		Vector3 copy = gamecam.transform.localEulerAngles;
+//		copy.z = 0;
+//		gamecam.transform.localEulerAngles = copy;
+
+//		// Create a rotation based on this new vector assuming that up is the global y axis.
+//		Quaternion targetRotation = Quaternion.AngleAxis(horizontal, Vector3.up);
+//
+//		// Change the players rotation to this new rotation.
+//		rigidbody.MoveRotation(rigidbody.rotation * targetRotation);
 	}
 
 	void Rotating (float horizontal, float vertical)

@@ -14,7 +14,6 @@ public class DoneEnemySight : MonoBehaviour
 	private NavMeshAgent nav;							// Reference to the NavMeshAgent component.
 	private SphereCollider col;							// Reference to the sphere collider trigger component.
 	private Animator anim;								// Reference to the Animator.
-	private DoneLastPlayerSighting lastPlayerSighting;	// Reference to last global sighting of the player.
     private GameObject player;							// Reference to the player.
 	private Animator playerAnim;						// Reference to the player's animator component.
 	private DonePlayerHealth playerHealth;				// Reference to the player's health script.
@@ -33,7 +32,6 @@ public class DoneEnemySight : MonoBehaviour
 		nav = GetComponent<NavMeshAgent>();
 		col = GetComponent<SphereCollider>();
 		anim = GetComponent<Animator>();
-		lastPlayerSighting = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneLastPlayerSighting>();
 		player = GameObject.FindGameObjectWithTag(DoneTags.player);
 		playerAnim = player.GetComponent<Animator>();
 		playerHealth = player.GetComponent<DonePlayerHealth>();
