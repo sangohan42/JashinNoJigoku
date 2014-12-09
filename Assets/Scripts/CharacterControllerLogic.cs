@@ -73,9 +73,12 @@ public class CharacterControllerLogic : MonoBehaviour
 	private Transform CameraInLookingAroundPosRight;
 	private Vector3 lookAroundPosRight;
 	private Vector3 lookAroundRotRight;
+	private Vector3 lookAroundPosRightCopy;
+
 	private Transform CameraInLookingAroundPosLeft;
 	private Vector3 lookAroundPosLeft;
 	private Vector3 lookAroundRotLeft;
+	private Vector3 lookAroundPosLeftCopy;
 
 	private Vector3 currentLookAroundPos;
 	private Vector3 currentLookAroundRot;
@@ -103,6 +106,8 @@ public class CharacterControllerLogic : MonoBehaviour
 	private bool isPursued;
 	private bool isInPanoramicView;
 	public float maxAngleInPanoramicView = 120;
+	private Vector3 camPanoramicPosition;
+	private Vector3 camPanoramicRotation;
 
 	private Vector3 camPositionWhenCloseToBorder;
 	private Vector3 camRotationWhenCloseToBorder;
@@ -110,7 +115,10 @@ public class CharacterControllerLogic : MonoBehaviour
 
 	public float levelMaxX = 15;
 	public float levelMinX = -40;
-	
+
+	private int buildingMask;
+	private int NPCMask;
+
 	
 	#endregion
 		
@@ -320,10 +328,12 @@ public class CharacterControllerLogic : MonoBehaviour
 		CameraInLookingAroundPosRight = GameObject.Find ("CameraInLookAroundRight").transform;
 		lookAroundPosRight = CameraInLookingAroundPosRight.localPosition;
 		lookAroundRotRight = CameraInLookingAroundPosRight.localEulerAngles;
+		lookAroundPosRightCopy = lookAroundPosRight;
 
 		CameraInLookingAroundPosLeft = GameObject.Find ("CameraInLookAroundLeft").transform;
 		lookAroundPosLeft = CameraInLookingAroundPosLeft.localPosition;
 		lookAroundRotLeft = CameraInLookingAroundPosLeft.localEulerAngles;
+		lookAroundPosLeftCopy = lookAroundPosLeft;
 
 		inCoverMode = false;
 		inPositioningCoverModeCam = false;
@@ -337,13 +347,54 @@ public class CharacterControllerLogic : MonoBehaviour
 		camSwitchDamp = 12f;
 		isPursued = false;
 		isInPanoramicView = false;
+		camPanoramicPosition = GameObject.Find ("CameraPanoramic").transform.position;
+		camPanoramicRotation = Vector3.zero;
 
 		camRotationWhenCloseToBorder = new Vector3 (32, 0, 0);
 
 		isPlayerCloseToBorder = false;
 
+		buildingMask = 11;
+
+		NPCMask = 1 << buildingMask;
+
 	}
 
+	private void CompensateForWalls(Vector3 fromObject, ref Vector3 toTarget)
+	{
+		Vector3 globalTargetPos = fromObject + Vector3.up + transform.forward *toTarget.z;
+		Debug.Log ("Global Target Pos = " + globalTargetPos);
+		// Compensate for walls between camera
+		RaycastHit wallHit = new RaycastHit();	
+//		Debug.DrawRay(fromObject + Vector3.up, globalTargetPos, Color.red);
+//		Debug.DrawRay(fromObject + Vector3.up, fromObject + Vector3.up + transform.forward, Color.cyan);
+//
+//		Debug.Break ();
+		if (Physics.Linecast(fromObject, globalTargetPos, out wallHit, NPCMask)) 
+		{
+//			Debug.Log("wallHit.point = " + wallHit.point);
+//			Debug.DrawRay(wallHit.point, wallHit.normal, Color.gray);
+			if(currentCoverState == CoverState.OnLeftFace || currentCoverState == CoverState.OnRightFace)
+			{
+				float modifValue = Mathf.Abs(wallHit.point.x - fromObject.x);
+				toTarget = new Vector3(toTarget.x, toTarget.y -0.5f, modifValue);
+				lookAroundPosRight.z = modifValue;
+				lookAroundPosLeft.z = modifValue;
+
+			}
+			else 
+			{
+				float modifValue = Mathf.Abs(wallHit.point.z - fromObject.z);
+				toTarget = new Vector3(toTarget.x, toTarget.y -0.5f, modifValue);
+				lookAroundPosRight.z = modifValue;
+				lookAroundPosLeft.z = modifValue;
+			}
+			lookAroundPosRight.y -= 0.5f;
+			lookAroundPosLeft.y -= 0.5f;
+			
+		}
+	}
+	
 	void LateUpdate()
 	{
 
@@ -358,6 +409,7 @@ public class CharacterControllerLogic : MonoBehaviour
 			//Reset Camera position and rotation if we are not in cover 
 			if(currentCoverState == CoverState.nil)
 			{
+				//If we have been in cover(the camera was attached to the player so we detach it
 				if(hasBeenInCover)gamecam.transform.parent = null;
 
 				// The position to reach
@@ -373,13 +425,16 @@ public class CharacterControllerLogic : MonoBehaviour
 
 					//Reset rotation
 					Vector3 rot = gamecam.transform.eulerAngles;
-					rot = cameraRotation; 
+					rot = cameraRotation;
+
 					if(!hasBeenInCover)
 					{
 						// Lerp the camera's position between it's current position and it's new position.
 						gamecam.transform.position = Vector3.Lerp(gamecam.transform.position, standardPos, smooth * Time.deltaTime);
 						gamecam.transform.eulerAngles = Vector3.Lerp(gamecam.transform.eulerAngles,rot, smooth * Time.deltaTime);
 					}
+
+					//The transition from cover to normal mode had to be abrupt
 					else 
 					{
 						gamecam.transform.position = standardPos;
@@ -440,6 +495,11 @@ public class CharacterControllerLogic : MonoBehaviour
 		//In PANORAMIC VIEW
 		else
 		{
+//			gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, camPanoramicPosition, smooth*Time.deltaTime);
+//			gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, camPanoramicRotation, smooth*Time.deltaTime);
+			gamecam.transform.localPosition = camPanoramicPosition;
+			gamecam.transform.localEulerAngles = camPanoramicRotation;
+
 		}
 
 //		else if(inLookAroundMode)
@@ -464,6 +524,21 @@ public class CharacterControllerLogic : MonoBehaviour
 		//Get Joystick Vector
 		joyX = uiJoystickScript.position.x;
 		joyY = uiJoystickScript.position.y;
+		if (Input.GetButtonDown("PanoramicView") && joyX == 0 && joyY == 0)
+		{
+			Debug.Log ("TOUCH");
+			if(!isInPanoramicView)
+			{
+				isInPanoramicView = true;
+				gamecam.transform.parent = transform;
+			}
+			else 
+			{
+				isInPanoramicView = false;
+				gamecam.transform.parent = null;
+			}
+
+		}
 
 		if(!isInPanoramicView)
 		{
@@ -482,20 +557,14 @@ public class CharacterControllerLogic : MonoBehaviour
 				float angleRootToMove = Vector3.Angle(transform.forward, stickDirection) * (axisSign.y < 0 ? -1f : 1f);
 				
 				charSpeed = stickDirection.magnitude;
-
 				direction = angleRootToMove * directionSpeed / 180f;
-				
 				charAngle = angleRootToMove;
 
-
-	//			Debug.Log ("Speed = " + speed);
-				// Press B to sprint
 				if (charSpeed>=1f)
 				{
 					speed = Mathf.Lerp(speed, SPRINT_SPEED, Time.deltaTime);
 				}
 				else speed = charSpeed;
-
 
 				animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
 				animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
@@ -511,7 +580,6 @@ public class CharacterControllerLogic : MonoBehaviour
 					animator.SetFloat(hashIdsScript.angle, 0f);
 				}
 
-				animator.SetBool(hashIdsScript.sneakingBool, Input.GetButton("Sneak"));
 			}
 
 			//IN COVER
@@ -542,6 +610,10 @@ public class CharacterControllerLogic : MonoBehaviour
 					transform.position = positionToPlaceTo;
 					playerPlaced = true;
 
+					//We verify that the coverPos is OK or if there is a wall between the player and the camera
+					//If there is a wall we change the coverPos as well as the lookingAroundPos
+					CompensateForWalls(transform.position, ref coverPos);
+
 				}
 				//We place the camera to the right position
 				else if(gamecam.transform.localPosition != coverPos && !inLookAroundMode)
@@ -562,15 +634,11 @@ public class CharacterControllerLogic : MonoBehaviour
 						transform.eulerAngles = new Vector3(0,90,0);
 						break;
 					}				
-					//transform.position = positionToPlaceTo;
-	//				Debug.Log ("coverPos = " + coverPos);
-	//				Debug.Log ("coverRot = " + coverRot);
+
 					transform.position = positionToPlaceTo;
 					gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, 15*Time.deltaTime);
 					gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, 15*Time.deltaTime);
-
 				}
-
 				else
 				{
 					inCoverMode = true;
@@ -650,7 +718,9 @@ public class CharacterControllerLogic : MonoBehaviour
 
 								coverPos = coverPosCopy;
 								coverRot = coverRotCopy;
-							 	currentModifToCoverPos = 0;
+								lookAroundPosRight = lookAroundPosRightCopy;
+								lookAroundPosLeft = lookAroundPosLeftCopy;
+								currentModifToCoverPos = 0;
 							}
 							break;
 
@@ -712,6 +782,8 @@ public class CharacterControllerLogic : MonoBehaviour
 
 								coverPos = coverPosCopy;
 								coverRot = coverRotCopy;
+								lookAroundPosRight = lookAroundPosRightCopy;
+								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
 							}
 							break;
@@ -774,6 +846,8 @@ public class CharacterControllerLogic : MonoBehaviour
 
 								coverPos = coverPosCopy;
 								coverRot = coverRotCopy;
+								lookAroundPosRight = lookAroundPosRightCopy;
+								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
 							}
 							break;

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class switchCamSystem : MonoBehaviour {
 
-	public Transform previousTransform;
+	private Transform previousTransform;
 	private Vector3 previousZoneCamPos;
 	private Vector3 previousZoneCamRot;
 
@@ -18,6 +18,7 @@ public class switchCamSystem : MonoBehaviour {
 	void Start () {
 		characterLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
 
+		previousTransform = GameObject.FindGameObjectWithTag (DoneTags.camera).transform;
 		previousZoneCamPos = previousTransform.position;
 		previousZoneCamRot = previousTransform.eulerAngles;
 
