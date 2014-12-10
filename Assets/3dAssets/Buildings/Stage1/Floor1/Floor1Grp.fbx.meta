@@ -160,6 +160,21 @@ ModelImporter:
     100308: Container__8
     100310: Container__9
     100312: Wall4
+    100314: WoodenBox1
+    100316: WoodenBox10
+    100318: WoodenBox11
+    100320: WoodenBox12
+    100322: WoodenBox13
+    100324: WoodenBox14
+    100326: WoodenBox15
+    100328: WoodenBox2
+    100330: WoodenBox3
+    100332: WoodenBox4
+    100334: WoodenBox5
+    100336: WoodenBox6
+    100338: WoodenBox7
+    100340: WoodenBox8
+    100342: WoodenBox9
     400000: Box1
     400002: Box10
     400004: Box11
@@ -317,6 +332,21 @@ ModelImporter:
     400308: Container__8
     400310: Container__9
     400312: Wall4
+    400314: WoodenBox1
+    400316: WoodenBox10
+    400318: WoodenBox11
+    400320: WoodenBox12
+    400322: WoodenBox13
+    400324: WoodenBox14
+    400326: WoodenBox15
+    400328: WoodenBox2
+    400330: WoodenBox3
+    400332: WoodenBox4
+    400334: WoodenBox5
+    400336: WoodenBox6
+    400338: WoodenBox7
+    400340: WoodenBox8
+    400342: WoodenBox9
     2300000: Box1
     2300002: Box10
     2300004: Box11
@@ -400,6 +430,21 @@ ModelImporter:
     2300160: Container__8
     2300162: Container__9
     2300164: Wall4
+    2300166: WoodenBox1
+    2300168: WoodenBox10
+    2300170: WoodenBox11
+    2300172: WoodenBox12
+    2300174: WoodenBox13
+    2300176: WoodenBox14
+    2300178: WoodenBox15
+    2300180: WoodenBox2
+    2300182: WoodenBox3
+    2300184: WoodenBox4
+    2300186: WoodenBox5
+    2300188: WoodenBox6
+    2300190: WoodenBox7
+    2300192: WoodenBox8
+    2300194: WoodenBox9
     3300000: Box1
     3300002: Box10
     3300004: Box11
@@ -483,6 +528,21 @@ ModelImporter:
     3300160: Container__8
     3300162: Container__9
     3300164: Wall4
+    3300166: WoodenBox1
+    3300168: WoodenBox10
+    3300170: WoodenBox11
+    3300172: WoodenBox12
+    3300174: WoodenBox13
+    3300176: WoodenBox14
+    3300178: WoodenBox15
+    3300180: WoodenBox2
+    3300182: WoodenBox3
+    3300184: WoodenBox4
+    3300186: WoodenBox5
+    3300188: WoodenBox6
+    3300190: WoodenBox7
+    3300192: WoodenBox8
+    3300194: WoodenBox9
     4300000: Container1
     4300002: Container2
     4300004: Container3
@@ -566,9 +626,24 @@ ModelImporter:
     4300160: Container__29
     4300162: Container__30
     4300164: Wall4
+    4300166: WoodenBox1
+    4300168: WoodenBox2
+    4300170: WoodenBox3
+    4300172: WoodenBox4
+    4300174: WoodenBox5
+    4300176: WoodenBox6
+    4300178: WoodenBox7
+    4300180: WoodenBox8
+    4300182: WoodenBox9
+    4300184: WoodenBox10
+    4300186: WoodenBox11
+    4300188: WoodenBox12
+    4300190: WoodenBox13
+    4300192: WoodenBox14
+    4300194: WoodenBox15
     9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
