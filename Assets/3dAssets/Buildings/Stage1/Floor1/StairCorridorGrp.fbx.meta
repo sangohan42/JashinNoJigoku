@@ -118,6 +118,42 @@ ModelImporter:
     100224: transform7
     100226: transform8
     100228: transform9
+    100230: ColumnGrp
+    100232: HashiraGrp1
+    100234: RailGrp
+    100236: SideLplate
+    100238: SidePlateGrp
+    100240: SideRplate
+    100242: transform107
+    100244: transform108
+    100246: transform109
+    100248: transform110
+    100250: transform111
+    100252: transform112
+    100254: transform113
+    100256: transform114
+    100258: transform115
+    100260: transform116
+    100262: transform117
+    100264: transform118
+    100266: transform119
+    100268: transform120
+    100270: transform121
+    100272: transform122
+    100274: transform123
+    100276: transform124
+    100278: transform125
+    100280: transform126
+    100282: transform127
+    100284: transform128
+    100286: transform129
+    100288: transform130
+    100290: transform131
+    100292: transform132
+    100294: transform138
+    100296: transform139
+    100298: transform140
+    100300: transform141
     400000: Corridor
     400002: polySurface1
     400004: polySurface2
@@ -233,6 +269,42 @@ ModelImporter:
     400224: transform7
     400226: transform8
     400228: transform9
+    400230: ColumnGrp
+    400232: HashiraGrp1
+    400234: RailGrp
+    400236: SideLplate
+    400238: SidePlateGrp
+    400240: SideRplate
+    400242: transform107
+    400244: transform108
+    400246: transform109
+    400248: transform110
+    400250: transform111
+    400252: transform112
+    400254: transform113
+    400256: transform114
+    400258: transform115
+    400260: transform116
+    400262: transform117
+    400264: transform118
+    400266: transform119
+    400268: transform120
+    400270: transform121
+    400272: transform122
+    400274: transform123
+    400276: transform124
+    400278: transform125
+    400280: transform126
+    400282: transform127
+    400284: transform128
+    400286: transform129
+    400288: transform130
+    400290: transform131
+    400292: transform132
+    400294: transform138
+    400296: transform139
+    400298: transform140
+    400300: transform141
     2300000: Corridor
     2300002: polySurface1
     2300004: polySurface2
@@ -316,6 +388,8 @@ ModelImporter:
     2300160: StairNum__7
     2300162: StairNum__8
     2300164: StairNum__9
+    2300166: SideLplate
+    2300168: SideRplate
     3300000: Corridor
     3300002: polySurface1
     3300004: polySurface2
@@ -399,6 +473,8 @@ ModelImporter:
     3300160: StairNum__7
     3300162: StairNum__8
     3300164: StairNum__9
+    3300166: SideLplate
+    3300168: SideRplate
     4300000: Corridor
     4300002: StairGrp1:pCube20
     4300004: StairGrp1:pCube21
@@ -482,6 +558,8 @@ ModelImporter:
     4300160: StairGrp1:pCube24
     4300162: StairGrp1:pCube26
     4300164: StairGrp1:pCube27
+    4300166: SideRplate
+    4300168: SideLplate
     9500000: //RootNode
   materials:
     importMaterials: 1
