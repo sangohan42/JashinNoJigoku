@@ -8,7 +8,7 @@ public class testCollisionWall : MonoBehaviour {
 	private GameObject player;
 	private CharacterControllerLogic characterControllerLogicScript;
 	private GameObject gameCam;
-
+	private CapsuleCollider caps;
 	public bool isAWall = true;
 
 	void Awake()
@@ -18,7 +18,7 @@ public class testCollisionWall : MonoBehaviour {
 		playerAnimator = player.GetComponent<Animator> ();
 		gameCam = GameObject.FindGameObjectWithTag (DoneTags.camera);
 		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
-
+		caps = player.GetComponent<CapsuleCollider> ();
 	}
 	
 	void OnCollisionEnter(Collision collision) {
@@ -82,6 +82,8 @@ public class testCollisionWall : MonoBehaviour {
 						{
 							playerAnimator.SetBool(hash.crouchCoverBool, true);
 							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, player.transform.position.y, contact.point.z -0.41f);
+							caps.center = new Vector3(0,0.5f,0);
+							caps.height = 0.9f;
 						}
 						//characterControllerLogicScript.VecToAlignTo = -1*contact.normal;
 						characterControllerLogicScript.BoundingBoxMinX = collider.bounds.min.x + 0.15f;
@@ -112,6 +114,8 @@ public class testCollisionWall : MonoBehaviour {
 						{
 							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x - 0.41f, player.transform.position.y, contact.point.z);
 							playerAnimator.SetBool(hash.crouchCoverBool, true);
+							caps.center = new Vector3(0,0.5f,0);
+							caps.height = 0.9f;
 						}
 
 						//characterControllerLogicScript.VecToAlignTo = -1*contact.normal;
@@ -136,6 +140,8 @@ public class testCollisionWall : MonoBehaviour {
 						{
 							playerAnimator.SetBool(hash.crouchCoverBool, true);
 							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x + 0.41f, player.transform.position.y, contact.point.z);
+							caps.center = new Vector3(0,0.5f,0);
+							caps.height = 0.9f;
 						}
 
 						//characterControllerLogicScript.VecToAlignTo = -1*contact.normal;

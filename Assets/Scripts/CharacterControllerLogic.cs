@@ -362,7 +362,7 @@ public class CharacterControllerLogic : MonoBehaviour
 	private void CompensateForWalls(Vector3 fromObject, ref Vector3 toTarget)
 	{
 		Vector3 globalTargetPos = fromObject + Vector3.up + transform.forward *toTarget.z;
-		Debug.Log ("Global Target Pos = " + globalTargetPos);
+//		Debug.Log ("Global Target Pos = " + globalTargetPos);
 		// Compensate for walls between camera
 		RaycastHit wallHit = new RaycastHit();	
 //		Debug.DrawRay(fromObject + Vector3.up, globalTargetPos, Color.red);
@@ -553,11 +553,13 @@ public class CharacterControllerLogic : MonoBehaviour
 				direction = angleRootToMove * directionSpeed / 180f;
 				charAngle = angleRootToMove;
 
-				if (charSpeed>=1f)
-				{
-					speed = Mathf.Lerp(speed, SPRINT_SPEED, Time.deltaTime);
-				}
-				else speed = charSpeed;
+//				if (charSpeed>=1f)
+//				{
+//					speed = Mathf.Lerp(speed, SPRINT_SPEED, Time.deltaTime);
+//				}
+//				else speed = charSpeed;
+
+				speed = charSpeed;
 
 				animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
 				animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
@@ -714,6 +716,8 @@ public class CharacterControllerLogic : MonoBehaviour
 								lookAroundPosRight = lookAroundPosRightCopy;
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
+								caps.center = new Vector3(0,1.03f,0);
+								caps.height = 2.07f;
 							}
 							break;
 
@@ -778,6 +782,8 @@ public class CharacterControllerLogic : MonoBehaviour
 								lookAroundPosRight = lookAroundPosRightCopy;
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
+								caps.center = new Vector3(0,1.03f,0);
+								caps.height = 2.07f;
 							}
 							break;
 
@@ -842,6 +848,8 @@ public class CharacterControllerLogic : MonoBehaviour
 								lookAroundPosRight = lookAroundPosRightCopy;
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
+								caps.center = new Vector3(0,1.03f,0);
+								caps.height = 2.07f;
 							}
 							break;
 
