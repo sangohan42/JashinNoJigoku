@@ -97,7 +97,7 @@ public class DoneEnemyAI : MonoBehaviour
 			// If near the last personal sighting...
 			if(nav.remainingDistance < nav.stoppingDistance)
 			{
-				Debug.Log ("Increment timer");
+//				Debug.Log ("Increment timer");
 				// ... increment the timer.
 				chaseTimer += Time.deltaTime;
 				

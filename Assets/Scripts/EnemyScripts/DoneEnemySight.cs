@@ -23,6 +23,7 @@ public class DoneEnemySight : MonoBehaviour
 	public GameObject FOV;
 	private bool resetFOVColor;
 	private CharacterControllerLogic characterControllerLogicScript;
+	private CapsuleCollider caps;
 
 	public Texture FOV1;
 	public Texture FOV2;
@@ -48,6 +49,7 @@ public class DoneEnemySight : MonoBehaviour
 		interrogativePointObject = transform.Find ("InterrogativePoint").gameObject;
 		interrogativePoint = interrogativePointObject.GetComponent<ParticleSystem>();
 		interrogativePointObject.SetActive (false);
+		caps = player.GetComponent<CapsuleCollider> ();
 
 		resetFOVColor = true;
 	}
@@ -135,15 +137,16 @@ public class DoneEnemySight : MonoBehaviour
 
 			// Create a vector from the enemy to the player and store the angle between it and forward.
             Vector3 direction = other.transform.position - transform.position;
+
 			float angle = Vector3.Angle(direction, transform.forward);
 			
 			// If the angle between forward and where the player is, is less than half the angle of view...
 			if(angle < fieldOfViewAngle * 0.5f)
 			{
 				RaycastHit hit;
-				
+//				Debug.DrawLine(transform.position + caps.center.y*transform.up, transform.position + caps.center.y*transform.up + direction.normalized, Color.cyan);
 				// ... and if a raycast towards the player hits something...
-				if(Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, col.radius))
+				if(Physics.Raycast(transform.position + caps.center.y*transform.up, direction.normalized, out hit, col.radius))
 				{
 //					Debug.DrawLine(hit.point, hit.point + hit.normal, Color.green, 2, false);
 					// ... and if the raycast hits the player...

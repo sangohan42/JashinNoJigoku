@@ -19,7 +19,7 @@ public class DoneEnemyShooting : MonoBehaviour
 	private DonePlayerHealth playerHealth;				// Reference to the player's health.
 	private bool shooting;								// A bool to say whether or not the enemy is currently shooting.
 	private float scaledDamage;							// Amount of damage that is scaled by the distance from the player.
-	
+	private CapsuleCollider caps;
 	
 	void Awake ()
 	{
@@ -38,6 +38,8 @@ public class DoneEnemyShooting : MonoBehaviour
 		
 		// The scaledDamage is the difference between the maximum and the minimum damage.
 		scaledDamage = maximumDamage - minimumDamage;
+
+		caps = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CapsuleCollider> ();
 	}
 	
 	
@@ -70,11 +72,11 @@ public class DoneEnemyShooting : MonoBehaviour
 		float aimWeight = anim.GetFloat(hash.aimWeightFloat);
 		
 		// Set the IK position of the right hand to the player's centre.
-		anim.SetIKPosition(AvatarIKGoal.RightHand, player.position + Vector3.up * 1.5f);
+		anim.SetIKPosition(AvatarIKGoal.RightHand, player.position + Vector3.up * caps.center.y);
 		
 		// Set the weight of the IK compared to animation to that of the curve.
 		anim.SetIKPositionWeight(AvatarIKGoal.RightHand, aimWeight);
-	}
+	}	
 	
 	
 	void Shoot ()
@@ -104,7 +106,7 @@ public class DoneEnemyShooting : MonoBehaviour
 		laserShotLine.SetPosition(0, laserShotLine.transform.position);
 		
 		// Set the end position of the player's centre of mass.
-		laserShotLine.SetPosition(1, player.position + Vector3.up * 1.5f);
+		laserShotLine.SetPosition(1, player.position + Vector3.up * caps.center.y);
 
 		laserShotLine.SetWidth (0.1f, 0.1f);
 		// Turn on the line renderer.
