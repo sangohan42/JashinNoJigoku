@@ -462,7 +462,8 @@ public class CharacterControllerLogic : MonoBehaviour
 				hasBeenInCover = false;
 
 				//If we still are in idle (not in pivot, not in locomotion, not in Sneak)
-				if(stateInfo.nameHash == hashIdsScript.m_IdleState || stateInfo.nameHash == hashIdsScript.m_sneakingState)
+				if(stateInfo.nameHash == hashIdsScript.m_IdleState || stateInfo.nameHash == hashIdsScript.m_sneakingState 
+				   || stateInfo.nameHash == hashIdsScript.m_LocomotionIdState)
 				{
 					// If there is some axis input...
 					if(joyX != 0f || joyY != 0f)
