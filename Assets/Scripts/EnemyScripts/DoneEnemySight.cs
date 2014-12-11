@@ -27,6 +27,7 @@ public class DoneEnemySight : MonoBehaviour
 
 	public Texture FOV1;
 	public Texture FOV2;
+	public Texture FOV3;
 
 	void Awake ()
 	{
@@ -72,6 +73,7 @@ public class DoneEnemySight : MonoBehaviour
 			//Display or undisplay the interrogation point
 			if(youJinLayerTransition == hash.Empty_YoujinModeTrans && interrogativePointObject.activeSelf == false)
 			{
+				FOV.renderer.material.SetTexture("_MainTex", FOV3);
 				interrogativePointObject.SetActive(true);
 				interrogativePoint.Play();
 				anim.SetBool(hash.inYoujinBool, true);
@@ -139,18 +141,21 @@ public class DoneEnemySight : MonoBehaviour
             Vector3 direction = other.transform.position - transform.position;
 
 			float angle = Vector3.Angle(direction, transform.forward);
-			
-			// If the angle between forward and where the player is, is less than half the angle of view...
-			if(angle < fieldOfViewAngle * 0.5f)
-			{
-				RaycastHit hit;
+
+			// Store the name hashes of the current states.
+			int playerLayerZeroStateHash = playerAnim.GetCurrentAnimatorStateInfo(0).nameHash;
+
+			RaycastHit hit;
 //				Debug.DrawLine(transform.position + caps.center.y*transform.up, transform.position + caps.center.y*transform.up + direction.normalized, Color.cyan);
-				// ... and if a raycast towards the player hits something...
-				if(Physics.Raycast(transform.position + caps.center.y*transform.up, direction.normalized, out hit, col.radius))
+			// ... and if a raycast towards the player hits something...
+			if(Physics.Raycast(transform.position + caps.center.y*transform.up, direction.normalized, out hit, col.radius))
+			{
+
+				// ... and if the raycast hits the player...
+				if(hit.collider.gameObject == player)
 				{
-//					Debug.DrawLine(hit.point, hit.point + hit.normal, Color.green, 2, false);
-					// ... and if the raycast hits the player...
-					if(hit.collider.gameObject == player)
+					// If the angle between forward and where the player is, is less than half the angle of view...
+					if(angle < fieldOfViewAngle * 0.5f)
 					{
 						// ... the player is in sight.
 						personalLastSighting = player.transform.position;
@@ -158,25 +163,19 @@ public class DoneEnemySight : MonoBehaviour
 						inPursuit = true;
 						inPatrol = false;
 						anim.SetLayerWeight(3,0);
+					}
 
-//						Debug.Log ("Player in sight");
-
+					// If the player is walking, running
+					else if(playerLayerZeroStateHash == hash.m_LocomotionIdState)
+					{
+						// ... set the last personal sighting of the player to the player's current position.
+						personalLastSighting = player.transform.position;
+						inPatrol = false;
+						
 					}
 				}
 			}
-			
-			// Store the name hashes of the current states.
-			int playerLayerZeroStateHash = playerAnim.GetCurrentAnimatorStateInfo(0).nameHash;
 
-			// If the player is walking, running
-			if(playerLayerZeroStateHash == hash.m_LocomotionIdState)
-			{
-				// ... set the last personal sighting of the player to the player's current position.
-				personalLastSighting = player.transform.position;
-				inPatrol = false;
-
-//					Debug.Log ("Player in Sphere Collider");
-			}
         }
     }
 	

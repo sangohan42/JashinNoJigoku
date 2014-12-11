@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: _Metal_Rough_2
-  m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: KeyMat
+  m_Shader: {fileID: 4800000, guid: 63d9c6e584460463c9c5f9efbdaf55ca, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -20,9 +20,17 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    m_Floats:
+      data:
+        first:
+          name: _Outline
+        second: .00803571381
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: .600000024, g: .615686297, b: .627451003, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _OutlineColor
+        second: {r: 1, g: 0, b: 0, a: 1}

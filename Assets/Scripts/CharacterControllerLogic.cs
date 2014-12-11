@@ -542,29 +542,24 @@ public class CharacterControllerLogic : MonoBehaviour
 				camSwitchDamp = 12f;
 
 				Vector3 stickDirection = new Vector3 (joyX, 0, joyY);
-				Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
-				
-				float angleRootToMove = Vector3.Angle(transform.forward, stickDirection) * (axisSign.y < 0 ? -1f : 1f);
-				
+//				Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
+//				
+//				float angleRootToMove = Vector3.Angle(transform.forward, stickDirection) * (axisSign.y < 0 ? -1f : 1f);
+//				
 				charSpeed = stickDirection.magnitude;
-				direction = angleRootToMove * directionSpeed / 180f;
-				charAngle = angleRootToMove;
-
-//				if (charSpeed>=1f)
-//				{
-//					speed = Mathf.Lerp(speed, SPRINT_SPEED, Time.deltaTime);
-//				}
-//				else speed = charSpeed;
+//				direction = angleRootToMove * directionSpeed / 180f;
+//				charAngle = angleRootToMove;
 
 				speed = charSpeed;
 
 				animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
-				animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
-				
-				if (speed > LocomotionThreshold)	// Dead zone
-				{
-					Animator.SetFloat(hashIdsScript.angle, charAngle);
-				}
+
+//				animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
+//				
+//				if (speed > LocomotionThreshold)	// Dead zone
+//				{
+//					Animator.SetFloat(hashIdsScript.angle, charAngle);
+//				}
 
 				if (speed < LocomotionThreshold && Mathf.Abs(joyX) < 0.05f)    // Dead zone
 				{
@@ -586,20 +581,6 @@ public class CharacterControllerLogic : MonoBehaviour
 					animator.SetFloat(hashIdsScript.speedFloat, 0);
 					animator.SetFloat(hashIdsScript.direction, 0);
 
-//					switch(currentCoverState)
-//					{
-//					case CoverState.onDownFace:
-//
-//						transform.eulerAngles = new Vector3(0,180,0);
-//						break;
-//					case CoverState.OnLeftFace:
-//						transform.eulerAngles = new Vector3(0,-90,0);
-//						break;
-//					case CoverState.OnRightFace:
-//						transform.eulerAngles = new Vector3(0,90,0);
-//						break;
-//					}
-
 					transform.forward = vecToAlignTo;
 					transform.position = positionToPlaceTo;
 					playerPlaced = true;
@@ -616,18 +597,6 @@ public class CharacterControllerLogic : MonoBehaviour
 					animator.SetFloat(hashIdsScript.direction, 0);
 
 					inPositioningCoverModeCam = true;
-//					switch(currentCoverState)
-//					{
-//					case CoverState.onDownFace:
-//						transform.eulerAngles = new Vector3(0,180,0);
-//						break;
-//					case CoverState.OnLeftFace:
-//						transform.eulerAngles = new Vector3(0,-90,0);
-//						break;
-//					case CoverState.OnRightFace:
-//						transform.eulerAngles = new Vector3(0,90,0);
-//						break;
-//					}		
 
 					transform.forward = vecToAlignTo;
 					transform.position = positionToPlaceTo;
@@ -639,11 +608,11 @@ public class CharacterControllerLogic : MonoBehaviour
 					inCoverMode = true;
 					inPositioningCoverModeCam = false;
 					transform.forward = vecToAlignTo;
-					transform.position = positionToPlaceTo;
+//					transform.position = positionToPlaceTo;
 					if(inLookAroundMode)
 					{
-						gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, currentLookAroundPos, 6f*Time.deltaTime);
-						gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, currentLookAroundRot, 6f*Time.deltaTime);
+						gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, currentLookAroundPos, 7f*Time.deltaTime);
+						gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, currentLookAroundRot, 7f*Time.deltaTime);
 					}
 
 					Vector3 stickDirection = new Vector3 (joyX, 0, joyY).normalized;
@@ -674,6 +643,7 @@ public class CharacterControllerLogic : MonoBehaviour
 
 									if(direction <0 && !inLookAroundMode)
 									{
+										positionToPlaceTo = transform.position;
 										currentLookAroundPos = lookAroundPosLeft;
 										currentLookAroundRot = lookAroundRotLeft;
 										inLookAroundMode = true;
@@ -688,9 +658,12 @@ public class CharacterControllerLogic : MonoBehaviour
 											inCoverMode = false;
 											camSwitchDamp = 7f;
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
+											transform.position = positionToPlaceTo;
 											inLookAroundMode = false;
 										}
-										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+//										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+									rigidbody.MovePosition(rigidbody.position-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+
 									}
 								}
 								else if(transform.position.x >= boundingBoxMaxX)
@@ -701,6 +674,8 @@ public class CharacterControllerLogic : MonoBehaviour
 
 									if(direction >0 && !inLookAroundMode)
 									{
+										positionToPlaceTo = transform.position;
+
 										currentLookAroundPos = lookAroundPosRight;
 										currentLookAroundRot = lookAroundRotRight;
 										inLookAroundMode = true;
@@ -715,16 +690,20 @@ public class CharacterControllerLogic : MonoBehaviour
 											inCoverMode = false;
 											camSwitchDamp = 7f;
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
+											transform.position = positionToPlaceTo;
+
 											inLookAroundMode = false;
 										}
-										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+//										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+									rigidbody.MovePosition(rigidbody.position-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+
 									}
 
 								}
 								else 
 								{
-									transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
-
+//									transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+									rigidbody.MovePosition(rigidbody.position-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									if(inLookAroundMode)
 									{
 										inCoverMode = false;
@@ -769,6 +748,7 @@ public class CharacterControllerLogic : MonoBehaviour
 
 									if(direction >0 && !inLookAroundMode)
 									{
+										positionToPlaceTo = transform.position;
 										currentLookAroundPos = lookAroundPosRight;
 										currentLookAroundRot = lookAroundRotRight;
 										inLookAroundMode = true;
@@ -783,9 +763,12 @@ public class CharacterControllerLogic : MonoBehaviour
 											inCoverMode = false;
 											camSwitchDamp = 7f;
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
+											transform.position = positionToPlaceTo;
+
 											inLookAroundMode = false;
 										}
-										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+//										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+										rigidbody.MovePosition(-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									}
 								}
 								else if(transform.position.z >= boundingBoxMaxZ)
@@ -796,6 +779,8 @@ public class CharacterControllerLogic : MonoBehaviour
 
 									if(direction <0 && !inLookAroundMode)
 									{
+										positionToPlaceTo = transform.position;
+
 										currentLookAroundPos = lookAroundPosLeft;
 										currentLookAroundRot = lookAroundRotLeft;
 										inLookAroundMode = true;
@@ -810,15 +795,18 @@ public class CharacterControllerLogic : MonoBehaviour
 											inCoverMode = false;
 											camSwitchDamp = 7f;
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
+											transform.position = positionToPlaceTo;
+
 											inLookAroundMode = false;
 										}
-										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+//										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+										rigidbody.MovePosition(-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									}
 								}
 								else 
 								{
-									transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
-
+//									transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+									rigidbody.MovePosition(-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									if(inLookAroundMode)
 									{
 										inCoverMode = false;
@@ -880,7 +868,8 @@ public class CharacterControllerLogic : MonoBehaviour
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
 											inLookAroundMode = false;
 										}
-										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+//										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+										rigidbody.MovePosition(-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									}
 								}
 								else if(transform.position.z >= boundingBoxMaxZ)
@@ -907,13 +896,14 @@ public class CharacterControllerLogic : MonoBehaviour
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
 											inLookAroundMode = false;
 										}
-										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+//										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+										rigidbody.MovePosition(-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									}
 								}
 								else 
 								{
-									transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
-
+//									transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+									rigidbody.MovePosition(-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									if(inLookAroundMode)
 									{
 										inCoverMode = false;
@@ -944,7 +934,7 @@ public class CharacterControllerLogic : MonoBehaviour
 						default:
 							break;
 					}
-					positionToPlaceTo = transform.position;
+//					positionToPlaceTo = transform.position;
 
 					animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
 					animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
@@ -959,7 +949,7 @@ public class CharacterControllerLogic : MonoBehaviour
 		}
 
 	}
-
+	
 	void RotateInPanoramic(float horizontal, float vertical)
 	{
 		float nextValX = currentModifToPanoramicRotVertical + vertical;
@@ -998,15 +988,14 @@ public class CharacterControllerLogic : MonoBehaviour
 	/// Any code that moves the character needs to be checked against physics
 	void FixedUpdate()
 	{							
-		// Rotate character model if stick is tilted right or left, but only if character is moving in that direction
-		if (IsInLocomotion()&& ((direction >= 0 && joyX >= 0) || (direction < 0 && joyX < 0)))
-		{
-//			Debug.Log ("HERE");
-			Vector3 rotationAmount = Vector3.Lerp(Vector3.zero, new Vector3(0f, rotationDegreePerSecond * (joyX < 0f ? -1f : 1f), 0f), Mathf.Abs(joyX));
-			Quaternion deltaRotation = Quaternion.Euler(rotationAmount * Time.deltaTime);
-        	this.transform.rotation = (this.transform.rotation * deltaRotation);
-		}		
-
+//		// Rotate character model if stick is tilted right or left, but only if character is moving in that direction
+//		if (IsInLocomotion()&& ((direction >= 0 && joyX >= 0) || (direction < 0 && joyX < 0)))
+//		{
+////			Debug.Log ("HERE");
+//			Vector3 rotationAmount = Vector3.Lerp(Vector3.zero, new Vector3(0f, rotationDegreePerSecond * (joyX < 0f ? -1f : 1f), 0f), Mathf.Abs(joyX));
+//			Quaternion deltaRotation = Quaternion.Euler(rotationAmount * Time.deltaTime);
+//        	this.transform.rotation = (this.transform.rotation * deltaRotation);
+//		}		
 
 		AudioManagement ();
 	}
