@@ -1,0 +1,122 @@
+fileFormatVersion: 2
+guid: 96d1ca225bd604283b4fbd1bab516441
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: ColliderPipeBassCornerL_1
+    100004: ColliderPipeBassR_1
+    100006: ColliderPipeBatchR1
+    100008: ColliderPipeBendL_2
+    100010: ColliderPipeBendL_3
+    100012: ColliderPipeLongBendR_2
+    100014: ColliderPipeLongBendR_3
+    100016: ColliderPipeLongBendR_4
+    100018: ColliderStairCollumL_1
+    100020: ColliderStairCollumR_1
+    100022: ColliderStairSideplateL_1
+    100024: ColliderStairSideplateR
+    400000: //RootNode
+    400002: ColliderPipeBassCornerL_1
+    400004: ColliderPipeBassR_1
+    400006: ColliderPipeBatchR1
+    400008: ColliderPipeBendL_2
+    400010: ColliderPipeBendL_3
+    400012: ColliderPipeLongBendR_2
+    400014: ColliderPipeLongBendR_3
+    400016: ColliderPipeLongBendR_4
+    400018: ColliderStairCollumL_1
+    400020: ColliderStairCollumR_1
+    400022: ColliderStairSideplateL_1
+    400024: ColliderStairSideplateR
+    2300000: ColliderPipeBassCornerL_1
+    2300002: ColliderPipeBassR_1
+    2300004: ColliderPipeBatchR1
+    2300006: ColliderPipeBendL_2
+    2300008: ColliderPipeBendL_3
+    2300010: ColliderPipeLongBendR_2
+    2300012: ColliderPipeLongBendR_3
+    2300014: ColliderPipeLongBendR_4
+    2300016: ColliderStairCollumL_1
+    2300018: ColliderStairCollumR_1
+    2300020: ColliderStairSideplateL_1
+    2300022: ColliderStairSideplateR
+    3300000: ColliderPipeBassCornerL_1
+    3300002: ColliderPipeBassR_1
+    3300004: ColliderPipeBatchR1
+    3300006: ColliderPipeBendL_2
+    3300008: ColliderPipeBendL_3
+    3300010: ColliderPipeLongBendR_2
+    3300012: ColliderPipeLongBendR_3
+    3300014: ColliderPipeLongBendR_4
+    3300016: ColliderStairCollumL_1
+    3300018: ColliderStairCollumR_1
+    3300020: ColliderStairSideplateL_1
+    3300022: ColliderStairSideplateR
+    4300000: ColliderPipeBassR_1
+    4300002: ColliderPipeLongBendR_2
+    4300004: ColliderPipeLongBendR_3
+    4300006: ColliderPipeLongBendR_4
+    4300008: ColliderPipeBatchR1
+    4300010: ColliderPipeBendL_2
+    4300012: ColliderPipeBendL_3
+    4300014: ColliderPipeBassCornerL_1
+    4300016: ColliderStairSideplateR
+    4300018: ColliderStairSideplateL_1
+    4300020: ColliderStairCollumR_1
+    4300022: ColliderStairCollumL_1
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

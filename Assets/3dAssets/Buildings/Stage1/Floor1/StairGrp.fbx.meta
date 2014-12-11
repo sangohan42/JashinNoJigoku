@@ -1,0 +1,542 @@
+fileFormatVersion: 2
+guid: 95ae4263e13c6431da7e8cba8eb38a73
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: ColumnGrp
+    100002: HashiraGrp1
+    100004: RailGrp
+    100006: SideLplate
+    100008: SidePlateGrp
+    100010: SideRplate
+    100012: //RootNode
+    100014: StairGrp 1
+    100016: StairGrp1:hashira1
+    100018: StairGrp1:hashira1 1
+    100020: StairGrp1:hashira10
+    100022: StairGrp1:hashira10 1
+    100024: StairGrp1:hashira11
+    100026: StairGrp1:hashira11 1
+    100028: StairGrp1:hashira13
+    100030: StairGrp1:hashira13 1
+    100032: StairGrp1:hashira14
+    100034: StairGrp1:hashira14 1
+    100036: StairGrp1:hashira15
+    100038: StairGrp1:hashira15 1
+    100040: StairGrp1:hashira16
+    100042: StairGrp1:hashira16 1
+    100044: StairGrp1:hashira17
+    100046: StairGrp1:hashira17 1
+    100048: StairGrp1:hashira18
+    100050: StairGrp1:hashira18 1
+    100052: StairGrp1:hashira19
+    100054: StairGrp1:hashira19 1
+    100056: StairGrp1:hashira20
+    100058: StairGrp1:hashira22
+    100060: StairGrp1:hashira5
+    100062: StairGrp1:hashira5 1
+    100064: StairGrp1:hashira6
+    100066: StairGrp1:hashira6 1
+    100068: StairGrp1:hashira7
+    100070: StairGrp1:hashira7 1
+    100072: StairGrp1:hashira8
+    100074: StairGrp1:hashira8 1
+    100076: StairGrp1:hashira9
+    100078: StairGrp1:hashira9 1
+    100080: StairGrp1:pCube11
+    100082: StairGrp1:pCube12
+    100084: StairGrp1:pCube20
+    100086: StairGrp1:pCube21
+    100088: StairGrp1:pCube22
+    100090: StairGrp1:pCube23
+    100092: StairGrp1:pCube24
+    100094: StairGrp1:pCube26
+    100096: StairGrp1:pCube27
+    100098: StairLanding_1
+    100100: StairNum__1
+    100102: StairNum__10
+    100104: StairNum__11
+    100106: StairNum__12
+    100108: StairNum__13
+    100110: StairNum__14
+    100112: StairNum__15
+    100114: StairNum__16
+    100116: StairNum__17
+    100118: StairNum__18
+    100120: StairNum__19
+    100122: StairNum__2
+    100124: StairNum__20
+    100126: StairNum__21
+    100128: StairNum__22
+    100130: StairNum__23
+    100132: StairNum__24
+    100134: StairNum__25
+    100136: StairNum__26
+    100138: StairNum__27
+    100140: StairNum__28
+    100142: StairNum__29
+    100144: StairNum__3
+    100146: StairNum__30
+    100148: StairNum__31
+    100150: StairNum__32
+    100152: StairNum__33
+    100154: StairNum__34
+    100156: StairNum__35
+    100158: StairNum__36
+    100160: StairNum__37
+    100162: StairNum__38
+    100164: StairNum__4
+    100166: StairNum__5
+    100168: StairNum__6
+    100170: StairNum__7
+    100172: StairNum__8
+    100174: StairNum__9
+    100176: transform107
+    100178: transform108
+    100180: transform109
+    100182: transform110
+    100184: transform111
+    100186: transform112
+    100188: transform113
+    100190: transform114
+    100192: transform115
+    100194: transform116
+    100196: transform117
+    100198: transform118
+    100200: transform119
+    100202: transform120
+    100204: transform121
+    100206: transform122
+    100208: transform123
+    100210: transform124
+    100212: transform125
+    100214: transform126
+    100216: transform127
+    100218: transform128
+    100220: transform129
+    100222: transform130
+    100224: transform131
+    100226: transform132
+    100228: transform138
+    100230: transform139
+    100232: transform140
+    100234: transform141
+    400000: ColumnGrp
+    400002: HashiraGrp1
+    400004: RailGrp
+    400006: SideLplate
+    400008: SidePlateGrp
+    400010: SideRplate
+    400012: //RootNode
+    400014: StairGrp 1
+    400016: StairGrp1:hashira1
+    400018: StairGrp1:hashira1 1
+    400020: StairGrp1:hashira10
+    400022: StairGrp1:hashira10 1
+    400024: StairGrp1:hashira11
+    400026: StairGrp1:hashira11 1
+    400028: StairGrp1:hashira13
+    400030: StairGrp1:hashira13 1
+    400032: StairGrp1:hashira14
+    400034: StairGrp1:hashira14 1
+    400036: StairGrp1:hashira15
+    400038: StairGrp1:hashira15 1
+    400040: StairGrp1:hashira16
+    400042: StairGrp1:hashira16 1
+    400044: StairGrp1:hashira17
+    400046: StairGrp1:hashira17 1
+    400048: StairGrp1:hashira18
+    400050: StairGrp1:hashira18 1
+    400052: StairGrp1:hashira19
+    400054: StairGrp1:hashira19 1
+    400056: StairGrp1:hashira20
+    400058: StairGrp1:hashira22
+    400060: StairGrp1:hashira5
+    400062: StairGrp1:hashira5 1
+    400064: StairGrp1:hashira6
+    400066: StairGrp1:hashira6 1
+    400068: StairGrp1:hashira7
+    400070: StairGrp1:hashira7 1
+    400072: StairGrp1:hashira8
+    400074: StairGrp1:hashira8 1
+    400076: StairGrp1:hashira9
+    400078: StairGrp1:hashira9 1
+    400080: StairGrp1:pCube11
+    400082: StairGrp1:pCube12
+    400084: StairGrp1:pCube20
+    400086: StairGrp1:pCube21
+    400088: StairGrp1:pCube22
+    400090: StairGrp1:pCube23
+    400092: StairGrp1:pCube24
+    400094: StairGrp1:pCube26
+    400096: StairGrp1:pCube27
+    400098: StairLanding_1
+    400100: StairNum__1
+    400102: StairNum__10
+    400104: StairNum__11
+    400106: StairNum__12
+    400108: StairNum__13
+    400110: StairNum__14
+    400112: StairNum__15
+    400114: StairNum__16
+    400116: StairNum__17
+    400118: StairNum__18
+    400120: StairNum__19
+    400122: StairNum__2
+    400124: StairNum__20
+    400126: StairNum__21
+    400128: StairNum__22
+    400130: StairNum__23
+    400132: StairNum__24
+    400134: StairNum__25
+    400136: StairNum__26
+    400138: StairNum__27
+    400140: StairNum__28
+    400142: StairNum__29
+    400144: StairNum__3
+    400146: StairNum__30
+    400148: StairNum__31
+    400150: StairNum__32
+    400152: StairNum__33
+    400154: StairNum__34
+    400156: StairNum__35
+    400158: StairNum__36
+    400160: StairNum__37
+    400162: StairNum__38
+    400164: StairNum__4
+    400166: StairNum__5
+    400168: StairNum__6
+    400170: StairNum__7
+    400172: StairNum__8
+    400174: StairNum__9
+    400176: transform107
+    400178: transform108
+    400180: transform109
+    400182: transform110
+    400184: transform111
+    400186: transform112
+    400188: transform113
+    400190: transform114
+    400192: transform115
+    400194: transform116
+    400196: transform117
+    400198: transform118
+    400200: transform119
+    400202: transform120
+    400204: transform121
+    400206: transform122
+    400208: transform123
+    400210: transform124
+    400212: transform125
+    400214: transform126
+    400216: transform127
+    400218: transform128
+    400220: transform129
+    400222: transform130
+    400224: transform131
+    400226: transform132
+    400228: transform138
+    400230: transform139
+    400232: transform140
+    400234: transform141
+    2300000: SideLplate
+    2300002: SideRplate
+    2300004: StairGrp1:hashira1
+    2300006: StairGrp1:hashira1 1
+    2300008: StairGrp1:hashira10
+    2300010: StairGrp1:hashira10 1
+    2300012: StairGrp1:hashira11
+    2300014: StairGrp1:hashira11 1
+    2300016: StairGrp1:hashira13
+    2300018: StairGrp1:hashira13 1
+    2300020: StairGrp1:hashira14
+    2300022: StairGrp1:hashira14 1
+    2300024: StairGrp1:hashira15
+    2300026: StairGrp1:hashira15 1
+    2300028: StairGrp1:hashira16
+    2300030: StairGrp1:hashira16 1
+    2300032: StairGrp1:hashira17
+    2300034: StairGrp1:hashira17 1
+    2300036: StairGrp1:hashira18
+    2300038: StairGrp1:hashira18 1
+    2300040: StairGrp1:hashira19
+    2300042: StairGrp1:hashira19 1
+    2300044: StairGrp1:hashira20
+    2300046: StairGrp1:hashira22
+    2300048: StairGrp1:hashira5
+    2300050: StairGrp1:hashira5 1
+    2300052: StairGrp1:hashira6
+    2300054: StairGrp1:hashira6 1
+    2300056: StairGrp1:hashira7
+    2300058: StairGrp1:hashira7 1
+    2300060: StairGrp1:hashira8
+    2300062: StairGrp1:hashira8 1
+    2300064: StairGrp1:hashira9
+    2300066: StairGrp1:hashira9 1
+    2300068: StairGrp1:pCube11
+    2300070: StairGrp1:pCube12
+    2300072: StairGrp1:pCube20
+    2300074: StairGrp1:pCube21
+    2300076: StairGrp1:pCube22
+    2300078: StairGrp1:pCube23
+    2300080: StairGrp1:pCube24
+    2300082: StairGrp1:pCube26
+    2300084: StairGrp1:pCube27
+    2300086: StairLanding_1
+    2300088: StairNum__1
+    2300090: StairNum__10
+    2300092: StairNum__11
+    2300094: StairNum__12
+    2300096: StairNum__13
+    2300098: StairNum__14
+    2300100: StairNum__15
+    2300102: StairNum__16
+    2300104: StairNum__17
+    2300106: StairNum__18
+    2300108: StairNum__19
+    2300110: StairNum__2
+    2300112: StairNum__20
+    2300114: StairNum__21
+    2300116: StairNum__22
+    2300118: StairNum__23
+    2300120: StairNum__24
+    2300122: StairNum__25
+    2300124: StairNum__26
+    2300126: StairNum__27
+    2300128: StairNum__28
+    2300130: StairNum__29
+    2300132: StairNum__3
+    2300134: StairNum__30
+    2300136: StairNum__31
+    2300138: StairNum__32
+    2300140: StairNum__33
+    2300142: StairNum__34
+    2300144: StairNum__35
+    2300146: StairNum__36
+    2300148: StairNum__37
+    2300150: StairNum__38
+    2300152: StairNum__4
+    2300154: StairNum__5
+    2300156: StairNum__6
+    2300158: StairNum__7
+    2300160: StairNum__8
+    2300162: StairNum__9
+    3300000: SideLplate
+    3300002: SideRplate
+    3300004: StairGrp1:hashira1
+    3300006: StairGrp1:hashira1 1
+    3300008: StairGrp1:hashira10
+    3300010: StairGrp1:hashira10 1
+    3300012: StairGrp1:hashira11
+    3300014: StairGrp1:hashira11 1
+    3300016: StairGrp1:hashira13
+    3300018: StairGrp1:hashira13 1
+    3300020: StairGrp1:hashira14
+    3300022: StairGrp1:hashira14 1
+    3300024: StairGrp1:hashira15
+    3300026: StairGrp1:hashira15 1
+    3300028: StairGrp1:hashira16
+    3300030: StairGrp1:hashira16 1
+    3300032: StairGrp1:hashira17
+    3300034: StairGrp1:hashira17 1
+    3300036: StairGrp1:hashira18
+    3300038: StairGrp1:hashira18 1
+    3300040: StairGrp1:hashira19
+    3300042: StairGrp1:hashira19 1
+    3300044: StairGrp1:hashira20
+    3300046: StairGrp1:hashira22
+    3300048: StairGrp1:hashira5
+    3300050: StairGrp1:hashira5 1
+    3300052: StairGrp1:hashira6
+    3300054: StairGrp1:hashira6 1
+    3300056: StairGrp1:hashira7
+    3300058: StairGrp1:hashira7 1
+    3300060: StairGrp1:hashira8
+    3300062: StairGrp1:hashira8 1
+    3300064: StairGrp1:hashira9
+    3300066: StairGrp1:hashira9 1
+    3300068: StairGrp1:pCube11
+    3300070: StairGrp1:pCube12
+    3300072: StairGrp1:pCube20
+    3300074: StairGrp1:pCube21
+    3300076: StairGrp1:pCube22
+    3300078: StairGrp1:pCube23
+    3300080: StairGrp1:pCube24
+    3300082: StairGrp1:pCube26
+    3300084: StairGrp1:pCube27
+    3300086: StairLanding_1
+    3300088: StairNum__1
+    3300090: StairNum__10
+    3300092: StairNum__11
+    3300094: StairNum__12
+    3300096: StairNum__13
+    3300098: StairNum__14
+    3300100: StairNum__15
+    3300102: StairNum__16
+    3300104: StairNum__17
+    3300106: StairNum__18
+    3300108: StairNum__19
+    3300110: StairNum__2
+    3300112: StairNum__20
+    3300114: StairNum__21
+    3300116: StairNum__22
+    3300118: StairNum__23
+    3300120: StairNum__24
+    3300122: StairNum__25
+    3300124: StairNum__26
+    3300126: StairNum__27
+    3300128: StairNum__28
+    3300130: StairNum__29
+    3300132: StairNum__3
+    3300134: StairNum__30
+    3300136: StairNum__31
+    3300138: StairNum__32
+    3300140: StairNum__33
+    3300142: StairNum__34
+    3300144: StairNum__35
+    3300146: StairNum__36
+    3300148: StairNum__37
+    3300150: StairNum__38
+    3300152: StairNum__4
+    3300154: StairNum__5
+    3300156: StairNum__6
+    3300158: StairNum__7
+    3300160: StairNum__8
+    3300162: StairNum__9
+    4300000: StairNum__1
+    4300002: StairNum__2
+    4300004: StairNum__3
+    4300006: StairNum__4
+    4300008: StairNum__5
+    4300010: StairNum__6
+    4300012: StairNum__7
+    4300014: StairNum__8
+    4300016: StairNum__9
+    4300018: StairNum__10
+    4300020: StairNum__11
+    4300022: StairNum__12
+    4300024: StairNum__13
+    4300026: StairNum__14
+    4300028: StairNum__15
+    4300030: StairNum__16
+    4300032: StairNum__17
+    4300034: StairNum__18
+    4300036: StairNum__19
+    4300038: StairLanding_1
+    4300040: StairNum__20
+    4300042: StairNum__21
+    4300044: StairNum__22
+    4300046: StairNum__23
+    4300048: StairNum__24
+    4300050: StairNum__25
+    4300052: StairNum__26
+    4300054: StairNum__27
+    4300056: StairNum__28
+    4300058: StairNum__29
+    4300060: StairNum__30
+    4300062: StairNum__31
+    4300064: StairNum__32
+    4300066: StairNum__33
+    4300068: StairNum__34
+    4300070: StairNum__35
+    4300072: StairNum__36
+    4300074: StairNum__37
+    4300076: StairNum__38
+    4300078: SideRplate
+    4300080: SideLplate
+    4300082: StairGrp1:pCube20
+    4300084: StairGrp1:pCube21
+    4300086: StairGrp1:pCube22
+    4300088: StairGrp1:pCube23
+    4300090: StairGrp1:hashira22
+    4300092: StairGrp1:pCube24
+    4300094: StairGrp1:pCube26
+    4300096: StairGrp1:pCube27
+    4300098: StairGrp1:hashira6
+    4300100: StairGrp1:hashira16
+    4300102: StairGrp1:hashira17
+    4300104: StairGrp1:hashira5
+    4300106: StairGrp1:hashira17
+    4300108: StairGrp1:hashira14
+    4300110: StairGrp1:hashira15
+    4300112: StairGrp1:hashira13
+    4300114: StairGrp1:hashira1
+    4300116: StairGrp1:hashira9
+    4300118: StairGrp1:hashira8
+    4300120: StairGrp1:hashira7
+    4300122: StairGrp1:hashira6
+    4300124: StairGrp1:hashira5
+    4300126: StairGrp1:hashira20
+    4300128: StairGrp1:hashira7
+    4300130: StairGrp1:hashira8
+    4300132: StairGrp1:hashira9
+    4300134: StairGrp1:hashira1
+    4300136: StairGrp1:hashira10
+    4300138: StairGrp1:hashira10
+    4300140: StairGrp1:hashira11
+    4300142: StairGrp1:hashira11
+    4300144: StairGrp1:hashira13
+    4300146: StairGrp1:hashira14
+    4300148: StairGrp1:hashira15
+    4300150: StairGrp1:hashira16
+    4300152: StairGrp1:pCube11
+    4300154: StairGrp1:pCube12
+    4300156: StairGrp1:hashira18
+    4300158: StairGrp1:hashira18
+    4300160: StairGrp1:hashira19
+    4300162: StairGrp1:hashira19
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
