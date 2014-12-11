@@ -14,6 +14,10 @@ public class testCollisionWall : MonoBehaviour {
 	private enum Face{LEFT, RIGHT, DOWN};
 	private Face currFace;
 	private BoxCollider currCollider;
+	private Vector3 size;
+	private Vector3 boundMax;
+	private Vector3 boundMin;
+
 	void Awake()
 	{
 		hash = GameObject.FindGameObjectWithTag (DoneTags.gameController).GetComponent<HashIds> ();
@@ -22,7 +26,24 @@ public class testCollisionWall : MonoBehaviour {
 		gameCam = GameObject.FindGameObjectWithTag (DoneTags.camera);
 		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
 		caps = player.GetComponent<CapsuleCollider> ();
-		currCollider = (BoxCollider)collider;
+
+	}
+
+	void Start()
+	{
+		if(collider is MeshCollider)
+		{
+			size = new Vector3 (collider.bounds.max.x - collider.bounds.min.x, collider.bounds.max.y - collider.bounds.min.y, collider.bounds.max.z - collider.bounds.min.z);
+
+		}
+
+		else 
+		{
+			currCollider = (BoxCollider)collider;
+			boundMax = currCollider.bounds.max;
+			boundMin = currCollider.bounds.min;
+			size = currCollider.size;
+		}
 	}
 	
 	void OnCollisionEnter(Collision collision) {
@@ -159,16 +180,16 @@ public class testCollisionWall : MonoBehaviour {
 			//If ANGLE > 0 WE NEED TO CHECK MAX X
 			if(angle <0)
 			{
-				float val = Mathf.Sin((-1*angle) * Mathf.PI / 180f) * currCollider.size.z;
+				float val = Mathf.Sin((-1*angle) * Mathf.PI / 180f) * size.z;
 
-				characterControllerLogicScript.BoundingBoxMinX = currCollider.bounds.min.x + val + 0.17f;
-				characterControllerLogicScript.BoundingBoxMaxX = currCollider.bounds.max.x - 0.17f;
+				characterControllerLogicScript.BoundingBoxMinX = collider.bounds.min.x + val + 0.17f;
+				characterControllerLogicScript.BoundingBoxMaxX = collider.bounds.max.x - 0.17f;
 			}
 			else
 			{
-				float val = Mathf.Sin((angle) * Mathf.PI / 180f)* currCollider.size.z;
-				characterControllerLogicScript.BoundingBoxMinX = currCollider.bounds.min.x + 0.17f;
-				characterControllerLogicScript.BoundingBoxMaxX = currCollider.bounds.max.x - val - 0.17f;
+				float val = Mathf.Sin((angle) * Mathf.PI / 180f)* size.z;
+				characterControllerLogicScript.BoundingBoxMinX = collider.bounds.min.x + 0.17f;
+				characterControllerLogicScript.BoundingBoxMaxX = collider.bounds.max.x - val - 0.17f;
 			}
 
 			break;
@@ -177,17 +198,17 @@ public class testCollisionWall : MonoBehaviour {
 			//If ANGLE > 0 WE NEED TO CHECK MIN Z
 			if(angle <0)
 			{
-				float val = Mathf.Sin((-1*angle) * Mathf.PI / 180f) * currCollider.size.x;
+				float val = Mathf.Sin((-1*angle) * Mathf.PI / 180f) * size.x;
 
-				characterControllerLogicScript.BoundingBoxMinZ = currCollider.bounds.min.z + 0.17f;
-				characterControllerLogicScript.BoundingBoxMaxZ = currCollider.bounds.max.z - val - 0.17f;
+				characterControllerLogicScript.BoundingBoxMinZ = collider.bounds.min.z + 0.17f;
+				characterControllerLogicScript.BoundingBoxMaxZ = collider.bounds.max.z - val - 0.17f;
 			}
 			else
 			{
-				float val = Mathf.Sin((angle) * Mathf.PI / 180f) * currCollider.size.x;
+				float val = Mathf.Sin((angle) * Mathf.PI / 180f) * size.x;
 				
-				characterControllerLogicScript.BoundingBoxMinZ = currCollider.bounds.min.z + val+ 0.17f;
-				characterControllerLogicScript.BoundingBoxMaxZ = currCollider.bounds.max.z - 0.17f;
+				characterControllerLogicScript.BoundingBoxMinZ = collider.bounds.min.z + val+ 0.17f;
+				characterControllerLogicScript.BoundingBoxMaxZ = collider.bounds.max.z - 0.17f;
 			}
 
 			break;
@@ -196,17 +217,17 @@ public class testCollisionWall : MonoBehaviour {
 			//If ANGLE > 0 WE NEED TO CHECK MAX Z
 			if(angle <0)
 			{
-				float val = Mathf.Sin((-1*angle) * Mathf.PI / 180f) * currCollider.size.x;
+				float val = Mathf.Sin((-1*angle) * Mathf.PI / 180f) * size.x;
 				
-				characterControllerLogicScript.BoundingBoxMinZ = currCollider.bounds.min.z + val + 0.17f;
-				characterControllerLogicScript.BoundingBoxMaxZ = currCollider.bounds.max.z - 0.17f;
+				characterControllerLogicScript.BoundingBoxMinZ = collider.bounds.min.z + val + 0.17f;
+				characterControllerLogicScript.BoundingBoxMaxZ = collider.bounds.max.z - 0.17f;
 			}
 			else
 			{
-				float val = Mathf.Sin((angle) * Mathf.PI / 180f) * currCollider.size.x;
+				float val = Mathf.Sin((angle) * Mathf.PI / 180f) * size.x;
 				
-				characterControllerLogicScript.BoundingBoxMinZ = currCollider.bounds.min.z + 0.17f;
-				characterControllerLogicScript.BoundingBoxMaxZ = currCollider.bounds.max.z - val - 0.17f;
+				characterControllerLogicScript.BoundingBoxMinZ = collider.bounds.min.z + 0.17f;
+				characterControllerLogicScript.BoundingBoxMaxZ = collider.bounds.max.z - val - 0.17f;
 			}
 
 			break;

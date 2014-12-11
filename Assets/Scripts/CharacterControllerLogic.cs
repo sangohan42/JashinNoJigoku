@@ -768,7 +768,7 @@ public class CharacterControllerLogic : MonoBehaviour
 											inLookAroundMode = false;
 										}
 //										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
-										rigidbody.MovePosition(-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+										rigidbody.MovePosition(rigidbody.position-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									}
 								}
 								else if(transform.position.z >= boundingBoxMaxZ)
@@ -800,13 +800,13 @@ public class CharacterControllerLogic : MonoBehaviour
 											inLookAroundMode = false;
 										}
 //										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
-										rigidbody.MovePosition(-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+										rigidbody.MovePosition(rigidbody.position-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									}
 								}
 								else 
 								{
 //									transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
-									rigidbody.MovePosition(-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+									rigidbody.MovePosition(rigidbody.position-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									if(inLookAroundMode)
 									{
 										inCoverMode = false;
@@ -852,6 +852,8 @@ public class CharacterControllerLogic : MonoBehaviour
 
 									if(direction <0 && !inLookAroundMode)
 									{
+										positionToPlaceTo = transform.position;
+
 										currentLookAroundPos = lookAroundPosLeft;
 										currentLookAroundRot = lookAroundRotLeft;
 										inLookAroundMode = true;
@@ -866,10 +868,12 @@ public class CharacterControllerLogic : MonoBehaviour
 											inCoverMode = false;
 											camSwitchDamp = 7f;
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
+											transform.position = positionToPlaceTo;
+
 											inLookAroundMode = false;
 										}
 //										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
-										rigidbody.MovePosition(-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+										rigidbody.MovePosition(rigidbody.position-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									}
 								}
 								else if(transform.position.z >= boundingBoxMaxZ)
@@ -880,6 +884,8 @@ public class CharacterControllerLogic : MonoBehaviour
 
 									if(direction >0 &&!inLookAroundMode)
 									{
+										positionToPlaceTo = transform.position;
+
 										currentLookAroundPos = lookAroundPosRight;
 										currentLookAroundRot = lookAroundRotRight;
 										inLookAroundMode = true;
@@ -894,16 +900,18 @@ public class CharacterControllerLogic : MonoBehaviour
 											inCoverMode = false;
 											camSwitchDamp = 7f;
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
+											transform.position = positionToPlaceTo;
+
 											inLookAroundMode = false;
 										}
 //										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
-										rigidbody.MovePosition(-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+										rigidbody.MovePosition(rigidbody.position-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									}
 								}
 								else 
 								{
 //									transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
-									rigidbody.MovePosition(-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+									rigidbody.MovePosition(rigidbody.position-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									if(inLookAroundMode)
 									{
 										inCoverMode = false;

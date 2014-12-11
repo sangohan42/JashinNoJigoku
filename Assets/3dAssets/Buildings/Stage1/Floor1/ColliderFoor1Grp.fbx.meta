@@ -16,6 +16,23 @@ ModelImporter:
     100020: ColliderStairCollumR_1
     100022: ColliderStairSideplateL_1
     100024: ColliderStairSideplateR
+    100026: ColliderContainer_1
+    100028: ColliderContainer_10
+    100030: ColliderContainer_11
+    100032: ColliderContainer_12
+    100034: ColliderContainer_13
+    100036: ColliderContainer_2
+    100038: ColliderContainer_3
+    100040: ColliderContainer_4
+    100042: ColliderContainer_5
+    100044: ColliderContainer_6
+    100046: ColliderContainer_7
+    100048: ColliderContainer_8
+    100050: ColliderContainer_9
+    100052: ContainerGrp
+    100054: pCube3
+    100056: PipeGrp
+    100058: StairGrp
     400000: //RootNode
     400002: ColliderPipeBassCornerL_1
     400004: ColliderPipeBassR_1
@@ -29,6 +46,23 @@ ModelImporter:
     400020: ColliderStairCollumR_1
     400022: ColliderStairSideplateL_1
     400024: ColliderStairSideplateR
+    400026: ColliderContainer_1
+    400028: ColliderContainer_10
+    400030: ColliderContainer_11
+    400032: ColliderContainer_12
+    400034: ColliderContainer_13
+    400036: ColliderContainer_2
+    400038: ColliderContainer_3
+    400040: ColliderContainer_4
+    400042: ColliderContainer_5
+    400044: ColliderContainer_6
+    400046: ColliderContainer_7
+    400048: ColliderContainer_8
+    400050: ColliderContainer_9
+    400052: ContainerGrp
+    400054: pCube3
+    400056: PipeGrp
+    400058: StairGrp
     2300000: ColliderPipeBassCornerL_1
     2300002: ColliderPipeBassR_1
     2300004: ColliderPipeBatchR1
@@ -41,6 +75,20 @@ ModelImporter:
     2300018: ColliderStairCollumR_1
     2300020: ColliderStairSideplateL_1
     2300022: ColliderStairSideplateR
+    2300024: ColliderContainer_1
+    2300026: ColliderContainer_10
+    2300028: ColliderContainer_11
+    2300030: ColliderContainer_12
+    2300032: ColliderContainer_13
+    2300034: ColliderContainer_2
+    2300036: ColliderContainer_3
+    2300038: ColliderContainer_4
+    2300040: ColliderContainer_5
+    2300042: ColliderContainer_6
+    2300044: ColliderContainer_7
+    2300046: ColliderContainer_8
+    2300048: ColliderContainer_9
+    2300050: pCube3
     3300000: ColliderPipeBassCornerL_1
     3300002: ColliderPipeBassR_1
     3300004: ColliderPipeBatchR1
@@ -53,6 +101,20 @@ ModelImporter:
     3300018: ColliderStairCollumR_1
     3300020: ColliderStairSideplateL_1
     3300022: ColliderStairSideplateR
+    3300024: ColliderContainer_1
+    3300026: ColliderContainer_10
+    3300028: ColliderContainer_11
+    3300030: ColliderContainer_12
+    3300032: ColliderContainer_13
+    3300034: ColliderContainer_2
+    3300036: ColliderContainer_3
+    3300038: ColliderContainer_4
+    3300040: ColliderContainer_5
+    3300042: ColliderContainer_6
+    3300044: ColliderContainer_7
+    3300046: ColliderContainer_8
+    3300048: ColliderContainer_9
+    3300050: pCube3
     4300000: ColliderPipeBassR_1
     4300002: ColliderPipeLongBendR_2
     4300004: ColliderPipeLongBendR_3
@@ -65,9 +127,23 @@ ModelImporter:
     4300018: ColliderStairSideplateL_1
     4300020: ColliderStairCollumR_1
     4300022: ColliderStairCollumL_1
+    4300024: ColliderContainer_1
+    4300026: ColliderContainer_2
+    4300028: ColliderContainer_3
+    4300030: ColliderContainer_4
+    4300032: ColliderContainer_5
+    4300034: ColliderContainer_6
+    4300036: ColliderContainer_7
+    4300038: ColliderContainer_8
+    4300040: ColliderContainer_9
+    4300042: ColliderContainer_10
+    4300044: ColliderContainer_11
+    4300046: ColliderContainer_12
+    4300048: ColliderContainer_13
+    4300050: pCube3
     9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -88,7 +164,7 @@ ModelImporter:
     globalScale: .00999999978
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -103,7 +179,7 @@ ModelImporter:
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []
@@ -117,6 +193,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   additionalBone: 0
   userData: 
