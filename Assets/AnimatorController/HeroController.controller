@@ -1551,7 +1551,7 @@ State:
   m_Motions:
   - {fileID: 20612622}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 120, y: 276, z: 0}
+  m_Position: {x: 108, y: 288, z: 0}
   m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
@@ -1656,7 +1656,7 @@ State:
   m_Motions:
   - {fileID: 20675347}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 120, y: 204, z: 0}
+  m_Position: {x: 120, y: 216, z: 0}
   m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
