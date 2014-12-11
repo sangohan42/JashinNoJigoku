@@ -131,9 +131,10 @@ public class testCollisionWall : MonoBehaviour {
 						}
 
 						characterControllerLogicScript.VecToAlignTo = normalVector;
-						characterControllerLogicScript.BoundingBoxMinZ = collider.bounds.min.z + 0.15f;
-						characterControllerLogicScript.BoundingBoxMaxZ = collider.bounds.max.z - 0.15f;
+//						characterControllerLogicScript.BoundingBoxMinZ = collider.bounds.min.z + 0.15f;
+//						characterControllerLogicScript.BoundingBoxMaxZ = collider.bounds.max.z - 0.15f;
 						characterControllerLogicScript.CurrentCoverState = CoverState.OnRightFace;
+						calculateBounds(Face.RIGHT, normalVector);
 
 					}
 
@@ -160,14 +161,14 @@ public class testCollisionWall : MonoBehaviour {
 			{
 				float val = Mathf.Sin((-1*angle) * Mathf.PI / 180f) * currCollider.size.z;
 
-				characterControllerLogicScript.BoundingBoxMinX = currCollider.bounds.min.x + val + 0.15f;
-				characterControllerLogicScript.BoundingBoxMaxX = currCollider.bounds.max.x - 0.15f;
+				characterControllerLogicScript.BoundingBoxMinX = currCollider.bounds.min.x + val + 0.17f;
+				characterControllerLogicScript.BoundingBoxMaxX = currCollider.bounds.max.x - 0.17f;
 			}
 			else
 			{
-				float val = Mathf.Sin(angle) * currCollider.size.z;
-				characterControllerLogicScript.BoundingBoxMinX = currCollider.bounds.min.x + 0.15f;
-				characterControllerLogicScript.BoundingBoxMaxX = currCollider.bounds.max.x - val - 0.15f;
+				float val = Mathf.Sin((angle) * Mathf.PI / 180f)* currCollider.size.z;
+				characterControllerLogicScript.BoundingBoxMinX = currCollider.bounds.min.x + 0.17f;
+				characterControllerLogicScript.BoundingBoxMaxX = currCollider.bounds.max.x - val - 0.17f;
 			}
 
 			break;
@@ -178,15 +179,15 @@ public class testCollisionWall : MonoBehaviour {
 			{
 				float val = Mathf.Sin((-1*angle) * Mathf.PI / 180f) * currCollider.size.x;
 
-				characterControllerLogicScript.BoundingBoxMinZ = currCollider.bounds.min.z + 0.15f;
-				characterControllerLogicScript.BoundingBoxMaxZ = currCollider.bounds.max.z - val - 0.15f;
+				characterControllerLogicScript.BoundingBoxMinZ = currCollider.bounds.min.z + 0.17f;
+				characterControllerLogicScript.BoundingBoxMaxZ = currCollider.bounds.max.z - val - 0.17f;
 			}
 			else
 			{
 				float val = Mathf.Sin((angle) * Mathf.PI / 180f) * currCollider.size.x;
 				
-				characterControllerLogicScript.BoundingBoxMinZ = currCollider.bounds.min.z + val+ 0.15f;
-				characterControllerLogicScript.BoundingBoxMaxZ = currCollider.bounds.max.z - 0.15f;
+				characterControllerLogicScript.BoundingBoxMinZ = currCollider.bounds.min.z + val+ 0.17f;
+				characterControllerLogicScript.BoundingBoxMaxZ = currCollider.bounds.max.z - 0.17f;
 			}
 
 			break;
@@ -195,11 +196,17 @@ public class testCollisionWall : MonoBehaviour {
 			//If ANGLE > 0 WE NEED TO CHECK MAX Z
 			if(angle <0)
 			{
+				float val = Mathf.Sin((-1*angle) * Mathf.PI / 180f) * currCollider.size.x;
 				
+				characterControllerLogicScript.BoundingBoxMinZ = currCollider.bounds.min.z + val + 0.17f;
+				characterControllerLogicScript.BoundingBoxMaxZ = currCollider.bounds.max.z - 0.17f;
 			}
 			else
 			{
+				float val = Mathf.Sin((angle) * Mathf.PI / 180f) * currCollider.size.x;
 				
+				characterControllerLogicScript.BoundingBoxMinZ = currCollider.bounds.min.z + 0.17f;
+				characterControllerLogicScript.BoundingBoxMaxZ = currCollider.bounds.max.z - val - 0.17f;
 			}
 
 			break;

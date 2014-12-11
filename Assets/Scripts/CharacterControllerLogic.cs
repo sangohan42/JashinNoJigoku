@@ -663,15 +663,15 @@ public class CharacterControllerLogic : MonoBehaviour
 								direction = joyX;
 								charAngle = 0;
 //								transform.position += new Vector3(Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED,0, 0) ;
-								transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+//								transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
 //								transform.eulerAngles = new Vector3(0,180,0);
-								if(transform.position.x < boundingBoxMinX)
+								if(transform.position.x <= boundingBoxMinX)
 								{
 									Vector3 temp = transform.position;
 									temp.x = boundingBoxMinX;
 									transform.position = temp;
 
-									if(direction <0)
+									if(direction <0 && !inLookAroundMode)
 									{
 										currentLookAroundPos = lookAroundPosLeft;
 										currentLookAroundRot = lookAroundRotLeft;
@@ -679,14 +679,26 @@ public class CharacterControllerLogic : MonoBehaviour
 										animator.SetBool(hashIdsScript.lookingAroundBool, true);
 										hasBeenInLookingAround = true;
 									}
+
+									else if(direction >=0)
+									{
+										if(inLookAroundMode)
+										{
+											inCoverMode = false;
+											camSwitchDamp = 7f;
+											animator.SetBool(hashIdsScript.lookingAroundBool, false);
+											inLookAroundMode = false;
+										}
+										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+									}
 								}
-								else if(transform.position.x > boundingBoxMaxX)
+								else if(transform.position.x >= boundingBoxMaxX)
 								{
 									Vector3 temp = transform.position;
 									temp.x = boundingBoxMaxX;
 									transform.position = temp;
 
-									if(direction >0)
+									if(direction >0 && !inLookAroundMode)
 									{
 										currentLookAroundPos = lookAroundPosRight;
 										currentLookAroundRot = lookAroundRotRight;
@@ -694,16 +706,32 @@ public class CharacterControllerLogic : MonoBehaviour
 										animator.SetBool(hashIdsScript.lookingAroundBool, true);
 										hasBeenInLookingAround = true;
 									}
+
+									else if(direction <=0)
+									{
+										if(inLookAroundMode)
+										{
+											inCoverMode = false;
+											camSwitchDamp = 7f;
+											animator.SetBool(hashIdsScript.lookingAroundBool, false);
+											inLookAroundMode = false;
+										}
+										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+									}
+
 								}
 								else 
 								{
+									transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+
 									if(inLookAroundMode)
 									{
 										inCoverMode = false;
 										camSwitchDamp = 7f;
+										animator.SetBool(hashIdsScript.lookingAroundBool, false);
+										inLookAroundMode = false;
 									}
-									animator.SetBool(hashIdsScript.lookingAroundBool, false);
-									inLookAroundMode = false;
+									
 								}
 							}
 							else 
@@ -729,16 +757,16 @@ public class CharacterControllerLogic : MonoBehaviour
 								direction = joyX;
 								charAngle = 0;
 //								transform.position += new Vector3(0, 0,-1*Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
-								transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+//								transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
 
 //								transform.eulerAngles = new Vector3(0,-90,0);
-								if(transform.position.z < boundingBoxMinZ)
+								if(transform.position.z <= boundingBoxMinZ)
 								{
 									Vector3 temp = transform.position;
 									temp.z = boundingBoxMinZ;
 									transform.position = temp;
 
-									if(direction >0)
+									if(direction >0 && !inLookAroundMode)
 									{
 										currentLookAroundPos = lookAroundPosRight;
 										currentLookAroundRot = lookAroundRotRight;
@@ -746,14 +774,26 @@ public class CharacterControllerLogic : MonoBehaviour
 										hasBeenInLookingAround = true;
 										animator.SetBool(hashIdsScript.lookingAroundBool, true);
 									}
+
+									else if(direction <=0)
+									{
+										if(inLookAroundMode)
+										{
+											inCoverMode = false;
+											camSwitchDamp = 7f;
+											animator.SetBool(hashIdsScript.lookingAroundBool, false);
+											inLookAroundMode = false;
+										}
+										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+									}
 								}
-								else if(transform.position.z > boundingBoxMaxZ)
+								else if(transform.position.z >= boundingBoxMaxZ)
 								{
 									Vector3 temp = transform.position;
 									temp.z = boundingBoxMaxZ;
 									transform.position = temp;
 
-									if(direction <0)
+									if(direction <0 && !inLookAroundMode)
 									{
 										currentLookAroundPos = lookAroundPosLeft;
 										currentLookAroundRot = lookAroundRotLeft;
@@ -761,16 +801,31 @@ public class CharacterControllerLogic : MonoBehaviour
 										hasBeenInLookingAround = true;
 										animator.SetBool(hashIdsScript.lookingAroundBool, true);
 									}
+
+									else if(direction >=0)
+									{
+										if(inLookAroundMode)
+										{
+											inCoverMode = false;
+											camSwitchDamp = 7f;
+											animator.SetBool(hashIdsScript.lookingAroundBool, false);
+											inLookAroundMode = false;
+										}
+										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+									}
 								}
 								else 
 								{
+									transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+
 									if(inLookAroundMode)
 									{
 										inCoverMode = false;
 										camSwitchDamp = 7f;
+										animator.SetBool(hashIdsScript.lookingAroundBool, false);
+										inLookAroundMode = false;
 									}
-									animator.SetBool(hashIdsScript.lookingAroundBool, false);
-									inLookAroundMode = false;
+									
 								}
 
 							}
@@ -797,16 +852,16 @@ public class CharacterControllerLogic : MonoBehaviour
 								direction = joyX;
 								charAngle = 0;
 //								transform.position += new Vector3(0, 0,Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
-								transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+//								transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
 
 //								transform.eulerAngles = new Vector3(0,90,0);
-								if(transform.position.z < boundingBoxMinZ)
+								if(transform.position.z <= boundingBoxMinZ)
 								{
 									Vector3 temp = transform.position;
 									temp.z = boundingBoxMinZ;
 									transform.position = temp;
 
-									if(direction <0)
+									if(direction <0 && !inLookAroundMode)
 									{
 										currentLookAroundPos = lookAroundPosLeft;
 										currentLookAroundRot = lookAroundRotLeft;
@@ -814,14 +869,26 @@ public class CharacterControllerLogic : MonoBehaviour
 										hasBeenInLookingAround = true;
 										animator.SetBool(hashIdsScript.lookingAroundBool, true);
 									}
+
+									else if(direction >=0)
+									{
+										if(inLookAroundMode)
+										{
+											inCoverMode = false;
+											camSwitchDamp = 7f;
+											animator.SetBool(hashIdsScript.lookingAroundBool, false);
+											inLookAroundMode = false;
+										}
+										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+									}
 								}
-								else if(transform.position.z > boundingBoxMaxZ)
+								else if(transform.position.z >= boundingBoxMaxZ)
 								{
 									Vector3 temp = transform.position;
 									temp.z = boundingBoxMaxZ;
 									transform.position = temp;
 
-									if(direction >0)
+									if(direction >0 &&!inLookAroundMode)
 									{
 										currentLookAroundPos = lookAroundPosRight;
 										currentLookAroundRot = lookAroundRotRight;
@@ -829,17 +896,32 @@ public class CharacterControllerLogic : MonoBehaviour
 										hasBeenInLookingAround = true;
 										animator.SetBool(hashIdsScript.lookingAroundBool, true);
 									}
+
+									else if(direction <=0)
+									{
+										if(inLookAroundMode)
+										{
+											inCoverMode = false;
+											camSwitchDamp = 7f;
+											animator.SetBool(hashIdsScript.lookingAroundBool, false);
+											inLookAroundMode = false;
+										}
+										transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+									}
 								}
 								else 
 								{
+									transform.position += -1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED;
+
 									if(inLookAroundMode)
 									{
 										inCoverMode = false;
 										camSwitchDamp = 7f;
+										animator.SetBool(hashIdsScript.lookingAroundBool, false);
+										inLookAroundMode = false;
 									}
-									animator.SetBool(hashIdsScript.lookingAroundBool, false);
-									inLookAroundMode = false;
 									
+
 								}
 							}
 							else 
