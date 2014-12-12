@@ -1176,6 +1176,10 @@ Transition:
     m_ConditionEvent: Speed
     m_EventTreshold: .400000006
     m_ExitTime: .75
+  - m_ConditionMode: 2
+    m_ConditionEvent: LookAround
+    m_EventTreshold: .400000006
+    m_ExitTime: .75
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -1218,6 +1222,10 @@ Transition:
     m_ExitTime: .88219893
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
+    m_EventTreshold: .400000006
+    m_ExitTime: .88219893
+  - m_ConditionMode: 2
+    m_ConditionEvent: LookAround
     m_EventTreshold: .400000006
     m_ExitTime: .88219893
   m_Atomic: 1

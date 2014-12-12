@@ -63,7 +63,7 @@ public class testCollisionWall : MonoBehaviour {
 				if(Physics.Raycast(player.transform.position + caps.center.y*transform.up, player.transform.forward, out hit, 1f))
 				{
 					normalVector = hit.normal;
-					Debug.Log ("Vector3.Dot(normalVector, Vector3.forward) = " + Vector3.Dot(normalVector, Vector3.forward));
+//					Debug.Log ("Vector3.Dot(normalVector, Vector3.forward) = " + Vector3.Dot(normalVector, Vector3.forward));
 				}
 
 				if(Vector3.Dot(collision.gameObject.transform.forward,-1*normalVector) > 0.6f)
@@ -87,6 +87,9 @@ public class testCollisionWall : MonoBehaviour {
 							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, player.transform.position.y, contact.point.z -0.42f);
 							caps.center = new Vector3(0,0.5f,0);
 							caps.height = 0.9f;
+							caps.radius = 0.36f;
+							characterControllerLogicScript.CoverPos += new Vector3(0, -0.8f,0);
+
 						}
 						characterControllerLogicScript.VecToAlignTo = normalVector;
 //						characterControllerLogicScript.BoundingBoxMinX = collider.bounds.min.x + 0.15f;
@@ -120,6 +123,10 @@ public class testCollisionWall : MonoBehaviour {
 							playerAnimator.SetBool(hash.crouchCoverBool, true);
 							caps.center = new Vector3(0,0.5f,0);
 							caps.height = 0.9f;
+							caps.radius = 0.36f;
+
+							characterControllerLogicScript.CoverPos += new Vector3(0, -0.8f,0);
+
 						}
 
 						characterControllerLogicScript.VecToAlignTo = normalVector;
@@ -149,6 +156,9 @@ public class testCollisionWall : MonoBehaviour {
 							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x + 0.42f, player.transform.position.y, contact.point.z);
 							caps.center = new Vector3(0,0.5f,0);
 							caps.height = 0.9f;
+							caps.radius = 0.36f;
+
+							characterControllerLogicScript.CoverPos += new Vector3(0, -0.8f,0);
 						}
 
 						characterControllerLogicScript.VecToAlignTo = normalVector;
