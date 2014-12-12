@@ -1,0 +1,217 @@
+fileFormatVersion: 2
+guid: 135e82d4dd27745f698ebef8d1a08603
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: ElectricL1
+    100002: ElectricL2
+    100004: ElectricR1
+    100006: ElectricR2
+    100008: PipeBassL1
+    100010: pipeBassLCorner1
+    100012: PipeBassR1
+    100014: pipeBassRCorner1
+    100016: PipeBatchR1
+    100018: PipeBatchR2
+    100020: //RootNode
+    100022: PipeGrp
+    100024: PipeLBend1
+    100026: PipeLBend2
+    100028: PipeLBend3
+    100030: PipeLongRBend1
+    100032: PipeLongRBend2
+    100034: PipeRBend1
+    100036: PipeRBend2
+    100038: PipeSlimTwinL1
+    100040: PipeSlimTwinL2
+    100042: PipeSlimTwinL3
+    100044: PipeSlimTwinR1
+    100046: PowerR1
+    100048: PowerR1 1
+    100050: PowerR1 2
+    100052: PowerR1 3
+    100054: PowerR2
+    100056: PowerR2 1
+    100058: PowerR2 2
+    100060: PowerR3
+    100062: TubeR1
+    100064: TubeR1 1
+    100066: TubeR1 2
+    100068: TubeR1 3
+    400000: ElectricL1
+    400002: ElectricL2
+    400004: ElectricR1
+    400006: ElectricR2
+    400008: PipeBassL1
+    400010: pipeBassLCorner1
+    400012: PipeBassR1
+    400014: pipeBassRCorner1
+    400016: PipeBatchR1
+    400018: PipeBatchR2
+    400020: PipeGrp
+    400022: //RootNode
+    400024: PipeLBend1
+    400026: PipeLBend2
+    400028: PipeLBend3
+    400030: PipeLongRBend1
+    400032: PipeLongRBend2
+    400034: PipeRBend1
+    400036: PipeRBend2
+    400038: PipeSlimTwinL1
+    400040: PipeSlimTwinL2
+    400042: PipeSlimTwinL3
+    400044: PipeSlimTwinR1
+    400046: PowerR1
+    400048: PowerR1 1
+    400050: PowerR1 2
+    400052: PowerR1 3
+    400054: PowerR2
+    400056: PowerR2 1
+    400058: PowerR2 2
+    400060: PowerR3
+    400062: TubeR1
+    400064: TubeR1 1
+    400066: TubeR1 2
+    400068: TubeR1 3
+    2300000: PipeBassL1
+    2300002: pipeBassLCorner1
+    2300004: PipeBassR1
+    2300006: pipeBassRCorner1
+    2300008: PipeBatchR1
+    2300010: PipeBatchR2
+    2300012: PipeLBend1
+    2300014: PipeLBend2
+    2300016: PipeLBend3
+    2300018: PipeLongRBend1
+    2300020: PipeLongRBend2
+    2300022: PipeRBend1
+    2300024: PipeRBend2
+    2300026: PipeSlimTwinL1
+    2300028: PipeSlimTwinL2
+    2300030: PipeSlimTwinL3
+    2300032: PipeSlimTwinR1
+    2300034: PowerR1
+    2300036: PowerR1 1
+    2300038: PowerR1 2
+    2300040: PowerR1 3
+    2300042: PowerR2
+    2300044: PowerR2 1
+    2300046: PowerR2 2
+    2300048: PowerR3
+    2300050: TubeR1
+    2300052: TubeR1 1
+    2300054: TubeR1 2
+    2300056: TubeR1 3
+    3300000: PipeBassL1
+    3300002: pipeBassLCorner1
+    3300004: PipeBassR1
+    3300006: pipeBassRCorner1
+    3300008: PipeBatchR1
+    3300010: PipeBatchR2
+    3300012: PipeLBend1
+    3300014: PipeLBend2
+    3300016: PipeLBend3
+    3300018: PipeLongRBend1
+    3300020: PipeLongRBend2
+    3300022: PipeRBend1
+    3300024: PipeRBend2
+    3300026: PipeSlimTwinL1
+    3300028: PipeSlimTwinL2
+    3300030: PipeSlimTwinL3
+    3300032: PipeSlimTwinR1
+    3300034: PowerR1
+    3300036: PowerR1 1
+    3300038: PowerR1 2
+    3300040: PowerR1 3
+    3300042: PowerR2
+    3300044: PowerR2 1
+    3300046: PowerR2 2
+    3300048: PowerR3
+    3300050: TubeR1
+    3300052: TubeR1 1
+    3300054: TubeR1 2
+    3300056: TubeR1 3
+    4300000: PipeBatchR1
+    4300002: PipeBatchR2
+    4300004: PipeBassL1
+    4300006: PipeBassR1
+    4300008: pipeBassLCorner1
+    4300010: pipeBassRCorner1
+    4300012: PipeSlimTwinL1
+    4300014: PipeSlimTwinL2
+    4300016: PipeSlimTwinL3
+    4300018: PipeSlimTwinR1
+    4300020: PipeLBend1
+    4300022: PipeLBend2
+    4300024: PipeLBend3
+    4300026: PipeRBend1
+    4300028: PipeRBend2
+    4300030: PipeLongRBend1
+    4300032: PipeLongRBend2
+    4300034: TubeR1
+    4300036: PowerR1
+    4300038: PowerR2
+    4300040: TubeR1
+    4300042: PowerR1
+    4300044: PowerR2
+    4300046: PowerR3
+    4300048: TubeR1
+    4300050: PowerR1
+    4300052: TubeR1
+    4300054: PowerR1
+    4300056: PowerR2
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 

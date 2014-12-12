@@ -1,0 +1,119 @@
+fileFormatVersion: 2
+guid: 88ff03a6ca7704b9e92bef495b525eb4
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: BoxGrp
+    100004: WoodenBox_1
+    100006: WoodenBox_10
+    100008: WoodenBox_11
+    100010: WoodenBox_2
+    100012: WoodenBox_3
+    100014: WoodenBox_4
+    100016: WoodenBox_5
+    100018: WoodenBox_6
+    100020: WoodenBox_7
+    100022: WoodenBox_8
+    100024: WoodenBox_9
+    400000: //RootNode
+    400002: BoxGrp
+    400004: WoodenBox_1
+    400006: WoodenBox_10
+    400008: WoodenBox_11
+    400010: WoodenBox_2
+    400012: WoodenBox_3
+    400014: WoodenBox_4
+    400016: WoodenBox_5
+    400018: WoodenBox_6
+    400020: WoodenBox_7
+    400022: WoodenBox_8
+    400024: WoodenBox_9
+    2300000: WoodenBox_1
+    2300002: WoodenBox_10
+    2300004: WoodenBox_11
+    2300006: WoodenBox_2
+    2300008: WoodenBox_3
+    2300010: WoodenBox_4
+    2300012: WoodenBox_5
+    2300014: WoodenBox_6
+    2300016: WoodenBox_7
+    2300018: WoodenBox_8
+    2300020: WoodenBox_9
+    3300000: WoodenBox_1
+    3300002: WoodenBox_10
+    3300004: WoodenBox_11
+    3300006: WoodenBox_2
+    3300008: WoodenBox_3
+    3300010: WoodenBox_4
+    3300012: WoodenBox_5
+    3300014: WoodenBox_6
+    3300016: WoodenBox_7
+    3300018: WoodenBox_8
+    3300020: WoodenBox_9
+    4300000: WoodenBox_1
+    4300002: WoodenBox_2
+    4300004: WoodenBox_3
+    4300006: WoodenBox_4
+    4300008: WoodenBox_5
+    4300010: WoodenBox_6
+    4300012: WoodenBox_7
+    4300014: WoodenBox_8
+    4300016: WoodenBox_9
+    4300018: WoodenBox_10
+    4300020: WoodenBox_11
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 

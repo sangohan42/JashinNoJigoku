@@ -4,6 +4,7 @@ using System.Collections;
 public class rotateItem : MonoBehaviour {
 
 	private float degreesPerSecond;
+
 	// Use this for initialization
 	void Start () {
 		degreesPerSecond = 160;
@@ -18,8 +19,16 @@ public class rotateItem : MonoBehaviour {
 	{
 		if(other.gameObject.CompareTag(DoneTags.player))
 		{
+			other.gameObject.GetComponent<CharacterControllerLogic>().GotKey = true;
 			Destroy (this.gameObject);
+//			StartCoroutine(Destroytimer ());
 		}
+	}
+
+	IEnumerator Destroytimer()
+	{
+		yield return new WaitForSeconds (animation["GetItem"].length);
+		Destroy (this.gameObject);
 	}
 }
 

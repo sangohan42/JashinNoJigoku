@@ -84,7 +84,7 @@ public class CharacterControllerLogic : MonoBehaviour
 
 	private Vector3 savedCamPosition;
 	private Quaternion savedCamRotation;
-	
+
 	private bool inCoverMode;
 	private bool inPositioningCoverModeCam;
 	private bool playerPlaced;
@@ -117,6 +117,8 @@ public class CharacterControllerLogic : MonoBehaviour
 
 	private int buildingMask;
 	private int NPCMask;
+
+	private bool gotKey;
 
 	
 	#endregion
@@ -294,8 +296,20 @@ public class CharacterControllerLogic : MonoBehaviour
 			this.isPursued = value;
 		}
 	}
-	
-	public float LocomotionThreshold { get { return 0.15f; } }
+
+	public bool GotKey
+	{
+		get
+	{
+		return this.gotKey;
+	}
+	set
+	{
+		this.gotKey = value;
+	}
+}
+
+public float LocomotionThreshold { get { return 0.15f; } }
 	
 	#endregion
 	
@@ -368,6 +382,7 @@ public class CharacterControllerLogic : MonoBehaviour
 
 		NPCMask = 1 << buildingMask;
 
+	
 	}
 
 	private void CompensateForWalls(Vector3 fromObject, ref Vector3 toTarget)
@@ -499,12 +514,6 @@ public class CharacterControllerLogic : MonoBehaviour
 			}
 		}
 
-//		else if(inLookAroundMode)
-//		{
-//			gamecam.transform.localPosition = lookAroundPos;
-//			gamecam.transform.localEulerAngles = lookAroundRot;
-//		}
-
 	}
 	
 	/// Update is called once per frame.
@@ -524,7 +533,6 @@ public class CharacterControllerLogic : MonoBehaviour
 
 		if (Input.GetButtonDown("PanoramicView") && joyX == 0 && joyY == 0)
 		{
-//			Debug.Log ("TOUCH");
 			if(!isInPanoramicView)
 			{
 				isInPanoramicView = true;
@@ -611,8 +619,8 @@ public class CharacterControllerLogic : MonoBehaviour
 
 					transform.forward = vecToAlignTo;
 					transform.position = positionToPlaceTo;
-					gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, 15*Time.deltaTime);
-					gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, 15*Time.deltaTime);
+					gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, 13*Time.deltaTime);
+					gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, 13*Time.deltaTime);
 //					Debug.Log ("positionToPlaceTo = "+positionToPlaceTo);
 //					Debug.Break ();
 				}
@@ -624,7 +632,7 @@ public class CharacterControllerLogic : MonoBehaviour
 //					transform.position = positionToPlaceTo;
 
 //					Vector3 currPos = transform.position;
-//					currPos.y = 0;
+//					currPos.y = -0.015f;
 //					transform.position = currPos;
 
 					if(inLookAroundMode)
@@ -645,7 +653,7 @@ public class CharacterControllerLogic : MonoBehaviour
 					switch(currentCoverState)
 					{
 						case CoverState.onDownFace:
-							if(joyY > -0.4f)
+							if(joyY > -0.3f)
 							{
 								speed = Mathf.Abs (joyX);
 								direction = joyX;
@@ -698,7 +706,6 @@ public class CharacterControllerLogic : MonoBehaviour
 										//COME BACK TO NORMAL COVER
 										if(direction >=0)
 										{
-											Debug.Log("EXIT THE LOOK AROUND");
 
 											inCoverMode = false;
 											camSwitchDamp = 7f;
@@ -736,15 +743,15 @@ public class CharacterControllerLogic : MonoBehaviour
 								lookAroundPosRight = lookAroundPosRightCopy;
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
-								caps.center = new Vector3(0,1.03f,0);
-								caps.height = 2.07f;
+								caps.center = new Vector3(0,1f,0.02f);
+								caps.height = 2;
 								caps.radius = 0.25f;
 
-							}
+						}
 							break;
 
 						case CoverState.OnLeftFace:
-							if(joyY > -0.4f)
+							if(joyY > -0.3f)
 							{
 								speed = Mathf.Abs (joyX);
 								direction = joyX;
@@ -832,15 +839,16 @@ public class CharacterControllerLogic : MonoBehaviour
 								lookAroundPosRight = lookAroundPosRightCopy;
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
-								caps.center = new Vector3(0,1.03f,0);
-								caps.height = 2.07f;
+								caps.center = new Vector3(0,1f,0.02f);
+								caps.height = 2;
 								caps.radius = 0.25f;
 
-							}
+							
+						}
 							break;
 
 						case CoverState.OnRightFace:
-							if(joyY > -0.4f)
+							if(joyY > -0.3f)
 							{
 								speed = Mathf.Abs (joyX);
 								direction = joyX;
@@ -927,11 +935,11 @@ public class CharacterControllerLogic : MonoBehaviour
 								lookAroundPosRight = lookAroundPosRightCopy;
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
-								caps.center = new Vector3(0,1.03f,0);
-								caps.height = 2.07f;
+								caps.center = new Vector3(0,1f,0.02f);
+								caps.height = 2;
 								caps.radius = 0.25f;
 
-							}
+						}
 							break;
 
 						default:

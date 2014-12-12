@@ -85,10 +85,10 @@ public class testCollisionWall : MonoBehaviour {
 						{
 							playerAnimator.SetBool(hash.crouchCoverBool, true);
 							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, player.transform.position.y, contact.point.z -0.42f);
-							caps.center = new Vector3(0,0.5f,0);
-							caps.height = 0.9f;
-							caps.radius = 0.36f;
-							characterControllerLogicScript.CoverPos += new Vector3(0, -0.8f,0);
+//							caps.center = new Vector3(0,0.65f,-0.05f);
+//							caps.height = 1f;
+//							caps.radius = 0.36f;
+							characterControllerLogicScript.CoverPos += new Vector3(0, -0.9f,0);
 
 						}
 						characterControllerLogicScript.VecToAlignTo = normalVector;
@@ -181,7 +181,7 @@ public class testCollisionWall : MonoBehaviour {
 		//We get the angle to first know how the object is rotated;
 		float angle = transform.localEulerAngles.y;
 		if(angle >180)angle = angle -360f;
-		Debug.Log ("angle = " + angle);
+//		Debug.Log ("angle = " + angle);
 
 		switch(currFace)
 		{
