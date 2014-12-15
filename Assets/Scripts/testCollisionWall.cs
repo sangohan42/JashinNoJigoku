@@ -45,8 +45,12 @@ public class testCollisionWall : MonoBehaviour {
 			size = currCollider.size;
 		}
 	}
-	
-	void OnCollisionEnter(Collision collision) {
+
+//	void OnCollisionStay(Collision collisionInfo) {
+//		Debug.Log ("CALLED");
+//
+//	}
+		void OnCollisionEnter(Collision collision) {
 
 		//If the player collide and was in Locomotion
 		if(collision.gameObject.CompareTag(DoneTags.player) && 
@@ -55,9 +59,9 @@ public class testCollisionWall : MonoBehaviour {
 		        !characterControllerLogicScript.IsPursued)
 		{
 			ContactPoint contact = collision.contacts[0];
+
 			if (collision.relativeVelocity.magnitude > 1)
 			{
-
 				RaycastHit hit;
 				Vector3 normalVector = Vector3.zero;
 				if(Physics.Raycast(player.transform.position + caps.center.y*transform.up, player.transform.forward, out hit, 1f))
@@ -72,7 +76,7 @@ public class testCollisionWall : MonoBehaviour {
 					//DOWN FACE
 					if(Vector3.Dot(normalVector, Vector3.forward) < -0.707f)
 					{
-						Debug.Log ("DOWN FACE");
+//						Debug.Log ("DOWN FACE");
 						currFace = Face.DOWN;
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
@@ -108,7 +112,7 @@ public class testCollisionWall : MonoBehaviour {
 					//LEFT FACE
 					if(Vector3.Dot(normalVector, Vector3.left) > 0.707f)
 					{
-						Debug.Log ("LEFT FACE");
+//						Debug.Log ("LEFT FACE");
 						currFace = Face.LEFT;
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
@@ -141,7 +145,7 @@ public class testCollisionWall : MonoBehaviour {
 					//RIGHT FACE
 					if(Vector3.Dot(normalVector, Vector3.left) < -0.707f)
 					{
-						Debug.Log ("RIGHT FACE");
+//						Debug.Log ("RIGHT FACE");
 						currFace = Face.RIGHT;
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;

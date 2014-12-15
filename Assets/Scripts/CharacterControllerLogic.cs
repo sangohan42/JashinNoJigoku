@@ -621,8 +621,6 @@ public float LocomotionThreshold { get { return 0.15f; } }
 					transform.position = positionToPlaceTo;
 					gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, 13*Time.deltaTime);
 					gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, 13*Time.deltaTime);
-//					Debug.Log ("positionToPlaceTo = "+positionToPlaceTo);
-//					Debug.Break ();
 				}
 				else
 				{
@@ -640,20 +638,11 @@ public float LocomotionThreshold { get { return 0.15f; } }
 						gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, currentLookAroundPos, 7f*Time.deltaTime);
 						gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, currentLookAroundRot, 7f*Time.deltaTime);
 					}
-//
-//					Vector3 stickDirection = new Vector3 (joyX, 0, joyY).normalized;
-//					Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
-//					
-//					float angleRootToMove = Vector3.Angle(transform.forward, stickDirection) * (axisSign.y < 0 ? -1f : 1f);
-//
-//					direction = angleRootToMove * directionSpeed / 180f;
-					
-//					charAngle = angleRootToMove;
 
 					switch(currentCoverState)
 					{
 						case CoverState.onDownFace:
-							if(joyY > -0.3f)
+							if(joyY > 0f)
 							{
 								speed = Mathf.Abs (joyX);
 								direction = joyX;
@@ -751,7 +740,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 							break;
 
 						case CoverState.OnLeftFace:
-							if(joyY > -0.3f)
+							if(joyY > 0f)
 							{
 								speed = Mathf.Abs (joyX);
 								direction = joyX;
@@ -848,7 +837,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 							break;
 
 						case CoverState.OnRightFace:
-							if(joyY > -0.3f)
+							if(joyY > 0f)
 							{
 								speed = Mathf.Abs (joyX);
 								direction = joyX;
