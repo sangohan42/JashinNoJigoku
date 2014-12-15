@@ -78,11 +78,18 @@ public class DoneEnemyAnimation : MonoBehaviour
 			speed = Vector3.Project(nav.desiredVelocity, transform.forward).magnitude;
 
 //			Debug.Log ("desired Velocity = " + nav.desiredVelocity);
-			
+			if(enemySight.inPursuit)
+			{
+				Vector3 vecFromEnemyToHeardPosition = enemySight.personalLastSighting - transform.position;
+				angle = FindAngle(transform.forward,vecFromEnemyToHeardPosition, transform.up);
+//				speed = Vector3.Project(nav.desiredVelocity, transform.forward).magnitude;
+//				Debug.Log ("new Angle = " + angle);
+//				Debug.Log ("new Speed = " + speed);
+			}
+			else
 			// ... and the angle is the angle between forward and the desired velocity.
 			angle = FindAngle(transform.forward, nav.desiredVelocity, transform.up);
 
-//			Debug.Log ("Angle = " + angle);
 
 			// If the angle is within the deadZone...
 			if(Mathf.Abs(angle) < deadZone)
