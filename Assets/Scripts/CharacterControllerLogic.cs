@@ -387,7 +387,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 		camPanoramicPosition = GameObject.Find ("CameraPanoramic").transform.position;
 		camPanoramicRotation = Vector3.zero;
 
-		camRotationWhenCloseToBorder = new Vector3 (40f, 0, 0);
+		camRotationWhenCloseToBorder = new Vector3 (45f, 0, 0);
 
 		isPlayerCloseToBorder = false;
 
