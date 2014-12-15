@@ -13,7 +13,7 @@ public class rotateItem : MonoBehaviour {
 		stopRotating = false;
 		foreach (Transform child in transform)
 		{
-			if(child.gameObject.name == "KeyRadar")
+			if(child.gameObject.name == "Radar")
 			{
 				keyOnRadar = child.gameObject;
 			}
@@ -47,10 +47,10 @@ public class rotateItem : MonoBehaviour {
 			renderer.enabled = false;
 
 			//destroy key rendering on radar
-			Destroy(keyOnRadar);
+			keyOnRadar.renderer.enabled = false;
 
 			//Enable text and play animation
-			keyText.SetActive(true);
+			keyText.renderer.enabled =true;
 
 			animation.Play("objectCatching");
 
