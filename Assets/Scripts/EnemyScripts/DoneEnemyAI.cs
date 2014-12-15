@@ -58,16 +58,16 @@ public class DoneEnemyAI : MonoBehaviour
 		// Create a vector from the enemy to the last sighting of the player.
 		Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
 //		Debug.Log ("Distance = " + sightingDeltaPos.magnitude);
-		if(sightingDeltaPos.magnitude < enemySight.shootingDistance)
+		if(sightingDeltaPos.magnitude <= enemySight.shootingDistance)
 		{
-//			Debug.Log ("STOP ANIM");
+			Debug.Log ("Stop navmesh");
 			nav.Stop();
 		}
 
 		else
 		{
 			// If the last personal sighting of the player is not close...
-			if(sightingDeltaPos.sqrMagnitude > 5f)
+//			if(sightingDeltaPos.sqrMagnitude > 5f)
 			nav.destination = enemySight.personalLastSighting;
 
 			// Set the appropriate speed for the NavMeshAgent.
@@ -93,11 +93,14 @@ public class DoneEnemyAI : MonoBehaviour
 			
 			// Set the appropriate speed for the NavMeshAgent.
 			nav.speed = chaseSpeed;
-			
+
+//			Debug.Log ("nav.remainingDistance = " + nav.remainingDistance);
+//			Debug.Log ("nav.stoppingDistance = " + nav.stoppingDistance);
+
 			// If near the last personal sighting...
 			if(nav.remainingDistance < nav.stoppingDistance)
 			{
-//				Debug.Log ("Increment timer");
+				Debug.Log ("Increment timer");
 				// ... increment the timer.
 				chaseTimer += Time.deltaTime;
 				
@@ -125,7 +128,7 @@ public class DoneEnemyAI : MonoBehaviour
 			Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
 			
 			// If the last personal sighting of the player is not close...
-			if(sightingDeltaPos.sqrMagnitude > 4f)
+			if(sightingDeltaPos.sqrMagnitude > 5f)
 				// ... set the destination for the NavMeshAgent to the position of the player.
 				nav.destination = enemySight.personalLastSighting;
 			

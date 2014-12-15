@@ -144,6 +144,7 @@ public class DoneEnemySight : MonoBehaviour
 
 			float angle = Vector3.Angle(direction, transform.forward);
 
+//			Debug.Log ("Angle = " + angle);
 			// Store the name hashes of the current states.
 			int playerLayerZeroStateHash = playerAnim.GetCurrentAnimatorStateInfo(0).nameHash;
 
