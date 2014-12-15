@@ -60,7 +60,6 @@ public class DoneEnemyAI : MonoBehaviour
 //		Debug.Log ("Distance = " + sightingDeltaPos.magnitude);
 		if(sightingDeltaPos.magnitude <= enemySight.shootingDistance)
 		{
-			Debug.Log ("Stop navmesh");
 			nav.Stop();
 		}
 
@@ -100,7 +99,7 @@ public class DoneEnemyAI : MonoBehaviour
 			// If near the last personal sighting...
 			if(nav.remainingDistance < nav.stoppingDistance)
 			{
-				Debug.Log ("Increment timer");
+//				Debug.Log ("Increment timer");
 				// ... increment the timer.
 				chaseTimer += Time.deltaTime;
 				

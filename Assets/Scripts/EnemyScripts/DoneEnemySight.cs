@@ -96,15 +96,12 @@ public class DoneEnemySight : MonoBehaviour
 			{
 				FOV.renderer.material.SetTexture("_MainTex", FOV2);
 				resetFOVColor = false;
-				characterControllerLogicScript.IsPursued = true;
-
 			}
 
 			else if(anim.GetBool(hash.inPatrolBool) == true && !resetFOVColor)
 			{
 				FOV.renderer.material.SetTexture("_MainTex",FOV1);
 				resetFOVColor = true;
-				characterControllerLogicScript.IsPursued = false;
 			}
 
 		}

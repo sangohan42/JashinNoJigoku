@@ -4,9 +4,11 @@ using System.Collections;
 public class OpenDoor : MonoBehaviour {
 
 	private CharacterControllerLogic characterLogicScript;
+	private bool isOpened;
 	// Use this for initialization
 	void Start () {
 		characterLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
+		isOpened = false;
 	}
 	
 	// Update is called once per frame
@@ -24,6 +26,7 @@ public class OpenDoor : MonoBehaviour {
 				{
 				}
 				animation.Play("openDoor");
+				isOpened = true;
 			}
 		}
 	}
@@ -32,11 +35,16 @@ public class OpenDoor : MonoBehaviour {
 	{
 		if(collider.gameObject.CompareTag(DoneTags.player))
 		{
-			while(animation.isPlaying)
+			if(isOpened)
 			{
-			}
 
-			animation.Play("closeDoor");
+				while(animation.isPlaying)
+				{
+				}
+
+				animation.Play("closeDoor");
+				isOpened = false;
+			}
 
 		}
 	}
