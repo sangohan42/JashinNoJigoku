@@ -611,6 +611,10 @@ public float LocomotionThreshold { get { return 0.15f; } }
 					transform.position = positionToPlaceTo;
 					playerPlaced = true;
 
+					Vector3 currPos = transform.position;
+					currPos.y = -0.02f;
+					transform.position = currPos;
+
 					//We verify that the coverPos is OK or if there is a wall between the player and the camera
 					//If there is a wall we change the coverPos as well as the lookingAroundPos
 					CompensateForWalls(transform.position, ref coverPos);
@@ -632,6 +636,10 @@ public float LocomotionThreshold { get { return 0.15f; } }
 
 					transform.forward = vecToAlignTo;
 					transform.position = positionToPlaceTo;
+
+					Vector3 currPos = transform.position;
+					currPos.y = -0.02f;
+					transform.position = currPos;
 					gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, coverPos, 13*Time.deltaTime);
 					gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, coverRot, 13*Time.deltaTime);
 //					Debug.Log ("positionToPlaceTo = "+positionToPlaceTo);

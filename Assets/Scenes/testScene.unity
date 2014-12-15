@@ -1478,8 +1478,8 @@ MonoBehaviour:
   turnSmoothing: 15
   smooth: 5
   maxAngleInPanoramicView: 120
-  levelMaxX: 14
-  levelMinX: -12.6999998
+  levelMaxX: 13.5
+  levelMinX: -12.5
 --- !u!136 &79445559
 CapsuleCollider:
   m_ObjectHideFlags: 0
