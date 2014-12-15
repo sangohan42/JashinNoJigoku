@@ -86,6 +86,7 @@ public class CharacterControllerLogic : MonoBehaviour
 	private Quaternion savedCamRotation;
 
 	private bool inCoverMode;
+	private bool inCrouchCoverMode;
 	private bool inPositioningCoverModeCam;
 	private bool playerPlaced;
 	private bool inModifyCoverPos;
@@ -307,7 +308,19 @@ public class CharacterControllerLogic : MonoBehaviour
 	{
 		this.gotKey = value;
 	}
-}
+	}
+
+	public bool InCrouchCoverMode
+	{
+		get
+		{
+			return this.inCrouchCoverMode;
+		}
+		set
+		{
+			this.inCrouchCoverMode = value;
+		}
+	}
 
 public float LocomotionThreshold { get { return 0.15f; } }
 	
@@ -388,17 +401,11 @@ public float LocomotionThreshold { get { return 0.15f; } }
 	private void CompensateForWalls(Vector3 fromObject, ref Vector3 toTarget)
 	{
 		Vector3 globalTargetPos = fromObject + Vector3.up + transform.forward *toTarget.z;
-//		Debug.Log ("Global Target Pos = " + globalTargetPos);
 		// Compensate for walls between camera
 		RaycastHit wallHit = new RaycastHit();	
-//		Debug.DrawRay(fromObject + Vector3.up, globalTargetPos, Color.red);
-//		Debug.DrawRay(fromObject + Vector3.up, fromObject + Vector3.up + transform.forward, Color.cyan);
-//
-//		Debug.Break ();
+
 		if (Physics.Linecast(fromObject, globalTargetPos, out wallHit, NPCMask)) 
 		{
-//			Debug.Log("wallHit.point = " + wallHit.point);
-//			Debug.DrawRay(wallHit.point, wallHit.normal, Color.gray);
 			if(currentCoverState == CoverState.OnLeftFace || currentCoverState == CoverState.OnRightFace)
 			{
 				float modifValue = Mathf.Abs(wallHit.point.x - fromObject.x);
@@ -607,6 +614,12 @@ public float LocomotionThreshold { get { return 0.15f; } }
 					//We verify that the coverPos is OK or if there is a wall between the player and the camera
 					//If there is a wall we change the coverPos as well as the lookingAroundPos
 					CompensateForWalls(transform.position, ref coverPos);
+					if(inCrouchCoverMode)
+					{
+						caps.center = new Vector3(0,0.5f,0);
+						caps.height = 0.9f;
+						caps.radius = 0.3f;
+					}
 
 				}
 				//We place the camera to the right position
@@ -631,29 +644,20 @@ public float LocomotionThreshold { get { return 0.15f; } }
 					transform.forward = vecToAlignTo;
 //					transform.position = positionToPlaceTo;
 
-//					Vector3 currPos = transform.position;
-//					currPos.y = -0.015f;
-//					transform.position = currPos;
+					Vector3 currPos = transform.position;
+					currPos.y = -0.02f;
+					transform.position = currPos;
 
 					if(inLookAroundMode)
 					{
 						gamecam.transform.localPosition = Vector3.Lerp(gamecam.transform.localPosition, currentLookAroundPos, 7f*Time.deltaTime);
 						gamecam.transform.localEulerAngles = Vector3.Lerp(gamecam.transform.localEulerAngles, currentLookAroundRot, 7f*Time.deltaTime);
 					}
-//
-//					Vector3 stickDirection = new Vector3 (joyX, 0, joyY).normalized;
-//					Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
-//					
-//					float angleRootToMove = Vector3.Angle(transform.forward, stickDirection) * (axisSign.y < 0 ? -1f : 1f);
-//
-//					direction = angleRootToMove * directionSpeed / 180f;
-					
-//					charAngle = angleRootToMove;
 
 					switch(currentCoverState)
 					{
 						case CoverState.onDownFace:
-							if(joyY > -0.3f)
+							if(joyY > -0.2f)
 							{
 								speed = Mathf.Abs (joyX);
 								direction = joyX;
@@ -743,15 +747,19 @@ public float LocomotionThreshold { get { return 0.15f; } }
 								lookAroundPosRight = lookAroundPosRightCopy;
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
-								caps.center = new Vector3(0,1f,0.02f);
-								caps.height = 2;
-								caps.radius = 0.25f;
+								if(inCrouchCoverMode)
+								{
+									caps.center = new Vector3(0,1f,0.02f);
+									caps.height = 2;
+									caps.radius = 0.25f;
+									inCrouchCoverMode = false;
+								}
+							}
 
-						}
 							break;
 
 						case CoverState.OnLeftFace:
-							if(joyY > -0.3f)
+							if(joyY > -0.2f)
 							{
 								speed = Mathf.Abs (joyX);
 								direction = joyX;
@@ -839,16 +847,19 @@ public float LocomotionThreshold { get { return 0.15f; } }
 								lookAroundPosRight = lookAroundPosRightCopy;
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
-								caps.center = new Vector3(0,1f,0.02f);
-								caps.height = 2;
-								caps.radius = 0.25f;
-
+								if(inCrouchCoverMode)
+								{
+									caps.center = new Vector3(0,1f,0.02f);
+									caps.height = 2;
+									caps.radius = 0.25f;
+									inCrouchCoverMode = false;
+								}
 							
-						}
+							}
 							break;
 
 						case CoverState.OnRightFace:
-							if(joyY > -0.3f)
+							if(joyY > -0.2f)
 							{
 								speed = Mathf.Abs (joyX);
 								direction = joyX;
@@ -935,11 +946,15 @@ public float LocomotionThreshold { get { return 0.15f; } }
 								lookAroundPosRight = lookAroundPosRightCopy;
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
-								caps.center = new Vector3(0,1f,0.02f);
-								caps.height = 2;
-								caps.radius = 0.25f;
+								if(inCrouchCoverMode)
+								{
+									caps.center = new Vector3(0,1f,0.02f);
+									caps.height = 2;
+									caps.radius = 0.25f;
+									inCrouchCoverMode = false;
+								}
 
-						}
+							}
 							break;
 
 						default:

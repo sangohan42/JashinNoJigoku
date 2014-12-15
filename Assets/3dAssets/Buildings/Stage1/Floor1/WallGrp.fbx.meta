@@ -15,6 +15,45 @@ ModelImporter:
     100018: WallR_1
     100020: WallR_2
     100022: EntranceDoorGrp
+    100024: EntranceWall3
+    100026: EntranceWall4
+    100028: WallL_12
+    100030: WallL_13
+    100032: WallL_14
+    100034: WallL_15
+    100036: WallL_16
+    100038: WallL_17
+    100040: WallL_25
+    100042: WallL_26
+    100044: WallL_27
+    100046: WallL_28
+    100048: WallL_29
+    100050: WallL_30
+    100052: WallL_31
+    100054: WallR_10
+    100056: WallR_11
+    100058: WallR_12
+    100060: WallR_13
+    100062: WallR_14
+    100064: WallR_17
+    100066: WallR_3
+    100068: WallR_4
+    100070: WallR_5
+    100072: WallR_6
+    100074: WallR_7
+    100076: WallR_8
+    100078: WallR_9
+    100080: WallTop_1
+    100082: WallTop_2
+    100084: WallTop_3
+    100086: EntranceWallHigh
+    100088: EntranceWallLow
+    100090: WallL_3
+    100092: WallL_4
+    100094: WallL_5
+    100096: WallL_6
+    100098: WallL_7
+    100100: WallL_8
     400000: EntranceColumnL
     400002: EntranceColumnR
     400004: EntranceDoorL
@@ -27,6 +66,45 @@ ModelImporter:
     400018: WallR_1
     400020: WallR_2
     400022: EntranceDoorGrp
+    400024: EntranceWall3
+    400026: EntranceWall4
+    400028: WallL_12
+    400030: WallL_13
+    400032: WallL_14
+    400034: WallL_15
+    400036: WallL_16
+    400038: WallL_17
+    400040: WallL_25
+    400042: WallL_26
+    400044: WallL_27
+    400046: WallL_28
+    400048: WallL_29
+    400050: WallL_30
+    400052: WallL_31
+    400054: WallR_10
+    400056: WallR_11
+    400058: WallR_12
+    400060: WallR_13
+    400062: WallR_14
+    400064: WallR_17
+    400066: WallR_3
+    400068: WallR_4
+    400070: WallR_5
+    400072: WallR_6
+    400074: WallR_7
+    400076: WallR_8
+    400078: WallR_9
+    400080: WallTop_1
+    400082: WallTop_2
+    400084: WallTop_3
+    400086: EntranceWallHigh
+    400088: EntranceWallLow
+    400090: WallL_3
+    400092: WallL_4
+    400094: WallL_5
+    400096: WallL_6
+    400098: WallL_7
+    400100: WallL_8
     2300000: EntranceColumnL
     2300002: EntranceColumnR
     2300004: EntranceDoorL
@@ -36,6 +114,43 @@ ModelImporter:
     2300012: WallL_2
     2300014: WallR_1
     2300016: WallR_2
+    2300018: WallL_12
+    2300020: WallL_13
+    2300022: WallL_14
+    2300024: WallL_15
+    2300026: WallL_16
+    2300028: WallL_17
+    2300030: WallL_25
+    2300032: WallL_26
+    2300034: WallL_27
+    2300036: WallL_28
+    2300038: WallL_29
+    2300040: WallL_30
+    2300042: WallL_31
+    2300044: WallR_10
+    2300046: WallR_11
+    2300048: WallR_12
+    2300050: WallR_13
+    2300052: WallR_14
+    2300054: WallR_17
+    2300056: WallR_3
+    2300058: WallR_4
+    2300060: WallR_5
+    2300062: WallR_6
+    2300064: WallR_7
+    2300066: WallR_8
+    2300068: WallR_9
+    2300070: WallTop_1
+    2300072: WallTop_2
+    2300074: WallTop_3
+    2300076: EntranceWallHigh
+    2300078: EntranceWallLow
+    2300080: WallL_3
+    2300082: WallL_4
+    2300084: WallL_5
+    2300086: WallL_6
+    2300088: WallL_7
+    2300090: WallL_8
     3300000: EntranceColumnL
     3300002: EntranceColumnR
     3300004: EntranceDoorL
@@ -45,6 +160,43 @@ ModelImporter:
     3300012: WallL_2
     3300014: WallR_1
     3300016: WallR_2
+    3300018: WallL_12
+    3300020: WallL_13
+    3300022: WallL_14
+    3300024: WallL_15
+    3300026: WallL_16
+    3300028: WallL_17
+    3300030: WallL_25
+    3300032: WallL_26
+    3300034: WallL_27
+    3300036: WallL_28
+    3300038: WallL_29
+    3300040: WallL_30
+    3300042: WallL_31
+    3300044: WallR_10
+    3300046: WallR_11
+    3300048: WallR_12
+    3300050: WallR_13
+    3300052: WallR_14
+    3300054: WallR_17
+    3300056: WallR_3
+    3300058: WallR_4
+    3300060: WallR_5
+    3300062: WallR_6
+    3300064: WallR_7
+    3300066: WallR_8
+    3300068: WallR_9
+    3300070: WallTop_1
+    3300072: WallTop_2
+    3300074: WallTop_3
+    3300076: EntranceWallHigh
+    3300078: EntranceWallLow
+    3300080: WallL_3
+    3300082: WallL_4
+    3300084: WallL_5
+    3300086: WallL_6
+    3300088: WallL_7
+    3300090: WallL_8
     4300000: EntranceDoorL
     4300002: EntranceDoorR
     4300004: EntranceColumnL
@@ -54,6 +206,43 @@ ModelImporter:
     4300012: WallL_1
     4300014: WallR_2
     4300016: WallR_1
+    4300018: WallR_17
+    4300020: WallR_3
+    4300022: WallR_4
+    4300024: WallR_5
+    4300026: WallR_6
+    4300028: WallR_7
+    4300030: WallR_8
+    4300032: WallR_9
+    4300034: WallR_10
+    4300036: WallR_11
+    4300038: WallR_12
+    4300040: WallR_13
+    4300042: WallR_14
+    4300044: WallL_12
+    4300046: WallL_13
+    4300048: WallL_14
+    4300050: WallL_15
+    4300052: WallL_16
+    4300054: WallL_17
+    4300056: WallTop_1
+    4300058: WallTop_2
+    4300060: WallTop_3
+    4300062: WallL_25
+    4300064: WallL_26
+    4300066: WallL_27
+    4300068: WallL_28
+    4300070: WallL_29
+    4300072: WallL_30
+    4300074: WallL_31
+    4300076: EntranceWallLow
+    4300078: EntranceWallHigh
+    4300080: WallL_3
+    4300082: WallL_4
+    4300084: WallL_5
+    4300086: WallL_6
+    4300088: WallL_7
+    4300090: WallL_8
     9500000: //RootNode
   materials:
     importMaterials: 0

@@ -1058,7 +1058,7 @@ Transition:
     m_ExitTime: .88219893
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
-    m_EventTreshold: .300000012
+    m_EventTreshold: .5
     m_ExitTime: .88219893
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
@@ -1126,7 +1126,7 @@ Transition:
     m_ExitTime: .75
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
-    m_EventTreshold: .300000012
+    m_EventTreshold: .200000003
     m_ExitTime: .75
   - m_ConditionMode: 2
     m_ConditionEvent: LookAround
@@ -1178,7 +1178,7 @@ Transition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: Speed
-    m_EventTreshold: .300000012
+    m_EventTreshold: .5
     m_ExitTime: .88219893
   - m_ConditionMode: 2
     m_ConditionEvent: LookAround
@@ -1234,7 +1234,7 @@ Transition:
     m_ExitTime: .840425551
   - m_ConditionMode: 4
     m_ConditionEvent: Speed
-    m_EventTreshold: .300000012
+    m_EventTreshold: .200000003
     m_ExitTime: .840425551
   - m_ConditionMode: 3
     m_ConditionEvent: Speed

@@ -84,6 +84,8 @@ public class DoneEnemySight : MonoBehaviour
 			         shootingLayerTransition == hash.Empty_WeaponShootTrans) && 
 			        interrogativePointObject.activeSelf == true)
 			{
+				FOV.renderer.material.SetTexture("_MainTex", FOV1);
+
 				interrogativePoint.Stop();
 				interrogativePointObject.SetActive(false);
 				anim.SetBool(hash.inYoujinBool, false);
