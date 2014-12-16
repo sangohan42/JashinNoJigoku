@@ -54,6 +54,8 @@ ModelImporter:
     100096: WallL_6
     100098: WallL_7
     100100: WallL_8
+    100102: EntranceDoorHigh
+    100104: EntranceDoorLow
     400000: EntranceColumnL
     400002: EntranceColumnR
     400004: EntranceDoorL
@@ -105,6 +107,8 @@ ModelImporter:
     400096: WallL_6
     400098: WallL_7
     400100: WallL_8
+    400102: EntranceDoorHigh
+    400104: EntranceDoorLow
     2300000: EntranceColumnL
     2300002: EntranceColumnR
     2300004: EntranceDoorL
@@ -151,6 +155,8 @@ ModelImporter:
     2300086: WallL_6
     2300088: WallL_7
     2300090: WallL_8
+    2300092: EntranceDoorHigh
+    2300094: EntranceDoorLow
     3300000: EntranceColumnL
     3300002: EntranceColumnR
     3300004: EntranceDoorL
@@ -197,6 +203,8 @@ ModelImporter:
     3300086: WallL_6
     3300088: WallL_7
     3300090: WallL_8
+    3300092: EntranceDoorHigh
+    3300094: EntranceDoorLow
     4300000: EntranceDoorL
     4300002: EntranceDoorR
     4300004: EntranceColumnL
@@ -243,6 +251,8 @@ ModelImporter:
     4300086: WallL_6
     4300088: WallL_7
     4300090: WallL_8
+    4300092: EntranceDoorLow
+    4300094: EntranceDoorHigh
     9500000: //RootNode
   materials:
     importMaterials: 0
