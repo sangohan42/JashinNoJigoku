@@ -217,7 +217,7 @@ public class Radar : MonoBehaviour
 			Vector3 extPos = go.transform.position;
 			
 			// Get the distance to the object from the centerObject
-			float dist = Vector3.Distance(centerPos, extPos);
+//			float dist = Vector3.Distance(centerPos, extPos);
 			
 			// Get the object's offset from the centerObject
 			float bX = centerPos.x - extPos.x;

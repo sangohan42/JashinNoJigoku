@@ -11,14 +11,12 @@ public class testCollisionObjects : MonoBehaviour {
 	private CapsuleCollider caps;
 
 	private enum Face{LEFT, RIGHT, DOWN};
-	private Face currFace;
 	private BoxCollider currCollider;
 	private Vector3 size;
-	private Vector3 boundMax;
-	private Vector3 boundMin;
+//	private Vector3 boundMax;
+//	private Vector3 boundMin;
 	
 	private float timeCollided;
-	private bool hasFirstCollided;
 	private static bool inCoverMode;
 	
 	private Vector3 normalVector;
@@ -32,7 +30,6 @@ public class testCollisionObjects : MonoBehaviour {
 		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
 		caps = player.GetComponent<CapsuleCollider> ();
 		timeCollided = 0;
-		hasFirstCollided = false;
 		inCoverMode = false;
 		normalVector = Vector3.zero;
 		
@@ -43,13 +40,12 @@ public class testCollisionObjects : MonoBehaviour {
 		if(collider is MeshCollider)
 		{
 			size = new Vector3 (collider.bounds.max.x - collider.bounds.min.x, collider.bounds.max.y - collider.bounds.min.y, collider.bounds.max.z - collider.bounds.min.z);
-			
 		}
 		else 
 		{
 			currCollider = (BoxCollider)collider;
-			boundMax = currCollider.bounds.max;
-			boundMin = currCollider.bounds.min;
+//			boundMax = currCollider.bounds.max;
+//			boundMin = currCollider.bounds.min;
 			size = currCollider.size;
 		}
 		
@@ -89,7 +85,6 @@ public class testCollisionObjects : MonoBehaviour {
 						if(Vector3.Dot(-1f*normalVector, Vector3.forward) > 0.707106)
 						{
 							Debug.Log ("DOWN FACE");
-							currFace = Face.DOWN;
 							characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 							characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
 
@@ -107,7 +102,6 @@ public class testCollisionObjects : MonoBehaviour {
 						else if(Vector3.Dot(-1f*normalVector, -1*Vector3.left) > 0.707106)
 						{
 							Debug.Log ("LEFT FACE");
-							currFace = Face.LEFT;
 							characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 							characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
 						
@@ -128,7 +122,6 @@ public class testCollisionObjects : MonoBehaviour {
 						else if(Vector3.Dot(-1f*normalVector, Vector3.left) > 0.707106)
 						{
 							Debug.Log ("RIGHT FACE");
-							currFace = Face.RIGHT;
 							characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 							characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
 

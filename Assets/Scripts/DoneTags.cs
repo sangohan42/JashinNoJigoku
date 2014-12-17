@@ -12,4 +12,5 @@ public class DoneTags : MonoBehaviour
 	public const string fader = "Fader";
 	public const string enemy = "Enemy";
 	public const string camera = "MainCamera";
+	public const string key = "KeyGroup";
 }
