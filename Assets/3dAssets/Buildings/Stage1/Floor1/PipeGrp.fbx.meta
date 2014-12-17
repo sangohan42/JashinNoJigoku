@@ -40,6 +40,29 @@ ModelImporter:
     100068: TubeR1 3
     100070: pipeBassRCorner2
     100072: pipeBassRCorner4
+    100074: Airfan2
+    100076: AirfanL_1Grp
+    100078: AirfanL_2Child
+    100080: AirfanL_2Grp
+    100082: AirfanR1Child
+    100084: AirfanR1Grp
+    100086: ElectricL3
+    100088: PipeBendL_1
+    100090: PipeBendL_2
+    100092: PipeBendL_3
+    100094: PipeBendL_4
+    100096: PipeBendL_5
+    100098: PipeLongBendR_1
+    100100: PipeLongBendR_2
+    100102: TubeRong
+    100104: TubeRong 1
+    100106: TubeRong 2
+    100108: TubeShort
+    100110: TubeShort 1
+    100112: TubeShort 2
+    100114: TubeShort 3
+    100116: TubeShort 4
+    100118: TubeShort 5
     400000: ElectricL1
     400002: ElectricL2
     400004: ElectricR1
@@ -77,6 +100,29 @@ ModelImporter:
     400068: TubeR1 3
     400070: pipeBassRCorner2
     400072: pipeBassRCorner4
+    400074: Airfan2
+    400076: AirfanL_1Grp
+    400078: AirfanL_2Child
+    400080: AirfanL_2Grp
+    400082: AirfanR1Child
+    400084: AirfanR1Grp
+    400086: ElectricL3
+    400088: PipeBendL_1
+    400090: PipeBendL_2
+    400092: PipeBendL_3
+    400094: PipeBendL_4
+    400096: PipeBendL_5
+    400098: PipeLongBendR_1
+    400100: PipeLongBendR_2
+    400102: TubeRong
+    400104: TubeRong 1
+    400106: TubeRong 2
+    400108: TubeShort
+    400110: TubeShort 1
+    400112: TubeShort 2
+    400114: TubeShort 3
+    400116: TubeShort 4
+    400118: TubeShort 5
     2300000: PipeBassL1
     2300002: pipeBassLCorner1
     2300004: PipeBassR1
@@ -108,6 +154,28 @@ ModelImporter:
     2300056: TubeR1 3
     2300058: pipeBassRCorner2
     2300060: pipeBassRCorner4
+    2300062: Airfan2
+    2300064: AirfanL_1Grp
+    2300066: AirfanL_2Child
+    2300068: AirfanL_2Grp
+    2300070: AirfanR1Child
+    2300072: AirfanR1Grp
+    2300074: PipeBendL_1
+    2300076: PipeBendL_2
+    2300078: PipeBendL_3
+    2300080: PipeBendL_4
+    2300082: PipeBendL_5
+    2300084: PipeLongBendR_1
+    2300086: PipeLongBendR_2
+    2300088: TubeRong
+    2300090: TubeRong 1
+    2300092: TubeRong 2
+    2300094: TubeShort
+    2300096: TubeShort 1
+    2300098: TubeShort 2
+    2300100: TubeShort 3
+    2300102: TubeShort 4
+    2300104: TubeShort 5
     3300000: PipeBassL1
     3300002: pipeBassLCorner1
     3300004: PipeBassR1
@@ -139,6 +207,28 @@ ModelImporter:
     3300056: TubeR1 3
     3300058: pipeBassRCorner2
     3300060: pipeBassRCorner4
+    3300062: Airfan2
+    3300064: AirfanL_1Grp
+    3300066: AirfanL_2Child
+    3300068: AirfanL_2Grp
+    3300070: AirfanR1Child
+    3300072: AirfanR1Grp
+    3300074: PipeBendL_1
+    3300076: PipeBendL_2
+    3300078: PipeBendL_3
+    3300080: PipeBendL_4
+    3300082: PipeBendL_5
+    3300084: PipeLongBendR_1
+    3300086: PipeLongBendR_2
+    3300088: TubeRong
+    3300090: TubeRong 1
+    3300092: TubeRong 2
+    3300094: TubeShort
+    3300096: TubeShort 1
+    3300098: TubeShort 2
+    3300100: TubeShort 3
+    3300102: TubeShort 4
+    3300104: TubeShort 5
     4300000: PipeBatch1
     4300002: PipeBatch2
     4300004: PipeBassL1
@@ -170,6 +260,28 @@ ModelImporter:
     4300056: PowerR2
     4300058: pipeBassRCorner2
     4300060: pipeBassRCorner4
+    4300062: PipeBendL_1
+    4300064: PipeBendL_2
+    4300066: PipeBendL_3
+    4300068: PipeBendL_4
+    4300070: PipeBendL_5
+    4300072: PipeLongBendR_1
+    4300074: PipeLongBendR_2
+    4300076: AirfanL_1Grp
+    4300078: TubeShort
+    4300080: TubeRong
+    4300082: Airfan2
+    4300084: TubeShort
+    4300086: AirfanL_2Grp
+    4300088: TubeShort
+    4300090: TubeRong
+    4300092: AirfanL_2Child
+    4300094: TubeShort
+    4300096: AirfanR1Grp
+    4300098: TubeShort
+    4300100: TubeRong
+    4300102: AirfanR1Child
+    4300104: TubeShort
     9500000: //RootNode
   materials:
     importMaterials: 1

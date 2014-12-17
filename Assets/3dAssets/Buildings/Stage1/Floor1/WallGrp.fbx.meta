@@ -56,6 +56,8 @@ ModelImporter:
     100100: WallL_8
     100102: EntranceDoorHigh
     100104: EntranceDoorLow
+    100106: polySurface10
+    100108: polySurface9
     400000: EntranceColumnL
     400002: EntranceColumnR
     400004: EntranceDoorL
@@ -109,6 +111,8 @@ ModelImporter:
     400100: WallL_8
     400102: EntranceDoorHigh
     400104: EntranceDoorLow
+    400106: polySurface10
+    400108: polySurface9
     2300000: EntranceColumnL
     2300002: EntranceColumnR
     2300004: EntranceDoorL
@@ -157,6 +161,8 @@ ModelImporter:
     2300090: WallL_8
     2300092: EntranceDoorHigh
     2300094: EntranceDoorLow
+    2300096: polySurface10
+    2300098: polySurface9
     3300000: EntranceColumnL
     3300002: EntranceColumnR
     3300004: EntranceDoorL
@@ -205,6 +211,8 @@ ModelImporter:
     3300090: WallL_8
     3300092: EntranceDoorHigh
     3300094: EntranceDoorLow
+    3300096: polySurface10
+    3300098: polySurface9
     4300000: EntranceDoorL
     4300002: EntranceDoorR
     4300004: EntranceColumnL
@@ -253,6 +261,8 @@ ModelImporter:
     4300090: WallL_8
     4300092: EntranceDoorLow
     4300094: EntranceDoorHigh
+    4300096: polySurface9
+    4300098: polySurface10
     9500000: //RootNode
   materials:
     importMaterials: 0
