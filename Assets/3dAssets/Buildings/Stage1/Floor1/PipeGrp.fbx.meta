@@ -38,6 +38,8 @@ ModelImporter:
     100064: TubeR1 1
     100066: TubeR1 2
     100068: TubeR1 3
+    100070: pipeBassRCorner2
+    100072: pipeBassRCorner4
     400000: ElectricL1
     400002: ElectricL2
     400004: ElectricR1
@@ -73,6 +75,8 @@ ModelImporter:
     400064: TubeR1 1
     400066: TubeR1 2
     400068: TubeR1 3
+    400070: pipeBassRCorner2
+    400072: pipeBassRCorner4
     2300000: PipeBassL1
     2300002: pipeBassLCorner1
     2300004: PipeBassR1
@@ -102,6 +106,8 @@ ModelImporter:
     2300052: TubeR1 1
     2300054: TubeR1 2
     2300056: TubeR1 3
+    2300058: pipeBassRCorner2
+    2300060: pipeBassRCorner4
     3300000: PipeBassL1
     3300002: pipeBassLCorner1
     3300004: PipeBassR1
@@ -131,6 +137,8 @@ ModelImporter:
     3300052: TubeR1 1
     3300054: TubeR1 2
     3300056: TubeR1 3
+    3300058: pipeBassRCorner2
+    3300060: pipeBassRCorner4
     4300000: PipeBatch1
     4300002: PipeBatch2
     4300004: PipeBassL1
@@ -160,6 +168,8 @@ ModelImporter:
     4300052: TubeR1
     4300054: PowerR1
     4300056: PowerR2
+    4300058: pipeBassRCorner2
+    4300060: pipeBassRCorner4
     9500000: //RootNode
   materials:
     importMaterials: 1

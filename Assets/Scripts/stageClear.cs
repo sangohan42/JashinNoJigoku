@@ -15,7 +15,8 @@ public class stageClear : MonoBehaviour {
 	{
 		if(collider.gameObject.CompareTag(DoneTags.player) && !characterLogicScript.IsPursued)
 		{
-			Application.LoadLevel("testScene");
+			//Application.LoadLevel("testScene");
+			FadeManager.Instance.LoadLevel("GameOver", 0.25f);
 		}
 	}
 }
