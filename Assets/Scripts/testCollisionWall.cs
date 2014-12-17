@@ -7,19 +7,16 @@ public class testCollisionWall : MonoBehaviour {
 	private Animator playerAnimator;
 	private GameObject player;
 	private CharacterControllerLogic characterControllerLogicScript;
+	private checkEnemyStatus checkEnemy;
 	private GameObject gameCam;
 	private CapsuleCollider caps;
-	public bool isAWall;
-	private bool isWALL;
 	private enum Face{LEFT, RIGHT, DOWN};
-	private Face currFace;
 	private BoxCollider currCollider;
 	private Vector3 size;
-	private Vector3 boundMax;
-	private Vector3 boundMin;
+//	private Vector3 boundMax;
+//	private Vector3 boundMin;
 
 	private float timeCollided;
-	private bool hasFirstCollided;
 	private static bool inCoverMode;
 
 	private Vector3 normalVector;
@@ -30,13 +27,12 @@ public class testCollisionWall : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag (DoneTags.player);
 		playerAnimator = player.GetComponent<Animator> ();
 		gameCam = GameObject.FindGameObjectWithTag (DoneTags.camera);
-		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
+		characterControllerLogicScript = player.GetComponent<CharacterControllerLogic> ();
+		checkEnemy = player.GetComponent<checkEnemyStatus> ();
 		caps = player.GetComponent<CapsuleCollider> ();
 		timeCollided = 0;
-		hasFirstCollided = false;
 		inCoverMode = false;
 		normalVector = Vector3.zero;
-		isWALL = isAWall;
 	}
 
 	void Start()
@@ -50,15 +46,15 @@ public class testCollisionWall : MonoBehaviour {
 		else 
 		{
 			currCollider = (BoxCollider)collider;
-			boundMax = currCollider.bounds.max;
-			boundMin = currCollider.bounds.min;
+//			boundMax = currCollider.bounds.max;
+//			boundMin = currCollider.bounds.min;
 			size = currCollider.size;
 		}
 
 	}
 
 	void OnCollisionStay(Collision collision) {
-		if(collision.gameObject.CompareTag(DoneTags.player) && !inCoverMode && !characterControllerLogicScript.IsPursued)
+		if(collision.gameObject.CompareTag(DoneTags.player) && !inCoverMode && checkEnemy.isNotSeen())
 		{
 			ContactPoint contact = collision.contacts[0];
 			RaycastHit hit;
@@ -80,15 +76,12 @@ public class testCollisionWall : MonoBehaviour {
 				//If we were 1 second in the good orientation
 				if(timeCollided > 0.5f)
 				{
-					Debug.DrawRay(hit.point, normalVector*2f, Color.cyan);
-					Debug.Break();
 					inCoverMode = true;
 
 					//DOWN FACE
 					if(Vector3.Dot(-1f*normalVector, Vector3.forward) > 0.707106)
 					{
 						Debug.Log ("DOWN FACE");
-						currFace = Face.DOWN;
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
 						playerAnimator.SetBool(hash.coverBool, true);
@@ -102,7 +95,6 @@ public class testCollisionWall : MonoBehaviour {
 					else if(Vector3.Dot(-1f*normalVector, -1*Vector3.left) > 0.707106)
 					{
 						Debug.Log ("LEFT FACE");
-						currFace = Face.LEFT;
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
 						playerAnimator.SetBool(hash.coverBool, true);
@@ -118,7 +110,6 @@ public class testCollisionWall : MonoBehaviour {
 					else if(Vector3.Dot(-1f*normalVector, Vector3.left) > 0.707106)
 					{
 						Debug.Log ("RIGHT FACE");
-						currFace = Face.RIGHT;
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
 						playerAnimator.SetBool(hash.coverBool, true);

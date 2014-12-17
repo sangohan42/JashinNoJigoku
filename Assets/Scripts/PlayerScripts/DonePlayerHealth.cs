@@ -73,7 +73,7 @@ public class DonePlayerHealth : MonoBehaviour
 //		rigidbody.AddForce(-2f*transform.forward,ForceMode.VelocityChange);
 
 		// Play the dying sound effect at the player's location.
-		AudioSource.PlayClipAtPoint(deathClip, transform.position);
+//		AudioSource.PlayClipAtPoint(deathClip, transform.position);
 	}
 	
 	

@@ -5,8 +5,11 @@ public class rotateItem : MonoBehaviour {
 
 	private float degreesPerSecond;
 	private bool stopRotating;
-	private GameObject keyOnRadar;
-	private GameObject keyText;
+	private GameObject OnRadar;
+	private GameObject Text;
+	private bool isAKey;
+	private CharacterControllerLogic ccl;
+
 	// Use this for initialization
 	void Start () {
 		degreesPerSecond = 160;
@@ -15,10 +18,13 @@ public class rotateItem : MonoBehaviour {
 		{
 			if(child.gameObject.name == "Radar")
 			{
-				keyOnRadar = child.gameObject;
+				OnRadar = child.gameObject;
 			}
-			else keyText = child.gameObject;
+			else Text = child.gameObject;
 		}
+		if (this.CompareTag (DoneTags.key))isAKey = true;
+		else isAKey = false;
+		ccl = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
 	}
 	
 	// Update is called once per frame
@@ -40,22 +46,21 @@ public class rotateItem : MonoBehaviour {
 			//Stop rotating
 			stopRotating = true;
 
-			//Set boolean to TRUE
-			other.gameObject.GetComponent<CharacterControllerLogic>().GotKey = true;
+			//if we are a key then the player got it
+			if(isAKey)ccl.GotKey = true;
+			else ccl.ShoukoNb ++;
 
-			//disable the key rendering
+			//disable the item rendering
 			renderer.enabled = false;
 
-			//destroy key rendering on radar
-			keyOnRadar.renderer.enabled = false;
+			//destroy item rendering on radar
+			OnRadar.renderer.enabled = false;
 
 			//Enable text and play animation
-			keyText.renderer.enabled =true;
+			Text.renderer.enabled = true;
 
 			animation.Play("objectCatching");
 
-//			Destroy (this.gameObject);
-//			StartCoroutine(Destroytimer ());
 		}
 	}
 

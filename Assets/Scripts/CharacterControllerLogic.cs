@@ -18,16 +18,16 @@ public class CharacterControllerLogic : MonoBehaviour
 	private GameObject radarCam;
 	[SerializeField]
 	private Camera mainCam;
-	[SerializeField]
-	private float rotationDegreePerSecond = 120f;
-	[SerializeField]
-	private float directionSpeed = 1.5f;
+//	[SerializeField]
+//	private float rotationDegreePerSecond = 120f;
+//	[SerializeField]
+//	private float directionSpeed = 1.5f;
 	[SerializeField]
 	private float directionDampTime = 0.25f;
 	[SerializeField]
 	private float speedDampTime = 0.05f;
-	[SerializeField]
-	private float fovDampTime = 3f;
+//	[SerializeField]
+//	private float fovDampTime = 3f;
 	[SerializeField]
 	private HashIds hashIdsScript;
 	
@@ -37,10 +37,10 @@ public class CharacterControllerLogic : MonoBehaviour
 	private float joyY = 0f;
 	public float turnSmoothing = 15f;	// A smoothing value for turning the player.
 	private AnimatorStateInfo stateInfo;
-	private AnimatorTransitionInfo transInfo;
+//	private AnimatorTransitionInfo transInfo;
 	private float speed = 0f;
 	private float direction = 0f;
-	private float charAngle = 0f;
+//	private float charAngle = 0f;
 	private const float SPRINT_SPEED = 2.0f;	
 	private float COVER_SPEED = 0.9f;
 
@@ -97,7 +97,7 @@ public class CharacterControllerLogic : MonoBehaviour
 	private float boundingBoxMinZ;
 	private float boundingBoxMaxZ;
 
-	private float camSwitchDamp;
+//	private float camSwitchDamp;
 
 	private bool hasBeenInLookingAround;
 	private bool hasBeenInCover;
@@ -120,6 +120,11 @@ public class CharacterControllerLogic : MonoBehaviour
 	private int NPCMask;
 
 	private bool gotKey;
+	private int shoukoNb;
+	private int availableShouko;
+	private int hasBeenSeenNb;
+
+	private float gameDuration;
 
 	
 	#endregion
@@ -322,6 +327,54 @@ public class CharacterControllerLogic : MonoBehaviour
 		}
 	}
 
+	public int HasBeenSeenNb
+	{
+		get
+		{
+			return this.hasBeenSeenNb;
+		}
+		set
+		{
+			this.hasBeenSeenNb = value;
+		}
+	}
+
+	public int ShoukoNb
+	{
+		get
+		{
+			return this.shoukoNb;
+		}
+		set
+		{
+			this.shoukoNb = value;
+		}
+	}
+
+	public int AvailableShouko
+	{
+		get
+		{
+			return this.availableShouko;
+		}
+		set
+		{
+			this.availableShouko = value;
+		}
+	}
+
+	public float GameDuration
+	{
+		get
+		{
+			return this.gameDuration;
+		}
+		set
+		{
+			this.gameDuration = value;
+		}
+	}
+
 public float LocomotionThreshold { get { return 0.15f; } }
 	
 	#endregion
@@ -381,7 +434,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 		inModifyCoverPos = false;
 		currentModifToCoverPos = 0;
 
-		camSwitchDamp = 12f;
+//		camSwitchDamp = 12f;
 		isPursued = false;
 		isInPanoramicView = false;
 		camPanoramicPosition = GameObject.Find ("CameraPanoramic").transform.position;
@@ -395,6 +448,12 @@ public float LocomotionThreshold { get { return 0.15f; } }
 
 		NPCMask = 1 << buildingMask;
 
+		gotKey = false;
+		hasBeenSeenNb = 0;
+		shoukoNb = 0;
+		availableShouko = GameObject.FindGameObjectsWithTag (DoneTags.shouko).Length;
+
+		gameDuration = 0;
 	
 	}
 
@@ -523,33 +582,32 @@ public float LocomotionThreshold { get { return 0.15f; } }
 	{
 
 		stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-		transInfo = animator.GetAnimatorTransitionInfo(0);
-		
-		charAngle = 0f;
 		direction = 0f;	
 		float charSpeed = 0f;
+
+		gameDuration += Time.deltaTime;
 
 		//Get Joystick Vector
 		joyX = uiJoystickScript.position.x;
 		joyY = uiJoystickScript.position.y;
 
-		if (Input.GetButtonDown("PanoramicView") && joyX == 0 && joyY == 0)
-		{
-			if(!isInPanoramicView)
-			{
-				isInPanoramicView = true;
-				gamecam.transform.parent = transform;
-				gamecam.transform.localPosition = camPanoramicPosition;
-				gamecam.transform.localEulerAngles = camPanoramicRotation;
-			}
-			else 
-			{
-				isInPanoramicView = false;
-				gamecam.transform.parent = null;
-				currentModifToPanoramicRotVertical = 0;
-			}
-
-		}
+//		if (Input.GetButtonDown("PanoramicView") && joyX == 0 && joyY == 0)
+//		{
+//			if(!isInPanoramicView)
+//			{
+//				isInPanoramicView = true;
+//				gamecam.transform.parent = transform;
+//				gamecam.transform.localPosition = camPanoramicPosition;
+//				gamecam.transform.localEulerAngles = camPanoramicRotation;
+//			}
+//			else 
+//			{
+//				isInPanoramicView = false;
+//				gamecam.transform.parent = null;
+//				currentModifToPanoramicRotVertical = 0;
+//			}
+//
+//		}
 
 		if(!isInPanoramicView)
 		{
@@ -560,27 +618,13 @@ public float LocomotionThreshold { get { return 0.15f; } }
 				inCoverMode = false;
 				playerPlaced = false;
 				hasBeenInLookingAround = false;
-				camSwitchDamp = 12f;
+//				camSwitchDamp = 12f;
 
 				Vector3 stickDirection = new Vector3 (joyX, 0, joyY);
-//				Vector3 axisSign = Vector3.Cross(this.transform.forward, stickDirection);
-//				
-//				float angleRootToMove = Vector3.Angle(transform.forward, stickDirection) * (axisSign.y < 0 ? -1f : 1f);
-//				
 				charSpeed = stickDirection.magnitude;
-//				direction = angleRootToMove * directionSpeed / 180f;
-//				charAngle = angleRootToMove;
-
 				speed = charSpeed;
 
 				animator.SetFloat(hashIdsScript.speedFloat, speed, speedDampTime, Time.deltaTime);
-
-//				animator.SetFloat(hashIdsScript.direction, direction, directionDampTime, Time.deltaTime);
-//				
-//				if (speed > LocomotionThreshold)	// Dead zone
-//				{
-//					Animator.SetFloat(hashIdsScript.angle, charAngle);
-//				}
 
 				if (speed < LocomotionThreshold && Mathf.Abs(joyX) < 0.05f)    // Dead zone
 				{
@@ -613,6 +657,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 					//We verify that the coverPos is OK or if there is a wall between the player and the camera
 					//If there is a wall we change the coverPos as well as the lookingAroundPos
 					CompensateForWalls(transform.position, ref coverPos);
+
 					if(inCrouchCoverMode)
 					{
 						caps.center = new Vector3(0,0.5f,0);
@@ -664,8 +709,6 @@ public float LocomotionThreshold { get { return 0.15f; } }
 							{
 								speed = Mathf.Abs (joyX);
 								direction = joyX;
-								charAngle = 0;
-//								Debug.Log ("direction = " + direction);
 
 								if(!inLookAroundMode)
 								{
@@ -715,7 +758,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 										{
 
 											inCoverMode = false;
-											camSwitchDamp = 7f;
+//											camSwitchDamp = 7f;
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
 //											transform.position = positionToPlaceTo;
 											inLookAroundMode = false;
@@ -730,7 +773,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 										if(direction <=0)
 										{
 											inCoverMode = false;
-											camSwitchDamp = 7f;
+//											camSwitchDamp = 7f;
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
 //											transform.position = positionToPlaceTo;
 											inLookAroundMode = false;
@@ -766,8 +809,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 							{
 								speed = Mathf.Abs (joyX);
 								direction = joyX;
-								charAngle = 0;
-//								Debug.Log("direction = " + direction);
+
 								if(!inLookAroundMode)
 								{
 									if(transform.position.z < boundingBoxMinZ && direction >0)
@@ -815,7 +857,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 										if(direction <=0)
 										{
 											inCoverMode = false;
-											camSwitchDamp = 7f;
+//											camSwitchDamp = 7f;
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
 //											transform.position = positionToPlaceTo;
 											inLookAroundMode = false;
@@ -830,7 +872,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 										if(direction >=0)
 										{
 											inCoverMode = false;
-											camSwitchDamp = 7f;
+//											camSwitchDamp = 7f;
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
 //											transform.position = positionToPlaceTo;
 											inLookAroundMode = false;
@@ -866,7 +908,6 @@ public float LocomotionThreshold { get { return 0.15f; } }
 							{
 								speed = Mathf.Abs (joyX);
 								direction = joyX;
-								charAngle = 0;
 
 								if(!inLookAroundMode)
 								{
@@ -914,7 +955,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 										if(direction >=0)
 										{
 											inCoverMode = false;
-											camSwitchDamp = 7f;
+//											camSwitchDamp = 7f;
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
 											transform.position = positionToPlaceTo;
 											inLookAroundMode = false;
@@ -929,7 +970,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 										if(direction <=0)
 										{
 											inCoverMode = false;
-											camSwitchDamp = 7f;
+//											camSwitchDamp = 7f;
 											animator.SetBool(hashIdsScript.lookingAroundBool, false);
 											transform.position = positionToPlaceTo;
 											inLookAroundMode = false;

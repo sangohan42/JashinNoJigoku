@@ -18,7 +18,7 @@ public class DoneEnemyAI : MonoBehaviour
 	private float chaseTimer;								// A timer for the chaseWaitTime.
 	private float patrolTimer;								// A timer for the patrolWaitTime.
 	private int wayPointIndex;								// A counter for the way point array.
-	private CharacterControllerLogic characterControllerLogicScript;
+//	private CharacterControllerLogic characterControllerLogicScript;
 
 	void Awake ()
 	{
@@ -26,7 +26,7 @@ public class DoneEnemyAI : MonoBehaviour
 		enemySight = GetComponent<DoneEnemySight>();
 		nav = GetComponent<NavMeshAgent>();
 		player = GameObject.FindGameObjectWithTag(DoneTags.player).transform;
-		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
+//		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
 		playerHealth = player.GetComponent<DonePlayerHealth>();
 		lastPlayerSighting = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneLastPlayerSighting>();
 
@@ -110,7 +110,7 @@ public class DoneEnemyAI : MonoBehaviour
 					chaseTimer = 0f;
 					enemySight.inPursuit = false;
 					enemySight.inPatrol = true;
-					Debug.Log ("Return patrolling");
+//					Debug.Log ("Return patrolling");
 				}
 			}
 			else

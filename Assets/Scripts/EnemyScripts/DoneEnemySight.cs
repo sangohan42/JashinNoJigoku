@@ -70,7 +70,7 @@ public class DoneEnemySight : MonoBehaviour
 			int youJinLayerTransition = anim.GetAnimatorTransitionInfo(3).nameHash;
 			int shootingLayerTransition = anim.GetAnimatorTransitionInfo(1).nameHash;
 
-			//Display or undisplay the interrogation point
+			//In YOUJIN mode
 			if(youJinLayerTransition == hash.Empty_YoujinModeTrans && interrogativePointObject.activeSelf == false)
 			{
 				FOV.renderer.material.SetTexture("_MainTex", FOV3);
@@ -78,7 +78,7 @@ public class DoneEnemySight : MonoBehaviour
 				interrogativePoint.Play();
 				anim.SetBool(hash.inYoujinBool, true);
 			}
-
+			//In PATROL mode
 			else if((youJinLayerTransition == hash.WeaponRaise_WeaponLower || 
 			         shootingLayerTransition == hash.Empty_WeaponRaiseTrans ||
 			         shootingLayerTransition == hash.Empty_WeaponShootTrans) && 
@@ -91,11 +91,13 @@ public class DoneEnemySight : MonoBehaviour
 				anim.SetBool(hash.inYoujinBool, false);
 			}
 
+			//PURSUIT mode
 			if((shootingLayerTransition == hash.Empty_WeaponRaiseTrans ||
 			   shootingLayerTransition == hash.Empty_WeaponShootTrans) && resetFOVColor)
 			{
 				FOV.renderer.material.SetTexture("_MainTex", FOV2);
 				resetFOVColor = false;
+				characterControllerLogicScript.HasBeenSeenNb ++;
 			}
 
 			else if(anim.GetBool(hash.inPatrolBool) == true && !resetFOVColor)
