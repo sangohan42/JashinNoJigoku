@@ -494,16 +494,11 @@ public float LocomotionThreshold { get { return 0.15f; } }
 
 				hasBeenInCover = false;
 
-				//If we still are in idle (not in pivot, not in locomotion, not in Sneak)
-				if(stateInfo.nameHash == hashIdsScript.m_IdleState || stateInfo.nameHash == hashIdsScript.m_sneakingState 
-				   || stateInfo.nameHash == hashIdsScript.m_LocomotionIdState)
+				// If there is some axis input...
+				if(joyX != 0f || joyY != 0f)
 				{
-					// If there is some axis input...
-					if(joyX != 0f || joyY != 0f)
-					{
-						// ... set the players rotation and set the speed parameter to 5.5f.
-						Rotating(joyX, joyY);
-					}
+					// ... set the players rotation and set the speed parameter to 5.5f.
+					Rotating(joyX, joyY);
 				}
 			}
 
