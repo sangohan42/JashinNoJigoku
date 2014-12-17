@@ -1,0 +1,285 @@
+fileFormatVersion: 2
+guid: d9cebecf6991e4762a073c1c1f8c5558
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Door1
+    100002: Door2
+    100004: Door3
+    100006: Door4
+    100008: HandleGrp
+    100010: HandleGrp 1
+    100012: HandleGrp 2
+    100014: jaguchi
+    100016: jaguchi 1
+    100018: jaguchi 2
+    100020: pCylinder2
+    100022: pCylinder2 1
+    100024: pCylinder2 2
+    100026: polySurface53
+    100028: polySurface53 1
+    100030: polySurface53 2
+    100032: polySurface54
+    100034: polySurface54 1
+    100036: polySurface54 2
+    100038: polySurface55
+    100040: polySurface55 1
+    100042: polySurface55 2
+    100044: polySurface56
+    100046: polySurface56 1
+    100048: polySurface56 2
+    100050: sen
+    100052: sen 1
+    100054: sen 2
+    100056: Sink
+    100058: Sink 1
+    100060: Sink 2
+    100062: SinkGrp
+    100064: SinkGrp1
+    100066: SinkGrp2
+    100068: SinkGrp3
+    100070: Toile_1
+    100072: Toile_2
+    100074: Toile_3
+    100076: Toile_4
+    100078: ToiletGrp
+    100080: //RootNode
+    100082: ToiletPapar_1
+    100084: ToiletPapar_2
+    100086: ToiletPapar_3
+    100088: ToiletPapar_4
+    100090: ToiletPaperGrp
+    100092: wall_1
+    100094: wall_2
+    100096: wall_3
+    100098: wall_4
+    100100: wall_5
+    400000: Door1
+    400002: Door2
+    400004: Door3
+    400006: Door4
+    400008: HandleGrp
+    400010: HandleGrp 1
+    400012: HandleGrp 2
+    400014: jaguchi
+    400016: jaguchi 1
+    400018: jaguchi 2
+    400020: pCylinder2
+    400022: pCylinder2 1
+    400024: pCylinder2 2
+    400026: polySurface53
+    400028: polySurface53 1
+    400030: polySurface53 2
+    400032: polySurface54
+    400034: polySurface54 1
+    400036: polySurface54 2
+    400038: polySurface55
+    400040: polySurface55 1
+    400042: polySurface55 2
+    400044: polySurface56
+    400046: polySurface56 1
+    400048: polySurface56 2
+    400050: sen
+    400052: sen 1
+    400054: sen 2
+    400056: Sink
+    400058: Sink 1
+    400060: Sink 2
+    400062: SinkGrp
+    400064: SinkGrp1
+    400066: SinkGrp2
+    400068: SinkGrp3
+    400070: Toile_1
+    400072: Toile_2
+    400074: Toile_3
+    400076: Toile_4
+    400078: ToiletGrp
+    400080: //RootNode
+    400082: ToiletPapar_1
+    400084: ToiletPapar_2
+    400086: ToiletPapar_3
+    400088: ToiletPapar_4
+    400090: ToiletPaperGrp
+    400092: wall_1
+    400094: wall_2
+    400096: wall_3
+    400098: wall_4
+    400100: wall_5
+    2300000: Door1
+    2300002: Door2
+    2300004: Door3
+    2300006: Door4
+    2300008: jaguchi
+    2300010: jaguchi 1
+    2300012: jaguchi 2
+    2300014: pCylinder2
+    2300016: pCylinder2 1
+    2300018: pCylinder2 2
+    2300020: polySurface53
+    2300022: polySurface53 1
+    2300024: polySurface53 2
+    2300026: polySurface54
+    2300028: polySurface54 1
+    2300030: polySurface54 2
+    2300032: polySurface55
+    2300034: polySurface55 1
+    2300036: polySurface55 2
+    2300038: polySurface56
+    2300040: polySurface56 1
+    2300042: polySurface56 2
+    2300044: sen
+    2300046: sen 1
+    2300048: sen 2
+    2300050: Sink
+    2300052: Sink 1
+    2300054: Sink 2
+    2300056: Toile_1
+    2300058: Toile_2
+    2300060: Toile_3
+    2300062: Toile_4
+    2300064: ToiletPapar_1
+    2300066: ToiletPapar_2
+    2300068: ToiletPapar_3
+    2300070: ToiletPapar_4
+    2300072: wall_1
+    2300074: wall_2
+    2300076: wall_3
+    2300078: wall_4
+    2300080: wall_5
+    3300000: Door1
+    3300002: Door2
+    3300004: Door3
+    3300006: Door4
+    3300008: jaguchi
+    3300010: jaguchi 1
+    3300012: jaguchi 2
+    3300014: pCylinder2
+    3300016: pCylinder2 1
+    3300018: pCylinder2 2
+    3300020: polySurface53
+    3300022: polySurface53 1
+    3300024: polySurface53 2
+    3300026: polySurface54
+    3300028: polySurface54 1
+    3300030: polySurface54 2
+    3300032: polySurface55
+    3300034: polySurface55 1
+    3300036: polySurface55 2
+    3300038: polySurface56
+    3300040: polySurface56 1
+    3300042: polySurface56 2
+    3300044: sen
+    3300046: sen 1
+    3300048: sen 2
+    3300050: Sink
+    3300052: Sink 1
+    3300054: Sink 2
+    3300056: Toile_1
+    3300058: Toile_2
+    3300060: Toile_3
+    3300062: Toile_4
+    3300064: ToiletPapar_1
+    3300066: ToiletPapar_2
+    3300068: ToiletPapar_3
+    3300070: ToiletPapar_4
+    3300072: wall_1
+    3300074: wall_2
+    3300076: wall_3
+    3300078: wall_4
+    3300080: wall_5
+    4300000: ToiletPapar_1
+    4300002: ToiletPapar_2
+    4300004: ToiletPapar_3
+    4300006: ToiletPapar_4
+    4300008: polySurface55
+    4300010: pCylinder2
+    4300012: polySurface54
+    4300014: polySurface53
+    4300016: polySurface56
+    4300018: sen
+    4300020: jaguchi
+    4300022: Sink
+    4300024: polySurface55
+    4300026: pCylinder2
+    4300028: polySurface54
+    4300030: polySurface53
+    4300032: polySurface56
+    4300034: sen
+    4300036: jaguchi
+    4300038: Sink
+    4300040: polySurface55
+    4300042: pCylinder2
+    4300044: polySurface54
+    4300046: polySurface53
+    4300048: polySurface56
+    4300050: sen
+    4300052: jaguchi
+    4300054: Sink
+    4300056: Toile_1
+    4300058: Toile_2
+    4300060: Toile_3
+    4300062: Toile_4
+    4300064: wall_1
+    4300066: wall_2
+    4300068: wall_3
+    4300070: wall_4
+    4300072: wall_5
+    4300074: Door4
+    4300076: Door3
+    4300078: Door2
+    4300080: Door1
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

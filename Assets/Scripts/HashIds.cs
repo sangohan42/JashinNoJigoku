@@ -27,6 +27,7 @@ public class HashIds : MonoBehaviour {
 	public int coverBool;
 	public int lookingAroundBool;
 	public int crouchCoverBool;
+	public int crawlingBool;
 	
 	public int shotFloat;
 	public int aimWeightFloat;
@@ -61,6 +62,7 @@ public class HashIds : MonoBehaviour {
 		coverBool = Animator.StringToHash("Cover");
 		lookingAroundBool = Animator.StringToHash("LookAround"); 
 		crouchCoverBool = Animator.StringToHash("CrouchCover");
+		crawlingBool = Animator.StringToHash ("Crawling");
 
 		shotFloat = Animator.StringToHash("Shot");
 		aimWeightFloat = Animator.StringToHash("AimWeight");

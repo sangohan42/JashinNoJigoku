@@ -7,16 +7,21 @@ ModelImporter:
     100002: GroundGrp
     100004: //RootNode
     100006: GroundStage1
+    100008: GrpundDirty
     400000: Ground
     400002: GroundGrp
     400004: //RootNode
     400006: GroundStage1
+    400008: GrpundDirty
     2300000: Ground
     2300002: GroundStage1
+    2300004: GrpundDirty
     3300000: Ground
     3300002: GroundStage1
+    3300004: GrpundDirty
     4300000: Ground
     4300002: GroundStage1
+    4300004: GrpundDirty
     9500000: //RootNode
   materials:
     importMaterials: 0
@@ -42,7 +47,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     weldVertices: 1

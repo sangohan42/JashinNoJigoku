@@ -6,7 +6,6 @@ public class checkEnemyStatus : MonoBehaviour {
 	private Animator[] enemiesAnimator;
 	private HashIds hash;
 	private int enemyNumber;
-	private CharacterControllerLogic characterControllerLogicScript;
 
 	// Use this for initialization
 	void Start () {
@@ -18,21 +17,9 @@ public class checkEnemyStatus : MonoBehaviour {
 			enemiesAnimator[i] = enemies[i].GetComponent<Animator>();
 		}
 		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<HashIds>();
-		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(isNotSeen())
-		{
-			characterControllerLogicScript.IsPursued = false;
-		}
-
-		else characterControllerLogicScript.IsPursued = true;
-
 	}
 
-	private bool isNotSeen()
+	public bool isNotSeen()
 	{
 		for(int i = 0; i< enemyNumber; i++)
 		{

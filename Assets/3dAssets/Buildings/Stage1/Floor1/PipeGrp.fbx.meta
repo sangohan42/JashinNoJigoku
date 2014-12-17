@@ -11,8 +11,8 @@ ModelImporter:
     100010: pipeBassLCorner1
     100012: PipeBassR1
     100014: pipeBassRCorner1
-    100016: PipeBatchR1
-    100018: PipeBatchR2
+    100016: PipeBatch1
+    100018: PipeBatch2
     100020: //RootNode
     100022: PipeGrp
     100024: PipeLBend1
@@ -46,8 +46,8 @@ ModelImporter:
     400010: pipeBassLCorner1
     400012: PipeBassR1
     400014: pipeBassRCorner1
-    400016: PipeBatchR1
-    400018: PipeBatchR2
+    400016: PipeBatch1
+    400018: PipeBatch2
     400020: PipeGrp
     400022: //RootNode
     400024: PipeLBend1
@@ -77,8 +77,8 @@ ModelImporter:
     2300002: pipeBassLCorner1
     2300004: PipeBassR1
     2300006: pipeBassRCorner1
-    2300008: PipeBatchR1
-    2300010: PipeBatchR2
+    2300008: PipeBatch1
+    2300010: PipeBatch2
     2300012: PipeLBend1
     2300014: PipeLBend2
     2300016: PipeLBend3
@@ -106,8 +106,8 @@ ModelImporter:
     3300002: pipeBassLCorner1
     3300004: PipeBassR1
     3300006: pipeBassRCorner1
-    3300008: PipeBatchR1
-    3300010: PipeBatchR2
+    3300008: PipeBatch1
+    3300010: PipeBatch2
     3300012: PipeLBend1
     3300014: PipeLBend2
     3300016: PipeLBend3
@@ -131,8 +131,8 @@ ModelImporter:
     3300052: TubeR1 1
     3300054: TubeR1 2
     3300056: TubeR1 3
-    4300000: PipeBatchR1
-    4300002: PipeBatchR2
+    4300000: PipeBatch1
+    4300002: PipeBatch2
     4300004: PipeBassL1
     4300006: PipeBassR1
     4300008: pipeBassLCorner1
@@ -162,7 +162,7 @@ ModelImporter:
     4300056: PowerR2
     9500000: //RootNode
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
@@ -185,7 +185,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     weldVertices: 1
@@ -212,6 +212,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   additionalBone: 0
   userData: 
