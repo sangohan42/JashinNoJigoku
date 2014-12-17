@@ -7,9 +7,9 @@ public class testCollisionObjects : MonoBehaviour {
 	private Animator playerAnimator;
 	private GameObject player;
 	private CharacterControllerLogic characterControllerLogicScript;
+	private checkEnemyStatus checkEnemy;
 	private GameObject gameCam;
 	private CapsuleCollider caps;
-
 	private enum Face{LEFT, RIGHT, DOWN};
 	private BoxCollider currCollider;
 	private Vector3 size;
@@ -27,7 +27,9 @@ public class testCollisionObjects : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag (DoneTags.player);
 		playerAnimator = player.GetComponent<Animator> ();
 		gameCam = GameObject.FindGameObjectWithTag (DoneTags.camera);
-		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
+		characterControllerLogicScript = player.GetComponent<CharacterControllerLogic> ();
+		checkEnemy = player.GetComponent<checkEnemyStatus> ();
+
 		caps = player.GetComponent<CapsuleCollider> ();
 		timeCollided = 0;
 		inCoverMode = false;
@@ -52,7 +54,7 @@ public class testCollisionObjects : MonoBehaviour {
 	}
 	
 	void OnCollisionStay(Collision collision) {
-		if(collision.gameObject.CompareTag(DoneTags.player) && !inCoverMode && !characterControllerLogicScript.IsPursued)
+		if(collision.gameObject.CompareTag(DoneTags.player) && !inCoverMode && checkEnemy.isNotSeen())
 		{
 			if(!inCoverMode)
 			{
@@ -76,8 +78,6 @@ public class testCollisionObjects : MonoBehaviour {
 					//If we were 1 second in the good orientation
 					if(timeCollided > 0.5f)
 					{
-						Debug.DrawRay(hit.point, normalVector*2f, Color.gray);
-						Debug.Break();
 
 						inCoverMode = true;
 						

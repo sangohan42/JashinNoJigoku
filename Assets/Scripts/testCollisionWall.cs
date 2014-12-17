@@ -7,9 +7,9 @@ public class testCollisionWall : MonoBehaviour {
 	private Animator playerAnimator;
 	private GameObject player;
 	private CharacterControllerLogic characterControllerLogicScript;
+	private checkEnemyStatus checkEnemy;
 	private GameObject gameCam;
 	private CapsuleCollider caps;
-	public bool isAWall;
 	private enum Face{LEFT, RIGHT, DOWN};
 	private BoxCollider currCollider;
 	private Vector3 size;
@@ -27,7 +27,8 @@ public class testCollisionWall : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag (DoneTags.player);
 		playerAnimator = player.GetComponent<Animator> ();
 		gameCam = GameObject.FindGameObjectWithTag (DoneTags.camera);
-		characterControllerLogicScript = GameObject.FindGameObjectWithTag (DoneTags.player).GetComponent<CharacterControllerLogic> ();
+		characterControllerLogicScript = player.GetComponent<CharacterControllerLogic> ();
+		checkEnemy = player.GetComponent<checkEnemyStatus> ();
 		caps = player.GetComponent<CapsuleCollider> ();
 		timeCollided = 0;
 		inCoverMode = false;
@@ -53,7 +54,7 @@ public class testCollisionWall : MonoBehaviour {
 	}
 
 	void OnCollisionStay(Collision collision) {
-		if(collision.gameObject.CompareTag(DoneTags.player) && !inCoverMode && !characterControllerLogicScript.IsPursued)
+		if(collision.gameObject.CompareTag(DoneTags.player) && !inCoverMode && checkEnemy.isNotSeen())
 		{
 			ContactPoint contact = collision.contacts[0];
 			RaycastHit hit;

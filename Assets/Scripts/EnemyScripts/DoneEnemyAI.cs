@@ -110,7 +110,7 @@ public class DoneEnemyAI : MonoBehaviour
 					chaseTimer = 0f;
 					enemySight.inPursuit = false;
 					enemySight.inPatrol = true;
-					Debug.Log ("Return patrolling");
+//					Debug.Log ("Return patrolling");
 				}
 			}
 			else
