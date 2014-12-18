@@ -255,6 +255,7 @@ GameObject:
   - 54: {fileID: 479716771}
   - 114: {fileID: 479716770}
   - 114: {fileID: 479716773}
+  - 81: {fileID: 479716774}
   m_Layer: 0
   m_Name: UI Root 2 1
   m_TagString: Untagged
@@ -366,6 +367,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27373a3c1d344976b8531d9cc75a8c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &479716774
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 479716768}
+  m_Enabled: 1
 --- !u!1 &534894013
 GameObject:
   m_ObjectHideFlags: 0

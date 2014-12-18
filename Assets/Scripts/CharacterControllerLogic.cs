@@ -793,12 +793,15 @@ public float LocomotionThreshold { get { return 0.15f; } }
 								lookAroundPosRight = lookAroundPosRightCopy;
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
+								testCollisionWall.inCoverMode = false;
+								rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 								if(inCrouchCoverMode)
 								{
 									caps.center = new Vector3(0,1f,0.02f);
 									caps.height = 2;
 									caps.radius = 0.25f;
 									inCrouchCoverMode = false;
+									testCollisionObjects.inCoverMode = false;
 								}
 							}
 
@@ -892,12 +895,15 @@ public float LocomotionThreshold { get { return 0.15f; } }
 								lookAroundPosRight = lookAroundPosRightCopy;
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
+								testCollisionWall.inCoverMode = false;
+								rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 								if(inCrouchCoverMode)
 								{
 									caps.center = new Vector3(0,1f,0.02f);
 									caps.height = 2;
 									caps.radius = 0.25f;
 									inCrouchCoverMode = false;
+									testCollisionObjects.inCoverMode = false;
 								}
 							
 							}
@@ -990,12 +996,15 @@ public float LocomotionThreshold { get { return 0.15f; } }
 								lookAroundPosRight = lookAroundPosRightCopy;
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
+								testCollisionWall.inCoverMode = false;
+								rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 								if(inCrouchCoverMode)
 								{
 									caps.center = new Vector3(0,1f,0.02f);
 									caps.height = 2;
 									caps.radius = 0.25f;
 									inCrouchCoverMode = false;
+									testCollisionObjects.inCoverMode = false;
 								}
 
 							}

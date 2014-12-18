@@ -18,6 +18,8 @@ public class DonePlayerHealth : MonoBehaviour
 	private float maxHealthPoint;
 	private string maxHealthPointString;
 	private Transform lifeBar;
+	private SoundManager soundManager;
+	private bool reset;
 
 	void Awake ()
 	{
@@ -30,6 +32,8 @@ public class DonePlayerHealth : MonoBehaviour
 		lifeBar = GameObject.Find ("LifeBar").transform;
 		maxHealthPointString = "/" + health;
 		maxHealthPoint = health;
+		soundManager = GameObject.FindGameObjectWithTag (DoneTags.soundmanager).GetComponent<SoundManager> ();
+		reset = false;
 	}
 	
 	
@@ -91,6 +95,7 @@ public class DonePlayerHealth : MonoBehaviour
 		
 		// Stop the footsteps playing.
 		audio.Stop();
+//		soundManager.stopBGM ();
 	}
 	
 	
@@ -100,9 +105,12 @@ public class DonePlayerHealth : MonoBehaviour
 		timer += Time.deltaTime;
 		
 		//If the timer is greater than or equal to the time before the level resets...
-		if(timer >= resetAfterDeathTime)
+		if(timer >= resetAfterDeathTime && !reset)
+		{
+			reset = true;
 			// ... reset the level.
 			sceneFadeInOut.EndScene();
+		}
 	}
 	
 	
