@@ -88,7 +88,7 @@ public class testCollisionWall : MonoBehaviour {
 				//If we were 1 second in the good orientation
 				if(timeCollided > 0.5f)
 				{
-					Debug.Log ("IS A WALL = " + isAWall + " and normal = " + normalVector);
+//					Debug.Log ("IS A WALL = " + isAWall + " and normal = " + normalVector);
 //
 //					Debug.Log ("collision point = " + contact.point);
 //					Debug.Log ("collision point Raycast = " + hit.point);
@@ -97,10 +97,13 @@ public class testCollisionWall : MonoBehaviour {
 
 					inCoverMode = true;
 
+
 					//DOWN FACE
 					if(Vector3.Dot(normalVector, Vector3.forward) > 0.707106)
 					{
 						Debug.Log ("DOWN FACE");
+						player.rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
 
@@ -124,6 +127,8 @@ public class testCollisionWall : MonoBehaviour {
 					else if(Vector3.Dot(normalVector, -1*Vector3.left) > 0.707106)
 					{
 						Debug.Log ("LEFT FACE");
+						player.rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
+
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
 
@@ -149,6 +154,8 @@ public class testCollisionWall : MonoBehaviour {
 					else if(Vector3.Dot(normalVector, Vector3.left) > 0.707106)
 					{
 						Debug.Log ("RIGHT FACE");
+						player.rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
+
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
 

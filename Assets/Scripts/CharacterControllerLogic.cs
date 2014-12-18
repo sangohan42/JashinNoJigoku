@@ -794,6 +794,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
 								testCollisionWall.inCoverMode = false;
+								rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 								if(inCrouchCoverMode)
 								{
 									caps.center = new Vector3(0,1f,0.02f);
@@ -895,6 +896,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
 								testCollisionWall.inCoverMode = false;
+								rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 								if(inCrouchCoverMode)
 								{
 									caps.center = new Vector3(0,1f,0.02f);
@@ -995,6 +997,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 								lookAroundPosLeft = lookAroundPosLeftCopy;
 								currentModifToCoverPos = 0;
 								testCollisionWall.inCoverMode = false;
+								rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 								if(inCrouchCoverMode)
 								{
 									caps.center = new Vector3(0,1f,0.02f);

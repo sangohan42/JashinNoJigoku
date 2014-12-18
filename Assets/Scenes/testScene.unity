@@ -1561,7 +1561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 0
 --- !u!65 &70701613
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1961,7 +1960,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .25
+  m_Radius: .230000004
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: .0199999996}
@@ -3306,7 +3305,7 @@ GameObject:
   - 114: {fileID: 124827695}
   m_Layer: 11
   m_Name: WoodenBox_10
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3363,7 +3362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 0
 --- !u!65 &124827696
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4588,7 +4586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 1
 --- !u!65 &191835772
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7161,7 +7158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 1
 --- !u!23 &299074449
 Renderer:
   m_ObjectHideFlags: 0
@@ -11393,7 +11389,7 @@ GameObject:
   - 114: {fileID: 562642893}
   m_Layer: 0
   m_Name: WoodenBox_6
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -11450,7 +11446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 0
 --- !u!65 &562642894
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11900,7 +11895,7 @@ GameObject:
   - 114: {fileID: 597922713}
   m_Layer: 11
   m_Name: WoodenBox_11
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -11957,7 +11952,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 0
 --- !u!65 &597922714
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15728,7 +15722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 1
 --- !u!65 &716575254
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19728,7 +19721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 1
 --- !u!65 &930018649
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20298,7 +20290,7 @@ GameObject:
   - 114: {fileID: 954734715}
   m_Layer: 11
   m_Name: WoodenBox_5
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -20355,7 +20347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 0
 --- !u!65 &954734716
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23983,6 +23974,50 @@ Prefab:
       propertyPath: m_LightmapTilingOffset.w
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 88ff03a6ca7704b9e92bef495b525eb4, type: 3}
+      propertyPath: m_TagString
+      value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: 88ff03a6ca7704b9e92bef495b525eb4, type: 3}
+      propertyPath: m_TagString
+      value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 88ff03a6ca7704b9e92bef495b525eb4, type: 3}
+      propertyPath: m_TagString
+      value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: 88ff03a6ca7704b9e92bef495b525eb4, type: 3}
+      propertyPath: m_TagString
+      value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 100020, guid: 88ff03a6ca7704b9e92bef495b525eb4, type: 3}
+      propertyPath: m_TagString
+      value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 88ff03a6ca7704b9e92bef495b525eb4, type: 3}
+      propertyPath: m_TagString
+      value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 88ff03a6ca7704b9e92bef495b525eb4, type: 3}
+      propertyPath: m_TagString
+      value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 88ff03a6ca7704b9e92bef495b525eb4, type: 3}
+      propertyPath: m_TagString
+      value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 100024, guid: 88ff03a6ca7704b9e92bef495b525eb4, type: 3}
+      propertyPath: m_TagString
+      value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 88ff03a6ca7704b9e92bef495b525eb4, type: 3}
+      propertyPath: m_TagString
+      value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 100022, guid: 88ff03a6ca7704b9e92bef495b525eb4, type: 3}
+      propertyPath: m_TagString
+      value: Box
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88ff03a6ca7704b9e92bef495b525eb4, type: 3}
   m_RootGameObject: {fileID: 1074792905}
@@ -26373,7 +26408,7 @@ GameObject:
   - 23: {fileID: 1145718675}
   m_Layer: 11
   m_Name: WoodenBox_7
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -30666,7 +30701,7 @@ GameObject:
   - 114: {fileID: 1329834958}
   m_Layer: 0
   m_Name: WoodenBox_3
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -30723,7 +30758,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 0
 --- !u!65 &1329834959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33041,7 +33075,7 @@ GameObject:
   - 114: {fileID: 1416505578}
   m_Layer: 11
   m_Name: WoodenBox_2
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -33098,7 +33132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 0
 --- !u!65 &1416505579
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36433,7 +36466,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 1
 --- !u!65 &1533253087
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38937,7 +38969,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 1
 --- !u!65 &1609068250
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40776,7 +40807,7 @@ GameObject:
   - 114: {fileID: 1694112748}
   m_Layer: 11
   m_Name: WoodenBox_1
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -40833,7 +40864,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 0
 --- !u!65 &1694112749
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50742,7 +50772,7 @@ GameObject:
   - 114: {fileID: 1935271488}
   m_Layer: 11
   m_Name: WoodenBox_9
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -50799,7 +50829,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 0
 --- !u!65 &1935271489
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53068,7 +53097,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 1
 --- !u!65 &1976688302
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -55879,7 +55907,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 1
 --- !u!64 &2042291402
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -56048,7 +56075,7 @@ GameObject:
   - 23: {fileID: 2050234971}
   m_Layer: 11
   m_Name: WoodenBox_4
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -56163,7 +56190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 1
 --- !u!65 &2053975755
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57201,7 +57227,7 @@ GameObject:
   - 114: {fileID: 2096936297}
   m_Layer: 11
   m_Name: WoodenBox_8
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -57258,7 +57284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 0
 --- !u!65 &2096936298
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57728,7 +57753,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 1
 --- !u!64 &2117015644
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -58286,7 +58310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f024b9878c46da84dc16854d09302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAWall: 1
 --- !u!65 &2136071874
 BoxCollider:
   m_ObjectHideFlags: 0
