@@ -8,7 +8,7 @@ public class DoneSceneFadeInOut : MonoBehaviour
 	
 	private bool sceneStarting = true;		// Whether or not the scene is still fading in.
 	
-	
+	private bool loadLevelOnce = false;
 	void Awake ()
 	{
 		// Set the texture so that it is the the size of the screen and covers it.
@@ -66,10 +66,11 @@ public class DoneSceneFadeInOut : MonoBehaviour
 		FadeToBlack();
 		
 		// If the screen is almost black...
-		if(guiTexture.color.a >= 0.95f){
+		if(guiTexture.color.a >= 0.95f && loadLevelOnce ==false){
 			// ... reload the level.
 			FadeManager.Instance.LoadLevel("GameOver", 0.25f);
 			//Application.LoadLevel("GameOver");
+			loadLevelOnce = true;
 		}
 	}
 }

@@ -12,7 +12,7 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
 	private float fadeAlpha = 0;
 	/// <summary>フェード中かどうか</summary>
 	public  bool isFading = false;
-
+	
 	private GameObject nowLoadingImage;
 	private GameObject LoadingBarFront;
 	
@@ -29,7 +29,7 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
 		this.blackTexture.SetPixel (0, 0, Color.white);
 		this.blackTexture.Apply ();
 		Time.timeScale = 1;
-
+		
 	}
 	
 	public void OnGUI ()
@@ -50,7 +50,7 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
 	{
 		StartCoroutine(loadlLevel(scene, interval));
 	}
-
+	
 	private IEnumerator loadlLevel(string scene, float interval)
 	{
 		//だんだん暗く
@@ -75,20 +75,14 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
 		
 		this.isFading = false;
 	}
-
-
-	public void OnLevelWasLoaded(int level) {
-		switch(level)
-		{
-			case(0)://Title
-				if (this != Instance) return;
-				break;
-			case(1)://Game
-				if (this != Instance) return;
-				break;
-			case(2)://Ending
-				if (this != Instance) return;
-				break;
+	
+	
+	public void OnLevelWasLoaded(int level) 
+	{
+		if (this != Instance)
+		{ 
+			Destroy (this.gameObject); 
+			return;
 		}
 	}
 	
@@ -97,10 +91,10 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
 	/// </summary>
 	/// <param name='scene'>シーン名</param>
 	/// <param name='interval'>暗転にかかる時間(秒)</param>
-//	private void TransScene (string scene, float interval, bool inGame){
-//
-//
-//	}
+	//	private void TransScene (string scene, float interval, bool inGame){
+	//
+	//
+	//	}
 	
 	
 	

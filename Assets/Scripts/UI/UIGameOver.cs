@@ -3,9 +3,9 @@ using System.Collections;
 
 public class UIGameOver : MonoBehaviour {
 
-	// Use this for initialization
+
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -16,11 +16,14 @@ public class UIGameOver : MonoBehaviour {
 
 	void OnPress(bool isDown)
 	{
-		switch(gameObject.name)
+		if(isDown)
 		{
-			case "RetryLabel":
-				FadeManager.Instance.LoadLevel("testScene", 0.25f);		
-			break;
+			switch(gameObject.name)
+			{
+				case "RetryLabel":
+					FadeManager.Instance.LoadLevel("testScene", 0.25f);		
+				break;
+			}
 		}
 	}
 }

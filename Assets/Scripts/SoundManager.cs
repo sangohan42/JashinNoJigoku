@@ -42,9 +42,8 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 	public void Awake ()
 	{
 		if (this != Instance) {
-			Debug.Log ("Destroy Sound Manager");
-			Destroy(this);
 			Destroy (this.gameObject);
+			//Debug.Log ("Destroy Sound Manager :Start");
 			return;
 		}
 		else{
@@ -60,6 +59,8 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 		
 		//Debug.Log ("In Awake, VolumeOff = " + volumeOff);
 	}
+
+
 		
 	public void initAudioSource()
 	{
@@ -121,25 +122,32 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 //		}	
 //	}
 
-//	public void OnLevelWasLoaded(int level) {
-//		switch(level){
-//			case(0)://Title
-//				//switchPlayBGM(soundName.BGM_Title);	
-//				StartCoroutine(switchPlayBGMLate(soundName.BGM_Title));
-//				checkIcon();
-//				break;
-//			case(1)://GameScene
-//				switchPlayBGM(soundName.BGM_InGame);	
-//				//StartCoroutine(switchPlayBGMLate(soundName.BGM_InGame));
-//				storeStageNameType = storeStageName.testScene;
-//				break;
-//			case(2)://Ending
-//				//switchPlayBGM(soundName.BGM_Result);
-//				StartCoroutine(switchPlayBGMLate(soundName.BGM_Result));
-//				storeStageNameType = storeStageName.GameOver;
-//				break;
-//		}
-//	}
+	public void OnLevelWasLoaded(int level) 
+	{
+		if (this != Instance)
+		{ 
+			Destroy (this.gameObject); 
+			return;
+		}
+		print ("OnLevelWasLoaded: " + "level" + level);
+		switch(level){
+			case(0)://Title
+				//switchPlayBGM(soundName.BGM_Title);	
+				StartCoroutine(switchPlayBGMLate(soundName.BGM_Title));
+				//checkIcon();
+				break;
+			case(1)://GameScene
+				switchPlayBGM(soundName.BGM_InGame);	
+				//StartCoroutine(switchPlayBGMLate(soundName.BGM_InGame));
+				storeStageNameType = storeStageName.testScene;
+				break;
+			case(2)://Ending
+				//switchPlayBGM(soundName.BGM_Result);
+				StartCoroutine(switchPlayBGMLate(soundName.BGM_Result));
+				storeStageNameType = storeStageName.GameOver;
+				break;
+		}
+	}
 	
 	IEnumerator switchPlayBGMLate(soundName sound)
 	{
