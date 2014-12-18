@@ -8,11 +8,15 @@ public class DoneSceneFadeInOut : MonoBehaviour
 	
 	private bool sceneStarting = true;		// Whether or not the scene is still fading in.
 	
-	
+	private bool endScene;
+
+	private bool willLoadScene;
 	void Awake ()
 	{
 		// Set the texture so that it is the the size of the screen and covers it.
 		guiTexture.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
+		endScene = false;
+		willLoadScene = false;
 	}
 	
 	
@@ -22,6 +26,8 @@ public class DoneSceneFadeInOut : MonoBehaviour
 		if(sceneStarting)
 			// ... call the StartScene function.
 			StartScene();
+
+		if(endScene)FadeToBlack();
 	}
 	
 	
@@ -36,6 +42,14 @@ public class DoneSceneFadeInOut : MonoBehaviour
 	{
 		// Lerp the colour of the texture between itself and black.
 		guiTexture.color = Color.Lerp(guiTexture.color, Color.black, fadeSpeed * Time.deltaTime);
+
+		// If the screen is almost black...
+		if(guiTexture.color.a >= 0.95f && !willLoadScene){
+			// ... reload the level.
+			FadeManager.Instance.LoadLevel("GameOver", 0.25f);
+			willLoadScene = true;
+			//Application.LoadLevel("GameOver");
+		}
 	}
 	
 	
@@ -61,15 +75,8 @@ public class DoneSceneFadeInOut : MonoBehaviour
 	{
 		// Make sure the texture is enabled.
 		guiTexture.enabled = true;
-		
-		// Start fading towards black.
-		FadeToBlack();
-		
-		// If the screen is almost black...
-		if(guiTexture.color.a >= 0.95f){
-			// ... reload the level.
-			FadeManager.Instance.LoadLevel("GameOver", 0.25f);
-			//Application.LoadLevel("GameOver");
-		}
+
+		endScene = true;
+
 	}
 }

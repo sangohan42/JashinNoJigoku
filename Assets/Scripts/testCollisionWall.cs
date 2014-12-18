@@ -13,11 +13,12 @@ public class testCollisionWall : MonoBehaviour {
 	private enum Face{LEFT, RIGHT, DOWN};
 	private BoxCollider currCollider;
 	private Vector3 size;
+	private bool isAWall;
 //	private Vector3 boundMax;
 //	private Vector3 boundMin;
 
 	private float timeCollided;
-	private static bool inCoverMode;
+	public static bool inCoverMode;
 
 	private Vector3 normalVector;
 
@@ -33,6 +34,7 @@ public class testCollisionWall : MonoBehaviour {
 		timeCollided = 0;
 		inCoverMode = false;
 		normalVector = Vector3.zero;
+		isAWall = !(this.CompareTag (DoneTags.box));
 	}
 
 	void Start()
@@ -57,67 +59,115 @@ public class testCollisionWall : MonoBehaviour {
 		if(collision.gameObject.CompareTag(DoneTags.player) && !inCoverMode && checkEnemy.isNotSeen())
 		{
 			ContactPoint contact = collision.contacts[0];
+//			if(normalVector != contact.normal)
+//			{
+//				Debug.Log ("RESET");
+//				timeCollided=0;
+//				normalVector = contact.normal;
+//			}
+//			normalVector = contact.normal;
+//			Debug.Log ("IS A WALL = " + isAWall);
 			RaycastHit hit;
-			if(Physics.Raycast(player.transform.position + caps.center.y*transform.up, player.transform.forward, out hit, 1f))
+			Vector3 startPos = player.transform.position + caps.center.y*transform.up;
+
+			if(Physics.Raycast(startPos, contact.point -startPos, out hit, 1f))
 			{
-				if(normalVector != hit.normal)
+				if(normalVector != -1*hit.normal)
 				{
-					timeCollided=0;
-					normalVector = hit.normal;
+					timeCollided = 0;
+					normalVector = -1*hit.normal;
 				}
 			}
 
 			//We have the right orientation
-			if(Vector3.Dot(collision.gameObject.transform.forward,-1*normalVector) > 0.75f && collision.relativeVelocity.magnitude >1)
+			if(Vector3.Dot(collision.gameObject.transform.forward,normalVector) > 0.75f && collision.relativeVelocity.magnitude >1)
 			{
-//					Debug.Log ("COLLIDE");
 				timeCollided += Time.deltaTime;
+
 
 				//If we were 1 second in the good orientation
 				if(timeCollided > 0.5f)
 				{
+					Debug.Log ("IS A WALL = " + isAWall + " and normal = " + normalVector);
+//
+//					Debug.Log ("collision point = " + contact.point);
+//					Debug.Log ("collision point Raycast = " + hit.point);
+//
+//					Debug.Break ();
+
 					inCoverMode = true;
 
 					//DOWN FACE
-					if(Vector3.Dot(-1f*normalVector, Vector3.forward) > 0.707106)
+					if(Vector3.Dot(normalVector, Vector3.forward) > 0.707106)
 					{
 						Debug.Log ("DOWN FACE");
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
-						playerAnimator.SetBool(hash.coverBool, true);
-						characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, player.transform.position.y, contact.point.z -0.22f);
-						characterControllerLogicScript.VecToAlignTo = normalVector;
+
+						if(isAWall){
+							playerAnimator.SetBool(hash.coverBool, true);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, player.transform.position.y, contact.point.z -0.22f);
+						}
+
+						else{
+							playerAnimator.SetBool(hash.crouchCoverBool, true);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, player.transform.position.y, contact.point.z -0.42f);
+							characterControllerLogicScript.InCrouchCoverMode = true;
+							characterControllerLogicScript.CoverPos += new Vector3(0, -0.9f,0);
+						}
+						characterControllerLogicScript.VecToAlignTo = -1*normalVector;
 						characterControllerLogicScript.CurrentCoverState = CoverState.onDownFace;
-						calculateBounds(Face.DOWN, normalVector);
+						calculateBounds(Face.DOWN, -1*normalVector);
 					}
 
 					//LEFT FACE
-					else if(Vector3.Dot(-1f*normalVector, -1*Vector3.left) > 0.707106)
+					else if(Vector3.Dot(normalVector, -1*Vector3.left) > 0.707106)
 					{
 						Debug.Log ("LEFT FACE");
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
-						playerAnimator.SetBool(hash.coverBool, true);
-						characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x - 0.22f, player.transform.position.y, contact.point.z);
-						characterControllerLogicScript.VecToAlignTo = normalVector;
-					
+
+						if(isAWall){
+							playerAnimator.SetBool(hash.coverBool, true);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x - 0.22f, player.transform.position.y, contact.point.z);
+
+						}
+
+						else{
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x - 0.42f, player.transform.position.y, contact.point.z);
+							playerAnimator.SetBool(hash.crouchCoverBool, true);
+							characterControllerLogicScript.InCrouchCoverMode = true;
+							characterControllerLogicScript.CoverPos += new Vector3(0, -0.9f,0);
+						}
+						characterControllerLogicScript.VecToAlignTo = -1*normalVector;
 						characterControllerLogicScript.CurrentCoverState = CoverState.OnLeftFace;
-						calculateBounds(Face.LEFT, normalVector);
+						calculateBounds(Face.LEFT, -1*normalVector);
 
 					}
 					
 					//RIGHT FACE
-					else if(Vector3.Dot(-1f*normalVector, Vector3.left) > 0.707106)
+					else if(Vector3.Dot(normalVector, Vector3.left) > 0.707106)
 					{
 						Debug.Log ("RIGHT FACE");
 						characterControllerLogicScript.SavedCamPosition = gameCam.transform.position;
 						characterControllerLogicScript.SavedCamRotation = gameCam.transform.rotation;
-						playerAnimator.SetBool(hash.coverBool, true);
-						characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x + 0.22f, player.transform.position.y, contact.point.z);
-						characterControllerLogicScript.VecToAlignTo = normalVector;
-					
+
+						if(isAWall){
+							playerAnimator.SetBool(hash.coverBool, true);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x + 0.22f, player.transform.position.y, contact.point.z);
+
+						}
+
+						else{
+							playerAnimator.SetBool(hash.crouchCoverBool, true);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x + 0.42f, player.transform.position.y, contact.point.z);
+							characterControllerLogicScript.InCrouchCoverMode = true;
+							characterControllerLogicScript.CoverPos += new Vector3(0, -0.9f,0);
+						}
+
+						characterControllerLogicScript.VecToAlignTo = -1*normalVector;
 						characterControllerLogicScript.CurrentCoverState = CoverState.OnRightFace;
-						calculateBounds(Face.RIGHT, normalVector);
+						calculateBounds(Face.RIGHT, -1*normalVector);
 						
 					}
 				}
@@ -128,7 +178,6 @@ public class testCollisionWall : MonoBehaviour {
 	void OnCollisionExit(Collision collision) 
 	{
 		timeCollided = 0;
-		inCoverMode = false;
 		normalVector = Vector3.zero;
 	}
 	

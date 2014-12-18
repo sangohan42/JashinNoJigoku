@@ -17,7 +17,7 @@ public class testCollisionObjects : MonoBehaviour {
 //	private Vector3 boundMin;
 	
 	private float timeCollided;
-	private static bool inCoverMode;
+	public static bool inCoverMode;
 	
 	private Vector3 normalVector;
 	
@@ -80,7 +80,9 @@ public class testCollisionObjects : MonoBehaviour {
 					{
 
 						inCoverMode = true;
-						
+
+						Debug.Log ("NOT A WALL and normal = " + normalVector);
+						Debug.Break ();
 						//DOWN FACE
 						if(Vector3.Dot(-1f*normalVector, Vector3.forward) > 0.707106)
 						{
@@ -145,7 +147,6 @@ public class testCollisionObjects : MonoBehaviour {
 	void OnCollisionExit(Collision collision) 
 	{
 		timeCollided = 0;
-		inCoverMode = false;
 		normalVector = Vector3.zero;
 	}
 

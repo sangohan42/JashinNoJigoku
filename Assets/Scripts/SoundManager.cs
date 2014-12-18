@@ -43,8 +43,10 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 	{
 		if (this != Instance) {
 			Debug.Log ("Destroy Sound Manager");
-			Destroy(this);
-			Destroy (this.gameObject);
+//			Destroy(this);
+//			Destroy (this.gameObject);
+			DestroyImmediate(this.gameObject);
+//			Debug.Break();
 			return;
 		}
 		else{
@@ -100,7 +102,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 //		SE_Throw = Resources.Load("Sounds/SE_Throw", typeof(AudioClip)) as AudioClip;
 
 		//initialize
-		if(Application.loadedLevelName == "testScene"){
+		if(Application.loadedLevelName == "testScene" && this == Instance){
 			Debug.Log("Play Background Music");
 			switchPlayBGM(soundName.BGM_InGame);
 		}
@@ -121,25 +123,32 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 //		}	
 //	}
 
-//	public void OnLevelWasLoaded(int level) {
-//		switch(level){
-//			case(0)://Title
-//				//switchPlayBGM(soundName.BGM_Title);	
-//				StartCoroutine(switchPlayBGMLate(soundName.BGM_Title));
-//				checkIcon();
-//				break;
-//			case(1)://GameScene
-//				switchPlayBGM(soundName.BGM_InGame);	
+	public void OnLevelWasLoaded(int level) {
+//		if (this != Instance) {
+//			Debug.Log ("Destroy Sound Manager OnLevelWasLoaded");
+//			Destroy(this);
+//			Destroy (this.gameObject);
+//			return;
+//		}
+		switch(level){
+			case(0)://Title
+				//switchPlayBGM(soundName.BGM_Title);	
+			StartCoroutine(switchPlayBGMLate(soundName.BGM_InGame));
+//			switchPlayBGM(soundName.BGM_InGame);	
+			//				checkIcon();
+				break;
+			case(1)://GameScene
+				switchPlayBGM(soundName.BGM_InGame);	
 //				//StartCoroutine(switchPlayBGMLate(soundName.BGM_InGame));
 //				storeStageNameType = storeStageName.testScene;
-//				break;
-//			case(2)://Ending
-//				//switchPlayBGM(soundName.BGM_Result);
-//				StartCoroutine(switchPlayBGMLate(soundName.BGM_Result));
-//				storeStageNameType = storeStageName.GameOver;
-//				break;
-//		}
-//	}
+				break;
+			case(2)://Ending
+				switchPlayBGM(soundName.BGM_InGame);
+//			StartCoroutine(switchPlayBGMLate(soundName.BGM_InGame));
+//			storeStageNameType = storeStageName.testScene;
+				break;
+		}
+	}
 	
 	IEnumerator switchPlayBGMLate(soundName sound)
 	{

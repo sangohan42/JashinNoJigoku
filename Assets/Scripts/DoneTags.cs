@@ -15,5 +15,6 @@ public class DoneTags : MonoBehaviour
 	public const string key = "KeyGroup";
 	public const string shouko = "Shouko";
 	public const string soundmanager = "SoundManager";
+	public const string box = "Box";
 
 }
