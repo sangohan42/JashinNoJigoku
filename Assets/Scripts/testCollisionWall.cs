@@ -109,7 +109,7 @@ public class testCollisionWall : MonoBehaviour {
 
 						if(isAWall){
 							playerAnimator.SetBool(hash.coverBool, true);
-							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, player.transform.position.y, contact.point.z -0.22f);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, player.transform.position.y, contact.point.z -0.24f);
 						}
 
 						else{
@@ -134,7 +134,7 @@ public class testCollisionWall : MonoBehaviour {
 
 						if(isAWall){
 							playerAnimator.SetBool(hash.coverBool, true);
-							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x - 0.22f, player.transform.position.y, contact.point.z);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x - 0.24f, player.transform.position.y, contact.point.z);
 
 						}
 
@@ -161,7 +161,7 @@ public class testCollisionWall : MonoBehaviour {
 
 						if(isAWall){
 							playerAnimator.SetBool(hash.coverBool, true);
-							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x + 0.22f, player.transform.position.y, contact.point.z);
+							characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x + 0.24f, player.transform.position.y, contact.point.z);
 
 						}
 

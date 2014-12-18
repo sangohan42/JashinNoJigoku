@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum soundName {BGM_Title, BGM_InGame, BGM_Result, Jingle_GameFinish, Jingle_GameStart, SE_Enter, SE_Hit_Pin, SE_Pin_Down, SE_Pin_Down2, SE_Rolling_Loop, SE_Rolling_Launch, SE_Special, SE_Throw   };
+public enum soundName {BGM_Title, BGM_InGame, BGM_Result, SE_GameOver, SE_GameStart, SE_DoorOpen, SE_DoorClose};
 
 public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 	
@@ -21,16 +21,10 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 	private AudioClip BGM_InGame {get; set;}
 	private AudioClip BGM_Result {get; set;}
 	
-	private AudioClip Jingle_GameFinish {get; set;}
-	private AudioClip Jingle_GameStart {get; set;}
-	private AudioClip SE_Enter {get; set;}
-	private AudioClip SE_Hit_Pin {get; set;}
-	private AudioClip SE_Pin_Down {get; set;}
-	private AudioClip SE_Pin_Down2 {get; set;}
-	private AudioClip SE_Rolling_Loop {get; set;}
-	private AudioClip SE_Rolling_Launch {get; set;}
-	private AudioClip SE_Special {get; set;}
-	private AudioClip SE_Throw {get; set;}
+	private AudioClip SE_GameOver {get; set;}
+	private AudioClip SE_GameStart {get; set;}
+	private AudioClip SE_DoorOpen {get; set;}
+	private AudioClip SE_DoorClose {get; set;}
 
 	public AudioSource[] audioSource {get; set;}
 	
@@ -59,8 +53,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 		
 		//Debug.Log ("In Awake, VolumeOff = " + volumeOff);
 	}
-
-
+	
 		
 	public void initAudioSource()
 	{
@@ -89,7 +82,9 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 		BGM_InGame = Resources.Load("Sounds/BGM_InGame", typeof(AudioClip)) as AudioClip;
 //		BGM_Result = Resources.Load("Sounds/BGM_Result", typeof(AudioClip)) as AudioClip;
 		
-		Jingle_GameFinish = Resources.Load("Sounds/endgame", typeof(AudioClip)) as AudioClip;
+		SE_GameOver = Resources.Load("Sounds/endgame", typeof(AudioClip)) as AudioClip;
+		SE_DoorOpen = Resources.Load("Sounds/DoorOpen", typeof(AudioClip)) as AudioClip;
+		SE_DoorClose = Resources.Load("Sounds/DoorClose", typeof(AudioClip)) as AudioClip;
 //		Jingle_GameStart = Resources.Load("Sounds/Jingle_GameStart", typeof(AudioClip)) as AudioClip;
 //		SE_Enter = Resources.Load("Sounds/SE_Enter", typeof(AudioClip)) as AudioClip;
 //		SE_Hit_Pin = Resources.Load("Sounds/SE_Hit_Pin", typeof(AudioClip)) as AudioClip;
@@ -131,19 +126,19 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 		}
 		print ("OnLevelWasLoaded: " + "level" + level);
 		switch(level){
-			case(0)://Title
+			case(0)://GameScene
 				//switchPlayBGM(soundName.BGM_Title);	
-				StartCoroutine(switchPlayBGMLate(soundName.BGM_Title));
+				StartCoroutine(switchPlayBGMLate(soundName.BGM_InGame));
 				//checkIcon();
 				break;
-			case(1)://GameScene
+			case(1)://GameClear
 				switchPlayBGM(soundName.BGM_InGame);	
 				//StartCoroutine(switchPlayBGMLate(soundName.BGM_InGame));
 				storeStageNameType = storeStageName.testScene;
 				break;
-			case(2)://Ending
+			case(2)://GameOver
 				//switchPlayBGM(soundName.BGM_Result);
-				StartCoroutine(switchPlayBGMLate(soundName.BGM_Result));
+				StartCoroutine(switchPlayBGMLate(soundName.BGM_InGame));
 				storeStageNameType = storeStageName.GameOver;
 				break;
 		}
@@ -176,7 +171,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 		if(volumeOff) return;
 		else
 		{
-			audioSource[0].volume = 0.5f;
+			audioSource[0].volume = 0.3f;
 			audioSource[0].clip = getBGMClip(sound);
 			audioSource[0].loop = true;
 			audioSource[0].Play ();	
@@ -192,35 +187,17 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 	{
 		switch(sound)
 		{
-			case soundName.Jingle_GameFinish:
-			return Jingle_GameFinish;
+			case soundName.SE_GameOver:
+			return SE_GameOver;
 
-			case soundName.Jingle_GameStart:
-			return Jingle_GameStart;
+			case soundName.SE_GameStart:
+			return SE_GameStart;
 
-			case soundName.SE_Enter:
-			return SE_Enter;
-			
-			case soundName.SE_Hit_Pin:
-			return SE_Hit_Pin;
+			case soundName.SE_DoorOpen:
+			return SE_DoorOpen;
 
-			case soundName.SE_Pin_Down:
-			return SE_Pin_Down;
-
-			case soundName.SE_Pin_Down2:
-			return SE_Pin_Down2;
-
-			case soundName.SE_Rolling_Loop:
-			return SE_Rolling_Loop;
-			
-			case soundName.SE_Rolling_Launch:
-			return SE_Rolling_Launch;
-
-			case soundName.SE_Special:
-			return SE_Special;
-
-			case soundName.SE_Throw:
-			return SE_Throw;
+			case soundName.SE_DoorClose:
+			return SE_DoorClose;
 
 			default:
 			Debug.Log ("Please Enter the name of an audio clip");

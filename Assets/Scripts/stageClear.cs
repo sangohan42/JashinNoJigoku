@@ -29,10 +29,10 @@ public class stageClear : MonoBehaviour {
 
 	IEnumerator playEndSound()
 	{
-		soundManager.playSound(soundName.Jingle_GameFinish);
-		yield return new WaitForSeconds(5);
+//		soundManager.playSound(soundName.SE_GameClear);
+//		yield return new WaitForSeconds(5);
 
-		FadeManager.Instance.LoadLevel("GameClear", 0.25f);
+		FadeManager.Instance.LoadLevel("GameClear", 0.35f);
 		yield return null;
 	}
 }

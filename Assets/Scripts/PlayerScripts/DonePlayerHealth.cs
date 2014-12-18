@@ -70,6 +70,7 @@ public class DonePlayerHealth : MonoBehaviour
 		// Set the animator's dead parameter to true also.
 		anim.SetBool(hash.deadBool, playerDead);
 
+		soundManager.playSound (soundName.SE_GameOver);
 //		//Transition from animated to ragdolled
 //		anim.enabled = false; //disable animation
 //		rigidbody.isKinematic = false; //allow the ragdoll RigidBodies to react to the environment

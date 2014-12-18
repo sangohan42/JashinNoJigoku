@@ -609,6 +609,11 @@ public float LocomotionThreshold { get { return 0.15f; } }
 //
 //		}
 
+		if(animator.IsInTransition(0) && animator.GetNextAnimatorStateInfo(0).nameHash == hashIdsScript.m_rollingState)
+		{
+			animator.SetBool("Rolling", false);
+		}
+
 		if(!isInPanoramicView)
 		{
 
@@ -743,7 +748,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 
 									else 
 									{
-										rigidbody.MovePosition(rigidbody.position-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+										rigidbody.MovePosition(rigidbody.position-1 *transform.right * 1.2f*Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									}
 								}
 
@@ -797,9 +802,9 @@ public float LocomotionThreshold { get { return 0.15f; } }
 								rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 								if(inCrouchCoverMode)
 								{
-									caps.center = new Vector3(0,1f,0.02f);
+									caps.center = new Vector3(0,1f,0.04f);
 									caps.height = 2;
-									caps.radius = 0.25f;
+									caps.radius = 0.28f;
 									inCrouchCoverMode = false;
 									testCollisionObjects.inCoverMode = false;
 								}
@@ -846,7 +851,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 									
 									else 
 									{
-										rigidbody.MovePosition(rigidbody.position-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+									rigidbody.MovePosition(rigidbody.position-1 *1.2f*transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									}
 								}
 								
@@ -899,9 +904,9 @@ public float LocomotionThreshold { get { return 0.15f; } }
 								rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 								if(inCrouchCoverMode)
 								{
-									caps.center = new Vector3(0,1f,0.02f);
+									caps.center = new Vector3(0,1f,0.04f);
 									caps.height = 2;
-									caps.radius = 0.25f;
+									caps.radius = 0.28f;
 									inCrouchCoverMode = false;
 									testCollisionObjects.inCoverMode = false;
 								}
@@ -948,7 +953,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 									
 									else 
 									{
-										rigidbody.MovePosition(rigidbody.position-1 *transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
+									rigidbody.MovePosition(rigidbody.position-1 *1.2f*transform.right * Time.deltaTime*direction*Mathf.Abs(direction)*COVER_SPEED);
 									}
 								}
 								
@@ -1000,9 +1005,9 @@ public float LocomotionThreshold { get { return 0.15f; } }
 								rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 								if(inCrouchCoverMode)
 								{
-									caps.center = new Vector3(0,1f,0.02f);
+									caps.center = new Vector3(0,1f,0.04f);
 									caps.height = 2;
-									caps.radius = 0.25f;
+									caps.radius = 0.28f;
 									inCrouchCoverMode = false;
 									testCollisionObjects.inCoverMode = false;
 								}
@@ -1138,6 +1143,11 @@ public float LocomotionThreshold { get { return 0.15f; } }
 				gamecam.transform.position = transform.position + cameraPosition;
 				gamecam.transform.eulerAngles = cameraRotation;
 			}
+		}
+
+		else if(Mathf.Abs(joyX) > 0.8f || Mathf.Abs(joyY) >0.8f)
+		{
+			animator.SetBool(hashIdsScript.rollingBool, true);
 		}
 	}
 	

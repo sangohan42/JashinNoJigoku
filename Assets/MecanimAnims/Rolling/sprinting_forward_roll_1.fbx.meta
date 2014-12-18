@@ -185,7 +185,7 @@ ModelImporter:
     4300018: Adam_Tongue_Geo
     4300020: Adam_Eyes_Geo
     4300022: Adam_Lashes_Geo
-    7400000: mixamo.com
+    7400000: Rolling
     9500000: //RootNode
     13700000: Adam_belt_geo
     13700002: Adam_Eyes_Geo
@@ -216,7 +216,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: Rolling
       takeName: mixamo.com
       firstFrame: 0
       lastFrame: 35
@@ -225,7 +225,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 1
       loopBlendOrientation: 1
       loopBlendPositionY: 1
