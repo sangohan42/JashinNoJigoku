@@ -126,7 +126,7 @@ public class CharacterControllerLogic : MonoBehaviour
 
 	private float gameDuration;
 
-	
+	private DonePlayerHealth playerHealthScript;
 	#endregion
 		
 	
@@ -454,7 +454,9 @@ public float LocomotionThreshold { get { return 0.15f; } }
 		availableShouko = GameObject.FindGameObjectsWithTag (DoneTags.shouko).Length;
 
 		gameDuration = 0;
-	
+
+		playerHealthScript = this.GetComponent<DonePlayerHealth> ();
+			
 	}
 
 	private void CompensateForWalls(Vector3 fromObject, ref Vector3 toTarget)
@@ -554,7 +556,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 				hasBeenInCover = false;
 
 				// If there is some axis input...
-				if(joyX != 0f || joyY != 0f)
+				if((joyX != 0f || joyY != 0f) && !playerHealthScript.playerIsDead)
 				{
 					// ... set the players rotation and set the speed parameter to 5.5f.
 					Rotating(joyX, joyY);
@@ -1030,9 +1032,19 @@ public float LocomotionThreshold { get { return 0.15f; } }
 		//In Panoramic view
 		else
 		{
-			RotateInPanoramic(joyX, joyY);
-		}
+			//If we are not dead
+			if(!playerHealthScript.playerIsDead)RotateInPanoramic(joyX, joyY);
 
+			//If we are dead we switch back to the normal camera mode
+			else 
+			{
+				isInPanoramicView = false;
+				gamecam.transform.parent = null;
+				currentModifToPanoramicRotVertical = 0;
+				gamecam.transform.position = transform.position + cameraPosition;
+				gamecam.transform.eulerAngles = cameraRotation;
+			}
+		}
 	}
 	
 	void RotateInPanoramic(float horizontal, float vertical)
@@ -1046,13 +1058,10 @@ public float LocomotionThreshold { get { return 0.15f; } }
 			Vector3 copy = gamecam.transform.localEulerAngles;
 			copy.x -= vertical;
 			gamecam.transform.localEulerAngles = copy;
-
-//			gamecam.transform.localRotation = Quaternion.AngleAxis(vertical, -1*this.transform.right) * gamecam.transform.localRotation;
 		}
 
 		//HORIZONTAL MOVEMENT
 		transform.rotation = Quaternion.AngleAxis(1.5f*horizontal, Vector3.up) * transform.rotation;
-
 	}
 
 	void Rotating (float horizontal, float vertical)
@@ -1073,15 +1082,6 @@ public float LocomotionThreshold { get { return 0.15f; } }
 	/// Any code that moves the character needs to be checked against physics
 	void FixedUpdate()
 	{							
-//		// Rotate character model if stick is tilted right or left, but only if character is moving in that direction
-//		if (IsInLocomotion()&& ((direction >= 0 && joyX >= 0) || (direction < 0 && joyX < 0)))
-//		{
-////			Debug.Log ("HERE");
-//			Vector3 rotationAmount = Vector3.Lerp(Vector3.zero, new Vector3(0f, rotationDegreePerSecond * (joyX < 0f ? -1f : 1f), 0f), Mathf.Abs(joyX));
-//			Quaternion deltaRotation = Quaternion.Euler(rotationAmount * Time.deltaTime);
-//        	this.transform.rotation = (this.transform.rotation * deltaRotation);
-//		}		
-
 		AudioManagement ();
 	}
 
@@ -1124,9 +1124,21 @@ public float LocomotionThreshold { get { return 0.15f; } }
 		EasyTouch.On_DoubleTap -= HandleOn_DoubleTap;
 	}
 
+//	void OnAnimatorIK (int layerIndex)
+//	{
+//		// Cache the current value of the AimWeight curve.
+//		float aimWeight = animator.GetFloat(hashIdsScript.aimWeightPlayerFloat);
+//		
+//		// Set the IK position of the right hand to the player's centre.
+//		animator.SetIKPosition(AvatarIKGoal.RightHand, gamecam.transform.localPosition + gamecam.transform.forward);
+//		
+//		// Set the weight of the IK compared to animation to that of the curve.
+//		animator.SetIKPositionWeight(AvatarIKGoal.RightHand, aimWeight);
+//	}	
+
 	void HandleOn_DoubleTap (Gesture gesture)
 	{
-		if(joyX == 0 && joyY == 0 && currentCoverState == CoverState.nil)
+		if(joyX == 0 && joyY == 0 && currentCoverState == CoverState.nil && !playerHealthScript.playerIsDead)
 		{
 			if(!isInPanoramicView)
 			{
@@ -1134,6 +1146,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 				gamecam.transform.parent = transform;
 				gamecam.transform.localPosition = camPanoramicPosition;
 				gamecam.transform.localEulerAngles = camPanoramicRotation;
+				animator.SetBool(hashIdsScript.playerRaiseWeapon, true);
 			}
 			else 
 			{
@@ -1142,9 +1155,12 @@ public float LocomotionThreshold { get { return 0.15f; } }
 				currentModifToPanoramicRotVertical = 0;
 				gamecam.transform.position = transform.position + cameraPosition;
 				gamecam.transform.eulerAngles = cameraRotation;
+				animator.SetBool(hashIdsScript.playerRaiseWeapon, false);
+
 			}
 		}
 
+		//Play rolling animation
 		else if(Mathf.Abs(joyX) > 0.8f || Mathf.Abs(joyY) >0.8f)
 		{
 			animator.SetBool(hashIdsScript.rollingBool, true);

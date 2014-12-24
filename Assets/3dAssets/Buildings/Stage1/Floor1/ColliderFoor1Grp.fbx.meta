@@ -36,6 +36,10 @@ ModelImporter:
     100060: WallGrp
     100062: WallL
     100064: WallR
+    100066: Entrance1
+    100068: ColliderDrum
+    100070: ColliderPipeLongBendR_5
+    100072: Floor1
     400000: //RootNode
     400002: ColliderPipeBassCornerL_1
     400004: ColliderPipeBassR_1
@@ -69,6 +73,10 @@ ModelImporter:
     400060: WallGrp
     400062: WallL
     400064: WallR
+    400066: Entrance1
+    400068: ColliderDrum
+    400070: ColliderPipeLongBendR_5
+    400072: Floor1
     2300000: ColliderPipeBassCornerL_1
     2300002: ColliderPipeBassR_1
     2300004: ColliderPipeBatchR1
@@ -97,6 +105,10 @@ ModelImporter:
     2300050: pCube3
     2300052: WallL
     2300054: WallR
+    2300056: Entrance1
+    2300058: ColliderDrum
+    2300060: ColliderPipeLongBendR_5
+    2300062: Floor1
     3300000: ColliderPipeBassCornerL_1
     3300002: ColliderPipeBassR_1
     3300004: ColliderPipeBatchR1
@@ -125,6 +137,10 @@ ModelImporter:
     3300050: pCube3
     3300052: WallL
     3300054: WallR
+    3300056: Entrance1
+    3300058: ColliderDrum
+    3300060: ColliderPipeLongBendR_5
+    3300062: Floor1
     4300000: ColliderPipeBassR_1
     4300002: ColliderPipeLongBendR_2
     4300004: ColliderPipeLongBendR_3
@@ -153,6 +169,10 @@ ModelImporter:
     4300050: pCube3
     4300052: WallR
     4300054: WallL
+    4300056: Entrance1
+    4300058: ColliderPipeLongBendR_5
+    4300060: ColliderDrum
+    4300062: Floor1
     9500000: //RootNode
   materials:
     importMaterials: 0

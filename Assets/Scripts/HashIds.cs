@@ -30,9 +30,12 @@ public class HashIds : MonoBehaviour {
 	public int crouchCoverBool;
 	public int crawlingBool;
 	public int rollingBool;
-	
+	public int playerShootingBool;
+	public int playerRaiseWeapon;
+
 	public int shotFloat;
 	public int aimWeightFloat;
+	public int aimWeightPlayerFloat;
 	public int angularSpeedFloat;
 	public int speedFloat;
 	public int speedFloatEnemy;
@@ -68,9 +71,12 @@ public class HashIds : MonoBehaviour {
 		crouchCoverBool = Animator.StringToHash("CrouchCover");
 		crawlingBool = Animator.StringToHash ("Crawling");
 		rollingBool = Animator.StringToHash ("Rolling");
+		playerShootingBool = Animator.StringToHash ("PlayerShooting");
+		playerRaiseWeapon = Animator.StringToHash ("PlayerRaiseWeapon");
 
 		shotFloat = Animator.StringToHash("Shot");
 		aimWeightFloat = Animator.StringToHash("AimWeight");
+		aimWeightPlayerFloat = Animator.StringToHash ("AimWeightPlayer");
 		angularSpeedFloat = Animator.StringToHash("AngularSpeed");
 		speedFloat = Animator.StringToHash("Speed");
 		speedFloatEnemy = Animator.StringToHash ("SpeedEnemy");

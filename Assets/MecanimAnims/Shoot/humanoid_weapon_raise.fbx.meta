@@ -237,18 +237,44 @@ ModelImporter:
           - time: .285626203
             value: 8.84532928e-05
             inSlope: .19274652
-            outSlope: 1.47340739
+            outSlope: 6.45488691
             tangentMode: 17
-          - time: .353474677
-            value: .100056894
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
+          - time: .440342754
+            value: .998766303
+            inSlope: 6.45488691
+            outSlope: Infinity
+            tangentMode: 29
           - time: 1
-            value: .0994315818
+            value: 1.00056362
             inSlope: 0
             outSlope: 0
             tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      - name: AimWeightPlayer
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: .308333337
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: .448083937
+            value: .999411821
+            inSlope: 7.1513958
+            outSlope: 0
+            tangentMode: 5
+          - time: 1
+            value: 1.00023234
+            inSlope: Infinity
+            outSlope: 0
+            tangentMode: 7
           preInfinity: 2
           postInfinity: 2
       events: []

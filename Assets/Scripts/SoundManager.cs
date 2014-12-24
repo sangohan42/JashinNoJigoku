@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum soundName {BGM_Title, BGM_InGame, BGM_Result, SE_GameOver, SE_GameStart, SE_DoorOpen, SE_DoorClose};
+public enum soundName {BGM_Title, BGM_InGame, BGM_Result, SE_GameOver, SE_GameStart, SE_DoorOpen, SE_DoorClose, SE_GrabObject};
 
 public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 	
@@ -25,6 +25,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 	private AudioClip SE_GameStart {get; set;}
 	private AudioClip SE_DoorOpen {get; set;}
 	private AudioClip SE_DoorClose {get; set;}
+	private AudioClip SE_GrabObject {get; set;}
 
 	public AudioSource[] audioSource {get; set;}
 	
@@ -85,6 +86,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 		SE_GameOver = Resources.Load("Sounds/endgame", typeof(AudioClip)) as AudioClip;
 		SE_DoorOpen = Resources.Load("Sounds/DoorOpen", typeof(AudioClip)) as AudioClip;
 		SE_DoorClose = Resources.Load("Sounds/DoorClose", typeof(AudioClip)) as AudioClip;
+		SE_GrabObject = Resources.Load("Sounds/grabObject2", typeof(AudioClip)) as AudioClip;
 //		Jingle_GameStart = Resources.Load("Sounds/Jingle_GameStart", typeof(AudioClip)) as AudioClip;
 //		SE_Enter = Resources.Load("Sounds/SE_Enter", typeof(AudioClip)) as AudioClip;
 //		SE_Hit_Pin = Resources.Load("Sounds/SE_Hit_Pin", typeof(AudioClip)) as AudioClip;
@@ -198,6 +200,9 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 
 			case soundName.SE_DoorClose:
 			return SE_DoorClose;
+
+			case soundName.SE_GrabObject:
+			return SE_GrabObject;
 
 			default:
 			Debug.Log ("Please Enter the name of an audio clip");

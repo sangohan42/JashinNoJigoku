@@ -58,6 +58,10 @@ ModelImporter:
     100104: EntranceDoorLow
     100106: polySurface10
     100108: polySurface9
+    100110: Entrance
+    100112: Wall_L
+    100114: Wall_R
+    100116: Light
     400000: EntranceColumnL
     400002: EntranceColumnR
     400004: EntranceDoorL
@@ -113,6 +117,10 @@ ModelImporter:
     400104: EntranceDoorLow
     400106: polySurface10
     400108: polySurface9
+    400110: Entrance
+    400112: Wall_L
+    400114: Wall_R
+    400116: Light
     2300000: EntranceColumnL
     2300002: EntranceColumnR
     2300004: EntranceDoorL
@@ -163,6 +171,10 @@ ModelImporter:
     2300094: EntranceDoorLow
     2300096: polySurface10
     2300098: polySurface9
+    2300100: Entrance
+    2300102: Wall_L
+    2300104: Wall_R
+    2300106: Light
     3300000: EntranceColumnL
     3300002: EntranceColumnR
     3300004: EntranceDoorL
@@ -213,6 +225,10 @@ ModelImporter:
     3300094: EntranceDoorLow
     3300096: polySurface10
     3300098: polySurface9
+    3300100: Entrance
+    3300102: Wall_L
+    3300104: Wall_R
+    3300106: Light
     4300000: EntranceDoorL
     4300002: EntranceDoorR
     4300004: EntranceColumnL
@@ -263,6 +279,10 @@ ModelImporter:
     4300094: EntranceDoorHigh
     4300096: polySurface9
     4300098: polySurface10
+    4300100: Entrance
+    4300102: Wall_L
+    4300104: Wall_R
+    4300106: Light
     9500000: //RootNode
   materials:
     importMaterials: 0
@@ -288,7 +308,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     weldVertices: 1

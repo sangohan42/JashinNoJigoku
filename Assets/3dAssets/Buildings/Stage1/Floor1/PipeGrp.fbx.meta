@@ -63,6 +63,14 @@ ModelImporter:
     100114: TubeShort 3
     100116: TubeShort 4
     100118: TubeShort 5
+    100120: SquarePipeL_1
+    100122: SquarePipeL_2
+    100124: SquarePipeR_1
+    100126: SquarePipeR_2
+    100128: SquarePipeR_3
+    100130: SquarePipeR_4
+    100132: SquarePipeR_5
+    100134: SquarePipeR_6
     400000: ElectricL1
     400002: ElectricL2
     400004: ElectricR1
@@ -123,6 +131,14 @@ ModelImporter:
     400114: TubeShort 3
     400116: TubeShort 4
     400118: TubeShort 5
+    400120: SquarePipeL_1
+    400122: SquarePipeL_2
+    400124: SquarePipeR_1
+    400126: SquarePipeR_2
+    400128: SquarePipeR_3
+    400130: SquarePipeR_4
+    400132: SquarePipeR_5
+    400134: SquarePipeR_6
     2300000: PipeBassL1
     2300002: pipeBassLCorner1
     2300004: PipeBassR1
@@ -176,6 +192,14 @@ ModelImporter:
     2300100: TubeShort 3
     2300102: TubeShort 4
     2300104: TubeShort 5
+    2300106: SquarePipeL_1
+    2300108: SquarePipeL_2
+    2300110: SquarePipeR_1
+    2300112: SquarePipeR_2
+    2300114: SquarePipeR_3
+    2300116: SquarePipeR_4
+    2300118: SquarePipeR_5
+    2300120: SquarePipeR_6
     3300000: PipeBassL1
     3300002: pipeBassLCorner1
     3300004: PipeBassR1
@@ -229,6 +253,14 @@ ModelImporter:
     3300100: TubeShort 3
     3300102: TubeShort 4
     3300104: TubeShort 5
+    3300106: SquarePipeL_1
+    3300108: SquarePipeL_2
+    3300110: SquarePipeR_1
+    3300112: SquarePipeR_2
+    3300114: SquarePipeR_3
+    3300116: SquarePipeR_4
+    3300118: SquarePipeR_5
+    3300120: SquarePipeR_6
     4300000: PipeBatch1
     4300002: PipeBatch2
     4300004: PipeBassL1
@@ -282,9 +314,17 @@ ModelImporter:
     4300100: TubeRong
     4300102: AirfanR1Child
     4300104: TubeShort
+    4300106: SquarePipeL_1
+    4300108: SquarePipeL_2
+    4300110: SquarePipeR_1
+    4300112: SquarePipeR_2
+    4300114: SquarePipeR_3
+    4300116: SquarePipeR_4
+    4300118: SquarePipeR_5
+    4300120: SquarePipeR_6
     9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -307,7 +347,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     weldVertices: 1

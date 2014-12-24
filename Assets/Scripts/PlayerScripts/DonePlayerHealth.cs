@@ -21,6 +21,14 @@ public class DonePlayerHealth : MonoBehaviour
 	private SoundManager soundManager;
 	private bool reset;
 
+	public bool playerIsDead 
+	{
+		get
+		{
+			return this.playerDead;
+		}
+	}
+
 	void Awake ()
 	{
 		// Setting up the references.
