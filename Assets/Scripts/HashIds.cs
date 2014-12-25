@@ -10,6 +10,7 @@ public class HashIds : MonoBehaviour {
 	public int m_dyingState = 0;
 	public int m_sneakingState = 0;
 	public int m_rollingState = 0;
+	public int m_stranglingState = 0;
 
 	public int Empty_YoujinModeTrans;
 	public int WeaponRaise_WeaponLower;
@@ -30,6 +31,8 @@ public class HashIds : MonoBehaviour {
 	public int crouchCoverBool;
 	public int crawlingBool;
 	public int rollingBool;
+	public int stranglingBool;
+	public int isStrangledBool;
 	public int playerShootingBool;
 	public int playerRaiseWeapon;
 
@@ -51,6 +54,7 @@ public class HashIds : MonoBehaviour {
 		m_dyingState = Animator.StringToHash("Base Layer.Dying");
 		m_sneakingState = Animator.StringToHash("Base Layer.Sneak");
 		m_rollingState = Animator.StringToHash ("Base Layer.Roll");
+		m_stranglingState = Animator.StringToHash ("Base Layer.Strangling");
 
 		Empty_YoujinModeTrans = Animator.StringToHash("Youjin.Empty -> Youjin.WeaponRaise");
 		WeaponRaise_WeaponLower = Animator.StringToHash("Youjin.WeaponRaise -> Youjin.WeaponLower");
@@ -71,6 +75,8 @@ public class HashIds : MonoBehaviour {
 		crouchCoverBool = Animator.StringToHash("CrouchCover");
 		crawlingBool = Animator.StringToHash ("Crawling");
 		rollingBool = Animator.StringToHash ("Rolling");
+		stranglingBool = Animator.StringToHash ("Strangling");
+		isStrangledBool = Animator.StringToHash ("BeingStrangled");
 		playerShootingBool = Animator.StringToHash ("PlayerShooting");
 		playerRaiseWeapon = Animator.StringToHash ("PlayerRaiseWeapon");
 

@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum soundName {BGM_Title, BGM_InGame, BGM_Result, SE_GameOver, SE_GameStart, SE_DoorOpen, SE_DoorClose, SE_GrabObject};
+public enum soundName {BGM_Title, BGM_InGame, BGM_Result, SE_GameOver, SE_GameStart, SE_DoorOpen, SE_DoorClose, SE_GrabObject,
+	SE_EnemyHurt, SE_EnemyDie, SE_DoorAccessGranted, SE_DoorAccessRefused, SE_EnemyYoujin1, SE_EnemyYoujin2, SE_EnemyYoujin3,
+	SE_EnemyYoujin4, SE_EnemyYoujin5};
 
 public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 	
@@ -26,7 +28,17 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 	private AudioClip SE_DoorOpen {get; set;}
 	private AudioClip SE_DoorClose {get; set;}
 	private AudioClip SE_GrabObject {get; set;}
+	private AudioClip SE_EnemyHurt {get; set;}
+	private AudioClip SE_EnemyDie {get; set;}
+	private AudioClip SE_DoorAccessGranted {get; set;}
+	private AudioClip SE_DoorAccessRefused {get; set;}
+	private AudioClip SE_EnemyYoujin1 {get; set;}
+	private AudioClip SE_EnemyYoujin2 {get; set;}
+	private AudioClip SE_EnemyYoujin3 {get; set;}
+	private AudioClip SE_EnemyYoujin4 {get; set;}
+	private AudioClip SE_EnemyYoujin5 {get; set;}
 
+	
 	public AudioSource[] audioSource {get; set;}
 	
 	bool[] sourceIsFree ;
@@ -87,15 +99,15 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 		SE_DoorOpen = Resources.Load("Sounds/DoorOpen", typeof(AudioClip)) as AudioClip;
 		SE_DoorClose = Resources.Load("Sounds/DoorClose", typeof(AudioClip)) as AudioClip;
 		SE_GrabObject = Resources.Load("Sounds/grabObject2", typeof(AudioClip)) as AudioClip;
-//		Jingle_GameStart = Resources.Load("Sounds/Jingle_GameStart", typeof(AudioClip)) as AudioClip;
-//		SE_Enter = Resources.Load("Sounds/SE_Enter", typeof(AudioClip)) as AudioClip;
-//		SE_Hit_Pin = Resources.Load("Sounds/SE_Hit_Pin", typeof(AudioClip)) as AudioClip;
-//		SE_Pin_Down = Resources.Load("Sounds/SE_Pin_Down", typeof(AudioClip)) as AudioClip;
-//		SE_Pin_Down2 = Resources.Load("Sounds/SE_Pin_Down2", typeof(AudioClip)) as AudioClip;
-//		SE_Rolling_Loop = Resources.Load("Sounds/SE_Rolling_Loop", typeof(AudioClip)) as AudioClip;
-//		SE_Rolling_Launch = Resources.Load("Sounds/SE_Rolling_Launch", typeof(AudioClip)) as AudioClip;
-//		SE_Special = Resources.Load("Sounds/SE_Special", typeof(AudioClip)) as AudioClip;
-//		SE_Throw = Resources.Load("Sounds/SE_Throw", typeof(AudioClip)) as AudioClip;
+		SE_EnemyHurt = Resources.Load("Sounds/EnemyHurt2", typeof(AudioClip)) as AudioClip;
+		SE_EnemyDie = Resources.Load("Sounds/EnemyDie(2)", typeof(AudioClip)) as AudioClip;
+		SE_DoorAccessGranted = Resources.Load("Sounds/AccessGranted", typeof(AudioClip)) as AudioClip;
+		SE_DoorAccessRefused = Resources.Load("Sounds/AccessRefused", typeof(AudioClip)) as AudioClip;
+		SE_EnemyYoujin1 = Resources.Load("Sounds/Youjin0", typeof(AudioClip)) as AudioClip;
+		SE_EnemyYoujin2 = Resources.Load("Sounds/Youjin1(2)", typeof(AudioClip)) as AudioClip;
+		SE_EnemyYoujin3 = Resources.Load("Sounds/Youjin2(2)", typeof(AudioClip)) as AudioClip;
+		SE_EnemyYoujin4 = Resources.Load("Sounds/Youjin3(2)", typeof(AudioClip)) as AudioClip;
+		SE_EnemyYoujin5 = Resources.Load("Sounds/Youjin4(2)", typeof(AudioClip)) as AudioClip;
 
 		//initialize
 		if(Application.loadedLevelName == "testScene"){
@@ -204,6 +216,33 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 			case soundName.SE_GrabObject:
 			return SE_GrabObject;
 
+			case soundName.SE_EnemyHurt:
+			return SE_EnemyHurt;
+
+			case soundName.SE_EnemyDie:
+			return SE_EnemyDie;
+
+			case soundName.SE_DoorAccessGranted:
+			return SE_DoorAccessGranted;
+
+			case soundName.SE_DoorAccessRefused:
+			return SE_DoorAccessRefused;
+
+			case soundName.SE_EnemyYoujin1:
+			return SE_EnemyYoujin1;
+
+			case soundName.SE_EnemyYoujin2:
+			return SE_EnemyYoujin2;
+
+			case soundName.SE_EnemyYoujin3:
+			return SE_EnemyYoujin3;
+
+			case soundName.SE_EnemyYoujin4:
+			return SE_EnemyYoujin4;
+
+			case soundName.SE_EnemyYoujin5:
+			return SE_EnemyYoujin5;
+			
 			default:
 			Debug.Log ("Please Enter the name of an audio clip");
 			return null;
@@ -260,19 +299,36 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 		return true;
 
 	}
-//
-//	public bool playSoundLoop(soundName sound)
-//	{
-//		if(volumeOff) return true;
-//
-//		audioSource[1].volume = 0.8f;
-//		audioSource[1].clip = getAudioClip(sound);
-//		audioSource[1].loop = true;
-//		audioSource[1].Play();
-//
-//		return true;
-//
-//	}
+
+	public bool playSoundLoop(soundName sound, int timesToPlay, float timeBetweenSounds,float firstTimeDelay)
+	{
+		if(volumeOff) return true;
+
+		StartCoroutine(playSoundLoopRoutine(sound, timesToPlay, timeBetweenSounds, firstTimeDelay));
+
+		return true;
+	}
+
+	public IEnumerator playSoundLoopRoutine(soundName sound, int timesToPlay, float timeBetweenSounds, float firstTimeDelay){
+		yield return new WaitForSeconds (firstTimeDelay);
+		audioSource[1].volume = 0.8f;
+		audioSource[1].clip = getAudioClip(sound);
+		for(int i = 1; i <= timesToPlay; i++){
+			yield return new WaitForSeconds(timeBetweenSounds);
+
+			audioSource[1].Play();
+		}
+		yield return new WaitForSeconds(timeBetweenSounds);
+		audioSource [1].clip = getAudioClip (soundName.SE_EnemyDie);
+		audioSource[1].Play();
+
+	}
+	
+	public void stopPlayLoop()
+	{
+		audioSource [1].Stop ();
+	}
+	
 //
 //	public bool playOneShot(soundName sound)
 //	{

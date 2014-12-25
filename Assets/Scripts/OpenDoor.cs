@@ -29,9 +29,14 @@ public class OpenDoor : MonoBehaviour {
 				while(animation.isPlaying)
 				{
 				}
+				soundManager.playSound(soundName.SE_DoorAccessGranted);
 				soundManager.playSound(soundName.SE_DoorOpen);
 				animation.Play("openDoor");
 				isOpened = true;
+			}
+			else
+			{
+				soundManager.playSound(soundName.SE_DoorAccessRefused);
 			}
 		}
 	}
@@ -46,6 +51,7 @@ public class OpenDoor : MonoBehaviour {
 				while(animation.isPlaying)
 				{
 				}
+
 				soundManager.playSound(soundName.SE_DoorClose);
 
 				animation.Play("closeDoor");

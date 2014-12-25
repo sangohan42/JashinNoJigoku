@@ -24,10 +24,25 @@ public class DoneEnemySight : MonoBehaviour
 	private bool resetFOVColor;
 	private CharacterControllerLogic characterControllerLogicScript;
 	private CapsuleCollider caps;
+	private bool isDead;
 
 	public Texture FOV1;
 	public Texture FOV2;
 	public Texture FOV3;
+
+	private SoundManager soundManager;
+
+	public bool IsDead
+	{
+		get
+		{
+			return this.isDead;
+		}
+		set
+		{
+			this.isDead = value;
+		}
+	}
 
 	void Awake ()
 	{
@@ -52,15 +67,42 @@ public class DoneEnemySight : MonoBehaviour
 		interrogativePointObject.SetActive (false);
 		caps = player.GetComponent<CapsuleCollider> ();
 
+		isDead = false;
+
 		resetFOVColor = true;
+
+		soundManager = GameObject.FindGameObjectWithTag (DoneTags.soundmanager).GetComponent<SoundManager> ();
 	}
-	
+
+	soundName getSoundName(int randomVal)
+	{
+		switch(randomVal)
+		{
+			case 1 :
+			return soundName.SE_EnemyYoujin1;
+			break;
+			case 2 :
+			return soundName.SE_EnemyYoujin2;
+			break;
+			case 3 :
+			return soundName.SE_EnemyYoujin3;
+			break;
+			case 4 :
+			return soundName.SE_EnemyYoujin4;
+			break;
+			case 5 :
+			return soundName.SE_EnemyYoujin5;
+			break;
+			default:
+			return soundName.SE_EnemyYoujin1;
+		}
+	}
 	
 	void Update ()
 	{
 	
 		// If the player is alive...
-		if(playerHealth.health > 0f)
+		if(playerHealth.health > 0f && !isDead)
 		{
 			// ... set the animator parameter to whether the player is in sight or not.
 			anim.SetBool(hash.playerInSightBool, playerInSight);
@@ -77,6 +119,8 @@ public class DoneEnemySight : MonoBehaviour
 				interrogativePointObject.SetActive(true);
 				interrogativePoint.Play();
 				anim.SetBool(hash.inYoujinBool, true);
+				int randomVal = Random.Range(1,6);
+				soundManager.playSound(getSoundName(randomVal));
 			}
 			//In PATROL mode
 			else if((youJinLayerTransition == hash.WeaponRaise_WeaponLower || 
@@ -143,7 +187,6 @@ public class DoneEnemySight : MonoBehaviour
 
 			float angle = Vector3.Angle(direction, transform.forward);
 
-//			Debug.Log ("Angle = " + angle);
 			// Store the name hashes of the current states.
 			int playerLayerZeroStateHash = playerAnim.GetCurrentAnimatorStateInfo(0).nameHash;
 
@@ -167,13 +210,25 @@ public class DoneEnemySight : MonoBehaviour
 						anim.SetLayerWeight(3,0);
 					}
 
-					// If the player is walking, running
+					// If the player is walking, running we enter in Youjin mode
 					else if(playerLayerZeroStateHash == hash.m_LocomotionIdState)
 					{
 						// ... set the last personal sighting of the player to the player's current position.
 						personalLastSighting = player.transform.position;
 						inPatrol = false;
 						
+					}
+					//If the player has not been seen and is close enough he will be able to strangle the enemy
+					if(!playerInSight && !inPursuit && direction.magnitude < 1.5f)
+					{
+						characterControllerLogicScript.IsCloseToEnemy = true;
+						characterControllerLogicScript.CloseEnemyAnimator = anim;
+						characterControllerLogicScript.CloseEnemy = this.gameObject;
+					}
+
+					else if (characterControllerLogicScript.IsCloseToEnemy)
+					{
+						characterControllerLogicScript.IsCloseToEnemy = false;
 					}
 				}
 			}

@@ -126,7 +126,16 @@ public class CharacterControllerLogic : MonoBehaviour
 
 	private float gameDuration;
 
+	private bool isCrawling;
+
+	private bool isCloseToEnemy;
+	private Animator closeEnemyAnimator;
+	private GameObject closeEnemy;
+
 	private DonePlayerHealth playerHealthScript;
+
+	private SoundManager soundManager;
+
 	#endregion
 		
 	
@@ -375,6 +384,42 @@ public class CharacterControllerLogic : MonoBehaviour
 		}
 	}
 
+	public bool IsCloseToEnemy
+	{
+		get
+		{
+			return this.isCloseToEnemy;
+		}
+		set
+		{
+			this.isCloseToEnemy = value;
+		}
+	}
+
+	public Animator CloseEnemyAnimator
+	{
+		get
+		{
+			return this.closeEnemyAnimator;
+		}
+		set
+		{
+			this.closeEnemyAnimator = value;
+		}
+	}
+
+	public GameObject CloseEnemy
+	{
+		get
+		{
+			return this.closeEnemy;
+		}
+		set
+		{
+			this.closeEnemy = value;
+		}
+	}
+
 public float LocomotionThreshold { get { return 0.15f; } }
 	
 	#endregion
@@ -455,7 +500,13 @@ public float LocomotionThreshold { get { return 0.15f; } }
 
 		gameDuration = 0;
 
+		isCrawling = false;
+
+		isCloseToEnemy = false;
+
 		playerHealthScript = this.GetComponent<DonePlayerHealth> ();
+
+		soundManager = GameObject.FindGameObjectWithTag (DoneTags.soundmanager).GetComponent<SoundManager> ();
 			
 	}
 
@@ -613,7 +664,18 @@ public float LocomotionThreshold { get { return 0.15f; } }
 
 		if(animator.IsInTransition(0) && animator.GetNextAnimatorStateInfo(0).nameHash == hashIdsScript.m_rollingState)
 		{
-			animator.SetBool("Rolling", false);
+			animator.SetBool(hashIdsScript.rollingBool, false);
+		}
+
+		if(animator.IsInTransition(0) && animator.GetNextAnimatorStateInfo(0).nameHash == hashIdsScript.m_stranglingState)
+		{
+			animator.SetBool(hashIdsScript.stranglingBool, false);
+		}
+
+		if(animator.GetCurrentAnimatorStateInfo(0).nameHash == hashIdsScript.m_stranglingState)
+		{
+			transform.forward = closeEnemy.transform.forward;
+			transform.position = closeEnemy.transform.position- 0.7f*transform.forward;
 		}
 
 		if(!isInPanoramicView)
@@ -1113,8 +1175,11 @@ public float LocomotionThreshold { get { return 0.15f; } }
 		EasyTouch.On_TouchDown += HandleOn_TouchDown;
 		EasyTouch.On_TouchUp += HandleOn_TouchUp;
 		EasyTouch.On_DoubleTap += HandleOn_DoubleTap;
+		EasyTouch.On_SimpleTap += HandleOnSimpleTap;
+//		EasyTouch.On_LongTap += HandleOn_LongTap;
 		
 	}
+
 
 	void OnDestroy()
 	{
@@ -1122,6 +1187,8 @@ public float LocomotionThreshold { get { return 0.15f; } }
 		EasyTouch.On_TouchDown -= HandleOn_TouchDown;
 		EasyTouch.On_TouchUp -= HandleOn_TouchUp;
 		EasyTouch.On_DoubleTap -= HandleOn_DoubleTap;
+//		EasyTouch.On_LongTap += HandleOn_LongTap;
+
 	}
 
 //	void OnAnimatorIK (int layerIndex)
@@ -1136,9 +1203,51 @@ public float LocomotionThreshold { get { return 0.15f; } }
 //		animator.SetIKPositionWeight(AvatarIKGoal.RightHand, aimWeight);
 //	}	
 
+//	void HandleOn_LongTap (Gesture gesture)
+//	{
+//		if(!isCrawling)
+//		{
+//			isCrawling = true;
+//		}
+//
+//		else
+//		{
+//			isCrawling = false;
+//		}
+//
+//		animator.SetBool(hashIdsScript.crawlingBool, isCrawling);
+//	}
+
+	void HandleOnSimpleTap (Gesture gesture)
+	{
+		if (isCloseToEnemy && !closeEnemy.GetComponent<DoneEnemySight>().IsDead && !inCoverMode)
+		{
+			transform.forward = closeEnemy.transform.forward;
+			//			closeEnemy.transform.forward = transform.forward;
+			transform.position = closeEnemy.transform.position- 0.66f*transform.forward;
+			//			closeEnemy.transform.position = transform.position+ 0.4f*transform.forward;
+
+			closeEnemy.GetComponent<SphereCollider>().enabled = false;
+			closeEnemy.GetComponent<CapsuleCollider>().enabled = false;
+			closeEnemy.GetComponent<DoneEnemySight>().IsDead = true;
+			animator.SetBool(hashIdsScript.stranglingBool, true);
+			closeEnemyAnimator.SetBool(hashIdsScript.isStrangledBool, true);
+			foreach (Transform child in closeEnemy.transform)
+			{
+				if(child.name == "FOV" || child.name == "PositionPoint"|| child.name == "InterrogativePoint")
+				{
+					child.gameObject.SetActive(false);
+				}
+			}
+//			soundManager.playSound(soundName.SE_EnemyHurt);
+			soundManager.playSoundLoop(soundName.SE_EnemyHurt,11, 0.25f, 0.4f);
+//			playSoundAfter(soundName.SE_EnemyHurt, 1f);
+		}
+	}
+
 	void HandleOn_DoubleTap (Gesture gesture)
 	{
-		if(joyX == 0 && joyY == 0 && currentCoverState == CoverState.nil && !playerHealthScript.playerIsDead)
+		if(joyX == 0 && joyY == 0 && currentCoverState == CoverState.nil && !playerHealthScript.playerIsDead )
 		{
 			if(!isInPanoramicView)
 			{
@@ -1146,7 +1255,7 @@ public float LocomotionThreshold { get { return 0.15f; } }
 				gamecam.transform.parent = transform;
 				gamecam.transform.localPosition = camPanoramicPosition;
 				gamecam.transform.localEulerAngles = camPanoramicRotation;
-				animator.SetBool(hashIdsScript.playerRaiseWeapon, true);
+//				animator.SetBool(hashIdsScript.playerRaiseWeapon, true);
 			}
 			else 
 			{
@@ -1155,16 +1264,17 @@ public float LocomotionThreshold { get { return 0.15f; } }
 				currentModifToPanoramicRotVertical = 0;
 				gamecam.transform.position = transform.position + cameraPosition;
 				gamecam.transform.eulerAngles = cameraRotation;
-				animator.SetBool(hashIdsScript.playerRaiseWeapon, false);
+//				animator.SetBool(hashIdsScript.playerRaiseWeapon, false);
 
 			}
 		}
 
-		//Play rolling animation
+		//Rolling
 		else if(Mathf.Abs(joyX) > 0.8f || Mathf.Abs(joyY) >0.8f)
 		{
 			animator.SetBool(hashIdsScript.rollingBool, true);
 		}
+
 	}
 	
 	void HandleOn_TouchStart (Gesture gesture)
@@ -1195,7 +1305,6 @@ public float LocomotionThreshold { get { return 0.15f; } }
 		if (inModifyCoverPos)
 		{
 			inModifyCoverPos = false;
-
 		}
 
 	}
