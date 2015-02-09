@@ -661,6 +661,37 @@ public float LocomotionThreshold { get { return 0.15f; } }
 //			}
 //
 //		}
+		if(Input.GetButtonDown("PanoramicView"))
+		{
+			if(joyX == 0 && joyY == 0 && currentCoverState == CoverState.nil && !playerHealthScript.playerIsDead )
+			{
+				if(!isInPanoramicView)
+				{
+					isInPanoramicView = true;
+					gamecam.transform.parent = transform;
+					gamecam.transform.localPosition = camPanoramicPosition;
+					gamecam.transform.localEulerAngles = camPanoramicRotation;
+					//				animator.SetBool(hashIdsScript.playerRaiseWeapon, true);
+				}
+				else 
+				{
+					isInPanoramicView = false;
+					gamecam.transform.parent = null;
+					currentModifToPanoramicRotVertical = 0;
+					gamecam.transform.position = transform.position + cameraPosition;
+					gamecam.transform.eulerAngles = cameraRotation;
+					//				animator.SetBool(hashIdsScript.playerRaiseWeapon, false);
+					
+				}
+			}
+		
+			//Rolling
+			else if(Mathf.Abs(joyX) > 0.8f || Mathf.Abs(joyY) >0.8f)
+			{
+				animator.SetBool(hashIdsScript.rollingBool, true);
+			}
+		}
+
 
 		if(animator.IsInTransition(0) && animator.GetNextAnimatorStateInfo(0).nameHash == hashIdsScript.m_rollingState)
 		{
