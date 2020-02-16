@@ -52,17 +52,15 @@
 // will zoom out and show you more stuff.
 
 using UnityEngine;
-using System.Collections;
 
 public class Radar : MonoBehaviour
 {
-	
-	public enum RadarTypes : int {Textured, Round, Transparent};
-	public enum RadarLocations : int {TopLeft, TopCenter, TopRight, BottomLeft, BottomCenter, BottomRight, Left, Center, Right, Custom};
+    public enum RadarTypes : int {Textured, Round, Transparent};
+	public enum RadarLocations : int {TopLeft, TopCenter, TopRight, BottomLeft, BottomCenter, BottomRight, Left, Center, Right};
 	
 	// Display Location
 	public RadarLocations radarLocation = RadarLocations.BottomCenter;
-	public Vector2 radarLocationCustom;
+	public Vector2 radarOffset;
 	public RadarTypes radarType = RadarTypes.Round;
 	public Color radarBackgroundA = new Color(255, 255, 0);
 	public Color radarBackgroundB = new Color(0, 255, 255);
@@ -110,9 +108,12 @@ public class Radar : MonoBehaviour
 	
 	// Initialize the radar
 	void Start ()
-	{
-		// Determine the size of the radar
-		_radarWidth = (int)(Screen.width * radarSize);
+    {
+        if (radarSize > 1)
+            radarSize = 1;
+
+        // Determine the size of the radar
+        _radarWidth = (int)(Screen.width * radarSize);
 		_radarHeight = _radarWidth;
 		
 		// Get the location of the radar
@@ -172,34 +173,6 @@ public class Radar : MonoBehaviour
 			}
 		}
 
-//		//Draw others
-//		if (radarBlip2Active)
-//		{
-//			foreach (GameObject go in enemy)
-//			{
-//				drawBlip(go, _radarBlip2Texture);
-//			}
-//		}
-
-//		if (radarBlip3Active)
-//		{
-//			gos = GameObject.FindGameObjectsWithTag(radarBlip3Tag); 
-//			
-//			foreach (GameObject go in gos)
-//			{
-//				drawBlip(go, _radarBlip3Texture);
-//			}
-//		}
-//		if (radarBlip4Active)
-//		{
-//			gos = GameObject.FindGameObjectsWithTag(radarBlip4Tag); 
-//			
-//			foreach (GameObject go in gos)
-//			{
-//				drawBlip(go, _radarBlip4Texture);
-//			}
-//		}
-//		
 		// Draw center player
 		if (radarCenterActive)
 		{
@@ -332,11 +305,9 @@ public class Radar : MonoBehaviour
 		{
 			_radarCenter = new Vector2(Screen.width - _radarWidth / 2, Screen.height - _radarHeight / 2);
 		}
-		else if(radarLocation == RadarLocations.Custom)
-		{
-			_radarCenter = radarLocationCustom;
-		}
-	} 
+
+        _radarCenter += radarOffset;
+    } 
 	
 	
 }

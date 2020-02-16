@@ -98,7 +98,7 @@ public class DownloadExample : MonoBehaviour {
 
 
 			//applaying downloaded image to material
-			atlasObject.renderer.material.mainTexture = atlasImage;
+			atlasObject.GetComponent<Renderer>().material.mainTexture = atlasImage;
 
 
 			//creating mesh texture component

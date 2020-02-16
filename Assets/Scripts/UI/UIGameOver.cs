@@ -1,20 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UIGameOver : MonoBehaviour {
-
-
-	void Start () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-
-	void OnPress(bool isDown)
+public class UIGameOver : MonoBehaviour
+{
+    void OnPress(bool isDown)
 	{
 		if(isDown)
 		{

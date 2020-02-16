@@ -8,7 +8,6 @@ using System.Collections;
 [RequireComponent(typeof(BoxCollider))]
 public class UIJoystick : MonoBehaviour
 {
-
     public UISprite joystickSprite;
     public Vector2 position;
     public bool isNormalize = false;
@@ -25,15 +24,10 @@ public class UIJoystick : MonoBehaviour
     Vector2 centerPosition;
     Vector2 lastPosition;
     float radius;
-	
-	void Awake()
-	{
-	}
-
+    
     void OnEnable()
     {
         widget = GetComponent<UIWidget>();
-//		joystickSprite.enabled = false;
 
         if (SystemInfo.deviceType == DeviceType.Handheld)
         {

@@ -85,17 +85,4 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
 			return;
 		}
 	}
-	
-	/// <summary>
-	/// シーン遷移用コルーチン
-	/// </summary>
-	/// <param name='scene'>シーン名</param>
-	/// <param name='interval'>暗転にかかる時間(秒)</param>
-	//	private void TransScene (string scene, float interval, bool inGame){
-	//
-	//
-	//	}
-	
-	
-	
 }

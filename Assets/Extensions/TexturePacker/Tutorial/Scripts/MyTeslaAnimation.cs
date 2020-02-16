@@ -23,8 +23,8 @@ public class MyTeslaAnimation : TPMeshAnimation {
 	protected override void Update() {
 		
 		if(!Application.isPlaying) {
-			if(renderer.sharedMaterial != MyAtlasController.atlasMaterial) {
-				renderer.sharedMaterial = MyAtlasController.atlasMaterial;
+			if(GetComponent<Renderer>().sharedMaterial != MyAtlasController.atlasMaterial) {
+				GetComponent<Renderer>().sharedMaterial = MyAtlasController.atlasMaterial;
 			}
 			
 			frames = new string[10];

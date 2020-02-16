@@ -35,7 +35,7 @@ public class TPMeshSpriteAnimation : TPBaseAnimation, TPFrameHolder {
 	
 	public override void ShowFrame(int index) {
 		if(frames.Count == 0) {
-			renderer.material = null;
+			GetComponent<Renderer>().material = null;
 			return;
 		}
 		
@@ -45,7 +45,7 @@ public class TPMeshSpriteAnimation : TPBaseAnimation, TPFrameHolder {
 		meshTexture.atlas = frame.atlasPath;
 		meshTexture.texture = frame.textureName;
 		
-		renderer.material = TPUtils.GetAtlasMaterial(frame.atlasPath);
+		GetComponent<Renderer>().material = TPUtils.GetAtlasMaterial(frame.atlasPath);
 		
 		meshTexture.applayUV();
 	}

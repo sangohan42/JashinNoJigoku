@@ -27,8 +27,8 @@ public class TPHelper : MonoBehaviour  {
 
 	void Awake() {
 		if(cloneMaterial) {
-			Material m = new Material(renderer.material);
-			renderer.material = m;
+			Material m = new Material(GetComponent<Renderer>().material);
+			GetComponent<Renderer>().material = m;
 		} 
 	}
 
@@ -42,8 +42,8 @@ public class TPHelper : MonoBehaviour  {
 		if(replaceMaterial) {
 			Material m = Resources.Load(atlasPath + "Material") as Material;
 
-			if(gameObject.renderer.sharedMaterial != m) {
-				gameObject.renderer.sharedMaterial = m;
+			if(gameObject.GetComponent<Renderer>().sharedMaterial != m) {
+				gameObject.GetComponent<Renderer>().sharedMaterial = m;
 			}
 		}
 	}

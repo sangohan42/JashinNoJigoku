@@ -50,7 +50,7 @@ public class TPSprite : MonoBehaviour, TPFrameHolder {
 	public void showFrame(int index) {
 		
 		if(frames.Count == 0) {
-			renderer.material = null;
+			GetComponent<Renderer>().material = null;
 			return;
 		}
 		//index--;
@@ -60,7 +60,7 @@ public class TPSprite : MonoBehaviour, TPFrameHolder {
 		meshTexture.atlas = frame.atlasPath;
 		meshTexture.texture = frame.textureName;
 
-		renderer.material = GetMaterial(frame.atlasPath);
+		GetComponent<Renderer>().material = GetMaterial(frame.atlasPath);
 		
 		meshTexture.applayUV();
 		
@@ -168,7 +168,7 @@ public class TPSprite : MonoBehaviour, TPFrameHolder {
 
 	public Color color {
 		get {
-			Material m = renderer.sharedMaterial;
+			Material m = GetComponent<Renderer>().sharedMaterial;
 			if(m == null) {
 				return Color.white;
 			}
@@ -186,11 +186,11 @@ public class TPSprite : MonoBehaviour, TPFrameHolder {
 		}
 
 		set {
-			if(renderer.sharedMaterial.HasProperty("_Color")) {
-				renderer.sharedMaterial.color = value;
+			if(GetComponent<Renderer>().sharedMaterial.HasProperty("_Color")) {
+				GetComponent<Renderer>().sharedMaterial.color = value;
 			}  else {
-				if(renderer.sharedMaterial.HasProperty ("_TintColor")) {
-					renderer.sharedMaterial.SetColor ("_TintColor", value);
+				if(GetComponent<Renderer>().sharedMaterial.HasProperty ("_TintColor")) {
+					GetComponent<Renderer>().sharedMaterial.SetColor ("_TintColor", value);
 				}
 
 			}

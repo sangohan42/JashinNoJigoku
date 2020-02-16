@@ -18,8 +18,8 @@ public class MyMeshTexture : TPMeshTexture {
 	
 	protected override void Update() {
 		if(!Application.isPlaying) {
-			if(renderer.sharedMaterial != MyAtlasController.atlasMaterial) {
-				renderer.sharedMaterial = MyAtlasController.atlasMaterial;
+			if(GetComponent<Renderer>().sharedMaterial != MyAtlasController.atlasMaterial) {
+				GetComponent<Renderer>().sharedMaterial = MyAtlasController.atlasMaterial;
 			}
 			
 			atlas = "TutorialAtlas";

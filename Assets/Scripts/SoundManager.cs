@@ -1,25 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public enum soundName {BGM_Title, BGM_InGame, BGM_Result, SE_GameOver, SE_GameStart, SE_DoorOpen, SE_DoorClose, SE_GrabObject,
 	SE_EnemyHurt, SE_EnemyDie, SE_DoorAccessGranted, SE_DoorAccessRefused, SE_EnemyYoujin1, SE_EnemyYoujin2, SE_EnemyYoujin3,
 	SE_EnemyYoujin4, SE_EnemyYoujin5};
 
-public class SoundManager : SingletonMonoBehaviour<SoundManager>{
-	
-		public enum storeStageName{
-		testScene = 0,
-		GameClear,
-		GameOver
-	}
-	
-	public delegate void volumeOnOffHandler(bool onVolume);
-//	public static event volumeOnOffHandler _volumeSwitch;
-	
-	private bool volumeOff;
+[RequireComponent(typeof(AudioSource))]
+public class SoundManager : SingletonMonoBehaviour<SoundManager>
+{
+    private bool _volumeOff;
 
-	private AudioClip BGM_Title {get; set;}
+    private AudioClip BGM_Title {get; set;}
 	private AudioClip BGM_InGame {get; set;}
 	private AudioClip BGM_Result {get; set;}
 	
@@ -38,13 +31,11 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 	private AudioClip SE_EnemyYoujin4 {get; set;}
 	private AudioClip SE_EnemyYoujin5 {get; set;}
 
+    public AudioSource[] audioSource {get; set;}
+
+    private bool[] sourceIsFree ;
 	
-	public AudioSource[] audioSource {get; set;}
-	
-	bool[] sourceIsFree ;
-	
-	UISprite volumeUISprite;
-	public storeStageName storeStageNameType ;
+	private UISprite volumeUISprite;
 	
 	public void Awake ()
 	{
@@ -53,47 +44,19 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 			//Debug.Log ("Destroy Sound Manager :Start");
 			return;
 		}
-		else{
+		else
+        {
 			Debug.Log ("Dont destroy on load");
 			DontDestroyOnLoad (this.gameObject);
 		}
 		
-		//Debug.Log (" AWAKE");
-		//volumeOff will be updated in the onStart function of getScore after reading the playerPrefs
-		volumeOff = System.Convert.ToBoolean(PlayerPrefs.GetString("volumeOff", "false"));
-	
-//		checkIcon();
-		
-		//Debug.Log ("In Awake, VolumeOff = " + volumeOff);
-	}
-	
-		
-	public void initAudioSource()
-	{
-		audioSource = gameObject.GetComponents<AudioSource>();
-		sourceIsFree = new bool[3];
-		for(int i = 0; i <3; i++)
-		{
-			sourceIsFree[i] = true;
-		}
-	}
-	
-	public int getFreeAudioSourceIndex()
-	{
-		for(int i = 0; i <3; i++)
-		{
-			if(sourceIsFree[i] == true)return i;
-		}
-		return -1;
-	}
-
-
+        _volumeOff = false;
+    }
+    
 	void Start () {
-		initAudioSource();
+		InitAudioSource();
 
-//		BGM_Title = Resources.Load("Sounds/BGM_Title", typeof(AudioClip)) as AudioClip;
 		BGM_InGame = Resources.Load("Sounds/BGM_InGame", typeof(AudioClip)) as AudioClip;
-//		BGM_Result = Resources.Load("Sounds/BGM_Result", typeof(AudioClip)) as AudioClip;
 		
 		SE_GameOver = Resources.Load("Sounds/endgame", typeof(AudioClip)) as AudioClip;
 		SE_DoorOpen = Resources.Load("Sounds/DoorOpen", typeof(AudioClip)) as AudioClip;
@@ -108,96 +71,107 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 		SE_EnemyYoujin3 = Resources.Load("Sounds/Youjin2(2)", typeof(AudioClip)) as AudioClip;
 		SE_EnemyYoujin4 = Resources.Load("Sounds/Youjin3(2)", typeof(AudioClip)) as AudioClip;
 		SE_EnemyYoujin5 = Resources.Load("Sounds/Youjin4(2)", typeof(AudioClip)) as AudioClip;
+    }
 
-		//initialize
-		if(Application.loadedLevelName == "testScene"){
-			Debug.Log("Play Background Music");
-			switchPlayBGM(soundName.BGM_InGame);
-		}
-		
-		//audioSource[1].clip = SE_Enter;
-	}
-	
-//	public void checkIcon()
-//	{
-//		if(!volumeOff)
-//		{
-//			GameObject.Find ("VolumeBtn").GetComponent<UISprite>().spriteName = "title_icon_speaker_on";
-//		}
-//		
-//		else
-//		{
-//			GameObject.Find ("VolumeBtn").GetComponent<UISprite>().spriteName = "title_icon_speaker_off";
-//		}	
-//	}
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
 
-	public void OnLevelWasLoaded(int level) 
-	{
-		if (this != Instance)
-		{ 
-			Destroy (this.gameObject); 
-			return;
-		}
-		print ("OnLevelWasLoaded: " + "level" + level);
-		switch(level){
-			case(0)://GameScene
-				//switchPlayBGM(soundName.BGM_Title);	
-				StartCoroutine(switchPlayBGMLate(soundName.BGM_InGame));
-				//checkIcon();
-				break;
-			case(1)://GameClear
-				switchPlayBGM(soundName.BGM_InGame);	
-				//StartCoroutine(switchPlayBGMLate(soundName.BGM_InGame));
-				storeStageNameType = storeStageName.testScene;
-				break;
-			case(2)://GameOver
-				//switchPlayBGM(soundName.BGM_Result);
-				StartCoroutine(switchPlayBGMLate(soundName.BGM_InGame));
-				storeStageNameType = storeStageName.GameOver;
-				break;
-		}
-	}
-	
-	IEnumerator switchPlayBGMLate(soundName sound)
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        if (this != Instance)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        print("OnLevelWasLoaded: " + "level " + scene.name);
+        switch (scene.name)
+        {
+            case ("testScene")://GameScene
+                StartCoroutine(SwitchPlayBGMLate(soundName.BGM_InGame));
+                //checkIcon();
+                break;
+            case ("GameClear")://GameClear
+                SwitchPlayBGM(soundName.BGM_InGame);
+                break;
+            case ("GameOver")://GameOver
+                StartCoroutine(SwitchPlayBGMLate(soundName.BGM_Result));
+                break;
+        }
+    }
+
+    public void InitAudioSource()
+    {
+        audioSource = gameObject.GetComponents<AudioSource>();
+        sourceIsFree = new bool[audioSource.Length];
+        for (int i = 0; i < audioSource.Length; i++)
+        {
+            sourceIsFree[i] = true;
+        }
+    }
+
+    public int GetFreeAudioSourceIndex()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (sourceIsFree[i])
+                return i;
+        }
+        return -1;
+    }
+
+    IEnumerator SwitchPlayBGMLate(soundName sound)
 	{
 		yield return new WaitForSeconds(0.05f);
-		switchPlayBGM(sound);
+		SwitchPlayBGM(sound);
 	}
 
-	public void volumeOnOff(bool val){
-		if(val){// if volume off
+	public void VolumeOnOff(bool val)
+    {
+		if(val)
+        {// if volume on
 			audioSource[0].volume = 0.8f;
-			if(audioSource[0].clip == null) audioSource[0].clip = getBGMClip(soundName.BGM_Title);	
+			if(audioSource[0].clip == null)
+                audioSource[0].clip = GetBGMClip(soundName.BGM_InGame);	
 			audioSource[0].loop = true;
 			audioSource[0].Play();	
 			print("volumeOn");
-			volumeOff = false;
+			_volumeOff = false;
 		}
-		else{
+		else
+        {
 			audioSource[0].Pause ();
 			print("volumeOff");
-			volumeOff = true;
+			_volumeOff = true;
 		}
 	}
 	
-	public void switchPlayBGM(soundName sound){
+	public void SwitchPlayBGM(soundName sound){
 		
-		if(volumeOff) return;
+		if(_volumeOff)
+            return;
 		else
 		{
 			audioSource[0].volume = 0.3f;
-			audioSource[0].clip = getBGMClip(sound);
+			audioSource[0].clip = GetBGMClip(sound);
 			audioSource[0].loop = true;
 			audioSource[0].Play ();	
-			//Debug.Log ("Background Sound switched");
+			Debug.Log ("Background Sound switched");
 		}
 	}
 
-	public void stopBGM(){
+	public void StopBGM()
+    {
 		audioSource[0].Stop();
 	}
 	
-	public AudioClip getAudioClip(soundName sound)
+	public AudioClip GetAudioClip(soundName sound)
 	{
 		switch(sound)
 		{
@@ -249,7 +223,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 		}
 	}
 	
-	public AudioClip getBGMClip(soundName sound)
+	public AudioClip GetBGMClip(soundName sound)
 	{
 		switch(sound)
 		{
@@ -271,19 +245,19 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 		}
 	}
 	
-	IEnumerator soundFinishPlaying(float waitTime, int indexAudioSource)
+	IEnumerator SoundFinishPlaying(float waitTime, int indexAudioSource)
 	{
 		yield return new WaitForSeconds(waitTime);
 		sourceIsFree[indexAudioSource] = true;
 	}
 
-	public bool playSound(soundName sound)
+	public bool PlaySound(soundName sound)
 	{
-		if(volumeOff) return true;
+		if(_volumeOff)
+            return true;
 
-
-		//get free audio source index
-		int index = getFreeAudioSourceIndex();
+        //get free audio source index
+		int index = GetFreeAudioSourceIndex();
 		
 		//no free audio source
 		if(index ==-1)return false;
@@ -292,84 +266,42 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>{
 		sourceIsFree[index] = false;
 		
 		audioSource[index+1].volume = 0.8f;
-		audioSource[index+1].clip = getAudioClip(sound);
+		audioSource[index+1].clip = GetAudioClip(sound);
 		audioSource[index+1].Play();
-		StartCoroutine(soundFinishPlaying(audioSource[index+1].clip.length, index));
+		StartCoroutine(SoundFinishPlaying(audioSource[index+1].clip.length, index));
 		
 		return true;
 
 	}
 
-	public bool playSoundLoop(soundName sound, int timesToPlay, float timeBetweenSounds,float firstTimeDelay)
+	public bool PlaySoundLoop(soundName sound, int timesToPlay, float timeBetweenSounds,float firstTimeDelay)
 	{
-		if(volumeOff) return true;
+		if(_volumeOff)
+            return true;
 
-		StartCoroutine(playSoundLoopRoutine(sound, timesToPlay, timeBetweenSounds, firstTimeDelay));
+		StartCoroutine(PlaySoundLoopRoutine(sound, timesToPlay, timeBetweenSounds, firstTimeDelay));
 
 		return true;
 	}
 
-	public IEnumerator playSoundLoopRoutine(soundName sound, int timesToPlay, float timeBetweenSounds, float firstTimeDelay){
+	public IEnumerator PlaySoundLoopRoutine(soundName sound, int timesToPlay, float timeBetweenSounds, float firstTimeDelay)
+    {
 		yield return new WaitForSeconds (firstTimeDelay);
 		audioSource[1].volume = 0.8f;
-		audioSource[1].clip = getAudioClip(sound);
+		audioSource[1].clip = GetAudioClip(sound);
 		for(int i = 1; i <= timesToPlay; i++){
 			yield return new WaitForSeconds(timeBetweenSounds);
 
 			audioSource[1].Play();
 		}
 		yield return new WaitForSeconds(timeBetweenSounds);
-		audioSource [1].clip = getAudioClip (soundName.SE_EnemyDie);
+		audioSource [1].clip = GetAudioClip (soundName.SE_EnemyDie);
 		audioSource[1].Play();
 
 	}
 	
-	public void stopPlayLoop()
+	public void StopPlayLoop()
 	{
 		audioSource [1].Stop ();
-	}
-	
-//
-//	public bool playOneShot(soundName sound)
-//	{
-//		if(volumeOff) return true;
-//		//If we ask to play the finish sound we stop the background sound to avoid strange blending
-//		if(sound == soundName.Jingle_GameFinish)
-//		{
-//			audioSource[0].Stop();
-//		}
-//
-//		if(audioSource[1].isPlaying)audioSource[1].Stop();
-//
-//		if(sound == soundName.SE_Rolling_Launch)
-//		{
-//			audioSource[1].volume = 4.5f;
-//		}
-//		else if(sound == soundName.SE_Hit_Pin)
-//		{
-//			audioSource[1].volume = 0.3f;
-//		}
-//		audioSource[1].PlayOneShot ( getAudioClip(sound));
-//
-//		return true;
-//	}
-	
-	#region Delegate
-	void OnEnable(){
-		
-	}
-	void OnDisable(){
-		unSubscribeEvent();
-	}
-	void OnDestroy(){
-		unSubscribeEvent();
-	}
-	void unSubscribeEvent(){
-		
-	}
-	#endregion
-
-	void Update () {
-
 	}
 }
