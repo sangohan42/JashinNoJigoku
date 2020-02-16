@@ -232,7 +232,7 @@ public class CharacterControllerLogic : MonoBehaviour
                     _gamecamTransform.parent = null;
 
 				// The position to reach
-				Vector3 standardPos = transform.position + CameraPosition;
+				Vector3 cameraStandardPos = transform.position + CameraPosition;
 
 					//We are not close to the border of the level
 				if(transform.position.x < LEVEL_MAX_X && transform.position.x > LEVEL_MIN_X)
@@ -249,14 +249,14 @@ public class CharacterControllerLogic : MonoBehaviour
 					if(!_hasBeenInCover)
 					{
 						// Lerp the camera's position between it's current position and it's new position.
-						_gamecamTransform.position = Vector3.Lerp(_gamecamTransform.position, standardPos, _cameraFollowSpeed * Time.deltaTime);
+						_gamecamTransform.position = Vector3.Lerp(_gamecamTransform.position, cameraStandardPos, _cameraFollowSpeed * Time.deltaTime);
 						_gamecamTransform.eulerAngles = Vector3.Lerp(_gamecamTransform.eulerAngles,rot, _cameraFollowSpeed * Time.deltaTime);
 					}
 
 					//The transition from cover to normal mode had to be abrupt
 					else 
 					{
-						_gamecamTransform.position = standardPos;
+						_gamecamTransform.position = cameraStandardPos;
 						_gamecamTransform.eulerAngles = rot;
 					}
 
@@ -271,8 +271,8 @@ public class CharacterControllerLogic : MonoBehaviour
 						_isPlayerCloseToBorder = true;
 					}
 
-					standardPos.x = (transform.position.x > LEVEL_MAX_X) ? LEVEL_MAX_X : LEVEL_MIN_X;
-					_gamecamTransform.position = Vector3.Lerp(_gamecamTransform.position, standardPos, _cameraFollowSpeed * Time.deltaTime);
+					cameraStandardPos.x = (transform.position.x > LEVEL_MAX_X) ? LEVEL_MAX_X : LEVEL_MIN_X;
+					_gamecamTransform.position = Vector3.Lerp(_gamecamTransform.position, cameraStandardPos, _cameraFollowSpeed * Time.deltaTime);
 
 					_gamecamTransform.eulerAngles = Vector3.Lerp(_gamecamTransform.eulerAngles,_camRotationWhenCloseToBorder, _cameraFollowSpeed * Time.deltaTime);
 

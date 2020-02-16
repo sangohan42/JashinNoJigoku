@@ -12,17 +12,18 @@ public class ScoreDisplayer : MonoBehaviour {
 		shoukoNb = GameObject.Find ("Shouko").GetComponent<UILabel> ();
 		spottedNb = GameObject.Find ("Spotted").GetComponent<UILabel> ();
 		gameDuration = GameObject.Find ("GameDuration").GetComponent<UILabel> ();
-		setLabels ();
+        SetLabels();
 	}
 
-	void setLabels()
+	void SetLabels()
 	{
 		shoukoNb.text = "Shouko " + PlayerPrefs.GetInt ("FoundShoukoNumber") + "/" + PlayerPrefs.GetInt ("TotalShoukoNumber");
 		spottedNb.text = "Spotted " + PlayerPrefs.GetInt ("Spotted");
 		gameDuration.text = "Duration " + FormatedTimeString(PlayerPrefs.GetFloat ("Duration"));
 	}
 
-	private string FormatedTimeString (float input) {
+	private string FormatedTimeString (float input)
+    {
 		int seconds;
 		int minutes;
 		

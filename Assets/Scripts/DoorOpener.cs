@@ -6,7 +6,7 @@ public class DoorOpener : MonoBehaviour {
 
 	private CharacterControllerLogic _characterControllerLogic;
 	private bool _isOpened;
-	private EnemyStatusChecker _checkEnemyStatus;
+	private EnemyStatusChecker _enemyStatusChecker;
 	private SoundManager _soundManager;
     private Animation _animation;
 
@@ -15,7 +15,7 @@ public class DoorOpener : MonoBehaviour {
     {
 		_characterControllerLogic = GameObject.FindGameObjectWithTag (Tags.player).GetComponent<CharacterControllerLogic> ();
 		_isOpened = false;
-		_checkEnemyStatus = GameObject.FindGameObjectWithTag (Tags.player).GetComponent<EnemyStatusChecker> ();
+		_enemyStatusChecker = GameObject.FindGameObjectWithTag (Tags.player).GetComponent<EnemyStatusChecker> ();
 		_soundManager = GameObject.FindGameObjectWithTag (Tags.soundmanager).GetComponent<SoundManager> ();
         _animation = GetComponent<Animation>();
     }
@@ -24,7 +24,7 @@ public class DoorOpener : MonoBehaviour {
 	{
 		if(collider.gameObject.CompareTag(Tags.player))
 		{
-			if(_characterControllerLogic.GotKey && _checkEnemyStatus.isNotSeen())
+			if(_characterControllerLogic.GotKey && _enemyStatusChecker.isNotSeen())
 			{
                 _soundManager.PlaySound(soundName.SE_DoorAccessGranted);
 				_soundManager.PlaySound(soundName.SE_DoorOpen);

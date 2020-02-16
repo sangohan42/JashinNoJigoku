@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Not currently used
 [RequireComponent(typeof(Renderer))]
 [RequireComponent(typeof(Light))]
 public class LaserBlinking : MonoBehaviour

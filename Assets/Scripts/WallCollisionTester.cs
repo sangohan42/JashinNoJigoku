@@ -9,7 +9,7 @@ public class WallCollisionTester : MonoBehaviour
 	private Animator _playerAnimator;
 	private GameObject _player;
 	private CharacterControllerLogic _characterControllerLogicScript;
-	private EnemyStatusChecker _checkEnemy;
+	private EnemyStatusChecker _enemyStatusChecker;
 	private GameObject _gameCam;
 	private CapsuleCollider _caps;
 	private Vector3 _size;
@@ -29,7 +29,7 @@ public class WallCollisionTester : MonoBehaviour
 		_playerAnimator = _player.GetComponent<Animator> ();
 		_gameCam = GameObject.FindGameObjectWithTag (Tags.camera);
 		_characterControllerLogicScript = _player.GetComponent<CharacterControllerLogic> ();
-		_checkEnemy = _player.GetComponent<EnemyStatusChecker> ();
+		_enemyStatusChecker = _player.GetComponent<EnemyStatusChecker> ();
 		_caps = _player.GetComponent<CapsuleCollider> ();
         _elapsedTimeSinceCollisionDetected = 0;
 		_currentCollidedSurfaceNormalVector = Vector3.zero;
@@ -57,7 +57,7 @@ public class WallCollisionTester : MonoBehaviour
 
 	void OnCollisionStay(Collision collision)
     {
-		if(collision.gameObject.CompareTag(Tags.player) && _characterControllerLogicScript.CurrentCoverState == CoverState.None && _checkEnemy.isNotSeen())
+		if(collision.gameObject.CompareTag(Tags.player) && _characterControllerLogicScript.CurrentCoverState == CoverState.None && _enemyStatusChecker.isNotSeen())
 		{
 			ContactPoint contact = collision.contacts[0];
 
@@ -91,12 +91,13 @@ public class WallCollisionTester : MonoBehaviour
 						_characterControllerLogicScript.SavedCamPosition = _gameCam.transform.position;
 						_characterControllerLogicScript.SavedCamRotation = _gameCam.transform.rotation;
 
-						if(_isAWall){
+						if(_isAWall)
+                        {
 							_playerAnimator.SetBool(_hash.CoverBool, true);
 							_characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, _player.transform.position.y, contact.point.z -0.24f);
 						}
-
-						else{
+                        else
+                        {
 							_playerAnimator.SetBool(_hash.CrouchCoverBool, true);
 							_characterControllerLogicScript.PositionToPlaceTo = new Vector3(contact.point.x, _player.transform.position.y, contact.point.z -0.42f);
 							_characterControllerLogicScript.InCrouchCoverMode = true;
@@ -237,6 +238,5 @@ public class WallCollisionTester : MonoBehaviour
 
 			break;
 		}
-
-	}
+    }
 }
