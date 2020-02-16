@@ -4,11 +4,11 @@ using UnityEngine;
 public class PlayerLifeHandler : MonoBehaviour
 {
     [SerializeField]
-    public float _health = 200f;						// How much health the player has left.
+    private float _health = 200f;						// How much health the player has left.
     [SerializeField]
-    public float _resetAfterDeathTime = 3f;				// How much time from the player dying to the level reseting.
+    private float _resetAfterDeathTime = 3f;				// How much time from the player dying to the level reseting.
     [SerializeField]
-    public AudioClip _gameOverClip;                     // The sound effect of gameover.
+    private AudioClip _gameOverClip;                     // The sound effect of gameover.
     [SerializeField]
     private UILabel _healthPointLabel;
     [SerializeField]
@@ -80,14 +80,14 @@ public class PlayerLifeHandler : MonoBehaviour
 		_animator.SetBool(_animatorHashIds.DeadBool, PlayerIsDead);
 
 		_soundManager.PlaySound (soundName.SE_GameOver);
-        //		//Transition from animated to ragdolled
+
+        //Transition from animated to ragdolled
         //_animator.enabled = false; //disable animation
         //rigidbody.isKinematic = false; //allow the ragdoll RigidBodies to react to the environment
         //rigidbody.constraints = RigidbodyConstraints.None;
         //rigidbody.AddForce(-2f * transform.forward, ForceMode.VelocityChange);
 
         //Play the dying sound effect at the player's location.
-
         AudioSource.PlayClipAtPoint(_gameOverClip, transform.position);
     }
 	

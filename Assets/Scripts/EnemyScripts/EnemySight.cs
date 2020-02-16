@@ -3,7 +3,6 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(SphereCollider))]
-[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
 public class EnemySight : MonoBehaviour
 {
@@ -11,8 +10,15 @@ public class EnemySight : MonoBehaviour
     private float _fieldOfViewAngle = 90f;				// Number of degrees, centred on forward, for the enemy see.
     [SerializeField]
     private float _shootingDistance = 5;
+    [SerializeField]
+    private GameObject FOV;
+    [SerializeField]
+    private Texture FOV1;
+    [SerializeField]
+    private Texture FOV2;
+    [SerializeField]
+    private Texture FOV3;
 
-    private NavMeshAgent _nav;                              // Reference to the NavMeshAgent component.
     private SphereCollider _playerDetectableSphereCollider; // Reference to the enemy sight sphere collider trigger component.
     private Animator _anim;								    // Reference to the Animator.
     private GameObject _player;                             // Reference to the player.
@@ -29,23 +35,18 @@ public class EnemySight : MonoBehaviour
     public bool InPatrol { get; set; }
     public bool InPursuit { get; set; }
     public bool PlayerInSight { get; set; }             // Whether or not the player is currently sighted.
-    public Vector3 PersonalLastSighting { get; set; }               // Last place this enemy spotted the player.
+    public Vector3 PersonalLastSighting { get; set; }   // Last place this enemy spotted the player.
+    public bool IsDead { get; set; }
 
     public float ShootingDistance
     {
         get { return _shootingDistance; }
     }
-    public bool IsDead { get; set; }
 
-    public GameObject FOV;
-    public Texture FOV1;
-	public Texture FOV2;
-	public Texture FOV3;
 
     void Awake ()
 	{
 		// Setting up the references.
-		_nav = GetComponent<NavMeshAgent>();
 		_playerDetectableSphereCollider = GetComponent<SphereCollider>();
 		_anim = GetComponent<Animator>();
 		_player = GameObject.FindGameObjectWithTag(Tags.player);
@@ -94,58 +95,50 @@ public class EnemySight : MonoBehaviour
 	
 	void Update ()
 	{
-	
-		// If the player is alive...
-		if(_playerLifeHandler._health > 0f && !IsDead)
+        // If the player and the enemy are alive...
+		if(_playerLifeHandler.Health > 0f )
 		{
-			// ... set the animator parameter to whether the player is in sight or not.
-			_anim.SetBool(_animatorHashIds.PlayerInSightBool, PlayerInSight);
-			_anim.SetBool (_animatorHashIds.InPursuitBool, InPursuit);
-			_anim.SetBool (_animatorHashIds.InPatrolBool, InPatrol);
+            if (!IsDead)
+            {
+                // ... set the animator parameter to whether the player is in sight or not.
+                _anim.SetBool(_animatorHashIds.PlayerInSightBool, PlayerInSight);
+                _anim.SetBool(_animatorHashIds.InPursuitBool, InPursuit);
+                _anim.SetBool(_animatorHashIds.InPatrolBool, InPatrol);
 
-			int youJinLayerTransition = _anim.GetAnimatorTransitionInfo(3).nameHash;
-			int shootingLayerTransition = _anim.GetAnimatorTransitionInfo(1).nameHash;
+                // In YOUJIN MODE
+                if (!InPatrol && !InPursuit && !PlayerInSight && !_interrogativePointObject.activeSelf)
+                {
+                    Debug.Log("Youjin Layer raising weapon");
+                    FOV.GetComponent<Renderer>().material.SetTexture("_MainTex", FOV3);
+                    _interrogativePointObject.SetActive(true);
+                    _interrogativePointParticleSystem.Play();
+                    _soundManager.PlaySound(GetRandomYoujinSoundName());
+                }
+                //Not anymore in YOUJIN mode
+                else if ((InPatrol || InPursuit) && _interrogativePointObject.activeSelf)
+                {
+                    FOV.GetComponent<Renderer>().material.SetTexture("_MainTex", FOV1);
 
-			//In YOUJIN mode
-			if(youJinLayerTransition == _animatorHashIds.Empty_YoujinModeTrans && _interrogativePointObject.activeSelf == false)
-			{
-				FOV.GetComponent<Renderer>().material.SetTexture("_MainTex", FOV3);
-				_interrogativePointObject.SetActive(true);
-				_interrogativePointParticleSystem.Play();
-				_anim.SetBool(_animatorHashIds.InYoujinBool, true);
-				_soundManager.PlaySound(GetRandomYoujinSoundName());
-			}
-			//In PATROL mode
-			else if((youJinLayerTransition == _animatorHashIds.WeaponRaise_WeaponLower || 
-			         shootingLayerTransition == _animatorHashIds.Empty_WeaponRaiseTransition ||
-			         shootingLayerTransition == _animatorHashIds.Empty_WeaponShootTransition) && 
-			        _interrogativePointObject.activeSelf == true)
-			{
-				FOV.GetComponent<Renderer>().material.SetTexture("_MainTex", FOV1);
+                    _interrogativePointParticleSystem.Stop();
+                    _interrogativePointObject.SetActive(false);
+                }
 
-				_interrogativePointParticleSystem.Stop();
-				_interrogativePointObject.SetActive(false);
-				_anim.SetBool(_animatorHashIds.InYoujinBool, false);
-			}
-
-			//PURSUIT mode
-			if((shootingLayerTransition == _animatorHashIds.Empty_WeaponRaiseTransition ||
-			   shootingLayerTransition == _animatorHashIds.Empty_WeaponShootTransition) && _resetFOVColor)
-			{
-				FOV.GetComponent<Renderer>().material.SetTexture("_MainTex", FOV2);
-				_resetFOVColor = false;
-				_characterControllerLogic.NumberOfEnemyInPursuitMode ++;
-			}
-
-			else if(_anim.GetBool(_animatorHashIds.InPatrolBool) == true && !_resetFOVColor)
-			{
-				FOV.GetComponent<Renderer>().material.SetTexture("_MainTex",FOV1);
-				_resetFOVColor = true;
-			}
-
-		}
-
-		//Player is Dead
+                //PURSUIT mode
+                if (InPursuit && _resetFOVColor)
+                {
+                    FOV.GetComponent<Renderer>().material.SetTexture("_MainTex", FOV2);
+                    _resetFOVColor = false;
+                    _characterControllerLogic.SpottedCount++;
+                }
+                //PATROL after PURSUIT
+                else if (InPatrol && !_resetFOVColor)
+                {
+                    FOV.GetComponent<Renderer>().material.SetTexture("_MainTex", FOV1);
+                    _resetFOVColor = true;
+                }
+            }
+        }
+        //Player is Dead
 		else
 		{
 			// ... set the animator parameter to false.
@@ -188,8 +181,7 @@ public class EnemySight : MonoBehaviour
 			// ... and if a raycast towards the player hits something...
 			if(Physics.Raycast(transform.position + _playerCapsuleCollider.center.y*transform.up, direction.normalized, out hit, _playerDetectableSphereCollider.radius))
 			{
-
-				// ... and if the raycast hits the player (there is no obstacles between the current enemy and the player)...
+                // ... and if the raycast hits the player (there is no obstacles between the current enemy and the player)...
 				if(hit.collider.gameObject == _player)
 				{
 					// If the angle between forward and where the player is, is less than half the angle of view...
@@ -202,15 +194,14 @@ public class EnemySight : MonoBehaviour
 						InPatrol = false;
 						_anim.SetLayerWeight(3,0);
 					}
-
-					// If the player is walking, running we enter in Youjin mode
+                    // If the player is walking, running we enter in Youjin mode
 					else if(playerLayerZeroStateHash == _animatorHashIds.LocomotionIdState)
 					{
 						// ... set the last personal sighting of the player to the player's current position.
 						PersonalLastSighting = _player.transform.position;
 						InPatrol = false;
-						
-					}
+                    }
+
 					//If the player has not been seen and is close enough he will be able to strangle the enemy
 					if(!PlayerInSight && !InPursuit && direction.magnitude < 1.5f)
 					{
@@ -225,51 +216,14 @@ public class EnemySight : MonoBehaviour
 					}
 				}
 			}
-
         }
     }
-	
-	
-	void OnTriggerExit (Collider other)
+
+    void OnTriggerExit (Collider other)
 	{
 		// If the player leaves the trigger zone...
 		if(other.gameObject == _player)
 			// ... the player is not in sight.
 			PlayerInSight = false;
-	}
-	
-	
-	float CalculatePathLength (Vector3 targetPosition)
-	{
-		// Create a path and set it based on a target position.
-		NavMeshPath path = new NavMeshPath();
-		if(_nav.enabled)
-			_nav.CalculatePath(targetPosition, path);
-		
-		// Create an array of points which is the length of the number of corners in the path + 2.
-		Vector3 [] allWayPoints = new Vector3[path.corners.Length + 2];
-		
-		// The first point is the enemy's position.
-		allWayPoints[0] = transform.position;
-		
-		// The last point is the target position.
-		allWayPoints[allWayPoints.Length - 1] = targetPosition;
-		
-		// The points inbetween are the corners of the path.
-		for(int i = 0; i < path.corners.Length; i++)
-		{
-			allWayPoints[i + 1] = path.corners[i];
-		}
-		
-		// Create a float to store the path length that is by default 0.
-		float pathLength = 0;
-		
-		// Increment the path length by an amount equal to the distance between each waypoint and the next.
-		for(int i = 0; i < allWayPoints.Length - 1; i++)
-		{
-			pathLength += Vector3.Distance(allWayPoints[i], allWayPoints[i + 1]);
-		}
-		
-		return pathLength;
 	}
 }

@@ -17,14 +17,14 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     public Transform[] _patrolWayPoints;						// An array of transforms for the patrol route.
 
-	private EnemySight _enemySight;						// Reference to the EnemySight script.
-	private NavMeshAgent _nav;								// Reference to the nav mesh agent.
-	private Transform _player;								// Reference to the player's transform.
+	private EnemySight _enemySight;						            // Reference to the EnemySight script.
+	private NavMeshAgent _nav;								        // Reference to the nav mesh agent.
+	private Transform _player;								        // Reference to the player's transform.
 	private PlayerLifeHandler _playerLifeHandler;					// Reference to the PlayerHealth script.
-	private LastPlayerSighting _lastPlayerSighting;		// Reference to the last global sighting of the player.
-	private float _chaseTimer;								// A timer for the chaseWaitTime.
-	private float _patrolTimer;								// A timer for the patrolWaitTime.
-	private int _currentWayPointIndex;					    // An index for the current way point
+	private LastPlayerSighting _lastPlayerSighting;                 // Reference to the last global sighting of the player.
+    private float _chaseTimer;								        // A timer for the chaseWaitTime.
+	private float _patrolTimer;								        // A timer for the patrolWaitTime.
+	private int _currentWayPointIndex;					            // An index for the current way point
 
 	void Awake ()
 	{
@@ -35,18 +35,18 @@ public class EnemyAI : MonoBehaviour
 		_playerLifeHandler = _player.GetComponent<PlayerLifeHandler>();
         _lastPlayerSighting = LastPlayerSighting.Instance;
     }
-	
-	
-	void Update ()
+
+
+    void Update ()
 	{
-		// If the player is in sight and is alive...
-		if(_enemySight.PlayerInSight && _playerLifeHandler._health > 0f)
+        // If the player is in sight and is alive...
+        if (_enemySight.PlayerInSight && _playerLifeHandler.Health > 0f)
 			// ... shoot.
 			Shooting();
 
-		// If the player has been heard and isn't dead...
-		else if(_enemySight.PersonalLastSighting != _lastPlayerSighting.ResetPosition && _playerLifeHandler._health > 0f)
-			//... youjin
+        // If the player has been heard and isn't dead...
+		else if( !_enemySight.InPatrol && _playerLifeHandler.Health > 0f)
+			//... youjin or in pursuit without the player in sight
 			Chasing();
 
 		// Otherwise...
@@ -64,10 +64,9 @@ public class EnemyAI : MonoBehaviour
 //		Debug.Log ("Distance = " + sightingDeltaPos.magnitude);
 		if(sightingDeltaPos.magnitude <= _enemySight.ShootingDistance)
 		{
-			_nav.Stop();
+			_nav.speed = 0;
 		}
-
-		else
+        else
 		{
 			// If the last personal sighting of the player is not close...
 //			if(sightingDeltaPos.sqrMagnitude > 5f)
@@ -84,22 +83,19 @@ public class EnemyAI : MonoBehaviour
 		//If the player was previously sighted
 		if(_enemySight.InPursuit)
 		{
+            // Create a vector from the enemy to the last sighting of the player.
+            Vector3 sightingDeltaPos = _enemySight.PersonalLastSighting - transform.position;
 
-			// Create a vector from the enemy to the last sighting of the player.
-			Vector3 sightingDeltaPos = _enemySight.PersonalLastSighting - transform.position;
+            // ... set the destination for the NavMeshAgent to the last known position of the player.
+            _nav.destination = _enemySight.PersonalLastSighting;
 
-			// If the last personal sighting of the player is not close...
-			if(sightingDeltaPos.sqrMagnitude > 5f)
-				// ... set the destination for the NavMeshAgent to the position of the player.
-				_nav.destination = _enemySight.PersonalLastSighting;
-			
-			// Set the appropriate speed for the NavMeshAgent.
-			_nav.speed = _chaseSpeed;
+            // Set the appropriate speed for the NavMeshAgent.
+            _nav.speed = _chaseSpeed;
 
             // If near the last personal sighting...
 			if(_nav.remainingDistance < _nav.stoppingDistance)
 			{
-//				Debug.Log ("Increment timer");
+				Debug.Log ("Increment timer");
 				// ... increment the timer.
 				_chaseTimer += Time.deltaTime;
 				
@@ -110,20 +106,18 @@ public class EnemyAI : MonoBehaviour
 					_chaseTimer = 0f;
 					_enemySight.InPursuit = false;
 					_enemySight.InPatrol = true;
-				}
-			}
+                }
+            }
 			else
 				// If not near the last sighting personal sighting of the player, reset the timer.
 				_chaseTimer = 0f;
-
-		}
+        }
 
 		//We are in Youjin Mode
 		else
 		{
-
-			// Create a vector from the enemy to the last sighting of the player.
-			Vector3 sightingDeltaPos = _enemySight.PersonalLastSighting - transform.position;
+            // Create a vector from the enemy to the last sighting of the player.
+            Vector3 sightingDeltaPos = _enemySight.PersonalLastSighting - transform.position;
 			
 			// If the last personal sighting of the player is not close...
 			if(sightingDeltaPos.sqrMagnitude > 5f)
@@ -156,7 +150,7 @@ public class EnemyAI : MonoBehaviour
 	void Patrolling ()
 	{
         // Set an appropriate speed for the NavMeshAgent.
-		_nav.speed = _patrolSpeed;
+        _nav.speed = _patrolSpeed;
 		
 		// If near the next waypoint or there is no destination...
 		if(_nav.destination == _lastPlayerSighting.ResetPosition || _nav.remainingDistance < _nav.stoppingDistance)

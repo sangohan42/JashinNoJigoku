@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(Animation))]
-public class OpenDoor : MonoBehaviour {
+public class DoorOpener : MonoBehaviour {
 
 	private CharacterControllerLogic _characterControllerLogic;
 	private bool _isOpened;
@@ -26,10 +26,7 @@ public class OpenDoor : MonoBehaviour {
 		{
 			if(_characterControllerLogic.GotKey && _checkEnemyStatus.isNotSeen())
 			{
-				while(GetComponent<Animation>().isPlaying)
-				{
-				}
-				_soundManager.PlaySound(soundName.SE_DoorAccessGranted);
+                _soundManager.PlaySound(soundName.SE_DoorAccessGranted);
 				_soundManager.PlaySound(soundName.SE_DoorOpen);
                 _animation.Play("openDoor");
 				_isOpened = true;

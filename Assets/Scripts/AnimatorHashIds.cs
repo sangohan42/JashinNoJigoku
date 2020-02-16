@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// Hero Animation State/Transition/variable Hashes
+// Hero Animation State/variable Hashes
 public class AnimatorHashIds : MonoBehaviour {
 	
 	// States
@@ -11,14 +11,6 @@ public class AnimatorHashIds : MonoBehaviour {
     public int SneakingState { get; private set; }
     public int RollingState { get; private set; }
     public int StranglingState { get; private set; }
-
-    // Transitions
-    public int Empty_YoujinModeTrans { get; private set; }
-    public int WeaponRaise_WeaponLower { get; private set; }
-    public int Empty_WeaponRaiseTransition { get; private set; }
-    public int Empty_WeaponShootTransition { get; private set; }
-    public int Locomotion_CoverTransition { get; private set; }
-    public int Cover_LocomotionTransition { get; private set; }
 
     // Variables
     public int DeadBool { get; private set; }
@@ -58,14 +50,7 @@ public class AnimatorHashIds : MonoBehaviour {
 		RollingState = Animator.StringToHash ("Base Layer.Roll");
 		StranglingState = Animator.StringToHash ("Base Layer.Strangling");
 
-		Empty_YoujinModeTrans = Animator.StringToHash("Youjin.Empty -> Youjin.WeaponRaise");
-		WeaponRaise_WeaponLower = Animator.StringToHash("Youjin.WeaponRaise -> Youjin.WeaponLower");
-		Empty_WeaponRaiseTransition = Animator.StringToHash("Shooting.Empty -> Shooting.WeaponRaise");
-		Empty_WeaponShootTransition = Animator.StringToHash("Shooting.Empty -> Shooting.WeaponShoot");
-		Locomotion_CoverTransition =Animator.StringToHash("Base Layer.Locomotion -> Base Layer.Cover");
-		Cover_LocomotionTransition =Animator.StringToHash("Base Layer.Cover -> Base Layer.Locomotion");
-
-		DeadBool = Animator.StringToHash("Dead");
+        DeadBool = Animator.StringToHash("Dead");
 		SneakingBool = Animator.StringToHash("Sneak");
 		PlayerInSightBool = Animator.StringToHash("PlayerInSight");
 		InPursuitBool = Animator.StringToHash("InPursuit");

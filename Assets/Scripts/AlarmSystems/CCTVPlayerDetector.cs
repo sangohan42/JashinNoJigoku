@@ -1,6 +1,6 @@
 using UnityEngine;
-using System.Collections;
 
+// Not Currently used
 public class CCTVPlayerDetector : MonoBehaviour
 {
     private GameObject _player;								// Reference to the player.

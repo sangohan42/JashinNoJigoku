@@ -218,7 +218,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 			return SE_EnemyYoujin5;
 			
 			default:
-			Debug.Log ("Please Enter the name of an audio clip");
+			Debug.Log ("Please Enter the name of a valid audio clip");
 			return null;
 		}
 	}
@@ -240,7 +240,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 			return BGM_Result;
 			
 			default:
-			Debug.Log ("Please Enter the name of a Background clip");
+			Debug.Log ("Please Enter the name of a valid Background clip");
 			return null;
 		}
 	}
@@ -260,7 +260,8 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 		int index = GetFreeAudioSourceIndex();
 		
 		//no free audio source
-		if(index ==-1)return false;
+		if(index ==-1)
+            return false;
 			
 		//the current audio source become busy
 		sourceIsFree[index] = false;

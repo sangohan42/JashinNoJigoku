@@ -31,8 +31,8 @@ public class CharacterControllerLogic : MonoBehaviour
 
     //const
     private const float COVER_SPEED = 0.9f;
-    private const float LEVEL_MAX_WIDTH = 20;
-    private const float LEVEL_MIN_WIDTH = 4;
+    private const float LEVEL_MAX_X = 11;
+    private const float LEVEL_MIN_X = -11;
     public const float JOYSTICK_INPUT_THRESHOLD = 0.15f;
 
     // Private global only
@@ -108,7 +108,7 @@ public class CharacterControllerLogic : MonoBehaviour
     public bool GotKey { get; set; }
     public int FoundShoukoNb { get; set; }
     public int TotalShoukoNb { get; set; }
-    public int NumberOfEnemyInPursuitMode { get; set; }
+    public int SpottedCount { get; set; }
     public float ElapsedTimeSinceLevelStartup { get; set; }
     public bool IsCloseToEnemy { get; set; }
     public Animator CloseEnemyAnimator { get; set; }
@@ -134,12 +134,13 @@ public class CharacterControllerLogic : MonoBehaviour
 
 		CameraRotation = _gamecamTransform.eulerAngles;
 		CameraPosition = _gamecamTransform.position - transform.position;
+
         CoverPos = _cameraInCoverPos.localPosition;
         CoverRot = _cameraInCoverPos.localEulerAngles;
         IsPursued = false;
         CurrentCoverState = CoverState.None;
         GotKey = false;
-        NumberOfEnemyInPursuitMode = 0;
+        SpottedCount = 0;
         FoundShoukoNb = 0;
         TotalShoukoNb = GameObject.FindGameObjectsWithTag(Tags.shouko).Length;
         ElapsedTimeSinceLevelStartup = 0;
@@ -234,7 +235,7 @@ public class CharacterControllerLogic : MonoBehaviour
 				Vector3 standardPos = transform.position + CameraPosition;
 
 					//We are not close to the border of the level
-				if(transform.position.x < LEVEL_MAX_WIDTH && transform.position.x > LEVEL_MIN_WIDTH)
+				if(transform.position.x < LEVEL_MAX_X && transform.position.x > LEVEL_MIN_X)
 				{
 					if(_isPlayerCloseToBorder)
 					{
@@ -270,7 +271,7 @@ public class CharacterControllerLogic : MonoBehaviour
 						_isPlayerCloseToBorder = true;
 					}
 
-					standardPos.x = (transform.position.x > LEVEL_MAX_WIDTH) ? LEVEL_MAX_WIDTH : LEVEL_MIN_WIDTH;
+					standardPos.x = (transform.position.x > LEVEL_MAX_X) ? LEVEL_MAX_X : LEVEL_MIN_X;
 					_gamecamTransform.position = Vector3.Lerp(_gamecamTransform.position, standardPos, _cameraFollowSpeed * Time.deltaTime);
 
 					_gamecamTransform.eulerAngles = Vector3.Lerp(_gamecamTransform.eulerAngles,_camRotationWhenCloseToBorder, _cameraFollowSpeed * Time.deltaTime);
@@ -892,9 +893,7 @@ public class CharacterControllerLogic : MonoBehaviour
 		if (IsCloseToEnemy && !CloseEnemy.GetComponent<EnemySight>().IsDead && !_isInCoverMode)
 		{
 			transform.forward = CloseEnemy.transform.forward;
-			//			closeEnemy.transform.forward = transform.forward;
-			transform.position = CloseEnemy.transform.position- 0.66f*transform.forward;
-			//			closeEnemy.transform.position = transform.position+ 0.4f*transform.forward;
+			transform.position = CloseEnemy.transform.position - 0.66f * transform.forward;
 
 			CloseEnemy.GetComponent<SphereCollider>().enabled = false;
 			CloseEnemy.GetComponent<CapsuleCollider>().enabled = false;
@@ -908,9 +907,7 @@ public class CharacterControllerLogic : MonoBehaviour
 					child.gameObject.SetActive(false);
 				}
 			}
-//			soundManager.playSound(soundName.SE_EnemyHurt);
 			_soundManager.PlaySoundLoop(soundName.SE_EnemyHurt,11, 0.25f, 0.4f);
-//			playSoundAfter(soundName.SE_EnemyHurt, 1f);
 		}
 	}
 

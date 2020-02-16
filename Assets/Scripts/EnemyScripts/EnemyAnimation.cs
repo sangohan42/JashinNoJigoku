@@ -73,19 +73,18 @@ public class EnemyAnimation : MonoBehaviour
 			angle = FindAngle(transform.forward, _player.position - transform.position, transform.up);
 		}
 		else
-		{
+        {
 			// Otherwise the speed is a projection of desired velocity on to the forward vector...
 			speed = Vector3.Project(_nav.desiredVelocity, transform.forward).magnitude;
 
-//			Debug.Log ("desired Velocity = " + nav.desiredVelocity);
 			if(_enemySight.InPursuit)
 			{
 				Vector3 vecFromEnemyToHeardPosition = _enemySight.PersonalLastSighting - transform.position;
-				angle = FindAngle(transform.forward,vecFromEnemyToHeardPosition, transform.up);
+				angle = FindAngle(transform.forward, vecFromEnemyToHeardPosition, transform.up);
             }
 			else
 			// ... and the angle is the angle between forward and the desired velocity.
-			angle = FindAngle(transform.forward, _nav.desiredVelocity, transform.up);
+			    angle = FindAngle(transform.forward, _nav.desiredVelocity, transform.up);
 
 
 			// If the angle is within the deadZone...
@@ -96,9 +95,11 @@ public class EnemyAnimation : MonoBehaviour
       			angle = 0f;
     		}
 		}
-		
-		// Call the Setup function of the helper class with the given parameters.
-		_enemyAnimatorSetup.Setup(speed, angle);
+        //Debug.Log("speed = " + speed);
+        //Debug.Log("angle = " + angle);
+
+        // Call the Setup function of the helper class with the given parameters.
+        _enemyAnimatorSetup.Setup(speed, angle);
 	}
 	
 	
